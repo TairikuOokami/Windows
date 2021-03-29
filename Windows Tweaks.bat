@@ -1,4 +1,4 @@
-﻿rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
+rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem SSU (Install before CU) - https://msrc.microsoft.com/update-guide/en-us/vulnerability/ADV990001
@@ -10,7 +10,7 @@ rem 19042.804.1.4 - http://download.windowsupdate.com/d/msdownload/update/softwa
 rem DISM /Online /Add-Package /PackagePath:Z:\Desktop\Windows10.0-KB4601319-x64_PSFX.cab
 
 rem Before making any changes, it is preferable to create a registry backup!
-rem https://support.microsoft.com/en-us/help/322756/how-to-back-up-and-restore-the-registry-in-windows
+rem https://support.microsoft.com/en-us/topic/how-to-back-up-and-restore-the-registry-in-windows-855140ad-e318-2a13-2829-d428a2ab0692
 rem https://www.tweaking.com/content/page/registry_backup.html
 
 rem Or even better, create a system image!
@@ -53,7 +53,7 @@ rem ================================= Basic informations =======================
 
 
 rem SeDebugPrivilege/SeTcbPrivilege - https://youtu.be/hZKLEw-Our4 - Self-elevation to System (even on SUA) used by ransomware (NotPetya/WannaCry)
-rem https://docs.microsoft.com/en-us/windows/device-security/security-policy-settings/act-as-part-of-the-operating-system
+rem https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/act-as-part-of-the-operating-system
 
 rem https://docs.microsoft.com/en-us/windows/deployment/update/waas-overview
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
@@ -63,7 +63,6 @@ rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefil
 rem Browser Leaks - https://browserleaks.com / https://whoer.net / CanvasFingerprint / WebRTC
 rem Browser Tracking Test - https://panopticlick.eff.org
 rem Privacy Etags - https://lucb1e.com/rp/cookielesscookies
-rem Privacy Info - https://github.com/CHEF-KOCH/Online-Privacy-Test-Resource-List/tree/f4f9176ae8ea44c0f77ece204ee4435e892c0a29
 rem Privacy Tools - https://www.ghacks.net/2015/08/14/comparison-of-windows-10-privacy-tools
 rem Privacy Tools - https://www.privacytools.io
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
@@ -73,14 +72,13 @@ rem AV Comparison
 rem https://www.programmifree.com/confronti
 rem https://checklab.pl/en/publications
 rem https://www.av-comparatives.org/latest-tests
-rem https://www.av-test.org/en/antivirus/home-windows/windows-10
+rem https://www.av-test.org/en/antivirus/home-windows
 rem https://www.mrg-effitas.com/test-library
-rem https://www.pcmag.com/roundup/267984/the-best-free-antivirus-protection
+rem https://www.lifewire.com/best-free-antivirus-software-4151895
 
 rem AVs/SSL Filtering - https://adguard.com/en/blog/everything-about-https-filtering.html - https://badssl.com
 rem AV is as vulnerable as any other software, but since it uses SYSTEM rights, it is more dangerous - https://cybellum.com/doubleagent-taking-full-control-antivirus
 rem Disable webfiltering, AV replacing legitimate certificates - https://www.eff.org/deeplinks/2015/02/dear-software-vendors-please-stop-trying-intercept-your-customers-encrypted
-rem MD being vulnerable all the time - http://news.softpedia.com/news/microsoft-releases-silent-fix-for-windows-defender-remote-code-execution-flaw-516095.shtml
 rem MD NeverEnding Story https://www.bleepingcomputer.com/news/security/12-year-old-windows-defender-bug-gives-hackers-admin-rights/
 rem https://www.bleepingcomputer.com/news/security/smartservice-and-s5mark-acts-like-an-adware-bodyguard-by-blocking-antivirus-software/
 rem https://blog.emsisoft.com/2015/01/17/has-the-antivirus-industry-gone-mad
@@ -89,7 +87,7 @@ rem https://www.av-test.org/en/news/news-single-view/data-protection-or-virus-pr
 
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
-rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org
+rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
 rem DNS ESNI Test - https://www.cloudflare.com/ssl/encrypted-sni/
 rem DNS ECH - Good-bye ESNI, hello ECH! - https://blog.cloudflare.com/encrypted-client-hello/
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-4/
@@ -107,12 +105,12 @@ rem UltraDNS - https://www.publicdns.neustar
 rem VPN Comparison / Anonymity
 rem https://arstechnica.com/tech-policy/2017/03/senate-votes-to-let-isps-sell-your-web-browsing-history-to-advertisers
 rem https://sec.hpi.de/ilc/search
-rem https://thatoneprivacysite.net/simple-vpn-comparison-chart
+rem https://www.safetydetectives.com/best-vpns
 rem https://www.msgsafe.io
 rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 
 rem Windows 10 ISO
-rem https://www.deskmodder.de/blog/2020/06/17/windows-10-20h2-19042-iso-esd-inkl-updates-deutsch-english
+rem https://www.deskmodder.de/blog/2021/02/18/windows-10-21h1-19043-iso-esd-inkl-updates-deutsch-english
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
 
@@ -138,10 +136,10 @@ rem =============================== Software recommendations ===================
 
 
 rem AntiVirus software
-rem 360 Total Security - https://www.360totalsecurity.com (Avira's signatures)
-rem Adaware (MT) - https://www.adaware.com/antivirus (Bitdefender's signatures)
+rem 360 Total Security (CN) - https://www.360totalsecurity.com
+rem Adaware (MT) - https://www.adaware.com/free-antivirus-download (Bitdefender's signatures)
 rem Adaware Silent - App Managment - Enable Gaming Mode / Disable ThreatWork Alliance
-rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/thank-you/try-free-cloud-antivirus
+rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/thank-you/free-antivirus-download
 rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended - uncheck All
 rem Kaspersky Security Cloud Setup - Uninstall Kaspersky Secure Connection (trial VPN)
 rem Kaspersky Security Cloud Setup -  Settings - Additional - Notifications - uncheck News Notifications and Promotional Materials
@@ -149,18 +147,19 @@ rem Kaspersky Security Cloud Performance - Settings - Protection - Turn Off All,
 rem Kaspersky Security Cloud Performance - Settings - Additional - uncheck Inject script into web traffic / Do not scan encrypted connections
 
 rem AntiVirus software (Cloud only)
-rem Immunet (US) - http://www.immunet.com/index
+rem Immunet (US) - https://www.immunet.com/index
 rem Panda (ES) (it has to be updated manually to the latest version) - https://www.pandasecurity.com/en-us/homeusers/free-antivirus
 rem Panda Performance - Settings - General - Disable Panda news / Antivirus - Block files for 10 seconds/Disable show warning/Process Monitor - Disable both
+rem WiseVector StopX (CN) - https://www.wisevector.com/en
 
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
-rem Immunet - http://www.immunet.com/index
-rem OSArmor - https://www.osarmor.com
-rem SecureAPlus Freemium (SG) - https://www.secureaplus.com/download - https://www.secureaplus.com/download/free-extension
+rem Immunet (US) - https://www.immunet.com/index
+rem LMT Anti Logger (VN) - https://www.leminhthanh.me/antilogger
+rem OSArmor (IT) - https://www.osarmor.com
+rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/endpoint-protection-platform
 rem VoodooShield (US) - https://voodooshield.com
 
 rem Browser Extensions useful against (99% malware comes via an email or a browser)
-rem Adult Content (Chrome/Firefox) - http://www.cloudacl.com/antiporn
 rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
 rem Coinhive, Malware and Popups (Chrome/Firefox/Opera) - https://add0n.com/popup-blocker.html
 rem Cookie Warnings (Chrome/Firefox/Opera) - https://www.i-dont-care-about-cookies.eu
@@ -169,14 +168,12 @@ rem Malware (Chrome/Firefox/Opera) - https://www.bitdefender.com/solutions/traff
 rem Malware (Chrome/Firefox) - https://www.malwarebytes.com/browserguard
 rem Phishing (Chrome/Firefox/Opera) - https://www.netcraft.com/apps/browser
 rem Punycode Domains (Chrome/Firefox/Opera) - https://github.com/AykutCevik/IDN-Safe
-rem Tracking (Chrome/Firefox/Opera) - https://www.eff.org/privacybadger
-rem (Install Chrome Extensions in Opera) - https://addons.opera.com/en/extensions/details/install-chrome-extensions
 
 rem Cleanup software
 rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
-rem HiBit Uninstaller - http://hibitsoft.ir
-rem Wise Disk Cleaner - http://www.wisecleaner.com/wise-disk-cleaner.html
-rem Wise Registry Cleaner - http://www.wisecleaner.com/wise-registry-cleaner.html
+rem HiBit Uninstaller - https://hibitsoft.ir
+rem Wise Disk Cleaner - https://www.wisecleaner.com/wise-disk-cleaner.html
+rem Wise Registry Cleaner - https://www.wisecleaner.com/wise-registry-cleaner.html
 
 rem Firewall software
 rem FortKnox Firewall (SK) - http://fortknox-firewall.com
@@ -184,7 +181,9 @@ rem Zone Alarm Firewall (IL) - https://www.zonealarm.com/software/free-firewall
 
 rem Firewall software using Windows Firewall
 rem Glasswire (US) - https://www.glasswire.com
+rem simplewall (US) - https://www.henrypp.org/product/simplewall
 rem Windows 10 Firewall Control (US) - https://www.sphinx-soft.com/Vista/order.html
+rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
 rem 360 Total Security Essential (CN) - https://www.360totalsecurity.com/en/features/360-total-security-essential
@@ -204,38 +203,37 @@ rem Security cleanup software (online/updatable on-demand scanners)
 rem ESET Online Scanner (SK) - https://www.eset.com/us/home/online-scanner
 rem F-Secure Online Scanner (US) - https://www.f-secure.com/en/home/free-tools/online-scanner
 rem HitmanPro (UK) - https://www.softpedia.com/get/Internet/Popup-Ad-Spyware-Blockers/Hitman-Pro.shtml
-rem Norton Power Eraser (US) - https://us.norton.com/support/tools/npe.html
+rem Norton Power Eraser (US) - https://support.norton.com/sp/static/external/tools/npe.html
 rem Panda Cloud Cleaner (ES) - https://www.pandasecurity.com/en-us/homeusers/solutions/cloud-cleaner
 rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/products/housecall.html
 
 rem Software
-rem Application Updates / Patch My PC - https://patchmypc.net
+rem Application Updates / Patch My PC - https://patchmypc.com
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bootable USB / Universal USB Installer - https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3
 rem Bootloader / EasyBCD - https://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
 rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy!
-rem Browser / Yandex.Browser - https://browser.yandex.com/security
-rem Calc / Old Calculator - https://winaero.com/download.php?view.1795
 rem Cloud Backup / IceDrive - https://icedrive.net/plans
 rem Cloud Backup / PolarBackup - https://www.polarbackup.com/#pricing
 rem Compact/Compress Files / Compact GUI - https://github.com/ImminentFate/CompactGUI
-rem Computer Management / NirLauncher - http://launcher.nirsoft.net
+rem Computer Management / NirLauncher - https://launcher.nirsoft.net
 rem CPU Info / CPU-Z - https://www.cpuid.com/softwares/cpu-z.html
 rem CPU Test / Prime95 - https://www.mersenne.org/download
 rem Data Recovery / DMDE Free Edition - https://dmde.com/download.html - https://www.techradar.com/how-to/computing/how-to-recover-lost-or-deleted-files-1307921/2
 rem Data Recovery / EaseUS Data Recovery Wizard - https://www.easeus.com/datarecoverywizard/free-data-recovery-software.htm
-rem Directx 9.0 Runtimes / DirectX Redistributable June 2010 - http://www.softpedia.com/get/System/OS-Enhancements/DirectX-9.0c-Redistributable.shtml
-rem Disc to MKV / MakeMKV Beta - http://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
+rem Directx 9.0 Runtimes / DirectX Redistributable June 2010 - https://www.softpedia.com/get/System/OS-Enhancements/DirectX-9.0c-Redistributable.shtml
+rem Disc to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
 rem Disk Info / CrystalDiskInfo - https://crystalmark.info/en/software/crystaldiskinfo
-rem Disk Scan / HDDScan - http://hddscan.com
-rem Disk Space Usage / WizTree - https://antibody-software.com/web/software/software/wiztree-finds-the-files-and-folders-using-the-most-disk-space-on-your-hard-drive
+rem Disk Scan / HDDScan - https://hddscan.com
+rem Disk Space Usage / WizTree - https://wiztreefree.com
 rem Disk Speed Test / CCSIO Benchmark - https://ccsiobench.com
 rem Disk Surface Test / Macrorit Disk Scanner - https://macrorit.com/disk-surface-test/disk-surface-test.html
 rem Driver Updates / Driver Easy - https://www.drivereasy.com
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
 rem eMail Client Browser Extension / Checker Plus for Gmail - https://chrome.google.com/webstore/detail/checker-plus-for-gmail/oeopbcgkkoapgobdbedcemjljbihmemj
 rem File Archiver / 7-zip - https://www.7-zip.org
+rem Folder View Globally Set / WinSetView - https://github.com/brake4bots/WinSetView
 rem GPU Info / GPU-Z - https://www.techpowerup.com/gpuz
 rem GPU Test / Furmark - https://geeks3d.com/furmark
 rem Hardware Information / HWiNFO - https://www.hwinfo.com/download.php
@@ -246,47 +244,42 @@ rem NET 3.5 Feature Installer for Windows 10 x86/x64 - https://github.com/abbodi
 rem Network Optimization / TCP Optimizer - https://www.speedguide.net/downloads.php
 rem Network Settings Manager / NetSetMan - https://www.netsetman.com/en/freeware
 rem Office Suite / FreeOffice - https://www.freeoffice.com/en/freeoffice
-rem Paint / Classic Paint - https://winaero.com/blog/download-classic-paint-windows-10
 rem Partition Manager / Macrorit Partition Expert - https://macrorit.com/partition-magic-manager/free-edition.html
 rem Password Manager (Offline) / KeePass Professional Edition - https://keepass.info/download.html
 rem Password Manager (Online) / Bitwarden - https://bitwarden.com
 rem PDF Editor / FreePDF - https://www.getfreepdf.com
 rem PDF Viewer / Sumatra PDF - https://www.sumatrapdfreader.org/free-pdf-reader.html
-rem Performance / DPC Latency Checker - https://www.thesycon.de/eng/latency_check.shtml
-rem Performance / LatencyMon - http://www.resplendence.com/latencymon
+rem Performance / LatencyMon - https://www.resplendence.com/latencymon
 rem Performance / Process Lasso - https://bitsum.com
 rem Performance / Windows System Timer Tool - https://vvvv.org/contribution/windows-system-timer-tool
 rem Permissions / Reset permissions/Take Ownership - http://lallouslab.net/2013/08/26/resetting-ntfs-files-permission-in-windows-graphical-utility/
-rem Process Monitor / Process Monitor - https://technet.microsoft.com/en-us/sysinternals/processmonitor.aspx
-rem Radio / Odio - https://audials.com/en/radio
+rem Process Monitor / Process Monitor - https://docs.microsoft.com/en-us/sysinternals/downloads/procmon
+rem Radio / Audials Radio - https://audials.com/en/radio
 rem RAM Fix / Intelligent standby list cleaner (+Timer Resolution) - https://www.wagnardsoft.com/content/intelligent-standby-list-cleaner-v1000-released
 rem RAM Free / Mem Reduct - https://www.henrypp.org/product/memreduct
-rem RAM Disk / AMD Radeon RAMDisk (4GB) - http://www.radeonramdisk.com/software_downloads.php
+rem RAM Disk / AMD Radeon RAMDisk (4GB) - https://www.radeonramdisk.com/software_downloads.php
 rem RAM Disk / ImDisk Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/imdisk-toolkit
-rem RAM Info / RAMExpert - http://www.kcsoftwares.com/?ramexpert
 rem RAM Test / Memtest (run one process per each 2GB) - https://hcidesign.com/memtest
 rem Remote Support / TeamViewer - https://www.teamviewer.com/en/download/windows
-rem Remove Locked File/Folder / ThisIsMyFile - http://www.softwareok.com/?seite=Freeware/ThisIsMyFile
+rem Remove Locked File/Folder / ThisIsMyFile - https://www.softwareok.com/?seite=Freeware/ThisIsMyFile
 rem Screen Recorder / FlashBack Express - https://www.flashbackrecorder.com/express
-rem Search / UltraSearch - https://www.jam-software.com/ultrasearch
+rem Search / UltraSearch - https://www.jam-software.com/ultrasearch_free
 rem Settings / ControlUWP - https://github.com/builtbybel/control-uwp/releases
 rem SoundCard Third Party Drivers / ASUS, C-Media and Creative - https://danielkawakami.blogspot.com
-rem Startup Manager / Autoruns - https://technet.microsoft.com/en-us/sysinternals/bb963902.aspx
+rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / Streamlabs OBS - https://streamlabs.com
 rem System Imaging / EaseUS Todo Backup - https://www.easeus.com/backup-software/tb-free.html
 rem System Restore / RollBack Rx Home Edition - https://horizondatasys.com/rollback-rx-time-machine/rollback-rx-home
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
 rem Undervolting / ThrottleStop - https://www.techpowerup.com/download/techpowerup-throttlestop
-rem Uninstaller / HiBit Uninstaller - http://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
+rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
 rem Visual C++ / AIO Repack - https://github.com/abbodi1406/vcredist/releases
 rem Visual C++ / Latest Visual C++ Downloads - https://support.microsoft.com/en-au/help/2977003/the-latest-supported-visual-c-downloads
 rem VM Android / BlueStacks - https://www.bluestacks.com
 rem Wallpaper - Live / Wallpaper Engine - https://store.steampowered.com/app/431960
-rem Windows Explorer Tabs / Clover - http://en.ejie.me
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
-rem Windows Tweaks / Winaero Tweaker - https://winaero.com/comment.php?comment.news.1836
+rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
 rem Windows Updates / Windows Update Manager - https://github.com/DavidXanatos/wumgr/releases
-rem Windows Updates Email Alerts / Microsoft Technical Security Notifications - https://www.microsoft.com/en-us/msrc/technical-security-notifications
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -302,6 +295,9 @@ icacls "%USERPROFILE%\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /
 takeown /s %computername% /u %username% /f "Z:\Desktop" /r /d y
 icacls "Z:\Desktop" /inheritance:r
 icacls "Z:\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
+
+rem Flush DNS Cache
+ipconfig /flushdns
 
 rem Remove user account
 net user defaultuser0 /delete
@@ -347,9 +343,8 @@ del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
 rem Remove Windows Powershell (to restore run "sfc /scannow")
 rem https://threatpost.com/fileless-malware-critical-ioc-threats-2020/159422
-rem http://www.malwaretech.com/2017/02/lets-unpack-dridex-loader.html
 rem https://blog.netspi.com/15-ways-to-bypass-the-powershell-execution-policy
-rem https://www.mrg-effitas.com/current-state-of-malicious-powershell-script-blocking
+rem https://www.mrg-effitas.com/research/current-state-of-malicious-powershell-script-blocking
 rem https://enigma0x3.net/2016/08/15/fileless-uac-bypass-using-eventvwr-exe-and-registry-hijacking
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
@@ -441,7 +436,7 @@ rem =========================== Restore essential startup entries ==============
 
 
 rem Run bcdedit command to check for the current status / Yes = True / No = False
-rem https://msdn.microsoft.com/en-us/library/windows/hardware/ff542202(v=vs.85).aspx
+rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set?
 bcdedit /deletevalue {current} safeboot
 bcdedit /deletevalue {current} safebootalternateshell
 bcdedit /deletevalue {current} removememory
@@ -467,7 +462,6 @@ bcdedit /set {default} bootstatuspolicy IgnoreAllFailures
 bcdedit /set {default} disabledynamictick yes
 bcdedit /set {default} lastknowngood yes
 bcdedit /set {default} recoveryenabled no
-
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-0.0.309\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles% (x86)\Microsoft OneDrive\OneDrive.exe\" /background" /f
@@ -517,7 +511,6 @@ rd "%ProgramFiles%\Common Files\LogiShrd\sp6\LU1" /s /q
 rd "%ProgramFiles%\Common Files\LogiShrd\Unifying\LU" /s /q
 
 rem Microsoft Edge Update Disabled
-rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 taskkill /im MSEdge.exe /f
 taskkill /im MicrosoftEdgeUpdate.exe /f
 rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate" /s /q
@@ -615,7 +608,7 @@ rem =========================== Windows Defender Security Center ===============
 rem ---------------------------- Firewall & network protection -----------------------------
 
 rem Enable Windows Firewall / AllProfiles / CurrentProfile / DomainProfile / PrivateProfile / PublicProfile
-rem https://technet.microsoft.com/en-us/library/cc771920(v=ws.10).aspx
+rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771920(v=ws.10)?
 netsh advfirewall set allprofiles state on
 
 rem Block all inbound network traffic and all outbound except allowed apps
@@ -645,40 +638,42 @@ netsh advfirewall firewall add rule name="ETS2 TCP" dir=out action=allow protoco
 netsh advfirewall firewall add rule name="ETS2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
 netsh advfirewall firewall add rule name="ETS2 MP TCP" dir=out action=allow protocol=TCP remoteip=104.16.0.0-104.31.255.255 remoteport=80 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
 netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow protocol=UDP remoteip=0.0.0.0 remoteport=1025-65535 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
-netsh advfirewall firewall add rule name="Google Chrome HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Google\Chrome Beta\Application\chrome.exe"
-netsh advfirewall firewall add rule name="Google Chrome QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles%\Google\Chrome Beta\Application\chrome.exe"
-netsh advfirewall firewall add rule name="Google Update TCP" dir=out action=allow protocol=TCP remoteip=142.250.0.0-142.251.255.255,172.217.0.0-172.217.255.255 remoteport=443 program="%ProgramFiles(x86)%\Google\Update\GoogleUpdate.exe"
+netsh advfirewall firewall add rule name="Google Chrome HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Google\Chrome\Application\chrome.exe"
+netsh advfirewall firewall add rule name="Google Chrome QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles%\Google\Chrome\Application\chrome.exe"
+netsh advfirewall firewall add rule name="Google Update TCP" dir=out action=allow protocol=TCP remoteip=142.250.0.0-142.251.255.255,172.217.0.0-172.217.255.255,216.58.192.0-216.58.223.255 remoteport=443 program="%ProgramFiles(x86)%\Google\Update\GoogleUpdate.exe"
 netsh advfirewall firewall add rule name="Hitman TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,51.140.0.0-51.145.255.255,52.224.0.0-52.255.255.255,104.40.0.0-104.47.255.255,191.239.203.0 remoteport=443 program="D:\Steam\steamapps\common\HITMAN2\dx12Retail\HITMAN2.exe"
-netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,178.162.206.0-178.162.207.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
+netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=37.58.48.0-37.58.55.255,46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,172.64.0.0-172.71.255.255,178.162.206.0-178.162.207.255,178.162.216.0-178.162.219.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
 netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
-netsh advfirewall firewall add rule name="Microsoft OneDrive TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%LocalAppData%\Microsoft\OneDrive\OneDrive.exe"
-netsh advfirewall firewall add rule name="Microsoft OneDrive Update TCP" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,52.132.0.0-52.143.255.255,168.61.0.0-168.63.255.255 remoteport=443 program="%LocalAppData%\Microsoft\OneDrive\OneDriveStandaloneUpdater.exe"
-netsh advfirewall firewall add rule name="Microsoft Store TCP 80" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,23.192.0.0-23.223.255.255,93.184.220.0-93.184.223.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=80 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12011.1001.1.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
-netsh advfirewall firewall add rule name="Microsoft Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12011.1001.1.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
+netsh advfirewall firewall add rule name="Microsoft OneDrive TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\OneDrive.exe"
+netsh advfirewall firewall add rule name="Microsoft OneDrive Setup TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\Update\OneDriveSetup.exe"
+netsh advfirewall firewall add rule name="Microsoft OneDrive Settings TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\21.046.0307.0001\FileCoAuth.exe"
+netsh advfirewall firewall add rule name="Microsoft OneDrive Update TCP" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,52.132.0.0-52.143.255.255,168.61.0.0-168.63.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\OneDriveStandaloneUpdater.exe"
+netsh advfirewall firewall add rule name="Microsoft Store TCP 80" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,23.192.0.0-23.223.255.255,93.184.220.0-93.184.223.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=80 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12101.1001.14.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
+netsh advfirewall firewall add rule name="Microsoft Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12101.1001.14.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
 netsh advfirewall firewall add rule name="Microsoft Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="Microsoft Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,93.184.220.0-93.184.223.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="Microsoft Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,111.221.29.0-111.221.29.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="Microsoft Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="Microsoft Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="Microsoft Svchost UDP 5353 Steam Friends" dir=out action=allow protocol=UDP remoteip=224.0.0.251 remoteport=5353 program="%WINDIR%\System32\svchost.exe"
 netsh advfirewall firewall add rule name="Microsoft Sync TCP 80" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255 remoteport=80 program="%WINDIR%\System32\SettingSyncHost.exe"
 netsh advfirewall firewall add rule name="Microsoft Sync TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,40.74.0.0-40.125.127.255,104.64.0.0-104.127.255.255 remoteport=443 program="%WINDIR%\System32\SettingSyncHost.exe"
 netsh advfirewall firewall add rule name="Microsoft UAC TCP" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255,151.139.0.0-151.139.255.255 remoteport=80,443 program="%WINDIR%\System32\consent.exe"
-netsh advfirewall firewall add rule name="Microsoft Weather TCP" dir=out action=allow protocol=TCP remoteport=443 remoteip=52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,204.79.195.0-204.79.197.255 program="%ProgramFiles%\WindowsApps\Microsoft.BingWeather_4.46.23383.0_x64__8wekyb3d8bbwe\Microsoft.Msn.Weather.exe"
+netsh advfirewall firewall add rule name="Microsoft Weather TCP" dir=out action=allow protocol=TCP remoteport=443 remoteip=52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,204.79.195.0-204.79.197.255 program="%ProgramFiles%\WindowsApps\Microsoft.BingWeather_4.46.30621.0_x64__8wekyb3d8bbwe\Microsoft.Msn.Weather.exe"
 netsh advfirewall firewall add rule name="OBS TCP" dir=out action=allow protocol=TCP remoteport=443,1935 program="%ProgramFiles%\Streamlabs OBS\resources\app.asar.unpacked\node_modules\obs-studio-node\obs64.exe"
 netsh advfirewall firewall add rule name="OBS Browser TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Streamlabs OBS\Streamlabs OBS.exe"
 netsh advfirewall firewall add rule name="OBS Browser UDP" dir=out action=allow protocol=UDP remoteport=5355 program="%ProgramFiles%\Streamlabs OBS\Streamlabs OBS.exe"
-netsh advfirewall firewall add rule name="Panda AgentSvc TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,52.145.0.0-52.191.255.255,137.135.0.0-137.135.255.255,168.61.0.0-168.63.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Devices Agent\AgentSvc.exe"
+netsh advfirewall firewall add rule name="Panda AgentSvc TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,52.145.0.0-52.191.255.255,93.184.220.0-93.184.223.255,137.135.0.0-137.135.255.255,168.61.0.0-168.63.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Devices Agent\AgentSvc.exe"
 netsh advfirewall firewall add rule name="Panda PSANHost TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,2.21.242.0-2.21.242.255,23.192.0.0-23.223.255.255,91.216.218.0-91.216.218.255,95.101.24.0-95.101.27.255,137.135.0.0-137.135.255.255,192.0.32.0-192.0.47.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSANHost.exe"
-netsh advfirewall firewall add rule name="Panda PSUAConsole TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,93.184.220.0-93.184.223.255,172.217.0.0-172.217.255.255,216.58.192.0-216.58.223.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAConsole.exe"
-netsh advfirewall firewall add rule name="Panda PSUAService TCP" dir=out action=allow protocol=TCP remoteip=13.32.0.0-13.47.255.255,52.192.0.0-52.223.191.255,65.8.0.0-65.11.255.255,143.204.0.0-143.204.255.255 remoteport=443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAService.exe"
+netsh advfirewall firewall add rule name="Panda PSUAConsole TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,93.184.220.0-93.184.223.255,142.250.0.0-142.251.255.255,172.217.0.0-172.217.255.255,216.58.192.0-216.58.223.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAConsole.exe"
+netsh advfirewall firewall add rule name="Panda PSUAService TCP" dir=out action=allow protocol=TCP remoteip=13.32.0.0-13.47.255.255,13.244.0.0-13.251.255.255,52.192.0.0-52.223.191.255,65.8.0.0-65.11.255.255,143.204.0.0-143.204.255.255 remoteport=443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAService.exe"
 netsh advfirewall firewall add rule name="PatchMyPC TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
 netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
-netsh advfirewall firewall add rule name="Steam Online" dir=out action=allow protocol=TCP remoteport=27015-27030,27038,27050 program="D:\Steam\Steam.exe"
-netsh advfirewall firewall add rule name="Steam TCP" dir=out action=allow protocol=TCP remoteip=2.16.186.0-2.16.187.255,92.123.212.0-92.123.215.255,95.101.24.0-95.101.27.255,104.64.0.0-104.127.255.255,146.66.155.0-146.66.155.255,155.133.224.0-155.133.255.255,162.254.192.0-162.254.199.255,216.58.192.0-216.58.223.255 remoteport=443 program="D:\Steam\Steam.exe"
-netsh advfirewall firewall add rule name="Steam UDP" dir=out action=allow protocol=UDP remoteip=146.66.155.0-146.66.155.255,155.133.224.0-155.133.255.255,162.254.192.0-162.254.199.255 remoteport=1025-65535 program="D:\Steam\Steam.exe"
+netsh advfirewall firewall add rule name="Steam TCP" dir=out action=allow protocol=TCP remoteport=443,8384,27015-27030,27038,27050 program="D:\Steam\Steam.exe"
+netsh advfirewall firewall add rule name="Steam UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\Steam.exe"
 netsh advfirewall firewall add rule name="Steam Web TCP" dir=out action=allow protocol=TCP remoteport=443 program="D:\Steam\bin\cef\cef.win7x64\steamwebhelper.exe"
 netsh advfirewall firewall add rule name="Steam Web UDP" dir=out action=allow protocol=UDP remoteip=224.0.0.252 remoteport=5355 program="D:\Steam\bin\cef\cef.win7x64\steamwebhelper.exe"
 netsh advfirewall firewall add rule name="TOR Firefox TCP" dir=out action=allow protocol=TCP remoteip=127.0.0.1 remoteport=1025-65535 program="Z:\Desktop\Tor Browser\Browser\firefox.exe"
 netsh advfirewall firewall add rule name="TOR TCP" dir=out action=allow protocol=TCP remoteport=443,1025-65535 program="Z:\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe"
-netsh advfirewall firewall add rule name="Update Time UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime.exe"
+netsh advfirewall firewall add rule name="Update Time UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime_x64.exe"
 netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
 
 
@@ -699,7 +694,7 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "S
 rem ================================ Windows Error Reporting ===============================
 
 
-rem https://docs.microsoft.com/en-us/windows/desktop/wer/wer-settings
+rem https://docs.microsoft.com/en-us/windows/win32/wer/wer-settings
 
 rem Disable Microsoft Support Diagnostic Tool MSDT
 reg add "HKLM\Software\Policies\Microsoft\Windows\ScriptedDiagnosticsProvider\Policy" /v "DisableQueryRemoteServer" /t REG_DWORD /d "0" /f
@@ -927,9 +922,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v "NoUseStoreOpenWi
 rem ================================ Windows Optimizations =================================
 
 
-rem https://msdn.microsoft.com/en-us/library/ee377058(v=bts.10).aspx
 rem https://channel9.msdn.com/Blogs/Seth-Juarez/Memory-Compression-in-Windows-10-RTM
-rem https://blogs.technet.microsoft.com/markrussinovich/2008/07/21/pushing-the-limits-of-windows-physical-memory/
 
 rem Determines whether user processes end automatically when the user either logs off or shuts down / 1 - Processes end automatically
 reg add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f
@@ -1013,7 +1006,7 @@ powercfg -h off
 rem =================================== Windows Policies ===================================
 
 
-rem Group Policies - https://getadmx.com
+rem Group Policies - https://admx.help
 rem https://docs.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/new-in-windows-mdm-enrollment-management#whatsnew10
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
@@ -1210,7 +1203,7 @@ rem =================================== Windows Policies =======================
 rem --------------------------------- User Account Control ---------------------------------
 
 rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd835564(v=ws.10)
-rem Reason to set UAC to Always Notify - https://technet.microsoft.com/en-us/library/2009.07.uac.aspx#id0560031
+rem Reason to set UAC to Always Notify - https://docs.microsoft.com/en-us/previous-versions/technet-magazine/dd822916(v=msdn.10)?
 rem https://daniels-it-blog.blogspot.com/2020/07/uac-bypass-via-dll-hijacking-and-mock.html
 rem https://www.bleepingcomputer.com/news/security/bypassing-windows-10-uac-with-mock-folders-and-dll-hijacking/
 rem There are really only two effectively distinct settings for the UAC slider - https://devblogs.microsoft.com/oldnewthing/20160816-00/?p=94105
@@ -1263,7 +1256,6 @@ rem =============================== Windows Scheduled Tasks ====================
 
 
 rem UAC Bypass - https://enigma0x3.net/2016/07/22/bypassing-uac-on-windows-10-using-disk-cleanup
-rem UAC Bypass - https://blog.ensilo.com/darkgate-malware
 
 rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
 rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
@@ -1721,7 +1713,7 @@ wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
 rem ________________________________________________________________________________________
-rem https://msdn.microsoft.com/en-us/library/windows/desktop/aa383928(v=vs.85).aspx
+rem https://docs.microsoft.com/en-us/windows/win32/wininet/caching?
 rem https://www.codeproject.com/articles/1158641/windows-continuous-disk-write-plus-webcachev-dat-p
 rem Disable WinInetCacheServer (WinINet Caching/V01.log/WebCacheV01.dat)
 rem %LocalAppData%\Microsoft\Windows\WebCache
@@ -1984,6 +1976,7 @@ schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Dis
 rem Remove Cortana app
 rem takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe"
 rem icacls "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /inheritance:r /grant:r %username%:F
+rem taskkill /im SearchApp.exe /f
 rem del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
 
 
@@ -2279,6 +2272,14 @@ rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAcc
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------------- Privacy ---------------------------------------
+rem .................................... Music library .....................................
+
+rem Allow/Deny - Allow access to screenshot border settings on this device
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\musicLibrary" /v "Value" /t REG_SZ /d "Deny" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------------- Privacy ---------------------------------------
 rem ..................................... Notifications ....................................
 
 rem Allow/Deny - Allow access to user notifications on this device
@@ -2356,7 +2357,7 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------------- Privacy ---------------------------------------
 rem ........................................ Radios ........................................
 
-rem Allow/Deny - Allow access to control raadios on this device
+rem Allow/Deny - Allow access to control radios on this device
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
 
 rem Allow/Deny - Allow Apps to control device radios
@@ -2364,6 +2365,22 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 
 rem Let apps control radios / 0 - Default / 1 - Enabled / 2 - Disabled
 rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessRadios" /t REG_DWORD /d "2" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------------- Privacy ---------------------------------------
+rem .................................. Screenshot borders ..................................
+
+rem Allow/Deny - Allow access to screenshot border settings on this device
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureWithoutBorder" /v "Value" /t REG_SZ /d "Deny" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------------- Privacy ---------------------------------------
+rem ................................. Screenshots and apps .................................
+
+rem Allow/Deny - Allow Apps to take screenshots of various windows or displays on this device
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2419,7 +2436,6 @@ rem . . . . . . . . . . . . . . . . . . . System info . . . . . . . . . . . . . 
 
 rem System info (Logo - 120x120.bmp)
 rem shell:::{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}
-rem http://aka.ms/AA9i4vz
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Logo" /t REG_SZ /d "D:\Software\Temp\Pics\Logo.bmp" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "(-_-)" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOwner" /t REG_SZ /d "Brony" /f
@@ -2675,25 +2691,28 @@ rem Take Ownership
 rem Files/Folders - https://www.youtube.com/watch?v=x7gjZMvQHu4
 rem Registry - https://www.youtube.com/watch?v=M1l5ifYKefg
 rem https://ss64.com/nt/icacls.html
-rem https://technet.microsoft.com/en-us/library/cc753024%28v=ws.11%29.aspx
-rem https://technet.microsoft.com/en-us/library/cc753525(v=ws.11).aspx
+rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753024(v=ws.11)?
+rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753525(v=ws.11)?
 
 rem Add "Take Ownership" Option in Files and Folders Context Menu in Windows
-reg add "HKCR\*\shell\runas" /ve /t REG_SZ /d "Take ownership" /f
-reg add "HKCR\*\shell\runas" /v "HasLUAShield" /t REG_SZ /d "" /f
-reg add "HKCR\*\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
-reg add "HKCR\*\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && icacls \"%%1\" /grant administrators:F" /f
-reg add "HKCR\*\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && icacls \"%%1\" /grant administrators:F" /f
-reg add "HKCR\Directory\shell\runas" /ve /t REG_SZ /d "Take ownership" /f
-reg add "HKCR\Directory\shell\runas" /v "HasLUAShield" /t REG_SZ /d "" /f
-reg add "HKCR\Directory\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
-reg add "HKCR\Directory\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
-reg add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
+rem reg add "HKCR\*\shell\runas" /ve /t REG_SZ /d "Take ownership" /f
+rem reg add "HKCR\*\shell\runas" /v "HasLUAShield" /t REG_SZ /d "" /f
+rem reg add "HKCR\*\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
+rem reg add "HKCR\*\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && icacls \"%%1\" /grant administrators:F" /f
+rem reg add "HKCR\*\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" && icacls \"%%1\" /grant administrators:F" /f
+rem reg add "HKCR\Directory\shell\runas" /ve /t REG_SZ /d "Take ownership" /f
+rem reg add "HKCR\Directory\shell\runas" /v "HasLUAShield" /t REG_SZ /d "" /f
+rem reg add "HKCR\Directory\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d "" /f
+rem reg add "HKCR\Directory\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
+rem reg add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
 
-rem Remove Send To from Context Menu
+rem Remove open in Windows Terminal from context menu
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{9F156763-7844-4DC4-B2B1-901F640F5155}" /t REG_SZ /d "" /f
+
+rem Remove Send To from context Menu
 reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f
 
-rem Remove Share from Context Menu
+rem Remove Share from Context menu
 reg delete "HKLM\Software\Classes\*\shellex\ContextMenuHandlers\ModernSharing" /f
 reg delete "HKLM\Software\Classes\*\shellex\ContextMenuHandlers\Sharing" /f
 reg delete "HKLM\Software\Classes\Drive\shellex\ContextMenuHandlers\Sharing" /f
@@ -2731,14 +2750,13 @@ rem =================================== Windows Support ========================
 rem Do not run ResetBase! It breaks Windows Updates (0x800f081f) and it can not be repaired!
 
 rem Apps - FixWin - http://www.thewindowsclub.com/fixwin-for-windows-10
-rem Windows Cleanup - https://pastebin.com/5Q4t1Us9
-rem Windows Drivers - http://www.catalog.update.microsoft.com
+rem Windows Cleanup - https://drive.google.com/file/d/1AQLr94IQPBpZYEyKNi_CsI5WAOC4BCKp/view
+rem Windows Drivers - https://www.catalog.update.microsoft.com
 rem Windows Forums - https://www.tenforums.com/general-support/58375-newly-added-tutorials.html
 rem Windows Repair Install - https://www.tenforums.com/tutorials/16397-repair-install-windows-10-place-upgrade.html
 rem Windows Repair Toolbox - https://windows-repair-toolbox.com
-rem Windows Support - https://technet.microsoft.com/en-us/windows/support-windows-10.aspx
 rem Windows Update Agent Reset - https://gallery.technet.microsoft.com/scriptcenter/reset-windows-update-agent-d824badc
-rem Windows Update Troubleshooter - https://aka.ms/wudiag
+rem Windows Update Troubleshooter - https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-for-windows-10-19bc41ca-ad72-ae67-af3c-89ce169755dd
  
 rem Boot into safemode - https://www.tenforums.com/tutorials/2304-boot-into-safe-mode-windows-10-a.html#option3
 rem bcdedit /set {identifier} safeboot minimal
@@ -2796,8 +2814,8 @@ rem https://www.urlvoid.com
 rem Reliability Monitor
 rem perfmon /rel
 
-rem https://technet.microsoft.com/en-gb/library/bb490876.aspx
-rem https://blogs.msdn.microsoft.com/b8/2012/05/09/redesigning-chkdsk-and-the-new-ntfs-health-model/
+rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-xp/bb490876(v=technet.10)?
+rem https://docs.microsoft.com/en-us/archive/blogs/b8/redesigning-chkdsk-and-the-new-ntfs-health-model
 rem Repair bad sectors
 rem chkdsk %SystemDrive% /r
 
@@ -2821,55 +2839,57 @@ rem ==================================== Windows Waypoint ======================
 
 timeout 5
 
-taskkill /im msedge.exe /f
-
-
 fsutil usn deletejournal /d /n c:
+
+taskkill /im dllhost.exe /f
+taskkill /im chrome.exe /f
+taskkill /im msedge.exe /f
+taskkill /im rundll32.exe /f
 
 rem Clean Discord's caches
 rd "%AppData%\Discord\Cache" /s /q
 rd "%AppData%\Discord\Code Cache" /s /q
 
-rem Clean Edge's updater, caches and cookies (not covered by CookieAutodelete, since the browser is running) - chrome://settings/siteData
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\*history*." /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Affiliation Database" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Affiliation Database-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\LOG" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\LOG.old" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Login Data" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Login Data-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Media History" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Media History-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Network Action Predictor" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Network Action Predictor-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Network Persistent State" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Reporting and NEL" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Reporting and NEL-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\QuotaManager" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\QuotaManager-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Shortcuts" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Shortcuts-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Top Sites" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Top Sites-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome Beta\User Data\Default\Visited Links" /s /f /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\AutofillStrikeDatabase" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\BudgetDatabase" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Cache" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Code Cache" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\data_reduction_proxy_leveldb" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\databases" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\File System" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\GCM Store" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\GPUCache" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\IndexedDB" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Local Storage" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Platform Notifications" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Service Worker" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Session Storage" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Sessions" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\shared_proto_db" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\Site Characteristics Database" /s /q
-rd "%LocalAppData%\Google\Chrome Beta\User Data\Default\VideoDecodeStats" /s /q
+rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - chrome://settings/siteData
+del "%LocalAppData%\Google\Chrome\User Data\Default\*history*." /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Affiliation Database" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Affiliation Database-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\LOG" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\LOG.old" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Login Data" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Login Data-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Media History" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Media History-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Network Action Predictor" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Network Action Predictor-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Network Persistent State" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Reporting and NEL" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Reporting and NEL-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\QuotaManager" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\QuotaManager-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Shortcuts" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Shortcuts-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Top Sites" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Top Sites-journal" /s /f /q
+del "%LocalAppData%\Google\Chrome\User Data\Default\Visited Links" /s /f /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\AutofillStrikeDatabase" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\BudgetDatabase" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Code Cache" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\data_reduction_proxy_leveldb" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\databases" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\File System" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\GCM Store" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\IndexedDB" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Local Storage" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Platform Notifications" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Session Storage" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Sessions" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\shared_proto_db" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\Site Characteristics Database" /s /q
+rd "%LocalAppData%\Google\Chrome\User Data\Default\VideoDecodeStats" /s /q
 
 rem Run Wise Disk Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
