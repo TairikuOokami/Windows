@@ -1,6 +1,6 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-rem https://support.microsoft.com/en-us/help/10741/windows-10-fix-network-connection-issues
+rem https://support.microsoft.com/en-us/windows/fix-wi-fi-connection-issues-in-windows-9424a1f7-6a3b-65a6-4d78-7f07eee84d2c
 rem Windows Repair Toolbox - https://windows-repair-toolbox.com
 rem Network Optimization / TCP Optimizer - www.speedguide.net/downloads.php
 rem www.tenforums.com/network-sharing/2806-slow-network-throughput-windows-10-a.html#post553305
