@@ -342,6 +342,7 @@ del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
 rem Remove Windows Powershell (to restore run "sfc /scannow")
+rem https://threatpost.com/powershell-payload-analysis-malware/165188
 rem https://threatpost.com/fileless-malware-critical-ioc-threats-2020/159422
 rem https://blog.netspi.com/15-ways-to-bypass-the-powershell-execution-policy
 rem https://www.mrg-effitas.com/research/current-state-of-malicious-powershell-script-blocking
