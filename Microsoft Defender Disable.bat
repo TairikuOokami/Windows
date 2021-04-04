@@ -62,6 +62,6 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
-rem Run twice to disable WD services !!!!!
+rem Run twice to disable WD services (MsMpEng.exe) !!!!!
 
 pause
