@@ -155,6 +155,7 @@ rem WiseVector StopX (CN) - https://www.wisevector.com/en
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
 rem LMT Anti Logger (VN) - https://www.leminhthanh.me/antilogger
+rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
 rem OSArmor (IT) - https://www.osarmor.com
 rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/endpoint-protection-platform
 rem VoodooShield (US) - https://voodooshield.com
@@ -627,6 +628,9 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 rem Windows Firewall Rules
 netsh advfirewall firewall add rule name="Audials TCP" dir=out action=allow protocol=TCP remoteport=80,443,1025-65535 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
 netsh advfirewall firewall add rule name="Audials UDP" dir=out action=allow protocol=UDP remoteport=5353 remoteip=224.0.0.252 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
+netsh advfirewall firewall add rule name="Brave HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Brave QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Brave Update TCP" dir=out action=allow protocol=TCP remoteip=13.200.0.0-13.239.255.255,65.8.0.0-65.11.255.255 remoteport=443 program="%ProgramFiles(x86)%\BraveSoftware\Update\BraveUpdate.exe"
 netsh advfirewall firewall add rule name="COD MW2 TCP" dir=out action=allow protocol=TCP remoteport=27015-27030,27038,27050 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
 netsh advfirewall firewall add rule name="COD MW2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
 netsh advfirewall firewall add rule name="COD MW3 TCP" dir=out action=allow protocol=TCP remoteport=3074 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 3\iw5sp.exe"
@@ -639,9 +643,6 @@ netsh advfirewall firewall add rule name="ETS2 TCP" dir=out action=allow protoco
 netsh advfirewall firewall add rule name="ETS2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
 netsh advfirewall firewall add rule name="ETS2 MP TCP" dir=out action=allow protocol=TCP remoteip=104.16.0.0-104.31.255.255 remoteport=80 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
 netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow protocol=UDP remoteip=0.0.0.0 remoteport=1025-65535 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
-netsh advfirewall firewall add rule name="Google Chrome HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Google\Chrome\Application\chrome.exe"
-netsh advfirewall firewall add rule name="Google Chrome QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles%\Google\Chrome\Application\chrome.exe"
-netsh advfirewall firewall add rule name="Google Update TCP" dir=out action=allow protocol=TCP remoteip=142.250.0.0-142.251.255.255,172.217.0.0-172.217.255.255,216.58.192.0-216.58.223.255 remoteport=443 program="%ProgramFiles(x86)%\Google\Update\GoogleUpdate.exe"
 netsh advfirewall firewall add rule name="Hitman TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,51.140.0.0-51.145.255.255,52.224.0.0-52.255.255.255,104.40.0.0-104.47.255.255,191.239.203.0 remoteport=443 program="D:\Steam\steamapps\common\HITMAN2\dx12Retail\HITMAN2.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=37.58.48.0-37.58.55.255,46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,172.64.0.0-172.71.255.255,178.162.206.0-178.162.207.255,178.162.216.0-178.162.219.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
 netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
@@ -649,8 +650,8 @@ netsh advfirewall firewall add rule name="Microsoft OneDrive TCP" dir=out action
 netsh advfirewall firewall add rule name="Microsoft OneDrive Setup TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\Update\OneDriveSetup.exe"
 netsh advfirewall firewall add rule name="Microsoft OneDrive Settings TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\21.046.0307.0001\FileCoAuth.exe"
 netsh advfirewall firewall add rule name="Microsoft OneDrive Update TCP" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,52.132.0.0-52.143.255.255,168.61.0.0-168.63.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\OneDriveStandaloneUpdater.exe"
-netsh advfirewall firewall add rule name="Microsoft Store TCP 80" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,23.192.0.0-23.223.255.255,93.184.220.0-93.184.223.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=80 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12101.1001.14.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
-netsh advfirewall firewall add rule name="Microsoft Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12101.1001.14.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
+netsh advfirewall firewall add rule name="Microsoft Store TCP 80" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,23.192.0.0-23.223.255.255,93.184.220.0-93.184.223.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=80 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12103.1001.11.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
+netsh advfirewall firewall add rule name="Microsoft Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12103.1001.11.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
 netsh advfirewall firewall add rule name="Microsoft Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
 netsh advfirewall firewall add rule name="Microsoft Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
 netsh advfirewall firewall add rule name="Microsoft Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
@@ -2852,45 +2853,43 @@ rd "%AppData%\Discord\Cache" /s /q
 rd "%AppData%\Discord\Code Cache" /s /q
 
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - chrome://settings/siteData
-del "%LocalAppData%\Google\Chrome\User Data\Default\*history*." /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Affiliation Database" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Affiliation Database-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\LOG" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\LOG.old" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Login Data" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Login Data-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Media History" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Media History-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Network Action Predictor" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Network Action Predictor-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Network Persistent State" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Reporting and NEL" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Reporting and NEL-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\QuotaManager" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\QuotaManager-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Shortcuts" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Shortcuts-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Top Sites" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Top Sites-journal" /s /f /q
-del "%LocalAppData%\Google\Chrome\User Data\Default\Visited Links" /s /f /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\AutofillStrikeDatabase" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\BudgetDatabase" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Cache" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Code Cache" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\data_reduction_proxy_leveldb" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\databases" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\File System" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\GCM Store" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\GPUCache" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\IndexedDB" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Local Storage" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Platform Notifications" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Service Worker" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Session Storage" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Sessions" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\shared_proto_db" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\Site Characteristics Database" /s /q
-rd "%LocalAppData%\Google\Chrome\User Data\Default\VideoDecodeStats" /s /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\*history*." /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\LOG" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\LOG.old" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Login Data" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Login Data-journal" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Media History" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Media History-journal" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Network Action Predictor" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Network Action Predictor-journal" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Network Persistent State" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Reporting and NEL" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Reporting and NEL-journal" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\QuotaManager" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\QuotaManager-journal" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Shortcuts" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Shortcuts-journal" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Top Sites" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Top Sites-journal" /s /f /q
+del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Visited Links" /s /f /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\AutofillStrikeDatabase" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\BudgetDatabase" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cache" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Code Cache" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\data_reduction_proxy_leveldb" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\databases" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\File System" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\GCM Store" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\GPUCache" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\IndexedDB" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Local Storage" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Platform Notifications" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Service Worker" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Session Storage" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Sessions" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\shared_proto_db" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Site Characteristics Database" /s /q
+rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\VideoDecodeStats" /s /q
 
 rem Run Wise Disk Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
