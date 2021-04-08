@@ -82,7 +82,7 @@ wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
 rem Setup Encrypted DNS
-ms-settings:network-ethernet
+start ms-settings:network-ethernet
 
 pause
 
