@@ -32,9 +32,9 @@ start "" /wait "D:\Software\Temp\Setup\12.exe"
 start "" /wait "D:\Software\Temp\Setup\13.exe"
 start "" /wait "D:\Software\Temp\Setup\15.exe"
 start "" /wait "D:\Software\Temp\Setup\16.exe"
-start "" /wait "D:\Software\Temp\Setup\ChromeSetup.exe"
+start "" /wait "D:\Software\Temp\Setup\BraveBrowserSetup.exe"
 
-taskkill /im Chrome.exe /f
+taskkill /im Brave.exe /f
 taskkill /im Discord.exe /f
 taskkill /im Setpoint.exe /f
 
@@ -46,14 +46,13 @@ xcopy "%AppData%\Discord" "Z:\Discord" /s /i /y
 rd "%AppData%\Discord" /s /q
 mklink /d "%AppData%\Discord" "Z:\Discord"
 
-taskkill /im chrome.exe /f
-taskkill /im GoogleUpdate.exe /f
-takeown /s %computername% /u %username% /f "%LocalAppData%\Google\Chrome" /r /d y
-rem icacls "%LocalAppData%\Google\Chrome" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem icacls "%LocalAppData%\Google\Chrome" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
-xcopy "%LocalAppData%\Google\Chrome" "Z:\Chrome" /s /i /y
-rd "%LocalAppData%\Google\Chrome" /s /q
-mklink /d "%LocalAppData%\Google\Chrome" "Z:\Chrome"
+taskkill /im Brave.exe /f
+takeown /s %computername% /u %username% /f "%LocalAppData%\BraveSoftware\Brave-Browser" /r /d y
+rem icacls "%LocalAppData%\BraveSoftware\Brave-Browser" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem icacls "%LocalAppData%\BraveSoftware\Brave-Browser" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
+xcopy "%LocalAppData%\BraveSoftware\Brave-Browser" "Z:\Brave" /s /i /y
+rd "%LocalAppData%\BraveSoftware\Brave-Browser" /s /q
+mklink /d "%LocalAppData%\BraveSoftware\Brave-Browser" "Z:\Brave"
 
 rd "Z:\Documents\Euro Truck Simulator 2\mod"
 mklink /d "Z:\Documents\Euro Truck Simulator 2\mod" "D:\Euro Truck Simulator 2\mod"
@@ -87,9 +86,11 @@ start ms-settings:appsfeatures
 
 pause
 
-start "" /wait "%ProgramFiles%\Google\Chrome Beta\Application\chrome.exe"
+start "" /wait "%ProgramFiles%\\BraveSoftware\Brave-Browser\Application\brave.exe"
 
 Disabled #heavy-ad-privacy-mitigations
+Disabled #tab-hover-cards
+Enabled #abusive-notification-permission-revocation
 Enabled #block-insecure-private-network-requests
 Enabled #disallow-doc-written-script-loads
 Enabled #dns-httpssvc
@@ -97,10 +98,11 @@ Enabled #enable-heavy-ad-intervention
 Enabled #enable-parallel-downloading
 Enabled #enable-quic
 Enabled #enable-webrtc-hide-local-ips-with-mdns
+Enabled #permission-chip
+Enabled #permission-predictions
 Enabled #quiet-notification-prompts
-Enabled #safe-browsing-enhanced-protection-message-in-interstitials
-Enabled #use-sync-sandbox
 Enabled #turn-off-streaming-media-caching-always
+Enabled #use-sync-sandbox
 
 https://duckduckgo.com/?q=%s&k5=2&k1=-1&kav=1&kau=-1&kax=-1&kaq=-1&kah=sk-sk&kao=-1&kk=-1&kak=-1&kap=-1&kbc=1
 
