@@ -66,9 +66,10 @@ rem https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-
 rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefilters.org
 rem Browser Leaks - https://browserleaks.com / https://whoer.net / CanvasFingerprint / WebRTC
 rem Browser Tracking Test - https://panopticlick.eff.org
+rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-based-adblocking-support
 rem Privacy Etags - https://lucb1e.com/rp/cookielesscookies
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
-rem Privacy Google FLoC - https://amifloced.org
+rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Tools - https://www.ghacks.net/2015/08/14/comparison-of-windows-10-privacy-tools
 rem Privacy Tools - https://www.privacytools.io
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
@@ -471,7 +472,7 @@ bcdedit /set {default} disabledynamictick yes
 bcdedit /set {default} lastknowngood yes
 bcdedit /set {default} recoveryenabled no
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-0.0.309\Discord.exe --start-minimized" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9001\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles% (x86)\Microsoft OneDrive\OneDrive.exe\" /background" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "EvtMgr6" /t REG_SZ /d "%ProgramFiles%\Logitech\SetPointP\SetPoint.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
@@ -519,9 +520,9 @@ rd "%ProgramFiles%\Common Files\LogiShrd\sp6\LU1" /s /q
 rd "%ProgramFiles%\Common Files\LogiShrd\Unifying\LU" /s /q
 
 rem Microsoft Edge Update Disabled
-taskkill /im MSEdge.exe /f
-taskkill /im MicrosoftEdgeUpdate.exe /f
-rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate" /s /q
+rem taskkill /im MSEdge.exe /f
+rem taskkill /im MicrosoftEdgeUpdate.exe /f
+rem rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate" /s /q
 
 rem Notepad
 reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosDX" /t REG_DWORD /d "1934" /f
@@ -564,13 +565,13 @@ rem Off - Disable Windows SmartScreen / On - Enable Windows SmartScreen
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
 
 rem 0 - Disable SmartScreen Filter in Microsoft Edge / 1 - Enable
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "1" /f
 
 rem 0 - Disable SmartScreen PUA in Microsoft Edge / 1 - Enable
 reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
 
 rem 0 - Disable Windows SmartScreen for Windows Store Apps / 1 - Enable
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t "REG_DWORD" /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t "REG_DWORD" /d "1" /f
 
 rem ________________________________________________________________________________________
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t "REG_DWORD" /d "0" /f
@@ -634,16 +635,12 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 rem Windows Firewall Rules
 netsh advfirewall firewall add rule name="Audials TCP" dir=out action=allow protocol=TCP remoteport=80,443,1025-65535 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
 netsh advfirewall firewall add rule name="Audials UDP" dir=out action=allow protocol=UDP remoteport=5353 remoteip=224.0.0.252 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
-netsh advfirewall firewall add rule name="Brave HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe"
-netsh advfirewall firewall add rule name="Brave QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles%\BraveSoftware\Brave-Browser\Application\brave.exe"
-netsh advfirewall firewall add rule name="Brave Update TCP" dir=out action=allow protocol=TCP remoteip=13.200.0.0-13.239.255.255,65.8.0.0-65.11.255.255,99.83.64.0-99.84.255.255,143.204.0.0-143.204.255.255 remoteport=443 program="%ProgramFiles(x86)%\BraveSoftware\Update\BraveUpdate.exe"
-rem netsh advfirewall firewall add rule name="Messenger TCP" dir=out action=allow protocol=TCP remoteip=69.171.224.0-69.171.255.255,185.60.216.0-185.60.219.255 remoteport=443 program="%LocalAppData%\Programs\caprine\Caprine.exe"
 netsh advfirewall firewall add rule name="COD MW2 TCP" dir=out action=allow protocol=TCP remoteport=27015-27030,27038,27050 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
 netsh advfirewall firewall add rule name="COD MW2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
 netsh advfirewall firewall add rule name="COD MW3 TCP" dir=out action=allow protocol=TCP remoteport=3074 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 3\iw5sp.exe"
 netsh advfirewall firewall add rule name="COD MW3 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 3\iw5sp.exe"
-netsh advfirewall firewall add rule name="Discord TCP" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,162.158.0.0-162.159.255.255 remoteport=443 program="%LOCALAPPDATA%\Discord\app-0.0.309\Discord.exe"
-netsh advfirewall firewall add rule name="Discord UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="%LOCALAPPDATA%\Discord\app-0.0.309\Discord.exe"
+netsh advfirewall firewall add rule name="Discord TCP" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,162.158.0.0-162.159.255.255 remoteport=443 program="%LOCALAPPDATA%\Discord\app-1.0.9001\Discord.exe"
+netsh advfirewall firewall add rule name="Discord UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="%LOCALAPPDATA%\Discord\app-1.0.9001\Discord.exe"
 netsh advfirewall firewall add rule name="Discord Update TCP" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,162.158.0.0-162.159.255.255 remoteport=443 program="%LOCALAPPDATA%\Discord\Update.exe"
 netsh advfirewall firewall add rule name="DriverEasy TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Easeware\DriverEasy\DriverEasy.exe"
 netsh advfirewall firewall add rule name="ETS2 TCP" dir=out action=allow protocol=TCP remoteport=80,443,4455 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
@@ -653,20 +650,24 @@ netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow prot
 netsh advfirewall firewall add rule name="Hitman TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,51.140.0.0-51.145.255.255,52.224.0.0-52.255.255.255,104.40.0.0-104.47.255.255,191.239.203.0 remoteport=443 program="D:\Steam\steamapps\common\HITMAN2\dx12Retail\HITMAN2.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=37.58.48.0-37.58.55.255,46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,172.64.0.0-172.71.255.255,178.162.206.0-178.162.207.255,178.162.216.0-178.162.219.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
 netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
-netsh advfirewall firewall add rule name="Microsoft OneDrive TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.150.0.0-20.153.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\OneDrive.exe"
-netsh advfirewall firewall add rule name="Microsoft OneDrive Setup TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\Update\OneDriveSetup.exe"
-netsh advfirewall firewall add rule name="Microsoft OneDrive Settings TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\21.046.0307.0001\FileCoAuth.exe"
-netsh advfirewall firewall add rule name="Microsoft OneDrive Update TCP" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,52.132.0.0-52.143.255.255,168.61.0.0-168.63.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\OneDriveStandaloneUpdater.exe"
+netsh advfirewall firewall add rule name="MS Edge HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge Beta\Application\msedge.exe"
+netsh advfirewall firewall add rule name="MS Edge QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles(x86)%\Microsoft\Edge Beta\Application\msedge.exe"
+netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255,52.145.0.0-52.191.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"
+
+netsh advfirewall firewall add rule name="MS OneDrive TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.150.0.0-20.153.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\OneDrive.exe"
+netsh advfirewall firewall add rule name="MS OneDrive Setup TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\Update\OneDriveSetup.exe"
+netsh advfirewall firewall add rule name="MS OneDrive Settings TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\21.046.0307.0001\FileCoAuth.exe"
+netsh advfirewall firewall add rule name="MS OneDrive Update TCP" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,52.132.0.0-52.143.255.255,168.61.0.0-168.63.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft OneDrive\OneDriveStandaloneUpdater.exe"
 netsh advfirewall firewall add rule name="Microsoft Store TCP 80" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,23.192.0.0-23.223.255.255,93.184.220.0-93.184.223.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=80 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12103.1001.11.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
-netsh advfirewall firewall add rule name="Microsoft Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12103.1001.11.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
-netsh advfirewall firewall add rule name="Microsoft Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="Microsoft Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="Microsoft Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="Microsoft Svchost UDP 5353 Steam Friends" dir=out action=allow protocol=UDP remoteip=224.0.0.251 remoteport=5353 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="Microsoft Sync TCP 80" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255 remoteport=80 program="%WINDIR%\System32\SettingSyncHost.exe"
-netsh advfirewall firewall add rule name="Microsoft Sync TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,40.74.0.0-40.125.127.255,104.64.0.0-104.127.255.255 remoteport=443 program="%WINDIR%\System32\SettingSyncHost.exe"
-netsh advfirewall firewall add rule name="Microsoft UAC TCP" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255,151.139.0.0-151.139.255.255 remoteport=80,443 program="%WINDIR%\System32\consent.exe"
-netsh advfirewall firewall add rule name="Microsoft Weather TCP" dir=out action=allow protocol=TCP remoteport=443 remoteip=52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,204.79.195.0-204.79.197.255 program="%ProgramFiles%\WindowsApps\Microsoft.BingWeather_4.46.30621.0_x64__8wekyb3d8bbwe\Microsoft.Msn.Weather.exe"
+netsh advfirewall firewall add rule name="MS Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12103.1001.11.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
+netsh advfirewall firewall add rule name="MS Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="MS Svchost UDP 5353 Steam Friends" dir=out action=allow protocol=UDP remoteip=224.0.0.251 remoteport=5353 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="MS Sync TCP 80" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255 remoteport=80 program="%WINDIR%\System32\SettingSyncHost.exe"
+netsh advfirewall firewall add rule name="MS Sync TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,40.74.0.0-40.125.127.255,104.64.0.0-104.127.255.255 remoteport=443 program="%WINDIR%\System32\SettingSyncHost.exe"
+netsh advfirewall firewall add rule name="MS UAC TCP" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255,151.139.0.0-151.139.255.255 remoteport=80,443 program="%WINDIR%\System32\consent.exe"
+netsh advfirewall firewall add rule name="MS Weather TCP" dir=out action=allow protocol=TCP remoteport=443 remoteip=52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,204.79.195.0-204.79.197.255 program="%ProgramFiles%\WindowsApps\Microsoft.BingWeather_4.46.31055.0_x64__8wekyb3d8bbwe\Microsoft.Msn.Weather.exe"
 netsh advfirewall firewall add rule name="OBS TCP" dir=out action=allow protocol=TCP remoteport=443,1935 program="%ProgramFiles%\Streamlabs OBS\resources\app.asar.unpacked\node_modules\obs-studio-node\obs64.exe"
 netsh advfirewall firewall add rule name="OBS Browser TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Streamlabs OBS\Streamlabs OBS.exe"
 netsh advfirewall firewall add rule name="OBS Browser UDP" dir=out action=allow protocol=UDP remoteport=5355 program="%ProgramFiles%\Streamlabs OBS\Streamlabs OBS.exe"
@@ -1276,6 +1277,7 @@ rem schtasks /DELETE /TN "Microsoft\Windows\SettingSync\BackgroundUploadTask" /f
 
 schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
+schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
 schtasks /DELETE /TN "Driver Easy Scheduled Scan" /f
 schtasks /DELETE /TN "MicrosoftEdgeUpdateTaskMachineCore" /f
 schtasks /DELETE /TN "MicrosoftEdgeUpdateTaskMachineUA" /f
@@ -1849,10 +1851,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 rem 1 - Show contacts on the taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" /v "PeopleBand" /t REG_DWORD /d "0" /f
 
-rem ________________________________________________________________________________________
-rem 0 - Turn on Quiet Hours in Action Center / Disable/Hide the message: Turn on Windows Security Center service
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
-
 rem 0 - Hide News and Interests Icon (Cortana in disguise) / 0 = Show icon and text (default) / 1 - Show icon only / 2 - Turn off
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "IsFeedsAvailable " /t REG_DWORD /d "2" /f
 
@@ -1868,6 +1866,56 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "S
 
 rem 0 - Hide Taskbar search / 1 - Show search icon / 2 - Show search box
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem Disable Cortana
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Cortana" /v "IsAvailable" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaCapabilities" /t REG_SZ /d "" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "DeviceHistoryEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "IsAssignedAccess" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "IsWindowsHelloActive" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\PolicyManager\default\Experience\AllowCortana" /v "value" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFileUpdates" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowIndexingEncryptedStoresOrItems" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchPrivacy" /t REG_DWORD /d "3" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWebOverMeteredConnections" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DoNotUseWebResults" /t REG_DWORD /d "1" /f
+
+rem 1 - Let Cortana respond to "Hey Cortana"
+reg add "HKCU\Software\Microsoft\Speech_OneCore\Preferences" /v "VoiceActivationOn" /t REG_DWORD /d "0" /f
+
+rem 1- Let Cortana listen for my commands when I press Windows key + C
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "VoiceShortcut" /t REG_DWORD /d "0" /f
+
+rem 1 - Use Cortana even when my device is locked
+reg add "HKCU\Software\Microsoft\Speech_OneCore\Preferences" /v "VoiceActivationEnableAboveLockscreen" /t REG_DWORD /d "0" /f
+
+rem Disable keyboard input/monitoring in apps like Calc, Edge, Search, Start, Store
+schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Disable
+
+rem Remove Cortana app (News and Interests)
+takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe"
+icacls "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /inheritance:r /grant:r %username%:F
+taskkill /im SearchApp.exe /f
+del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
+
+rem Remove Your Phone app (News and Interests)
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.211.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.211.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+taskkill /im YourPhone.exe /f
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.211.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+
+rem 0 - Turn on Quiet Hours in Action Center / Disable/Hide the message: Turn on Windows Security Center service
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -1951,47 +1999,6 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessM
 
 rem Let apps access ... / 0 - Default / 1 - Enabled / 2 - Disabled
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessPhone" /t REG_DWORD /d "2" /f
-
-rem Disable Cortana
-
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Cortana" /v "IsAvailable" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaCapabilities" /t REG_SZ /d "" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "DeviceHistoryEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "IsAssignedAccess" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "IsWindowsHelloActive" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\PolicyManager\default\Experience\AllowCortana" /v "value" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFileUpdates" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowIndexingEncryptedStoresOrItems" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchPrivacy" /t REG_DWORD /d "3" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWebOverMeteredConnections" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DoNotUseWebResults" /t REG_DWORD /d "1" /f
-
-rem 1 - Let Cortana respond to "Hey Cortana"
-reg add "HKCU\Software\Microsoft\Speech_OneCore\Preferences" /v "VoiceActivationOn" /t REG_DWORD /d "0" /f
-
-rem 1- Let Cortana listen for my commands when I press Windows key + C
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "VoiceShortcut" /t REG_DWORD /d "0" /f
-
-rem 1 - Use Cortana even when my device is locked
-reg add "HKCU\Software\Microsoft\Speech_OneCore\Preferences" /v "VoiceActivationEnableAboveLockscreen" /t REG_DWORD /d "0" /f
-
-rem Disable keyboard input/monitoring in apps like Calc, Edge, Search, Start, Store
-schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Disable
-
-rem Remove Cortana app (News and Interests)
-takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe"
-icacls "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /inheritance:r /grant:r %username%:F
-taskkill /im SearchApp.exe /f
-del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2856,7 +2863,6 @@ timeout 5
 fsutil usn deletejournal /d /n c:
 
 taskkill /im dllhost.exe /f
-taskkill /im brave.exe /f
 taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
 
@@ -2865,43 +2871,46 @@ rd "%AppData%\Discord\Cache" /s /q
 rd "%AppData%\Discord\Code Cache" /s /q
 
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - chrome://settings/siteData
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\*history*." /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\LOG" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\LOG.old" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Login Data" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Login Data-journal" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Media History" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Media History-journal" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Network Action Predictor" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Network Action Predictor-journal" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Network Persistent State" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Reporting and NEL" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Reporting and NEL-journal" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\QuotaManager" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\QuotaManager-journal" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Shortcuts" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Shortcuts-journal" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Top Sites" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Top Sites-journal" /s /f /q
-del "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Visited Links" /s /f /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\AutofillStrikeDatabase" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\BudgetDatabase" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Cache" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Code Cache" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\data_reduction_proxy_leveldb" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\databases" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\File System" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\GCM Store" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\GPUCache" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\IndexedDB" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Local Storage" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Platform Notifications" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Service Worker" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Session Storage" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Sessions" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\shared_proto_db" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\Site Characteristics Database" /s /q
-rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data\Default\VideoDecodeStats" /s /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\*history*." /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\LOG" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\LOG.old" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Login Data" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Login Data-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Media History" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Media History-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Network Action Predictor" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Network Action Predictor-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Network Persistent State" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Reporting and NEL" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Reporting and NEL-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\QuotaManager" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\QuotaManager-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Shortcuts" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Shortcuts-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Top Sites" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Top Sites-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Visited Links" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Web Data" /s /f /q
+del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Web Data-journal" /s /f /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\AutofillStrikeDatabase" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\blob_storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\BudgetDatabase" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Cache" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Code Cache" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Collections" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\data_reduction_proxy_leveldb" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\databases" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\File System" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\GPUCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\IndexedDB" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Local Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Platform Notifications" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Service Worker" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Session Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Sessions" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\shared_proto_db" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Site Characteristics Database" /s /q
+rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\VideoDecodeStats" /s /q
 
 rem Run Wise Disk Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
