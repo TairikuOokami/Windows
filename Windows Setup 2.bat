@@ -32,9 +32,8 @@ start "" /wait "D:\Software\Temp\Setup\12.exe"
 start "" /wait "D:\Software\Temp\Setup\13.exe"
 start "" /wait "D:\Software\Temp\Setup\15.exe"
 start "" /wait "D:\Software\Temp\Setup\16.exe"
-start "" /wait "D:\Software\Temp\Setup\BraveBrowserSetup.exe"
 
-taskkill /im Brave.exe /f
+taskkill /im msedge.exe /f
 taskkill /im Discord.exe /f
 taskkill /im Setpoint.exe /f
 
@@ -47,12 +46,12 @@ rd "%AppData%\Discord" /s /q
 mklink /d "%AppData%\Discord" "Z:\Discord"
 
 taskkill /im Brave.exe /f
-takeown /s %computername% /u %username% /f "%LocalAppData%\BraveSoftware\Brave-Browser" /r /d y
-rem icacls "%LocalAppData%\BraveSoftware\Brave-Browser" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem icacls "%LocalAppData%\BraveSoftware\Brave-Browser" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
-xcopy "%LocalAppData%\BraveSoftware\Brave-Browser" "Z:\Brave" /s /i /y
-rd "%LocalAppData%\BraveSoftware\Brave-Browser" /s /q
-mklink /d "%LocalAppData%\BraveSoftware\Brave-Browser" "Z:\Brave"
+takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
+rem icacls "%LocalAppData%\Microsoft\Edge" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem icacls "%LocalAppData%\Microsoft\Edge" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
+xcopy "%LocalAppData%\Microsoft\Edge" "Z:\Edge" /s /i /y
+rd "%LocalAppData%\Microsoft\Edge" /s /q
+mklink /d "%LocalAppData%\Microsoft\Edge" "Z:\Edge"
 
 rd "Z:\Documents\Euro Truck Simulator 2\mod"
 mklink /d "Z:\Documents\Euro Truck Simulator 2\mod" "D:\Euro Truck Simulator 2\mod"
@@ -86,23 +85,7 @@ start ms-settings:appsfeatures
 
 pause
 
-start "" /wait "%ProgramFiles%\\BraveSoftware\Brave-Browser\Application\brave.exe"
-
-Disabled #heavy-ad-privacy-mitigations
-Disabled #tab-hover-cards
-Enabled #abusive-notification-permission-revocation
-Enabled #block-insecure-private-network-requests
-Enabled #disallow-doc-written-script-loads
-Enabled #dns-httpssvc
-Enabled #enable-heavy-ad-intervention
-Enabled #enable-parallel-downloading
-Enabled #enable-quic
-Enabled #enable-webrtc-hide-local-ips-with-mdns
-Enabled #permission-chip
-Enabled #permission-predictions
-Enabled #quiet-notification-prompts
-Enabled #turn-off-streaming-media-caching-always
-Enabled #use-sync-sandbox
+start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge Beta\Application\msedge.exe"
 
 https://duckduckgo.com/?q=%s&k5=2&k1=-1&kav=1&kau=-1&kax=-1&kaq=-1&kah=sk-sk&kao=-1&kk=-1&kak=-1&kap=-1&kbc=1
 
@@ -168,4 +151,4 @@ rem "HKLM\Software\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd891
 rem Enhancer for Youtube
 rem {"version":"2.0.103.3","settings":{"blur":0,"brightness":100,"contrast":100,"grayscale":0,"huerotate":0,"invert":0,"saturate":100,"sepia":0,"applyvideofilters":false,"backgroundcolor":"#000000","backgroundopacity":85,"blockads":true,"blockadsexceptforsubs":false,"blockautoplay":false,"blockhfrformats":false,"blockwebmformats":true,"cinemamode":false,"cinemamodewideplayer":false,"controls":["options"],"controlspeed":false,"controlspeedmousebutton":false,"controlvolume":false,"controlvolumemousebutton":false,"customcolors":{"--dimmer-text":"#cccccc","--hover-background":"#232323","--main-background":"#111111","--main-color":"#00adee","--main-text":"#eff0f1","--second-background":"#181818","--shadow":"#000000"},"customcssrules":"","customscript":"","customtheme":false,"date":1590884155282,"defaultvolume":false,"disableautoplay":false,"executescript":false,"expanddescription":false,"filter":"none","hidecardsendscreens":false,"hidechat":false,"hidecomments":false,"hiderelated":false,"ignoreplaylists":true,"ignorepopupplayer":true,"localecode":"en_US","localedir":"ltr","message":false,"miniplayer":false,"miniplayerposition":"_top-left","miniplayersize":"_400x225","newestcomments":false,"overridespeeds":false,"pauseforegroundtab":false,"pausevideos":false,"popuplayersize":"640x360","qualityembeds":"hd720","qualityembedsfullscreen":"hd1080","qualityplaylists":"hd1080","qualityplaylistsfullscreen":"hd1080","qualityvideos":"hd1080","qualityvideosfullscreen":"hd1080","reload":false,"reversemousewheeldirection":false,"selectquality":true,"selectqualityfullscreenoff":false,"selectqualityfullscreenon":false,"speed":1,"speedvariation":0.1,"stopvideos":false,"theatermode":false,"theme":"default-dark","themevariant":"youtube-deep-dark.css","update":1614801673501,"volume":50,"volumemultiplier":3,"volumevariation":5,"whitelist":"Google Chrome","wideplayer":false,"wideplayerviewport":false}}
 rem Selection Search
-rem eyJzZWFyY2hFbmdpbmVzIjpbeyJuYW1lIjoiWW91dHViZSIsInVybCI6Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3Jlc3VsdHM/c2VhcmNoX3F1ZXJ5PSVzIn0seyJuYW1lIjoiSU1EYiIsInVybCI6Imh0dHBzOi8vd3d3LmltZGIuY29tL2ZpbmQ/cz1hbGwmcT0lcyJ9LHsibmFtZSI6IlNvZnRwZWRpYSIsInVybCI6Imh0dHBzOi8vd2luLnNvZnRwZWRpYS5jb20vZHluLXNlYXJjaC5waHA/c2VhcmNoX3Rlcm09JXMifSx7Im5hbWUiOiJEaWN0aW9uYXJ5IiwidXJsIjoiaHR0cHM6Ly93d3cudGhlZnJlZWRpY3Rpb25hcnkuY29tLyVzIn0seyJuYW1lIjoiTXlBbmltZSIsInVybCI6Imh0dHBzOi8vbXlhbmltZWxpc3QubmV0L2FuaW1lLnBocD9xPSVzJmNhdD1hbmltZSJ9LHsibmFtZSI6IjEyM01vdmllcyIsInVybCI6Imh0dHBzOi8vd3c0LjAxMjNtb3ZpZS5uZXQvc2VhcmNoLyVzLmh0bWwifSx7Im5hbWUiOiJHb01vdmllcyIsInVybCI6Imh0dHBzOi8vd3cuZ28xMjNtb3ZpZXMuaW8vP3M9JXMifSx7Im5hbWUiOiJFTW92aWVzIiwidXJsIjoiaHR0cHM6Ly9lbW92aWVzLmlvL21vdmllL3NlYXJjaC8lcyJ9XSwic3R5bGVTaGVldCI6IiIsIm9wdGlvbnMiOnsiYnV0dG9uIjowLCJuZXd0YWIiOnRydWUsImFjdGl2YXRvciI6ImRpc2FibGVkIiwicmVtb3ZlX2ljb25zIjoibm8iLCJzaG93X2luX2lucHV0cyI6dHJ1ZSwiYmFja2dyb3VuZF90YWIiOmZhbHNlLCJrX2FuZF9tX2NvbWJvIjpbMTcsMF0sImNvbnRleHRfbWVudSI6ImVuYWJsZWQiLCJ0b29sYmFyX3BvcHVwIjoiZGlzYWJsZWQiLCJ0b29sYmFyX3BvcHVwX3N0eWxlIjoiZGVmYXVsdCIsInRvb2xiYXJfcG9wdXBfaG90a2V5cyI6ZmFsc2UsInRvb2xiYXJfcG9wdXBfc3VnZ2VzdGlvbnMiOnRydWUsInNlcGFyYXRlX21lbnVzIjpmYWxzZSwiaGlkZV9vbl9jbGljayI6ZmFsc2UsImRpc2FibGVfZm9ybWV4dHJhY3RvciI6dHJ1ZSwib3Blbl9vbl9kYmxjbGljayI6ZmFsc2UsImRibGNsaWNrX2luX2lucHV0cyI6dHJ1ZSwib3Blbl9uZXdfdGFiX2xhc3QiOmZhbHNlLCJkaXNhYmxlX2VmZmVjdHMiOmZhbHNlLCJhdXRvX3BvcHVwX3JlbGF0aXZlX3RvX21vdXNlIjpmYWxzZSwiYXV0b19wb3B1cF9zaG93X21lbnVfZGlyZWN0bHkiOmZhbHNlLCJhdXRvX3BvcHVwX2luX2lucHV0cyI6ZmFsc2UsImFjdGl2YXRvcl9jb21ibyI6W10sInNob3dfdG9vbHRpcHMiOmZhbHNlLCJjaXJjdWxhcl9tZW51IjpmYWxzZSwic29ydF9ieV9jbGljayI6ZmFsc2UsInNlbGVjdGlvbl9sZW5ndGhfbGltaXQiOi0xLCJhdXRvX2hpZGVfZGVsYXkiOjAsImF1dG9fb3Blbl9kZWxheSI6MzAwLCJoaWRlX29uX3Njcm9sbCI6ZmFsc2UsInNlbGVjdGlvbl9hbGxvd19uZXdsaW5lIjpmYWxzZSwidXNlX3doaXRlbGlzdCI6ZmFsc2V9LCJWRVJTSU9OIjoiMC44LjU2In0=
+rem eyJzZWFyY2hFbmdpbmVzIjpbeyJuYW1lIjoiWW91dHViZSIsInVybCI6Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3Jlc3VsdHM/c2VhcmNoX3F1ZXJ5PSVzIn0seyJuYW1lIjoiSU1EYiIsInVybCI6Imh0dHBzOi8vd3d3LmltZGIuY29tL2ZpbmQ/cz1hbGwmcT0lcyJ9LHsibmFtZSI6IlNvZnRwZWRpYSIsInVybCI6Imh0dHBzOi8vd2luLnNvZnRwZWRpYS5jb20vZHluLXNlYXJjaC5waHA/c2VhcmNoX3Rlcm09JXMifSx7Im5hbWUiOiJEaWN0aW9uYXJ5IiwidXJsIjoiaHR0cHM6Ly93d3cudGhlZnJlZWRpY3Rpb25hcnkuY29tLyVzIn0seyJuYW1lIjoibTR1ZnJlZSIsInVybCI6Imh0dHBzOi8vbTR1ZnJlZS50by9zZWFyY2gvJXMuaHRtbCJ9LHsibmFtZSI6IjEyM01vdmllcyIsInVybCI6Imh0dHBzOi8vd3c1LjAxMjNtb3ZpZS5uZXQvc2VhcmNoLyVzLmh0bWwifSx7Im5hbWUiOiJHb01vdmllcyIsInVybCI6Imh0dHBzOi8vd3cuZ28xMjNtb3ZpZXMuaW8vP3M9JXMifSx7Im5hbWUiOiJNeUFuaW1lIiwidXJsIjoiaHR0cHM6Ly9teWFuaW1lbGlzdC5uZXQvYW5pbWUucGhwP3E9JXMmY2F0PWFuaW1lIn1dLCJzdHlsZVNoZWV0IjoiIiwib3B0aW9ucyI6eyJidXR0b24iOjAsIm5ld3RhYiI6dHJ1ZSwiYWN0aXZhdG9yIjoiZGlzYWJsZWQiLCJyZW1vdmVfaWNvbnMiOiJubyIsInNob3dfaW5faW5wdXRzIjp0cnVlLCJiYWNrZ3JvdW5kX3RhYiI6ZmFsc2UsImtfYW5kX21fY29tYm8iOlsxNywwXSwiY29udGV4dF9tZW51IjoiZW5hYmxlZCIsInRvb2xiYXJfcG9wdXAiOiJkaXNhYmxlZCIsInRvb2xiYXJfcG9wdXBfc3R5bGUiOiJkZWZhdWx0IiwidG9vbGJhcl9wb3B1cF9ob3RrZXlzIjpmYWxzZSwidG9vbGJhcl9wb3B1cF9zdWdnZXN0aW9ucyI6dHJ1ZSwic2VwYXJhdGVfbWVudXMiOmZhbHNlLCJoaWRlX29uX2NsaWNrIjpmYWxzZSwiZGlzYWJsZV9mb3JtZXh0cmFjdG9yIjp0cnVlLCJvcGVuX29uX2RibGNsaWNrIjpmYWxzZSwiZGJsY2xpY2tfaW5faW5wdXRzIjp0cnVlLCJvcGVuX25ld190YWJfbGFzdCI6ZmFsc2UsImRpc2FibGVfZWZmZWN0cyI6ZmFsc2UsImF1dG9fcG9wdXBfcmVsYXRpdmVfdG9fbW91c2UiOmZhbHNlLCJhdXRvX3BvcHVwX3Nob3dfbWVudV9kaXJlY3RseSI6ZmFsc2UsImF1dG9fcG9wdXBfaW5faW5wdXRzIjpmYWxzZSwiYWN0aXZhdG9yX2NvbWJvIjpbXSwic2hvd190b29sdGlwcyI6ZmFsc2UsImNpcmN1bGFyX21lbnUiOmZhbHNlLCJzb3J0X2J5X2NsaWNrIjpmYWxzZSwic2VsZWN0aW9uX2xlbmd0aF9saW1pdCI6LTEsImF1dG9faGlkZV9kZWxheSI6MCwiYXV0b19vcGVuX2RlbGF5IjozMDAsImhpZGVfb25fc2Nyb2xsIjpmYWxzZSwic2VsZWN0aW9uX2FsbG93X25ld2xpbmUiOmZhbHNlLCJ1c2Vfd2hpdGVsaXN0IjpmYWxzZX0sIlZFUlNJT04iOiIwLjguNTcifQ==
