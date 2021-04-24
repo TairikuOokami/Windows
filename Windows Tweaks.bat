@@ -119,6 +119,7 @@ rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 rem Windows 10 ISO
 rem https://www.deskmodder.de/blog/2021/02/18/windows-10-21h1-19043-iso-esd-inkl-updates-deutsch-english
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
+rem https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewiso
 rem https://tb.rg-adguard.net
 
 rem https://genuineisoverifier.weebly.com
@@ -635,7 +636,7 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Rules
 netsh advfirewall firewall add rule name="Audials TCP" dir=out action=allow protocol=TCP remoteport=80,443,1025-65535 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
-netsh advfirewall firewall add rule name="Audials UDP" dir=out action=allow protocol=UDP remoteport=5353 remoteip=224.0.0.252 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
+netsh advfirewall firewall add rule name="Audials UDP" dir=out action=allow protocol=UDP remoteport=5353 remoteip=224.0.0.251 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
 netsh advfirewall firewall add rule name="COD MW2 TCP" dir=out action=allow protocol=TCP remoteport=27015-27030,27038,27050 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
 netsh advfirewall firewall add rule name="COD MW2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
 netsh advfirewall firewall add rule name="COD MW3 TCP" dir=out action=allow protocol=TCP remoteport=3074 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 3\iw5sp.exe"
@@ -651,8 +652,8 @@ netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow prot
 netsh advfirewall firewall add rule name="Hitman TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,51.140.0.0-51.145.255.255,52.224.0.0-52.255.255.255,104.40.0.0-104.47.255.255,191.239.203.0 remoteport=443 program="D:\Steam\steamapps\common\HITMAN2\dx12Retail\HITMAN2.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=37.58.48.0-37.58.55.255,46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,172.64.0.0-172.71.255.255,178.162.206.0-178.162.207.255,178.162.216.0-178.162.219.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
 netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
-netsh advfirewall firewall add rule name="MS Edge HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge Beta\Application\msedge.exe"
-netsh advfirewall firewall add rule name="MS Edge QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles(x86)%\Microsoft\Edge Beta\Application\msedge.exe"
+netsh advfirewall firewall add rule name="MS Edge HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="MS Edge QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255,40.74.0.0-40.125.127.255,52.145.0.0-52.191.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"
 netsh advfirewall firewall add rule name="MS OneDrive Settings TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255,168.61.0.0-168.63.255.255 remoteport=443 program="%ProgramFiles%\Microsoft OneDrive\21.067.0404.0001\FileCoAuth.exe"
 netsh advfirewall firewall add rule name="MS OneDrive TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.150.0.0-20.153.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255,93.184.220.0-93.184.223.255,192.229.128.0-192.229.255.255 remoteport=443 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
