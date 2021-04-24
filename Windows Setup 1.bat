@@ -11,6 +11,8 @@ windowsdefender://threat
 rem Disable Tamper Protection First and Windows Defender !!!!!
 rem Install AMD Chipset Drivers (restart) and AMD GPU Drivers !!!!!
 
+start "" "D:\Software"
+
 pause
 
 takeown /s %computername% /u %username% /f D: /r /d y
@@ -115,7 +117,6 @@ slmgr /cpky
 
 pause
 
-copy "D:\Software\Temp\Setup\0.msi" "%USERPROFILE%\Desktop"
 start "" /wait "%USERPROFILE%\Desktop\0.msi"
 
 pause
@@ -177,14 +178,13 @@ md "Z:\Desktop"
 mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
 
 rem Move Documents
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "Z:\Documents" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{F42EE2D3-909F-4907-8871-4C22FC0BF756}" /t REG_EXPAND_SZ /d "Z:\Documents" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Personal" /t REG_EXPAND_SZ /d "Z:\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{F42EE2D3-909F-4907-8871-4C22FC0BF756}" /t REG_EXPAND_SZ /d "D:\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Personal" /t REG_EXPAND_SZ /d "D:\Documents" /f
 takeown /s %computername% /u %username% /f "%USERPROFILE%\Documents" /r /d y
 icacls "%USERPROFILE%\Documents" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
 rd "%USERPROFILE%\Documents" /s /q
-mklink /d "%USERPROFILE%\Documents" "Z:\Documents"
-xcopy "D:\OneDrive\Documents" "Z:\Documents" /s /i /y
+mklink /d "%USERPROFILE%\Documents" "D:\Documents"
 
 rem Move Downloads
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "D:\Software\Temp\Downloads" /f
