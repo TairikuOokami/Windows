@@ -52,7 +52,7 @@ start ms-settings:appsfeatures
 pause
 
 start "" /wait "%ProgramFiles(x86)%\SoftMaker FreeOffice 2018\PlanMaker.exe"
-start "" "D:\OneDrive\Mikai.xlsx"
+start "" "D:\OneDrive\Mikai.7z"
 
 pause
 
