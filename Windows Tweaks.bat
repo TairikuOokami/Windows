@@ -651,7 +651,7 @@ netsh advfirewall firewall add rule name="ETS2 MP TCP" dir=out action=allow prot
 netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow protocol=UDP remoteip=0.0.0.0 remoteport=1025-65535 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
 netsh advfirewall firewall add rule name="Hitman TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,51.140.0.0-51.145.255.255,52.224.0.0-52.255.255.255,104.40.0.0-104.47.255.255,191.239.203.0 remoteport=443 program="D:\Steam\steamapps\common\HITMAN2\dx12Retail\HITMAN2.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=37.58.48.0-37.58.55.255,46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,172.64.0.0-172.71.255.255,178.162.206.0-178.162.207.255,178.162.216.0-178.162.219.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
-netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
+netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
 netsh advfirewall firewall add rule name="MS Edge HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="MS Edge QUIC" dir=out action=allow protocol=UDP remoteport=80,443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255,40.74.0.0-40.125.127.255,52.145.0.0-52.191.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"
@@ -675,7 +675,7 @@ netsh advfirewall firewall add rule name="Panda AgentSvc TCP" dir=out action=all
 netsh advfirewall firewall add rule name="Panda PSANHost TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,2.21.242.0-2.21.242.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,91.216.218.0-91.216.218.255,95.101.24.0-95.101.27.255,137.135.0.0-137.135.255.255,192.0.32.0-192.0.47.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSANHost.exe"
 netsh advfirewall firewall add rule name="Panda PSUAConsole TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,93.184.220.0-93.184.223.255,142.250.0.0-142.251.255.255,172.217.0.0-172.217.255.255,216.58.192.0-216.58.223.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAConsole.exe"
 netsh advfirewall firewall add rule name="Panda PSUAService TCP" dir=out action=allow protocol=TCP remoteip=13.32.0.0-13.47.255.255,13.244.0.0-13.251.255.255,52.192.0.0-52.223.191.255,65.8.0.0-65.11.255.255,143.204.0.0-143.204.255.255,184.24.0.0-184.31.255.255 remoteport=443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAService.exe"
-netsh advfirewall firewall add rule name="PatchMyPC TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
+netsh advfirewall firewall add rule name="PatchMyPC TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
 netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
 netsh advfirewall firewall add rule name="Steam TCP" dir=out action=allow protocol=TCP remoteport=443,8384,27015-27030,27038,27050 program="D:\Steam\Steam.exe"
 netsh advfirewall firewall add rule name="Steam UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\Steam.exe"
@@ -683,8 +683,8 @@ netsh advfirewall firewall add rule name="Steam Web TCP" dir=out action=allow pr
 netsh advfirewall firewall add rule name="Steam Web UDP" dir=out action=allow protocol=UDP remoteip=224.0.0.252 remoteport=5355 program="D:\Steam\bin\cef\cef.win7x64\steamwebhelper.exe"
 netsh advfirewall firewall add rule name="TOR Firefox TCP" dir=out action=allow protocol=TCP remoteip=127.0.0.1 remoteport=1025-65535 program="Z:\Desktop\Tor Browser\Browser\firefox.exe"
 netsh advfirewall firewall add rule name="TOR TCP" dir=out action=allow protocol=TCP remoteport=443,1025-65535 program="Z:\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe"
-netsh advfirewall firewall add rule name="Update Time UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime_x64.exe"
-netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\Software\Temp\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
+netsh advfirewall firewall add rule name="Update Time UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime_x64.exe"
+netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\OneDrive\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
 
 
 rem =================================== Windows Logging ====================================
@@ -1757,7 +1757,7 @@ rem ----------------------------------- Personalization ------------------------
 rem ..................................... Background .......................................
 
 rem Choose your picture (Black/Dark recommended)
-reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "D:\Software\Temp\Pics\MLP\Wallpaper.jpg" /f
+reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "D:\OneDrive\Pictures\MLP\Wallpaper.jpg" /f
 
 rem Choose a fit / 10 - Fill / 6 - Fit / 2 - Stretch / 0 - Tile/Center
 reg add "HKCU\Control Panel\Desktop" /v "WallpaperStyle" /t REG_SZ /d "2" /f
@@ -2457,7 +2457,7 @@ rem . . . . . . . . . . . . . . . . . . . System info . . . . . . . . . . . . . 
 
 rem System info (Logo - 120x120.bmp)
 rem shell:::{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Logo" /t REG_SZ /d "D:\Software\Temp\Pics\Logo.bmp" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Logo" /t REG_SZ /d "D:\OneDrive\Pictures\Logo.bmp" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "(-_-)" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOwner" /t REG_SZ /d "Brony" /f
 
@@ -2871,46 +2871,46 @@ rd "%AppData%\Discord\Cache" /s /q
 rd "%AppData%\Discord\Code Cache" /s /q
 
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - chrome://settings/siteData
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\*history*." /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\LOG" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\LOG.old" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Login Data" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Login Data-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Media History" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Media History-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Network Action Predictor" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Network Action Predictor-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Network Persistent State" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Reporting and NEL" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Reporting and NEL-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\QuotaManager" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\QuotaManager-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Shortcuts" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Shortcuts-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Top Sites" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Top Sites-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Visited Links" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Web Data" /s /f /q
-del "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Web Data-journal" /s /f /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\AutofillStrikeDatabase" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\blob_storage" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\BudgetDatabase" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Cache" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Code Cache" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Collections" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\data_reduction_proxy_leveldb" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\databases" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\File System" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\GPUCache" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\IndexedDB" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Local Storage" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Platform Notifications" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Service Worker" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Session Storage" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Sessions" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\shared_proto_db" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\Site Characteristics Database" /s /q
-rd "%LocalAppData%\Microsoft\Edge Beta\User Data\Default\VideoDecodeStats" /s /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Visited Links" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AutofillStrikeDatabase" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\blob_storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\BudgetDatabase" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Collections" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\data_reduction_proxy_leveldb" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\File System" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Platform Notifications" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Session Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Sessions" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q
 
 rem Run Wise Disk Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
