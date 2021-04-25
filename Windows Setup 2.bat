@@ -22,13 +22,13 @@ pause
 start "" /wait "%USERPROFILE%\Desktop\freeoffice2018.msi"
 start "" /wait "D:\Software\AudialsRadio-Setup.exe"
 start "" /wait "‪D:\Software\GIHO_TubeGet_Pro.exe"
-start "" /wait "D:\Software\Temp\Setup\10.exe" /ai
+start "" /wait "D:\OneDrive\Setup\10.exe" /ai
 
 rem Disable scanning and updating Process Hacker
-start "" /wait "D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
-start "" /wait "D:\Software\Temp\Setup\3.exe"
-start "" /wait "D:\Software\Temp\Setup\15.exe"
-start "" /wait "D:\Software\Temp\Setup\16.exe"
+start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
+start "" /wait "D:\OneDrive\Setup\3.exe"
+start "" /wait "D:\OneDrive\Setup\15.exe"
+start "" /wait "D:\OneDrive\Setup\16.exe"
 
 taskkill /im msedge.exe /f
 taskkill /im Setpoint.exe /f
@@ -39,8 +39,8 @@ mklink /d "%LocalAppData%\Microsoft\Edge" "Z:\Edge"
 
 pause
 
-start "" /wait "D:\Software\Temp\Setup\Setup.exe"
-start "" /wait "D:\Software\Temp\Setup\0.reg"
+start "" /wait "D:\OneDrive\Setup\Setup.exe"
+start "" /wait "D:\OneDrive\Setup\0.reg"
 taskkill /im explorer.exe /f & explorer.exe
 xcopy "C:\Setup" "%USERPROFILE%\Desktop" /s /i /y
 rd "C:\Setup" /s /q
@@ -52,7 +52,7 @@ start ms-settings:appsfeatures
 pause
 
 start "" /wait "%ProgramFiles(x86)%\SoftMaker FreeOffice 2018\PlanMaker.exe"
-start "" "D:\Software\Temp\Mikai.xlsx"
+start "" "D:\OneDrive\Mikai.xlsx"
 
 pause
 
@@ -63,8 +63,8 @@ pause
 reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "D:\TruckersMP Launcher" /f
 reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
 start "" /wait "D:\Steam\steam.exe"
-start "" /wait "D:\Software\Temp\Setup\13.exe"
-start "" /wait "D:\Software\Temp\Setup\14.exe"
+start "" /wait "D:\OneDrive\Setup\13.exe"
+start "" /wait "D:\OneDrive\Setup\14.exe"
 
 pause
 
@@ -79,11 +79,11 @@ devmgmt.msc
 
 pause
 
-start "" /wait "D:\Software\Temp\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TCPOptimizer.exe"
+start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TCPOptimizer.exe"
 
 pause
 
-start "" /wait "D:\Software\Temp\Setup\FREEAV.exe"
+start "" /wait "D:\OneDrive\Setup\FREEAV.exe"
 
 rem Restart Now !
 
@@ -131,8 +131,6 @@ rem Enabled #disallow-doc-written-script-loads
 rem Enabled #enable-heavy-ad-intervention
 rem Enabled #enable-quic
 rem Enabled #enable-webrtc-hide-local-ips-with-mdns
-
-rem https://duckduckgo.com/?q=%s&k1=-1&k5=2&kah=sk-sk&kak=-1&kao=-1&kap=-1&kaq=-1&kau=-1&kav=1&kax=-1&kk=-1&t=h_&ia=web
 
 rem Enhancer for Youtube
 rem {"version":"2.0.104.8","settings":{"blur":0,"brightness":100,"contrast":100,"grayscale":0,"huerotate":0,"invert":0,"saturate":100,"sepia":0,"applyvideofilters":false,"backgroundcolor":"#000000","backgroundopacity":50,"blackbars":false,"blockads":true,"blockadsexceptforsubs":false,"blockautoplay":false,"blockhfrformats":false,"blockwebmformats":false,"cinemamode":false,"cinemamodewideplayer":false,"controlbar":{"active":true,"autohide":false,"centered":true,"position":"fixed"},"controls":[],"controlsvisible":false,"controlspeed":false,"controlspeedmousebutton":false,"controlvolume":false,"controlvolumemousebutton":false,"customcolors":{"--dimmer-text":"#cccccc","--hover-background":"#232323","--main-background":"#111111","--main-color":"#00adee","--main-text":"#eff0f1","--second-background":"#181818","--shadow":"#000000"},"customcssrules":"","customscript":"","customtheme":false,"darktheme":true,"date":1590884155282,"defaultvolume":false,"disableautoplay":false,"executescript":false,"expanddescription":false,"filter":"none","hidecardsendscreens":false,"hidechat":false,"hidecomments":false,"hiderelated":false,"ignoreplaylists":false,"ignorepopupplayer":true,"localecode":"en_US","localedir":"ltr","message":false,"miniplayer":false,"miniplayerposition":"_top-left","miniplayersize":"_400x225","newestcomments":false,"overridespeeds":false,"pauseforegroundtab":false,"pausevideos":false,"popuplayersize":"640x360","qualityembeds":"hd720","qualityembedsfullscreen":"hd1080","qualityplaylists":"hd1080","qualityplaylistsfullscreen":"hd1080","qualityvideos":"hd1080","qualityvideosfullscreen":"hd1080","reload":false,"reversemousewheeldirection":false,"selectquality":true,"selectqualityfullscreenoff":false,"selectqualityfullscreenon":false,"speed":1,"speedvariation":0.1,"stopvideos":false,"theatermode":false,"theme":"default-dark","themevariant":"youtube-deep-dark.css","update":1619098163598,"volume":50,"volumemultiplier":3,"volumevariation":5,"whitelist":"","wideplayer":false,"wideplayerviewport":false}}
