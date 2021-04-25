@@ -20,11 +20,11 @@ icacls D: /inheritance:r
 icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
 
-takeown /s %computername% /u %username% /f D:\Software /r /d y
-icacls D:\Software /inheritance:r
-icacls D:\Software /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\Software /grant "Users":(OI)(CI)RX /t /l /q /c
-icacls D:\Software /deny "System":(OI)(CI)F /t /l /q /c
+takeown /s %computername% /u %username% /f D:\OneDrive /r /d y
+icacls D:\OneDrive /inheritance:r
+icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
+icacls D:\OneDrive /deny "System":(OI)(CI)F /t /l /q /c
 
 rem Access CMD with SYSTEM rights at logon (Win+U)
 takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
@@ -107,7 +107,7 @@ Dism /Online /Disable-Feature /FeatureName:WorkFolders-Client /Quiet /NoRestart
 Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Quiet /NoRestart
 rem Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Source:E:\sources\sxs /LimitAccess
 
-rem start "" /wait "D:\Software\Temp\Setup\dotNetFx35_WX_9_x86_x64.exe" /ai
+rem start "" /wait "D:\OneDrive\Setup\dotNetFx35_WX_9_x86_x64.exe" /ai
 
 rem Activate Windows
 slmgr.vbs /ato
@@ -145,27 +145,27 @@ reg add "HKCU\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /
 
 rem Ponified system icons / 3 - Default / 4 - Opened
 rem https://www.tenforums.com/tutorials/81222-change-icons-folders-pc-windows-10-a.html
-reg add "HKCR\CompressedFolder\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.001\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.7z\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.cab\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.rar\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.wim\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.zip\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\batfile\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Join.me.ico" /f
-reg add "HKCR\Folder\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\fluttericon.ico" /f
-reg add "HKCR\regfile\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Cheerilee.ico" /f
-reg add "HKCR\txtfile\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Notepad.ico" /f
-reg add "HKCU\Software\Classes\CLSID\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\applebloomicon.ico" /f
-reg add "HKCU\Software\Classes\CLSID\{088e3905-0323-4b02-9826-5d99428e115f}\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\scooticon2.ico" /f
-reg add "HKCU\Software\Classes\CLSID\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\Sweetiebelleicon.ico" /f
-reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\C\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\rarityticon2.ico" /f
-reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\D\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\Pinkie_Pie.ico" /f
-reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\Z\DefaultIcon" /ve /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Speed Runners.ico" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\fluttericon.ico" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\Software\Temp\Pics\MLP Icons\Folders\fluttericon.ico" /f
+reg add "HKCR\CompressedFolder\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\7-Zip.001\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\7-Zip.7z\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\7-Zip.cab\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\7-Zip.rar\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\7-Zip.wim\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\7-Zip.zip\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\batfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Join.me.ico" /f
+reg add "HKCR\Folder\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
+reg add "HKCR\regfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Cheerilee.ico" /f
+reg add "HKCR\txtfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Notepad.ico" /f
+reg add "HKCU\Software\Classes\CLSID\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\applebloomicon.ico" /f
+reg add "HKCU\Software\Classes\CLSID\{088e3905-0323-4b02-9826-5d99428e115f}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\scooticon2.ico" /f
+reg add "HKCU\Software\Classes\CLSID\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Sweetiebelleicon.ico" /f
+reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\C\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\rarityticon2.ico" /f
+reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\D\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Pinkie_Pie.ico" /f
+reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\Z\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Speed Runners.ico" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 
 Move Desktop
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "Z:\Desktop" /f
@@ -187,14 +187,14 @@ rd "%USERPROFILE%\Documents" /s /q
 mklink /d "%USERPROFILE%\Documents" "D:\Documents"
 
 rem Move Downloads
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "D:\Software\Temp\Downloads" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "D:\Software\Temp\Downloads" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "D:\Software\Temp\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "D:\OneDrive\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "D:\OneDrive\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "D:\OneDrive\Downloads" /f
 
 rem Move Pictures
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "My Pictures" /t REG_SZ /d "D:\Software\Temp\Pics" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{0DDD015D-B06C-45D5-8C4C-F59713854639}" /t REG_EXPAND_SZ /d "D:\Software\Temp\Pics" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "My Pictures" /t REG_EXPAND_SZ /d "D:\Software\Temp\Pics" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "My Pictures" /t REG_SZ /d "D:\OneDrive\Pictures" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{0DDD015D-B06C-45D5-8C4C-F59713854639}" /t REG_EXPAND_SZ /d "D:\OneDrive\Pictures" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "My Pictures" /t REG_EXPAND_SZ /d "D:\OneDrive\Pictures" /f
 
 rem Move Videos
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "My Video" /t REG_SZ /d "D:\Movies" /f
@@ -205,11 +205,11 @@ rem Temp Folders to RAMDisk
 reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "Z:\TEMP" /f
 reg add "HKCU\Environment" /v "TMP" /t REG_SZ /d "Z:\TEMP" /f
 
-start "" /wait "D:\Software\Temp\Setup\4.exe"
-start "" /wait "D:\Software\Temp\Setup\5.exe"
-start "" /wait "D:\Software\Temp\Setup\6.exe"
-start "" /wait "D:\Software\Temp\Setup\7.exe"
-start "" /wait "D:\Software\Temp\Setup\8.exe"
+start "" /wait "D:\OneDrive\Setup\4.exe"
+start "" /wait "D:\OneDrive\Setup\5.exe"
+start "" /wait "D:\OneDrive\Setup\6.exe"
+start "" /wait "D:\OneDrive\Setup\7.exe"
+start "" /wait "D:\OneDrive\Setup\8.exe"
 start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
 
 %WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe "Set-ExecutionPolicy bypass - noprofile"
