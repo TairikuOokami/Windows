@@ -635,8 +635,6 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices" /f
 
 rem Windows Firewall Rules
-netsh advfirewall firewall add rule name="AMD Stream" dir=out action=allow protocol=TCP remoteip=52.223.192.0-52.223.255.255 remoteport=1935 program="%ProgramFiles%\AMD\CNext\CNext\AMDRSServ.exe"
-netsh advfirewall firewall add rule name="AMD Twitch" dir=out action=allow protocol=TCP remoteip=34.192.0.0-34.255.255.255,44.192.0.0-44.255.255.255,100.20.0.0-100.31.255.255,151.101.0.0-151.101.255.255,199.232.0.0-199.232.255.255 remoteport=443 program="%ProgramFiles%\AMD\CNext\CNext\twitch\TwitchClient.exe"
 netsh advfirewall firewall add rule name="Audials TCP" dir=out action=allow protocol=TCP remoteport=80,443,1025-65535 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
 netsh advfirewall firewall add rule name="Audials UDP" dir=out action=allow protocol=UDP remoteport=5353 remoteip=224.0.0.251 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
 netsh advfirewall firewall add rule name="COD MW2 TCP" dir=out action=allow protocol=TCP remoteport=27015-27030,27038,27050 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
@@ -647,7 +645,7 @@ netsh advfirewall firewall add rule name="Discord TCP" dir=out action=allow prot
 netsh advfirewall firewall add rule name="Discord UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="%LOCALAPPDATA%\Discord\app-1.0.9001\Discord.exe"
 netsh advfirewall firewall add rule name="Discord Update TCP" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,162.158.0.0-162.159.255.255 remoteport=443 program="%LOCALAPPDATA%\Discord\Update.exe"
 netsh advfirewall firewall add rule name="DriverEasy TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Easeware\DriverEasy\DriverEasy.exe"
-netsh advfirewall firewall add rule name="ETS2 TCP" dir=out action=allow protocol=TCP remoteport=80,443,4455 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
+netsh advfirewall firewall add rule name="ETS2 TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
 netsh advfirewall firewall add rule name="ETS2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
 netsh advfirewall firewall add rule name="ETS2 MP TCP" dir=out action=allow protocol=TCP remoteip=104.16.0.0-104.31.255.255 remoteport=80 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
 netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow protocol=UDP remoteip=0.0.0.0 remoteport=1025-65535 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
@@ -683,6 +681,8 @@ netsh advfirewall firewall add rule name="TOR Firefox TCP" dir=out action=allow 
 netsh advfirewall firewall add rule name="TOR TCP" dir=out action=allow protocol=TCP remoteport=443,1025-65535 program="Z:\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe"
 netsh advfirewall firewall add rule name="Update Time UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime_x64.exe"
 netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\OneDrive\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
+netsh advfirewall firewall add rule name="XSplit" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,104.16.0.0-104.31.255.255,151.101.0.0-151.101.255.255,199.232.0.0-199.232.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\SplitmediaLabs\XSplit Broadcaster\x64\XSplit.Core.exe"
+netsh advfirewall firewall add rule name="XSplit Twitch" dir=out action=allow protocol=TCP remoteip=52.223.192.0-52.223.255.255,99.181.64.0-99.181.127.255,185.42.204.0-185.42.207.255 remoteport=1935 program="%ProgramFiles(x86)%\SplitmediaLabs\XSplit Broadcaster\x64\XSplit.Core.exe"
 
 
 rem =================================== Windows Logging ====================================
@@ -1906,7 +1906,7 @@ icacls "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe
 taskkill /im SearchApp.exe /f
 del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
 
-rem Remove Your Phone app (News and Interests)
+rem Remove Your Phone app
 takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.215.0_x64__8wekyb3d8bbwe\YourPhone.exe"
 icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.215.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
@@ -2863,6 +2863,12 @@ fsutil usn deletejournal /d /n c:
 taskkill /im dllhost.exe /f
 taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
+
+taskkill /im cncmd.exe /f
+taskkill /im QtWebEngineProcess.exe /f
+taskkill /im RadeonSoftware.exe /f
+taskkill /im amdow.exe /f
+taskkill /im AMDRSServ.exe /f
 
 rem Clean Discord's caches
 rd "%AppData%\Discord\Cache" /s /q
