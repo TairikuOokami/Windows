@@ -101,6 +101,7 @@ rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-4/
 rem DNS List - https://wiki.ipfire.org/dns/public-servers
 
 rem Family Filtering (adult/proxy/search)
+rem Adguard - https://adguard.com/en/adguard-dns/overview.html
 rem Cloudflare - https://developers.cloudflare.com/1.1.1.1/1.1.1.1-for-families/setup-instructions/windows/
 rem CleanBrowsing - https://cleanbrowsing.org/ip-address - https://categorify.org/recategorize
 rem DNS Family - https://dnsforfamily.com/#DNS_Servers
@@ -1706,13 +1707,13 @@ rem Setup DNS over HTTPS (DoH)
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
 
 rem Setup DNS Servers on DHCP Enabled Network (Quad9)
-wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
+rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
 
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("10.10.10.12"), ("255.255.255.248")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("10.10.10.10")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
 
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
