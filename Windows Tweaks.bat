@@ -484,6 +484,7 @@ reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "PSU
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "autocheck autochk *" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE" /t REG_MULTI_SZ /d "" /f
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers" /f
 
 
 rem =================================== Software Setup =====================================
@@ -636,6 +637,7 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices" /f
 
 rem Windows Firewall Rules
+rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
 netsh advfirewall firewall add rule name="Audials TCP" dir=out action=allow protocol=TCP remoteport=80,443,1025-65535 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
 netsh advfirewall firewall add rule name="Audials UDP" dir=out action=allow protocol=UDP remoteport=5353 remoteip=224.0.0.251 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
 netsh advfirewall firewall add rule name="COD MW2 TCP" dir=out action=allow protocol=TCP remoteport=27015-27030,27038,27050 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
@@ -682,7 +684,7 @@ netsh advfirewall firewall add rule name="TOR Firefox TCP" dir=out action=allow 
 netsh advfirewall firewall add rule name="TOR TCP" dir=out action=allow protocol=TCP remoteport=443,1025-65535 program="Z:\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe"
 netsh advfirewall firewall add rule name="Update Time UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime_x64.exe"
 netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\OneDrive\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
-netsh advfirewall firewall add rule name="XSplit" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,104.16.0.0-104.31.255.255,151.101.0.0-151.101.255.255,199.232.0.0-199.232.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\SplitmediaLabs\XSplit Broadcaster\x64\XSplit.Core.exe"
+netsh advfirewall firewall add rule name="XSplit Core" dir=out action=allow protocol=TCP remoteip=8.8.4.4,8.8.8.8,35.184.0.0-35.191.255.255,104.16.0.0-104.31.255.255,151.101.0.0-151.101.255.255,199.232.0.0-199.232.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\SplitmediaLabs\XSplit Broadcaster\x64\XSplit.Core.exe"
 netsh advfirewall firewall add rule name="XSplit Twitch" dir=out action=allow protocol=TCP remoteip=52.223.192.0-52.223.255.255,99.181.64.0-99.181.127.255,185.42.204.0-185.42.207.255 remoteport=1935 program="%ProgramFiles(x86)%\SplitmediaLabs\XSplit Broadcaster\x64\XSplit.Core.exe"
 
 
@@ -1704,7 +1706,18 @@ netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
 
 rem Setup DNS over HTTPS (DoH)
+rem netsh dns show encryption
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
+
+rem Setup DNS over HTTPS (DoH) Add Custom Servers
+netsh dns add encryption server=1.0.0.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=1.1.1.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=9.9.9.9 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=149.112.112.112 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=94.140.14.15 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=94.140.15.16 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=185.228.168.10 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
+netsh dns add encryption server=185.228.169.11 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
 
 rem Setup DNS Servers on DHCP Enabled Network (Quad9)
 rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
@@ -1714,6 +1727,8 @@ rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{5db3e81b-9b64-4972-8860-c1c9a19f6e79}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{5db3e81b-9b64-4972-8860-c1c9a19f6e79}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
 
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
@@ -1908,10 +1923,10 @@ taskkill /im SearchApp.exe /f
 del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
 
 rem Remove Your Phone app
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.215.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.215.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.95.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.95.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21022.215.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.95.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem 0 - Turn on Quiet Hours in Action Center / Disable/Hide the message: Turn on Windows Security Center service
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
@@ -2446,7 +2461,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Supp
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://discordapp.com/TairikuOkami#2826" /f
 
 rem Computer Description
-reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "100/10 MBps" /f
+reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "300/30 MBps" /f
 
 
 rem =================================== Windows Settings ===================================
