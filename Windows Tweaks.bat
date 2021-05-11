@@ -484,7 +484,6 @@ reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "PSU
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "autocheck autochk *" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE" /t REG_MULTI_SZ /d "" /f
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers" /f
 
 
 rem =================================== Software Setup =====================================
@@ -1862,11 +1861,20 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "D
 rem Combine taskbar buttons / 0 - Always hide labels / 1 - When taskbar is full / 2 - Never
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarGlomLevel" /t REG_DWORD /d "0" /f
 
-rem 1 - Show contacts on the taskbar
+rem 1 - Show People on the taskbar Icon
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" /v "PeopleBand" /t REG_DWORD /d "0" /f
 
-rem 0 - Hide News and Interests Icon (Cortana in disguise) / 0 = Show icon and text (default) / 1 - Show icon only / 2 - Turn off
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "IsFeedsAvailable " /t REG_DWORD /d "2" /f
+rem News and Interests (Cortana in disguise) / 0 - Show icon and text (default) / 1 - Show icon only / 2 - Turn off
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t REG_DWORD /d "2" /f
+
+rem News and Interests Reduce taskbar updates / 0 - No / 1 - Yes
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarContentUpdateMode" /t REG_DWORD /d "1" /f
+
+rem News and Interests Open on hover / 0 - No / 1 - Yes
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarOpenOnHover" /t REG_DWORD /d "0" /f
+
+rem News and Interests Taskbar Menu / 0 - Hide / 1 - Show
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "IsFeedsAvailable" /t REG_DWORD /d "0" /f
 
 rem 0 - Hide Task View button
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
