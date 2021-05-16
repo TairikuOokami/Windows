@@ -523,6 +523,7 @@ rd "%ProgramFiles%\Common Files\LogiShrd\sp6\LU1" /s /q
 rd "%ProgramFiles%\Common Files\LogiShrd\Unifying\LU" /s /q
 
 rem Microsoft Edge Update Disabled
+rem https://www.sordum.org/9312/edge-blocker-v1-7
 rem taskkill /im MSEdge.exe /f
 rem taskkill /im MicrosoftEdgeUpdate.exe /f
 rem rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate" /s /q
@@ -574,7 +575,7 @@ rem 0 - Disable SmartScreen PUA in Microsoft Edge / 1 - Enable
 reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
 
 rem 0 - Disable Windows SmartScreen for Windows Store Apps / 1 - Enable
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t "REG_DWORD" /d "1" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t "REG_DWORD" /d "0" /f
 
 rem ________________________________________________________________________________________
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen" /t "REG_DWORD" /d "0" /f
@@ -582,10 +583,10 @@ reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "Conf
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t "REG_DWORD" /d "0" /f
 
 rem Remove Smartscreen (to restore run "sfc /scannow")
-rem takeown /s %computername% /u %username% /f "%WinDir%\System32\smartscreen.exe"
-rem icacls "%WinDir%\System32\smartscreen.exe" /grant:r %username%:F
-rem taskkill /im smartscreen.exe /f
-rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
+takeown /s %computername% /u %username% /f "%WinDir%\System32\smartscreen.exe"
+icacls "%WinDir%\System32\smartscreen.exe" /grant:r %username%:F
+taskkill /im smartscreen.exe /f
+del "%WinDir%\System32\smartscreen.exe" /s /f /q
 
 
 rem =========================== Windows Defender Security Center ===========================
@@ -1726,8 +1727,8 @@ rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{5db3e81b-9b64-4972-8860-c1c9a19f6e79}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{5db3e81b-9b64-4972-8860-c1c9a19f6e79}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
 
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
@@ -2876,6 +2877,13 @@ rem taskkill /im explorer.exe /f & explorer.exe
 
 rem User Accounts - netplwiz
 
+rem Windows Updates Block
+rem https://www.tenforums.com/tutorials/8013-enable-disable-windows-update-automatic-updates-windows-10-a.html
+rem https://www.sordum.org/9470/windows-update-blocker-v1-6
+rem Block svchost.exe in the firewall (TCP 80) or create a nonexistant symlink
+rem rd "%WINDIR%\SoftwareDistribution\Download" /s /q
+rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
+
 
 rem ==================================== Windows Waypoint ==================================
 
@@ -2898,7 +2906,7 @@ rem Clean Discord's caches
 rd "%AppData%\Discord\Cache" /s /q
 rd "%AppData%\Discord\Code Cache" /s /q
 
-rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - chrome://settings/siteData
+rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - edge://settings/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q
