@@ -353,6 +353,7 @@ del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
 rem Remove Windows Powershell (to restore run "sfc /scannow")
+rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
 rem https://threatpost.com/powershell-payload-analysis-malware/165188
 rem https://threatpost.com/fileless-malware-critical-ioc-threats-2020/159422
 rem https://blog.netspi.com/15-ways-to-bypass-the-powershell-execution-policy
@@ -477,7 +478,6 @@ bcdedit /set {default} recoveryenabled no
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9001\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles% (x86)\Microsoft OneDrive\OneDrive.exe\" /background" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "EvtMgr6" /t REG_SZ /d "%ProgramFiles%\Logitech\SetPointP\SetPoint.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
 reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "PSUAMain" /t REG_SZ /d "\"%ProgramFiles% (x86)\Panda Security\Panda Security Protection\PSUAMain.exe\" /LaunchSysTray" /f
@@ -511,16 +511,16 @@ reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z
 reg delete "HKCU\Software\Gihosoft\TubeGet" /v "Net_DayLink5Times" /f
 
 rem Logitech Setpoint
-taskkill /im LogiAppBroker.exe /f
-taskkill /im LogitechUpdate.exe /f
-taskkill /im LULnchr.exe /f
-taskkill /im KHALMNPR.exe /f
-taskkill /im Setpoint.exe /f
-del "%ProgramFiles%\Logitech\SetPointP\LogiAppBroker.exe" /s /f /q
-del "%ProgramFiles%\Logitech\SetPointP\msvcp110.dll" /s /f /q
-del "%ProgramFiles%\Logitech\SetPointP\msvcr110.dll" /s /f /q
-rd "%ProgramFiles%\Common Files\LogiShrd\sp6\LU1" /s /q
-rd "%ProgramFiles%\Common Files\LogiShrd\Unifying\LU" /s /q
+rem taskkill /im LogiAppBroker.exe /f
+rem taskkill /im LogitechUpdate.exe /f
+rem taskkill /im LULnchr.exe /f
+rem taskkill /im KHALMNPR.exe /f
+rem taskkill /im Setpoint.exe /f
+rem del "%ProgramFiles%\Logitech\SetPointP\LogiAppBroker.exe" /s /f /q
+rem del "%ProgramFiles%\Logitech\SetPointP\msvcp110.dll" /s /f /q
+rem del "%ProgramFiles%\Logitech\SetPointP\msvcr110.dll" /s /f /q
+rem rd "%ProgramFiles%\Common Files\LogiShrd\sp6\LU1" /s /q
+rem rd "%ProgramFiles%\Common Files\LogiShrd\Unifying\LU" /s /q
 
 rem Microsoft Edge Update Disabled
 rem https://www.sordum.org/9312/edge-blocker-v1-7
@@ -1280,8 +1280,6 @@ schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
 schtasks /DELETE /TN "Driver Easy Scheduled Scan" /f
-schtasks /DELETE /TN "MicrosoftEdgeUpdateTaskMachineCore" /f
-schtasks /DELETE /TN "MicrosoftEdgeUpdateTaskMachineUA" /f
 schtasks /DELETE /TN "ModifyLinkUpdate" /f
 schtasks /DELETE /TN "SoftMakerUpdater" /f
 schtasks /DELETE /TN "StartCN" /f
@@ -1410,7 +1408,7 @@ rem Windows Defender Firewall (Base Filtering Engine/Network Location Awareness)
 rem Windows Driver Foundation - User-mode Driver Framework / required by some drivers like USB devices
 rem Windows Image Acquisition (WIA) / required by scanners
 rem Windows Management Instrumentation / required by wmic commands / disabled to prevent some fileless malware
-rem Windows Push Notifications User Service / required by Logitech Setpoint to avoid Runtime Error
+rem Windows Push Notifications User Service / required by Logitech Setpoint to avoid Runtime Error and upon disabling, Windows and network is sluggish
 
 rem AMD Crash Defender Service
 sc config "AMD Crash Defender Service" start= disabled
@@ -1932,10 +1930,10 @@ taskkill /im SearchApp.exe /f
 del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
 
 rem Remove Your Phone app
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.95.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.95.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.110.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.110.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.95.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.110.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem 0 - Turn on Quiet Hours in Action Center / Disable/Hide the message: Turn on Windows Security Center service
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
