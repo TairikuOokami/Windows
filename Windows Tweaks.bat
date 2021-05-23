@@ -62,6 +62,7 @@ rem https://docs.microsoft.com/en-us/windows/security/threat-protection/security
 rem https://docs.microsoft.com/en-us/windows/deployment/update/waas-overview
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
 rem https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-security-baselines
+rem https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Microsoft-Security-Baselines
 
 rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefilters.org
 rem Browser Leaks - https://browserleaks.com / https://whoer.net / CanvasFingerprint / WebRTC
@@ -655,25 +656,24 @@ netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow prot
 netsh advfirewall firewall add rule name="Hitman TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,51.140.0.0-51.145.255.255,52.224.0.0-52.255.255.255,104.40.0.0-104.47.255.255,191.239.203.0 remoteport=443 program="D:\Steam\steamapps\common\HITMAN2\dx12Retail\HITMAN2.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=37.58.48.0-37.58.55.255,46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,172.64.0.0-172.71.255.255,178.162.206.0-178.162.207.255,178.162.216.0-178.162.219.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
 netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
-netsh advfirewall firewall add rule name="MS Edge HTTPS" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="MS Edge TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255,40.74.0.0-40.125.127.255,52.145.0.0-52.191.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"
-netsh advfirewall firewall add rule name="MS OneDrive Settings TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255,168.61.0.0-168.63.255.255 remoteport=443 program="%ProgramFiles%\Microsoft OneDrive\21.073.0411.0002\FileCoAuth.exe"
 netsh advfirewall firewall add rule name="MS OneDrive TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.150.0.0-20.153.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,93.184.220.0-93.184.223.255,192.229.128.0-192.229.255.255 remoteport=443 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
 netsh advfirewall firewall add rule name="MS OneDrive Update TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles%\Microsoft OneDrive\OneDriveStandaloneUpdater.exe"
 netsh advfirewall firewall add rule name="MS Store TCP 80" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,23.192.0.0-23.223.255.255,93.184.220.0-93.184.223.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=80 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12104.1001.1.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
 netsh advfirewall firewall add rule name="MS Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12104.1001.1.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
 netsh advfirewall firewall add rule name="MS Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,104.16.0.0-104.31.255.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
+netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.10.0.0-51.13.255.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
 netsh advfirewall firewall add rule name="MS Svchost UDP 5353 Steam Friends" dir=out action=allow protocol=UDP remoteip=224.0.0.251 remoteport=5353 program="%WINDIR%\System32\svchost.exe"
 netsh advfirewall firewall add rule name="MS Sync TCP 80" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255 remoteport=80 program="%WINDIR%\System32\SettingSyncHost.exe"
 netsh advfirewall firewall add rule name="MS Sync TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,40.74.0.0-40.125.127.255,104.64.0.0-104.127.255.255 remoteport=443 program="%WINDIR%\System32\SettingSyncHost.exe"
 netsh advfirewall firewall add rule name="MS UAC TCP" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255,151.139.0.0-151.139.255.255 remoteport=80,443 program="%WINDIR%\System32\consent.exe"
 netsh advfirewall firewall add rule name="MS Weather TCP" dir=out action=allow protocol=TCP remoteport=443 remoteip=52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,204.79.195.0-204.79.197.255 program="%ProgramFiles%\WindowsApps\Microsoft.BingWeather_4.46.31121.0_x64__8wekyb3d8bbwe\Microsoft.Msn.Weather.exe"
-netsh advfirewall firewall add rule name="Panda AgentSvc TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,52.145.0.0-52.191.255.255,93.184.220.0-93.184.223.255,137.135.0.0-137.135.255.255,168.61.0.0-168.63.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Devices Agent\AgentSvc.exe"
-netsh advfirewall firewall add rule name="Panda PSANHost TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,2.21.242.0-2.21.242.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,91.216.218.0-91.216.218.255,95.101.24.0-95.101.27.255,137.135.0.0-137.135.255.255,192.0.32.0-192.0.47.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSANHost.exe"
+netsh advfirewall firewall add rule name="Panda AgentSvc TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,52.145.0.0-52.191.255.255,93.184.220.0-93.184.223.255,137.135.0.0-137.135.255.255,168.61.0.0-168.63.255.255,191.232.0.0-191.235.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Devices Agent\AgentSvc.exe"
+netsh advfirewall firewall add rule name="Panda PSANHost TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,2.21.242.0-2.21.242.255,2.23.144.0-2.23.159.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,91.216.218.0-91.216.218.255,95.101.24.0-95.101.27.255,104.64.0.0-104.127.255.255,137.135.0.0-137.135.255.255,192.0.32.0-192.0.47.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSANHost.exe"
 netsh advfirewall firewall add rule name="Panda PSUAConsole TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,93.184.220.0-93.184.223.255,142.250.0.0-142.251.255.255,172.217.0.0-172.217.255.255,216.58.192.0-216.58.223.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAConsole.exe"
-netsh advfirewall firewall add rule name="Panda PSUAService TCP" dir=out action=allow protocol=TCP remoteip=13.32.0.0-13.47.255.255,13.244.0.0-13.251.255.255,52.192.0.0-52.223.191.255,65.8.0.0-65.11.255.255,143.204.0.0-143.204.255.255,184.24.0.0-184.31.255.255 remoteport=443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAService.exe"
+netsh advfirewall firewall add rule name="Panda PSUAService TCP" dir=out action=allow protocol=TCP remoteip=13.32.0.0-13.47.255.255,13.244.0.0-13.251.255.255,52.192.0.0-52.223.191.255,65.8.0.0-65.11.255.255,99.85.128.0-99.87.191.255,143.204.0.0-143.204.255.255,184.24.0.0-184.31.255.255 remoteport=443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAService.exe"
 netsh advfirewall firewall add rule name="PatchMyPC TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
 netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
 netsh advfirewall firewall add rule name="Steam TCP" dir=out action=allow protocol=TCP remoteport=443,8384,27015-27030,27038,27050 program="D:\Steam\Steam.exe"
@@ -1697,26 +1697,6 @@ rem http://www.computerhope.com/wmic.htm
 rem To get adapter's index number use
 rem wmic nicconfig get caption,index,TcpipNetbiosOptions
 
-rem Disable IPv6
-netsh int ipv6 isatap set state disabled
-netsh int teredo set state disabled
-netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
-reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
-
-rem Setup DNS over HTTPS (DoH)
-rem netsh dns show encryption
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
-
-rem Setup DNS over HTTPS (DoH) Add Custom Servers
-netsh dns add encryption server=1.0.0.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
-netsh dns add encryption server=1.1.1.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
-netsh dns add encryption server=9.9.9.9 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
-netsh dns add encryption server=149.112.112.112 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
-netsh dns add encryption server=94.140.14.15 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
-netsh dns add encryption server=94.140.15.16 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
-netsh dns add encryption server=185.228.168.10 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
-netsh dns add encryption server=185.228.169.11 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
-
 rem Setup DNS Servers on DHCP Enabled Network (Quad9)
 rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
 
@@ -1725,8 +1705,8 @@ rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
+rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
+rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
 
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
@@ -1754,14 +1734,41 @@ reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWi
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "0" /f
 
-rem 1 - Disable Domain Name Devolution (DNS AutoCorrect) / 0 - Enabled (Default)
-reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "UseDomainNameDevolution" /t REG_DWORD /d "0" /f
+rem Disable IDN (internationalized domain name)
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableIdnMapping" /t REG_DWORD /d "0" /f
+
+rem Disable Multicast
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMulticast" /t REG_DWORD /d "0" /f
+
+rem Setup DNS over HTTPS (DoH)
+rem netsh dns show encryption
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
+
+rem Setup DNS over HTTPS (DoH) Add Custom Servers
+netsh dns add encryption server=1.0.0.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=1.1.1.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=9.9.9.9 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=149.112.112.112 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=94.140.14.15 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=94.140.15.16 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=185.228.168.10 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
+netsh dns add encryption server=185.228.169.11 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
 
 rem Restrict NTLM: Incoming NTLM traffic - Deny All
 reg add "HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0" /v "RestrictReceivingNTLMTraffic" /t REG_DWORD /d "2" /f
  
 rem Restrict NTLM: Outgoing NTLM traffic to remote servers - Deny All
 reg add "HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0" /v "RestrictSendingNTLMTraffic" /t REG_DWORD /d "2" /f
+
+rem Disable IPv6
+netsh int ipv6 isatap set state disabled
+netsh int teredo set state disabled
+netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
+
+rem 1 - Disable Domain Name Devolution (DNS AutoCorrect) / 0 - Enabled (Default)
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "UseDomainNameDevolution" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
