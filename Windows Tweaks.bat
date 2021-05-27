@@ -193,7 +193,6 @@ rem Zone Alarm Firewall (IL) - https://www.zonealarm.com/software/free-firewall
 rem Firewall software using Windows Firewall
 rem Glasswire (US) - https://www.glasswire.com
 rem simplewall (US) - https://www.henrypp.org/product/simplewall
-rem Windows 10 Firewall Control (US) - https://www.sphinx-soft.com/Vista/order.html
 rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
@@ -254,6 +253,7 @@ rem Media Player / PotPlayer - https://daumpotplayer.com
 rem NET 3.5 Feature Installer for Windows 10 x86/x64 - https://github.com/abbodi1406/dotNetFx35W10/releases
 rem Network Optimization / TCP Optimizer - https://www.speedguide.net/downloads.php
 rem Network Settings Manager / NetSetMan - https://www.netsetman.com/en/freeware
+rem Notepad / Notepad3 - https://www.rizonesoft.com/downloads/notepad3
 rem Office Suite / FreeOffice - https://www.freeoffice.com/en/freeoffice
 rem Partition Manager / Macrorit Partition Expert - https://macrorit.com/partition-magic-manager/free-edition.html
 rem Password Manager (Offline) / KeePass Professional Edition - https://keepass.info/download.html
@@ -477,8 +477,9 @@ bcdedit /set {default} disabledynamictick yes
 bcdedit /set {default} lastknowngood yes
 bcdedit /set {default} recoveryenabled no
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9001\Discord.exe --start-minimized" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9002\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles% (x86)\Microsoft OneDrive\OneDrive.exe\" /background" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
 reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "PSUAMain" /t REG_SZ /d "\"%ProgramFiles% (x86)\Panda Security\Panda Security Protection\PSUAMain.exe\" /LaunchSysTray" /f
@@ -623,15 +624,15 @@ rem ---------------------------- Firewall & network protection -----------------
 
 rem Enable Windows Firewall / AllProfiles / CurrentProfile / DomainProfile / PrivateProfile / PublicProfile
 rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771920(v=ws.10)?
-netsh advfirewall set allprofiles state on
+rem netsh advfirewall set allprofiles state on
 
 rem Block all inbound network traffic and all outbound except allowed apps
-netsh advfirewall set DomainProfile firewallpolicy blockinboundalways,blockoutbound
-netsh advfirewall set PrivateProfile firewallpolicy blockinboundalways,blockoutbound
-netsh advfirewall set PublicProfile firewallpolicy blockinboundalways,blockoutbound
+rem netsh advfirewall set DomainProfile firewallpolicy blockinboundalways,blockoutbound
+rem netsh advfirewall set PrivateProfile firewallpolicy blockinboundalways,blockoutbound
+rem netsh advfirewall set PublicProfile firewallpolicy blockinboundalways,blockoutbound
 
 rem Remove All Windows Firewall Rules
-netsh advfirewall firewall delete rule name=all
+rem netsh advfirewall firewall delete rule name=all
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Defaults\FirewallPolicy\FirewallRules" /f
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedInterfaces" /f
@@ -639,53 +640,11 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-netsh advfirewall firewall add rule name="Audials TCP" dir=out action=allow protocol=TCP remoteport=80,443,1025-65535 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
-netsh advfirewall firewall add rule name="Audials UDP" dir=out action=allow protocol=UDP remoteport=5353 remoteip=224.0.0.251 program="%ProgramFiles(x86)%\Audials\Audials 2021\Audials.exe"
-netsh advfirewall firewall add rule name="COD MW2 TCP" dir=out action=allow protocol=TCP remoteport=27015-27030,27038,27050 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
-netsh advfirewall firewall add rule name="COD MW2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 2\iw4sp.exe"
-netsh advfirewall firewall add rule name="COD MW3 TCP" dir=out action=allow protocol=TCP remoteport=3074 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 3\iw5sp.exe"
-netsh advfirewall firewall add rule name="COD MW3 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Call of Duty Modern Warfare 3\iw5sp.exe"
-netsh advfirewall firewall add rule name="Discord TCP" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,162.158.0.0-162.159.255.255 remoteport=443 program="%LOCALAPPDATA%\Discord\app-1.0.9001\Discord.exe"
-netsh advfirewall firewall add rule name="Discord UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="%LOCALAPPDATA%\Discord\app-1.0.9001\Discord.exe"
-netsh advfirewall firewall add rule name="Discord Update TCP" dir=out action=allow protocol=TCP remoteip=35.184.0.0-35.191.255.255,162.158.0.0-162.159.255.255 remoteport=443 program="%LOCALAPPDATA%\Discord\Update.exe"
-netsh advfirewall firewall add rule name="DriverEasy TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles%\Easeware\DriverEasy\DriverEasy.exe"
-netsh advfirewall firewall add rule name="ETS2 TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
-netsh advfirewall firewall add rule name="ETS2 UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\steamapps\common\Euro Truck Simulator 2\bin\win_x64\eurotrucks2.exe"
-netsh advfirewall firewall add rule name="ETS2 MP TCP" dir=out action=allow protocol=TCP remoteip=104.16.0.0-104.31.255.255 remoteport=80 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
-netsh advfirewall firewall add rule name="ETS2 MP UDP" dir=out action=allow protocol=UDP remoteip=0.0.0.0 remoteport=1025-65535 program="D:\Euro Truck Simulator 2\TruckersMP Launcher\Launcher.exe"
-netsh advfirewall firewall add rule name="Hitman TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,51.140.0.0-51.145.255.255,52.224.0.0-52.255.255.255,104.40.0.0-104.47.255.255,191.239.203.0 remoteport=443 program="D:\Steam\steamapps\common\HITMAN2\dx12Retail\HITMAN2.exe"
-netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=allow protocol=TCP remoteip=37.58.48.0-37.58.55.255,46.165.216.0-46.165.223.255,46.165.240.0-46.165.247.255,78.159.96.0-78.159.103.255,78.159.112.0-78.159.115.255,84.16.224.0-84.16.255.255,104.16.0.0-104.31.255.255,116.202.0.0-116.203.255.255,172.64.0.0-172.71.255.255,178.162.206.0-178.162.207.255,178.162.216.0-178.162.219.255 remoteport=443 program="Z:\Temp\IcedrivePortable\Icedrive.exe"
-netsh advfirewall firewall add rule name="IP Info TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\NirLauncher\NirSoft\ipnetinfo.exe"
-netsh advfirewall firewall add rule name="MS Edge TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255,40.74.0.0-40.125.127.255,52.145.0.0-52.191.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"
-netsh advfirewall firewall add rule name="MS OneDrive TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.150.0.0-20.153.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,93.184.220.0-93.184.223.255,192.229.128.0-192.229.255.255 remoteport=443 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
-netsh advfirewall firewall add rule name="MS OneDrive Update TCP" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.180.0.0-20.191.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.103.0.0-51.105.255.255,52.96.0.0-52.115.255.255,52.132.0.0-52.143.255.255 remoteport=443 program="%ProgramFiles%\Microsoft OneDrive\OneDriveStandaloneUpdater.exe"
-netsh advfirewall firewall add rule name="MS Store TCP 80" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,23.192.0.0-23.223.255.255,93.184.220.0-93.184.223.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=80 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12104.1001.1.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
-netsh advfirewall firewall add rule name="MS Store TCP 443" dir=out action=allow protocol=TCP remoteip=2.18.232.0-2.18.235.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,40.74.0.0-40.125.127.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,88.221.184.0-88.221.191.255,92.123.228.0-92.123.231.255,104.64.0.0-104.127.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255 remoteport=443 program="%ProgramFiles%\WindowsApps\Microsoft.WindowsStore_12104.1001.1.0_x64__8wekyb3d8bbwe\WinStore.App.exe"
-netsh advfirewall firewall add rule name="MS Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.10.0.0-51.13.255.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="MS Svchost UDP 5353 Steam Friends" dir=out action=allow protocol=UDP remoteip=224.0.0.251 remoteport=5353 program="%WINDIR%\System32\svchost.exe"
-netsh advfirewall firewall add rule name="MS Sync TCP 80" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255 remoteport=80 program="%WINDIR%\System32\SettingSyncHost.exe"
-netsh advfirewall firewall add rule name="MS Sync TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,40.74.0.0-40.125.127.255,104.64.0.0-104.127.255.255 remoteport=443 program="%WINDIR%\System32\SettingSyncHost.exe"
-netsh advfirewall firewall add rule name="MS UAC TCP" dir=out action=allow protocol=TCP remoteip=93.184.220.0-93.184.223.255,151.139.0.0-151.139.255.255 remoteport=80,443 program="%WINDIR%\System32\consent.exe"
-netsh advfirewall firewall add rule name="MS Weather TCP" dir=out action=allow protocol=TCP remoteport=443 remoteip=52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,204.79.195.0-204.79.197.255 program="%ProgramFiles%\WindowsApps\Microsoft.BingWeather_4.46.31121.0_x64__8wekyb3d8bbwe\Microsoft.Msn.Weather.exe"
-netsh advfirewall firewall add rule name="Panda AgentSvc TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,52.145.0.0-52.191.255.255,93.184.220.0-93.184.223.255,137.135.0.0-137.135.255.255,168.61.0.0-168.63.255.255,191.232.0.0-191.235.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Devices Agent\AgentSvc.exe"
-netsh advfirewall firewall add rule name="Panda PSANHost TCP" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,2.21.242.0-2.21.242.255,2.23.144.0-2.23.159.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,91.216.218.0-91.216.218.255,95.101.24.0-95.101.27.255,104.64.0.0-104.127.255.255,137.135.0.0-137.135.255.255,192.0.32.0-192.0.47.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSANHost.exe"
-netsh advfirewall firewall add rule name="Panda PSUAConsole TCP" dir=out action=allow protocol=TCP remoteip=40.64.0.0-40.71.255.255,93.184.220.0-93.184.223.255,142.250.0.0-142.251.255.255,172.217.0.0-172.217.255.255,216.58.192.0-216.58.223.255 remoteport=80,443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAConsole.exe"
-netsh advfirewall firewall add rule name="Panda PSUAService TCP" dir=out action=allow protocol=TCP remoteip=13.32.0.0-13.47.255.255,13.244.0.0-13.251.255.255,52.192.0.0-52.223.191.255,65.8.0.0-65.11.255.255,99.85.128.0-99.87.191.255,143.204.0.0-143.204.255.255,184.24.0.0-184.31.255.255 remoteport=443 program="%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAService.exe"
-netsh advfirewall firewall add rule name="PatchMyPC TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
-netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
-netsh advfirewall firewall add rule name="Steam TCP" dir=out action=allow protocol=TCP remoteport=443,8384,27015-27030,27038,27050 program="D:\Steam\Steam.exe"
-netsh advfirewall firewall add rule name="Steam UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\Steam\Steam.exe"
-netsh advfirewall firewall add rule name="Steam Web TCP" dir=out action=allow protocol=TCP remoteport=443 program="D:\Steam\bin\cef\cef.win7x64\steamwebhelper.exe"
-netsh advfirewall firewall add rule name="Steam Web UDP" dir=out action=allow protocol=UDP remoteip=224.0.0.252 remoteport=5355 program="D:\Steam\bin\cef\cef.win7x64\steamwebhelper.exe"
-netsh advfirewall firewall add rule name="TOR Firefox TCP" dir=out action=allow protocol=TCP remoteip=127.0.0.1 remoteport=1025-65535 program="Z:\Desktop\Tor Browser\Browser\firefox.exe"
-netsh advfirewall firewall add rule name="TOR TCP" dir=out action=allow protocol=TCP remoteport=443,1025-65535 program="Z:\Desktop\Tor Browser\Browser\TorBrowser\Tor\tor.exe"
-netsh advfirewall firewall add rule name="Update Time UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime_x64.exe"
-netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="D:\OneDrive\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
-netsh advfirewall firewall add rule name="XSplit Core" dir=out action=allow protocol=TCP remoteip=8.8.4.4,8.8.8.8,35.184.0.0-35.191.255.255,104.16.0.0-104.31.255.255,151.101.0.0-151.101.255.255,199.232.0.0-199.232.255.255 remoteport=80,443 program="%ProgramFiles(x86)%\SplitmediaLabs\XSplit Broadcaster\x64\XSplit.Core.exe"
-netsh advfirewall firewall add rule name="XSplit Twitch" dir=out action=allow protocol=TCP remoteip=52.223.192.0-52.223.255.255,99.181.64.0-99.181.127.255,185.42.204.0-185.42.207.255 remoteport=1935 program="%ProgramFiles(x86)%\SplitmediaLabs\XSplit Broadcaster\x64\XSplit.Core.exe"
+rem netsh advfirewall firewall add rule name="MS Edge TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+rem netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255,40.74.0.0-40.125.127.255,52.145.0.0-52.191.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"rem netsh advfirewall firewall add rule name="MS Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+rem netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
+rem netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.10.0.0-51.13.255.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+rem netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
 
 
 rem =================================== Windows Logging ====================================
@@ -795,10 +754,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowRecent
 
 rem 1 - Show frequently folders in Quick Access
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowFrequent" /t REG_DWORD /d "0" /f
-
-rem ________________________________________________________________________________________
-rem To restart explorer
-rem taskkill /im explorer.exe /f & explorer.exe
 
 
 rem =================================== Windows Explorer ===================================
@@ -1080,7 +1035,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "39" /t REG_SZ /d "wbemtest.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "40" /t REG_SZ /d "wecutil.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "41" /t REG_SZ /d "werfault.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "42" /t REG_SZ /d "wfc.exe" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "42" /t REG_SZ /d "wfc.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "43" /t REG_SZ /d "windbg.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "44" /t REG_SZ /d "winrm.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "45" /t REG_SZ /d "winrs.exe" /f
@@ -1937,10 +1892,10 @@ taskkill /im SearchApp.exe /f
 del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
 
 rem Remove Your Phone app
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.110.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.110.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\Microsoft.YourPhone_1.21042.137.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.110.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem 0 - Turn on Quiet Hours in Action Center / Disable/Hide the message: Turn on Windows Security Center service
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
