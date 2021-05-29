@@ -28,10 +28,8 @@ rem Disable scanning and updating Process Hacker
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
 start "" /wait "D:\OneDrive\Setup\3.exe"
 start "" /wait "D:\OneDrive\Setup\15.exe"
-start "" /wait "D:\OneDrive\Setup\16.exe"
 
-taskkill /im msedge.exe /f
-taskkill /im Setpoint.exe /f
+taskkill /im msedge.exe /
 takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
 xcopy "%LocalAppData%\Microsoft\Edge" "Z:\Edge" /s /i /y
 rd "%LocalAppData%\Microsoft\Edge" /s /q
@@ -57,6 +55,18 @@ start "" "D:\OneDrive\Mikai.7z"
 pause
 
 start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+
+rem Disabled #heavy-ad-privacy-mitigations
+rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
+rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
+rem Disabled #enable-quic
+rem Disabled #edge-show-feature-recommendations
+rem Enabled #block-insecure-private-network-requests
+rem Enabled #disallow-doc-written-script-loads
+
+pause
+
+start "" /wait "‪D:\Software\OneDriveSetup.exe /allusers"
 
 pause
 
@@ -126,6 +136,7 @@ rem "HKLM\Software\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd891
 rem Disabled #heavy-ad-privacy-mitigations
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
+rem Disabled #enable-quic
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
 rem Enabled #enable-heavy-ad-intervention
@@ -135,4 +146,4 @@ rem Enabled #enable-webrtc-hide-local-ips-with-mdns
 rem Enhancer for Youtube
 rem {"version":"2.0.104.8","settings":{"blur":0,"brightness":100,"contrast":100,"grayscale":0,"huerotate":0,"invert":0,"saturate":100,"sepia":0,"applyvideofilters":false,"backgroundcolor":"#000000","backgroundopacity":50,"blackbars":false,"blockads":true,"blockadsexceptforsubs":false,"blockautoplay":false,"blockhfrformats":false,"blockwebmformats":false,"cinemamode":false,"cinemamodewideplayer":false,"controlbar":{"active":true,"autohide":false,"centered":true,"position":"fixed"},"controls":[],"controlsvisible":false,"controlspeed":false,"controlspeedmousebutton":false,"controlvolume":false,"controlvolumemousebutton":false,"customcolors":{"--dimmer-text":"#cccccc","--hover-background":"#232323","--main-background":"#111111","--main-color":"#00adee","--main-text":"#eff0f1","--second-background":"#181818","--shadow":"#000000"},"customcssrules":"","customscript":"","customtheme":false,"darktheme":true,"date":1590884155282,"defaultvolume":false,"disableautoplay":false,"executescript":false,"expanddescription":false,"filter":"none","hidecardsendscreens":false,"hidechat":false,"hidecomments":false,"hiderelated":false,"ignoreplaylists":false,"ignorepopupplayer":true,"localecode":"en_US","localedir":"ltr","message":false,"miniplayer":false,"miniplayerposition":"_top-left","miniplayersize":"_400x225","newestcomments":false,"overridespeeds":false,"pauseforegroundtab":false,"pausevideos":false,"popuplayersize":"640x360","qualityembeds":"hd720","qualityembedsfullscreen":"hd1080","qualityplaylists":"hd1080","qualityplaylistsfullscreen":"hd1080","qualityvideos":"hd1080","qualityvideosfullscreen":"hd1080","reload":false,"reversemousewheeldirection":false,"selectquality":true,"selectqualityfullscreenoff":false,"selectqualityfullscreenon":false,"speed":1,"speedvariation":0.1,"stopvideos":false,"theatermode":false,"theme":"default-dark","themevariant":"youtube-deep-dark.css","update":1619098163598,"volume":50,"volumemultiplier":3,"volumevariation":5,"whitelist":"","wideplayer":false,"wideplayerviewport":false}}
 
-rem eyJzZWFyY2hFbmdpbmVzIjpbeyJuYW1lIjoiWW91dHViZSIsInVybCI6Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3Jlc3VsdHM/c2VhcmNoX3F1ZXJ5PSVzIn0seyJuYW1lIjoiSU1EYiIsInVybCI6Imh0dHBzOi8vd3d3LmltZGIuY29tL2ZpbmQ/cz1hbGwmcT0lcyJ9LHsibmFtZSI6IlNvZnRwZWRpYSIsInVybCI6Imh0dHBzOi8vd2luLnNvZnRwZWRpYS5jb20vZHluLXNlYXJjaC5waHA/c2VhcmNoX3Rlcm09JXMifSx7Im5hbWUiOiJEaWN0aW9uYXJ5IiwidXJsIjoiaHR0cHM6Ly93d3cudGhlZnJlZWRpY3Rpb25hcnkuY29tLyVzIn0seyJuYW1lIjoibTR1ZnJlZSIsInVybCI6Imh0dHBzOi8vbTR1ZnJlZS50by9zZWFyY2gvJXMuaHRtbCJ9LHsibmFtZSI6IjEyM01vdmllcyIsInVybCI6Imh0dHBzOi8vd3c1LjAxMjNtb3ZpZS5uZXQvc2VhcmNoLyVzLmh0bWwifSx7Im5hbWUiOiJHb01vdmllcyIsInVybCI6Imh0dHBzOi8vd3cuZ28xMjNtb3ZpZXMuaW8vP3M9JXMifSx7Im5hbWUiOiJNeUFuaW1lIiwidXJsIjoiaHR0cHM6Ly9teWFuaW1lbGlzdC5uZXQvYW5pbWUucGhwP3E9JXMmY2F0PWFuaW1lIn1dLCJzdHlsZVNoZWV0IjoiIiwib3B0aW9ucyI6eyJidXR0b24iOjAsIm5ld3RhYiI6dHJ1ZSwiYWN0aXZhdG9yIjoiZGlzYWJsZWQiLCJyZW1vdmVfaWNvbnMiOiJubyIsInNob3dfaW5faW5wdXRzIjp0cnVlLCJiYWNrZ3JvdW5kX3RhYiI6ZmFsc2UsImtfYW5kX21fY29tYm8iOlsxNywwXSwiY29udGV4dF9tZW51IjoiZW5hYmxlZCIsInRvb2xiYXJfcG9wdXAiOiJkaXNhYmxlZCIsInRvb2xiYXJfcG9wdXBfc3R5bGUiOiJkZWZhdWx0IiwidG9vbGJhcl9wb3B1cF9ob3RrZXlzIjpmYWxzZSwidG9vbGJhcl9wb3B1cF9zdWdnZXN0aW9ucyI6dHJ1ZSwic2VwYXJhdGVfbWVudXMiOmZhbHNlLCJoaWRlX29uX2NsaWNrIjpmYWxzZSwiZGlzYWJsZV9mb3JtZXh0cmFjdG9yIjp0cnVlLCJvcGVuX29uX2RibGNsaWNrIjpmYWxzZSwiZGJsY2xpY2tfaW5faW5wdXRzIjp0cnVlLCJvcGVuX25ld190YWJfbGFzdCI6ZmFsc2UsImRpc2FibGVfZWZmZWN0cyI6ZmFsc2UsImF1dG9fcG9wdXBfcmVsYXRpdmVfdG9fbW91c2UiOmZhbHNlLCJhdXRvX3BvcHVwX3Nob3dfbWVudV9kaXJlY3RseSI6ZmFsc2UsImF1dG9fcG9wdXBfaW5faW5wdXRzIjpmYWxzZSwiYWN0aXZhdG9yX2NvbWJvIjpbXSwic2hvd190b29sdGlwcyI6ZmFsc2UsImNpcmN1bGFyX21lbnUiOmZhbHNlLCJzb3J0X2J5X2NsaWNrIjpmYWxzZSwic2VsZWN0aW9uX2xlbmd0aF9saW1pdCI6LTEsImF1dG9faGlkZV9kZWxheSI6MCwiYXV0b19vcGVuX2RlbGF5IjozMDAsImhpZGVfb25fc2Nyb2xsIjpmYWxzZSwic2VsZWN0aW9uX2FsbG93X25ld2xpbmUiOmZhbHNlLCJ1c2Vfd2hpdGVsaXN0IjpmYWxzZX0sIlZFUlNJT04iOiIwLjguNTcifQ==
+rem eyJzZWFyY2hFbmdpbmVzIjpbeyJuYW1lIjoiWW91dHViZSIsInVybCI6Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3Jlc3VsdHM/c2VhcmNoX3F1ZXJ5PSVzIn0seyJuYW1lIjoiSU1EYiIsInVybCI6Imh0dHBzOi8vd3d3LmltZGIuY29tL2ZpbmQ/cz1hbGwmcT0lcyJ9LHsibmFtZSI6IlNvZnRwZWRpYSIsInVybCI6Imh0dHBzOi8vd2luLnNvZnRwZWRpYS5jb20vZHluLXNlYXJjaC5waHA/c2VhcmNoX3Rlcm09JXMifSx7Im5hbWUiOiJEaWN0aW9uYXJ5IiwidXJsIjoiaHR0cHM6Ly93d3cudGhlZnJlZWRpY3Rpb25hcnkuY29tLyVzIn0seyJuYW1lIjoibTR1ZnJlZSIsInVybCI6Imh0dHBzOi8vbTR1ZnJlZS50by9zZWFyY2gvJXMuaHRtbCJ9LHsibmFtZSI6IjEyM01vdmllcyIsInVybCI6Imh0dHBzOi8vd3c1LjAxMjNtb3ZpZS5uZXQvc2VhcmNoLyVzLmh0bWwifSx7Im5hbWUiOiIxMjNTZXJpZXMiLCJ1cmwiOiJodHRwczovLzEyM3Nlcmllcy5uZXQvc2VhcmNoP2tleXdvcmQ9JXMifSx7Im5hbWUiOiJNeUFuaW1lIiwidXJsIjoiaHR0cHM6Ly9teWFuaW1lbGlzdC5uZXQvYW5pbWUucGhwP3E9JXMmY2F0PWFuaW1lIn1dLCJzdHlsZVNoZWV0IjoiIiwib3B0aW9ucyI6eyJidXR0b24iOjAsIm5ld3RhYiI6dHJ1ZSwiYWN0aXZhdG9yIjoiZGlzYWJsZWQiLCJyZW1vdmVfaWNvbnMiOiJubyIsInNob3dfaW5faW5wdXRzIjp0cnVlLCJiYWNrZ3JvdW5kX3RhYiI6ZmFsc2UsImtfYW5kX21fY29tYm8iOlsxNywwXSwiY29udGV4dF9tZW51IjoiZW5hYmxlZCIsInRvb2xiYXJfcG9wdXAiOiJkaXNhYmxlZCIsInRvb2xiYXJfcG9wdXBfc3R5bGUiOiJkZWZhdWx0IiwidG9vbGJhcl9wb3B1cF9ob3RrZXlzIjpmYWxzZSwidG9vbGJhcl9wb3B1cF9zdWdnZXN0aW9ucyI6dHJ1ZSwic2VwYXJhdGVfbWVudXMiOmZhbHNlLCJoaWRlX29uX2NsaWNrIjpmYWxzZSwiZGlzYWJsZV9mb3JtZXh0cmFjdG9yIjp0cnVlLCJvcGVuX29uX2RibGNsaWNrIjpmYWxzZSwiZGJsY2xpY2tfaW5faW5wdXRzIjp0cnVlLCJvcGVuX25ld190YWJfbGFzdCI6ZmFsc2UsImRpc2FibGVfZWZmZWN0cyI6ZmFsc2UsImF1dG9fcG9wdXBfcmVsYXRpdmVfdG9fbW91c2UiOmZhbHNlLCJhdXRvX3BvcHVwX3Nob3dfbWVudV9kaXJlY3RseSI6ZmFsc2UsImF1dG9fcG9wdXBfaW5faW5wdXRzIjpmYWxzZSwiYWN0aXZhdG9yX2NvbWJvIjpbXSwic2hvd190b29sdGlwcyI6ZmFsc2UsImNpcmN1bGFyX21lbnUiOmZhbHNlLCJzb3J0X2J5X2NsaWNrIjpmYWxzZSwic2VsZWN0aW9uX2xlbmd0aF9saW1pdCI6LTEsImF1dG9faGlkZV9kZWxheSI6MCwiYXV0b19vcGVuX2RlbGF5IjozMDAsImhpZGVfb25fc2Nyb2xsIjpmYWxzZSwic2VsZWN0aW9uX2FsbG93X25ld2xpbmUiOmZhbHNlLCJ1c2Vfd2hpdGVsaXN0IjpmYWxzZX0sIlZFUlNJT04iOiIwLjguNTcifQ==
