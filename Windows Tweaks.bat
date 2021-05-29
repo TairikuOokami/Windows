@@ -19,8 +19,6 @@ rem https://www.easeus.com/backup-software/tb-free.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server."
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
-rem Windows Defender Firewall is set to block all inbound/outbound except allowed apps, which have to be added first!
-
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks.
 rem Removing SearchApp.exe breaks News and Interest and it might have various consequences regarding Start's and taskbar's functionality.
 rem Removing Powershell can also affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise.
@@ -76,7 +74,7 @@ rem Privacy Tools - https://www.privacytools.io
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
-rem AV Comparison
+rem AV Comparison - note that most of those are being paid by AV companies, just like malwaretips, which censors you, if you disagree.
 rem https://www.programmifree.com/confronti
 rem https://checklab.pl/en/publications
 rem https://www.av-comparatives.org/latest-tests
@@ -1404,6 +1402,9 @@ sc config IKEEXT start= disabled
 rem IP Helper
 sc config iphlpsvc start= disabled
 
+rem Network Policy Server Management Service
+sc config NPSMSvc start= disabled
+
 rem Payments and NFC/SE Manager
 sc config SEMgrSvc start= disabled
 
@@ -1421,6 +1422,9 @@ sc config TermService start= disabled
 
 rem Retail Demo
 sc config RetailDemo start=disabled
+
+rem Secure Socket Tunneling Protocol Service
+sc config SstpSvc start=disabled
 
 rem Server
 sc config LanmanServer start= disabled
@@ -1658,7 +1662,7 @@ rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
