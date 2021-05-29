@@ -75,10 +75,11 @@ wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","1
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
 wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
@@ -210,6 +211,7 @@ start "" /wait "D:\OneDrive\Setup\5.exe"
 start "" /wait "D:\OneDrive\Setup\6.exe"
 start "" /wait "D:\OneDrive\Setup\7.exe"
 start "" /wait "D:\OneDrive\Setup\8.exe"
+start "" /wait "D:\OneDrive\Setup\9.exe"
 start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
 
 %WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe "Set-ExecutionPolicy bypass - noprofile"
