@@ -74,8 +74,7 @@ rem Privacy Tools - https://www.privacytools.io
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
-rem AV Comparison - note that most of those are being "sponsored" by AV companies, just like malwaretips, which bans you, if you point it out
-rem Ban for merely poiting out, that censorship is not nice, nazi struppigel in particular: https://i.postimg.cc/R4LHjdFh/Malware-Tips.jpg
+rem AV Comparison
 rem https://www.programmifree.com/confronti
 rem https://checklab.pl/en/publications
 rem https://www.av-comparatives.org/latest-tests
