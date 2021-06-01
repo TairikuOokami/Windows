@@ -1,7 +1,6 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-
 rem SSU (Install before CU) - https://msrc.microsoft.com/update-guide/en-us/vulnerability/ADV990001 (Not updated since I use Dev at the moment to be able to use DoH)
 rem 19042.740.1.1 - http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4598481-x64_749fe79fd2e31b145de37c2f9ebf4f711d174dc2.msu
 rem DISM /Online /Add-Package /PackagePath:Z:\Desktop\Windows10.0-KB4598481-x64.cab
@@ -510,24 +509,6 @@ rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z:/TEMP/Gihosoft/temp" /f
 reg delete "HKCU\Software\Gihosoft\TubeGet" /v "Net_DayLink5Times" /f
-
-rem Logitech Setpoint
-rem taskkill /im LogiAppBroker.exe /f
-rem taskkill /im LogitechUpdate.exe /f
-rem taskkill /im LULnchr.exe /f
-rem taskkill /im KHALMNPR.exe /f
-rem taskkill /im Setpoint.exe /f
-rem del "%ProgramFiles%\Logitech\SetPointP\LogiAppBroker.exe" /s /f /q
-rem del "%ProgramFiles%\Logitech\SetPointP\msvcp110.dll" /s /f /q
-rem del "%ProgramFiles%\Logitech\SetPointP\msvcr110.dll" /s /f /q
-rem rd "%ProgramFiles%\Common Files\LogiShrd\sp6\LU1" /s /q
-rem rd "%ProgramFiles%\Common Files\LogiShrd\Unifying\LU" /s /q
-
-rem Microsoft Edge Update Disabled
-rem https://www.sordum.org/9312/edge-blocker-v1-7
-rem taskkill /im MSEdge.exe /f
-rem taskkill /im MicrosoftEdgeUpdate.exe /f
-rem rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate" /s /q
 
 rem Notepad
 reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosDX" /t REG_DWORD /d "1934" /f
@@ -1114,9 +1095,6 @@ reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\SQM" /v "DisableCust
 reg add "HKLM\Software\Policies\Microsoft\Messenger\Client" /v "CEIP" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Policies\Microsoft\SQMClient\Windows" /v "CEIPEnable" /t REG_DWORD /d "0" /f
 
-rem 0 - Disable Microsoft Edge Preloading
-reg add "HKLM\Software\Policies\Microsoft\MicrosoftEdge\Main" /v "AllowPrelaunch" /t REG_DWORD /d "0" /f
-
 rem 0 - Disable Application Impact Telemetry (AIT)
 reg add "HKLM\Software\Policies\Microsoft\Windows\AppCompat" /v "AITEnable" /t REG_DWORD /d "0" /f
 
@@ -1162,6 +1140,17 @@ reg add "HKLM\System\CurrentControlSet\Control\Terminal Server" /v "TSUserEnable
 rem Disable SMB 1.0/2.0
 reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "SMB1" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "SMB2" /t REG_DWORD /d "0" /f
+
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+
+
+rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
+rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
+
+rem Google Cast, Edge trying to connect to 239.255.255.250 via UDP port 1900 / 0 - Disable
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
