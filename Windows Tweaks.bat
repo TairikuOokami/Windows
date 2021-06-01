@@ -1,6 +1,7 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
+
 rem SSU (Install before CU) - https://msrc.microsoft.com/update-guide/en-us/vulnerability/ADV990001 (Not updated since I use Dev at the moment to be able to use DoH)
 rem 19042.740.1.1 - http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4598481-x64_749fe79fd2e31b145de37c2f9ebf4f711d174dc2.msu
 rem DISM /Online /Add-Package /PackagePath:Z:\Desktop\Windows10.0-KB4598481-x64.cab
