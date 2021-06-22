@@ -1,14 +1,6 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem SSU (Install before CU) - https://msrc.microsoft.com/update-guide/en-us/vulnerability/ADV990001 (Not updated since I use Dev at the moment to be able to use DoH)
-rem 19042.740.1.1 - http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/01/windows10.0-kb4598481-x64_749fe79fd2e31b145de37c2f9ebf4f711d174dc2.msu
-rem DISM /Online /Add-Package /PackagePath:Z:\Desktop\Windows10.0-KB4598481-x64.cab
-
-rem CU (20H2) - https://support.microsoft.com/en-us/help/4581839
-rem 19042.804.1.4 - http://download.windowsupdate.com/d/msdownload/update/software/secu/2021/02/windows10.0-kb4601319-x64_fa56d86b14e97133976a808e521f891ee180e101.msu
-rem DISM /Online /Add-Package /PackagePath:Z:\Desktop\Windows10.0-KB4601319-x64_PSFX.cab
-
 rem Before making any changes, it is preferable to create a registry backup!
 rem https://support.microsoft.com/en-us/topic/how-to-back-up-and-restore-the-registry-in-windows-855140ad-e318-2a13-2829-d428a2ab0692
 rem https://www.tweaking.com/content/page/registry_backup.html
@@ -19,6 +11,7 @@ rem https://www.easeus.com/backup-software/tb-free.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server."
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
+
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks.
 rem Removing SearchApp.exe breaks News and Interest and it might have various consequences regarding Start's and taskbar's functionality.
 rem Removing Powershell can also affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise.
@@ -105,7 +98,7 @@ rem Cloudflare - https://developers.cloudflare.com/1.1.1.1/1.1.1.1-for-families/
 rem CleanBrowsing - https://cleanbrowsing.org/ip-address - https://categorify.org/recategorize
 rem DNS Family - https://dnsforfamily.com/#DNS_Servers
 rem Enforce Safe Search (=Adult Filter) - https://chrome.google.com/webstore/detail/enforce-safe-search-adult/fiopkogmohpinncfhneadmpkcikmgkgc
-rem NextDNS - https://www.nextdns.io
+rem NextDNS - https://www.nextdns.io / https://test.nextdns.io
 rem OpenDNS - https://www.opendns.com/setupguide/#familyshield
 rem UltraDNS - https://www.publicdns.neustar
 
@@ -248,6 +241,7 @@ rem Hardware Information / HWiNFO - https://www.hwinfo.com/download.php
 rem Hardware Monitor / HWMonitor - https://www.cpuid.com/softwares/hwmonitor.html
 rem Image Viewer / XnView - https://www.xnview.com/en/xnview/#downloads
 rem Media Player / PotPlayer - https://daumpotplayer.com
+rem Monitor's Refresh rate Test / https://www.testufo.com
 rem NET 3.5 Feature Installer for Windows 10 x86/x64 - https://github.com/abbodi1406/dotNetFx35W10/releases
 rem Network Optimization / TCP Optimizer - https://www.speedguide.net/downloads.php
 rem Network Settings Manager / NetSetMan - https://www.netsetman.com/en/freeware
@@ -684,37 +678,6 @@ schtasks /Change /TN "Microsoft\Windows\Windows Error Reporting\QueueReporting" 
 rem Windows Error Reporting Service
 sc config WerSvc start= disabled
 
-rem Remove Windows Errror Reporting exe (to restore run "sfc /scannow")
-rem takeown /s %computername% /u %username% /f "%WinDir%\System32\WerFault.exe"
-rem icacls "%WinDir%\System32\WerFault.exe" /grant:r %username%:F
-rem taskkill /im WerFault.exe /f
-rem del "%WinDir%\System32\WerFault.exe" /s /f /q
-
-rem takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WerFault.exe"
-rem icacls "%WinDir%\SysWOW64\WerFault.exe" /grant:r %username%:F
-rem taskkill /im WerFault.exe /f
-rem del "%WinDir%\SysWOW64\WerFault.exe" /s /f /q
-
-rem takeown /s %computername% /u %username% /f "%WinDir%\System32\WerFaultSecure.exe"
-rem icacls "%WinDir%\System32\WerFaultSecure.exe" /grant:r %username%:F
-rem taskkill /im WerFaultSecure.exe /f
-rem del "%WinDir%\System32\WerFaultSecure.exe" /s /f /q
-
-rem takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WerFaultSecure.exe"
-rem icacls "%WinDir%\SysWOW64\WerFaultSecure.exe" /grant:r %username%:F
-rem taskkill /im WerFaultSecure.exe /f
-rem del "%WinDir%\SysWOW64\WerFaultSecure.exe" /s /f /q
-
-rem takeown /s %computername% /u %username% /f "%WinDir%\System32\wermgr.exe"
-rem icacls "%WinDir%\System32\wermgr.exe" /grant:r %username%:F
-rem taskkill /im wermgr.exe /f
-rem del "%WinDir%\System32\wermgr.exe" /s /f /q
-
-rem takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\wermgr.exe"
-rem icacls "%WinDir%\SysWOW64\wermgr.exe" /grant:r %username%:F
-rem taskkill /im wermgr.exe /f
-rem del "%WinDir%\SysWOW64\wermgr.exe" /s /f /q
-
 
 rem =================================== Windows Explorer ===================================
 rem --------------------------------------- Options ----------------------------------------
@@ -751,7 +714,6 @@ rem reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f
 rem reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f
 reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" /v "FolderType" /t REG_SZ /d "NotSpecified" /f
 rem taskkill /im explorer.exe /f & explorer.exe
-
 
 rem ________________________________________________________________________________________
 rem Remove Network Icon from Navigation Panel
@@ -952,7 +914,7 @@ powercfg -h off
 rem =================================== Windows Policies ===================================
 
 
-rem Group Policies - https://admx.help
+rem https://admx.help
 rem https://docs.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/new-in-windows-mdm-enrollment-management#whatsnew10
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
@@ -1015,7 +977,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "39" /t REG_SZ /d "wbemtest.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "40" /t REG_SZ /d "wecutil.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "41" /t REG_SZ /d "werfault.exe" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "42" /t REG_SZ /d "wfc.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "42" /t REG_SZ /d "finger.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "43" /t REG_SZ /d "windbg.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "44" /t REG_SZ /d "winrm.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "45" /t REG_SZ /d "winrs.exe" /f
@@ -1028,7 +990,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "52" /t REG_SZ /d "certutil.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "regsvr32.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "rundll32.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "55" /t REG_SZ /d "finger.exe" /f
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
 reg add "HKLM\Software\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f
@@ -1145,12 +1106,235 @@ reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "SMB
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 
-
+rem https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Microsoft-Security-Baselines/label-name/Edge
 rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
+rem https://admx.help/?Category=EdgeChromium
 
-rem Google Cast, Edge trying to connect to 239.255.255.250 via UDP port 1900 / 0 - Disable
+rem ________________________________________________________________________________________
+rem 1 - Allow users to open files using the DirectInvoke protocol
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DirectInvokeEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Disable taking screenshots
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DisableScreenshots" /t REG_DWORD /d "1" /f
+
+rem 1 - Allow Google Cast to connect to Cast devices on all IP addresses, Edge trying to connect to 239.255.255.250 via UDP port 1900
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow QUIC protocol
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow screen capture
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow Speech Recognition
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpeechRecognitionEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow video capture
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_DWORD /d "0" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ..................................... Appearances ......................................
+
+rem 0 - Show share button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ConfigureShare" /t REG_DWORD /d "1" /f
+
+rem 1 - Show Collections button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeCollectionsEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Show favorites bar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "FavoritesBarEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Show Math Solver button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MathSolverEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Show home button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowHomeButton" /t REG_DWORD /d "0" /f
+
+rem 1 - Show feedback button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UserFeedbackAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Show vertical tabs for all current browser windows
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VerticalTabsAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Show web capture button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebCaptureEnabled" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem 1 - Enables background updates to the list of available templates for Collections and other features that use templates
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundTemplateListUpdatesEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable Web Widget
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d "0" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem .............................. Cookies and site permissions ............................
+
+rem Motion or light sensors / 1 - AllowSensors / 2 - BlockSensors
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultSensorsSetting" /t REG_DWORD /d "2" /f
+
+rem PDF Documents
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AlwaysOpenPdfExternally" /t REG_DWORD /d "1" /f
+
+rem File Editing / 2 - BlockFileSystemRead / 3 - AskFileSystemRead
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultFileSystemReadGuardSetting" /t REG_DWORD /d "2" /f
+
+rem File Editing / 2 - BlockFileSystemWrite / 3 - AskFileSystemWrite
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultFileSystemWriteGuardSetting" /t REG_DWORD /d "2" /f
+
+rem Location / 1 - AllowGeolocation / 2 - BlockGeolocation / 3 - AskGeolocation
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultGeolocationSetting" /t REG_DWORD /d "2" /f
+
+rem Insecure Content / 2 - BlockInsecureContent / 3 - AllowExceptionsInsecureContent
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultInsecureContentSetting" /t REG_DWORD /d "2" /f
+
+rem Notifications / 1 - AllowNotifications / 2 - BlockNotifications / 3 - AskNotifications
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultNotificationsSetting" /t REG_DWORD /d "2" /f
+
+rem Serial ports / 2 - BlockSerial / 3 - AskSerial 
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultSerialGuardSetting" /t REG_DWORD /d "2" /f
+
+rem USB Devices / 2 - BlockWebUsb / 3 - AskWebUsb
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultWebUsbGuardSetting" /t REG_DWORD /d "2" /f
+
+rem ________________________________________________________________________________________
+rem 1 - Allow audio capture
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioCaptureAllowed" /t REG_DWORD /d "0" /f
+
+rem Bluetooth / 2 - BlockWebBluetooth / 3 - AskWebBluetooth
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultWebBluetoothGuardSetting" /t REG_DWORD /d "2" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ...................................... Downloads .......................................
+
+rem Set download directory
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadDirectory" /t REG_SZ /d "Z:\Desktop" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ..................................... Extensions .......................................
+
+rem 1 - Blocks external extensions from being installed
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BlockExternalExtensions" /t REG_DWORD /d "1" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ...................................... Languages .......................................
+
+rem 1 - Enable spellcheck
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Offer to translate pages that aren't in a language I read
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TranslateEnabled" /t REG_DWORD /d "0" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ..................................... New tab page .....................................
+
+rem Page Layout / 1 - DisableImageOfTheDay / 2 -  DisableCustomImage / 3 - DisableAll
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageAllowedBackgroundTypes" /t REG_DWORD /d "1" /f
+
+rem 1 - Allow Microsoft News content on the new tab page
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageContentEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Preload the new tab page for a faster experience
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPagePrerenderEnabled" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem Configures the default home page in Microsoft Edge
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HomepageIsNewTabPage" /t REG_DWORD /d "1" /f
+
+rem 1 - Hide the default top sites from the new tab page
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSites" /t REG_DWORD /d "1" /f
+
+rem 1 - Allow quick links on the new tab page
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageQuickLinksEnabled" /t REG_DWORD /d "0" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ............................ Privacy, search, and services .............................
+
+rem 1 - Suggest similar sites when a website can't be found
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AlternateErrorPagesEnabled" /t REG_DWORD /d "0" /f
+
+rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
+
+rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
+
+rem 1 - Microsoft Defender SmartScreen
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SmartScreenEnabled" /t REG_DWORD /d "1" /f
+
+rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem Enable Microsoft Search in Bing suggestions in the address bar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
+
+rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
+
+rem Enable full-tab promotional content
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromotionalTabsEnabled" /t REG_DWORD /d "0" /f
+
+rem Allow recommendations and promotional notifications from Microsoft Edge
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d "0" /f
+
+rem Choose whether users can receive customized background images and text, suggestions, notifications, and tips for Microsoft services)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecommendationsEnabled" /t REG_DWORD /d "0" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ...................................... Profiles ........................................
+
+rem 1 - Save and fill personal info
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Save and fill payment info
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Show rewards points in Microsoft Edge user profile
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Offer to save passwords
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordManagerEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Show alerts when passwords are found in an online leak
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordMonitorAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Use a web service to help resolve navigation errors
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
+
+rem 1 - Show me search and site suggestions using my typed characters
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Show rewards points in Microsoft Edge user profile
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ....................................... System .........................................
+
+rem 1 - Continue running background apps when Microsoft Edge is closed
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Use hardware acceleration when available
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Save resources with sleeping tabs
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SleepingTabsEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Startup boost
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem NetworkPrediction / 0 - Always / 1 - WifiOnly / 2 - Never
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkPredictionOptions" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1886,10 +2070,10 @@ taskkill /im SearchApp.exe /f
 del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
 
 rem Remove Your Phone app
-takeown /s %computername% /u %username% /f "%ProgramFiles%\Microsoft.YourPhone_1.21042.137.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.104.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.104.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21042.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.104.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem 0 - Turn on Quiet Hours in Action Center / Disable/Hide the message: Turn on Windows Security Center service
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
