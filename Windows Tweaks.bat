@@ -1109,7 +1109,7 @@ rem ------------------------------------ Microsoft Edge ------------------------
 rem https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Microsoft-Security-Baselines/label-name/Edge
 rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
-rem https://admx.help/?Category=EdgeChromium
+rem rem https://admx.help/?Category=EdgeChromium
 
 rem ________________________________________________________________________________________
 rem 1 - Allow users to open files using the DirectInvoke protocol
@@ -1155,7 +1155,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowHomeButton" /t REG_DWORD
 rem 1 - Show feedback button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UserFeedbackAllowed" /t REG_DWORD /d "0" /f
 
-rem 1 - Show vertical tabs for all current browser windows
+rem 1 - Show tab actions menu (Show vertical tabs)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VerticalTabsAllowed" /t REG_DWORD /d "0" /f
 
 rem 1 - Show web capture button
