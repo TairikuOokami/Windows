@@ -7,6 +7,12 @@ rem Wise Disk Cleaner - http://www.wisecleaner.com/wise-disk-cleaner.html
 rem Wise Registry Cleaner - http://www.wisecleaner.com/wise-registry-cleaner.html
 rem Windows Drivers - http://www.catalog.update.microsoft.com
 
+rem Disable Reserved Storage (7GB)
+Dism /Online /Set-ReservedStorageState /State:Disabled /Quiet /NoRestart
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "MiscPolicyInfo" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
+
 rem Open Explorer - Choose the desired View - View - Options - View - Apply to Folders - OK - Close Explorer ASAP
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f
