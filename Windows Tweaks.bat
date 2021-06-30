@@ -12,6 +12,8 @@ rem https://www.easeus.com/backup-software/tb-free.html
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server."
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 
+rem If you enable "SeparateProcess" you will get the old File Explorer plus the old context menu within it (not on the desktop though)
+
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks.
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise.
 
