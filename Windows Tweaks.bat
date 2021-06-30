@@ -13,8 +13,12 @@ rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature t
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks.
-rem Removing SearchApp.exe breaks News and Interest and it might have various consequences regarding Start's and taskbar's functionality.
-rem Removing Powershell can also affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise.
+rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise.
+
+rem Critical processes removed - SearchHost.exe / TextInputHost.exe / Widgets.exe
+rem Disabled task MsCtfMonitor is required to be able to search/type within Settings
+rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
+rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
 
 
 rem ________________________________________________________________________________________
@@ -30,11 +34,10 @@ rem Software Setup
 rem Windows Setup plus Manual Config
 
 rem Windows Defender Security Center
-rem Windows Logging
 rem Windows Error Reporting
 rem Windows Explorer
 rem Windows Optimizations
-rem Windows Policies
+rem Windows Policies (Edge)
 rem Windows Scheduled Tasks
 rem Windows Services
 rem Windows Settings
@@ -302,10 +305,6 @@ icacls "Z:\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
 rem Flush DNS Cache
 ipconfig /flushdns
 
-rem Remove user account
-net user defaultuser0 /delete
-net user defaultuser100000 /delete
-
 rem Remove random files/folders - https://github.com/MoscaDotTo/Winapp2/blob/master/Winapp3/Winapp3.ini
 del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
 del "%LocalAppData%\Microsoft\Windows\ActionCenterCache" /s /f /q
@@ -330,8 +329,6 @@ rd "%LocalAppData%\Microsoft\Windows\IECompatUaCache" /s /q
 rd "%LocalAppData%\Microsoft\Windows\INetCache" /s /q
 rd "%LocalAppData%\Microsoft\Windows\INetCookies" /s /q
 rd "%LocalAppData%\Microsoft\Windows\WebCache" /s /q
-rd "%LocalAppData%\Packages\Microsoft.Windows.Cortana_cw5n1h2txyewy\AppData\Indexed DB" /s /q
-rd "%LocalAppData%\slobs-client-updater" /s /q
 rd "%LocalAppData%\Steam\htmlcache" /s /q
 rd "%LocalAppData%\Temp" /s /q
 rd "C:\Users\Mikai\3D Objects" /s /q
@@ -442,7 +439,7 @@ rem =========================== Restore essential startup entries ==============
 
 
 rem Run bcdedit command to check for the current status / Yes = True / No = False
-rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set?
+rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
 bcdedit /deletevalue {current} safeboot
 bcdedit /deletevalue {current} safebootalternateshell
 bcdedit /deletevalue {current} removememory
@@ -619,20 +616,6 @@ rem netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action
 rem netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
 rem netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.10.0.0-51.13.255.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
 rem netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
-
-
-rem =================================== Windows Logging ====================================
-
-
-rem https://docs.microsoft.com/en-us/windows/win32/etw/configuring-and-starting-an-autologger-session
-rem DiagLog is required by Diagnostic Policy Service (Troubleshooting)
-rem EventLog-System/EventLog-Application are required by Windows Events Log Service
-rem perfmon
-
-reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f
 
 
 rem ================================ Windows Error Reporting ===============================
@@ -907,8 +890,17 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management
 rem 0 - Disable Fast Startup for a Full Shutdown / 1 - Enable Fast Startup (Hybrid Boot) for a Hybrid Shutdown
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Power" /v "HiberbootEnabled" /t REG_DWORD /d "0" /f
 
-rem Disable Hibernation / Disable Fast Startup (Hybrid Boot)
+rem Disable Fast Startup (Hybrid Boot) and Disable Hibernation
 powercfg -h off
+
+rem https://docs.microsoft.com/en-us/windows/win32/etw/configuring-and-starting-an-autologger-session
+rem DiagLog is required by Diagnostic Policy Service (Troubleshooting)
+rem EventLog-System/EventLog-Application are required by Windows Events Log Service
+rem perfmon
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\AutoLogger-Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1110,6 +1102,7 @@ rem https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Mic
 rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
 rem rem https://admx.help/?Category=EdgeChromium
+rem edge://policy
 
 rem ________________________________________________________________________________________
 rem 1 - Allow users to open files using the DirectInvoke protocol
@@ -1132,6 +1125,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpeechRecognitionEnabled" /t
 
 rem 1 - Allow video capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1167,6 +1161,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundTemplateListUpdate
 
 rem 1 - Enable Web Widget
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1206,6 +1201,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioCaptureAllowed" /t REG_
 rem Bluetooth / 2 - BlockWebBluetooth / 3 - AskWebBluetooth
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultWebBluetoothGuardSetting" /t REG_DWORD /d "2" /f
 
+
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 rem ...................................... Downloads .......................................
@@ -1213,12 +1209,17 @@ rem ...................................... Downloads ...........................
 rem Set download directory
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadDirectory" /t REG_SZ /d "Z:\Desktop" /f
 
+rem 1 - Ask me what to do with each download (Ignored when download directory is set)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /t REG_DWORD /d "1" /f
+
+
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 rem ..................................... Extensions .......................................
 
 rem 1 - Blocks external extensions from being installed
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BlockExternalExtensions" /t REG_DWORD /d "1" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1229,6 +1230,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DW
 
 rem 1 - Offer to translate pages that aren't in a language I read
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TranslateEnabled" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1244,14 +1246,12 @@ rem 1 - Preload the new tab page for a faster experience
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPagePrerenderEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem Configures the default home page in Microsoft Edge
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HomepageIsNewTabPage" /t REG_DWORD /d "1" /f
-
 rem 1 - Hide the default top sites from the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSites" /t REG_DWORD /d "1" /f
 
 rem 1 - Allow quick links on the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageQuickLinksEnabled" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1265,9 +1265,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD
 
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
-
-rem 1 - Microsoft Defender SmartScreen
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SmartScreenEnabled" /t REG_DWORD /d "1" /f
 
 rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
@@ -1287,6 +1284,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" 
 
 rem Choose whether users can receive customized background images and text, suggestions, notifications, and tips for Microsoft services)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecommendationsEnabled" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1315,6 +1313,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG
 
 rem 1 - Show rewards points in Microsoft Edge user profile
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1394,14 +1393,7 @@ rem =============================== Windows Scheduled Tasks ====================
 
 
 rem UAC Bypass - https://enigma0x3.net/2016/07/22/bypassing-uac-on-windows-10-using-disk-cleanup
-
-rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
-rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
-rem schtasks /Change /TN "Microsoft\Office\OfficeBackgroundTaskHandlerRegistration" /Disable
-rem schtasks /End /TN "Microsoft\Office\OfficeBackgroundTaskHandlerRegistration"
-
-rem Disable Background Synchronization (permanently, it can not be disabled) 
-rem schtasks /DELETE /TN "Microsoft\Windows\SettingSync\BackgroundUploadTask" /f
+rem MsCtfMonitor Task (keylogger) is required to be able to type within Settings and etc
 
 schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
@@ -1434,6 +1426,7 @@ schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDia
 schtasks /Change /TN "Microsoft\Windows\DiskFootprint\Diagnostics" /Disable
 schtasks /Change /TN "Microsoft\Windows\DiskFootprint\StorageSense" /Disable
 schtasks /Change /TN "Microsoft\Windows\DUSM\dusmtask" /Disable
+schtasks /Change /TN "Microsoft\Windows\EnterpriseMgmt\MDMMaintenenceTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Feedback\Siuf\DmClient" /Disable
 schtasks /Change /TN "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" /Disable
 schtasks /Change /TN "Microsoft\Windows\FileHistory\File History (maintenance mode)" /Disable
@@ -1441,7 +1434,6 @@ schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeature
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushing" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\OneSettings\RefreshCache" /Disable
-schtasks /Change /TN "Microsoft\Windows\HelloFace\FODCleanupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\LocalUserSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\MouseSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\PenSyncDataAvailable" /Disable
@@ -1457,7 +1449,6 @@ schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Logon" /Disable
 schtasks /Change /TN "Microsoft\Windows\Maintenance\WinSAT" /Disable
 schtasks /Change /TN "Microsoft\Windows\Maps\MapsToastTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Maps\MapsUpdateTask" /Disable
-schtasks /Change /TN "Microsoft\Windows\Mobile Broadband Accounts\MNO Metadata Parser" /Disable
 schtasks /Change /TN "Microsoft\Windows\MUI\LPRemove" /Disable
 schtasks /Change /TN "Microsoft\Windows\Multimedia\SystemSoundsService" /Disable
 schtasks /Change /TN "Microsoft\Windows\NlaSvc\WiFiTask" /Disable
@@ -1465,21 +1456,24 @@ schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable
 schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
 schtasks /Change /TN "Microsoft\Windows\Printing\EduPrintProv" /Disable
+schtasks /Change /TN "Microsoft\Windows\Printing\PrinterCleanupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\PushToInstall\Registration" /Disable
 schtasks /Change /TN "Microsoft\Windows\Ras\MobilityManager" /Disable
 schtasks /Change /TN "Microsoft\Windows\RecoveryEnvironment\VerifyWinRE" /Disable
 schtasks /Change /TN "Microsoft\Windows\RemoteAssistance\RemoteAssistanceTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /Disable
 schtasks /Change /TN "Microsoft\Windows\Servicing\StartComponentCleanup" /Disable
-schtasks /Change /TN "Microsoft\Windows\SettingSync\BackupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SettingSync\NetworkStateChangeTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Setup\SetupCleanupTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Setup\SnapshotCleanupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceAgentTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceManagerTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Storage Tiers Management\Storage Tiers Management Initialization" /Disable
 schtasks /Change /TN "Microsoft\Windows\Sysmain\ResPriStaticDbSync" /Disable
 schtasks /Change /TN "Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Task Manager\Interactive" /Disable
+schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Disable
 schtasks /Change /TN "Microsoft\Windows\Time Synchronization\ForceSynchronizeTime" /Disable
 schtasks /Change /TN "Microsoft\Windows\Time Synchronization\SynchronizeTime" /Disable
 schtasks /Change /TN "Microsoft\Windows\Time Zone\SynchronizeTimeZone" /Disable
@@ -1558,6 +1552,9 @@ reg add "HKLM\System\CurrentControlSet\Services\PimIndexMaintenanceSvc" /v "Star
 rem Data Usage
 sc config DusmSvc start= disabled
 
+rem DevQuery Background Discovery Broker
+sc config DevQueryBroker start= disabled
+
 rem Display Policy Service
 sc config DispBrokerDesktopSvc start= disabled
 
@@ -1618,12 +1615,6 @@ sc config lmhosts start= disabled
 rem Touch Keyboard and Handwriting Panel Service (keeps ctfmon.exe running)
 sc config TabletInputService start= disabled
 
-rem UserDataSvc
-reg add "HKLM\System\CurrentControlSet\Services\UserDataSvc" /v "Start" /t REG_DWORD /d "4" /f
-
-rem UnistoreSvc
-reg add "HKLM\System\CurrentControlSet\Services\UnistoreSvc" /v "Start" /t REG_DWORD /d "4" /f
-
 rem WebClient
 sc config WebClient start= disabled
 
@@ -1644,6 +1635,78 @@ sc config LanmanWorkstation start= disabled
 
 
 rem =================================== Windows Settings ===================================
+rem ------------------------------------ Accessibility ------------------------------------
+rem ....................................... Audio .........................................
+rem . . . . . . . . . . . . . . . . . . Sound themes . . . . . . . . . . . . . . . . . . .
+
+rem Delete Windows Default Sounds (Permanently)
+reg delete "HKCU\AppEvents\Schemes\Apps" /f
+
+rem When windows detects communications activity / 0 - Mute all other sounds / 1 - Reduce all other by 80% / 2 - Reduce all other by 50% / 3 - Do nothing
+reg add "HKCU\Software\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ------------------------------------ Accessibility ------------------------------------
+rem ........................................ Mouse ........................................
+
+rem Mouse Keys / 62 - Disable / 63 - Default
+reg add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "62" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ------------------------------------ Accessibility ------------------------------------
+rem ...................................... Keyboard .......................................
+
+rem Filter keys / 126 - Disable All / 127 - Default
+reg add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "126" /f
+
+rem Sticky keys / 26 - Disable All / 511 - Default
+reg add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "26" /f
+
+rem Toggle keys / 58 - Disable All / 63 - Default
+reg add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "58" /f
+
+rem ________________________________________________________________________________________
+rem 1 - Disable Windows Key Hotkeys
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoWinKeys" /t REG_DWORD /d "1" /f
+rem Disable specific Windows Key Hotkeys only (like R = Win+R)
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DisabledHotkeys" /t REG_EXPAND_SZ /d "R" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ------------------------------------ Accessibility ------------------------------------
+rem ...................................... Keyboard .......................................
+rem . . . . . . . . . . . . . . . . . . . . Typing . . . . . . . . . . . . . . . . . . . .
+
+
+rem 1 - Show text suggestions when typing on the physical keyboard (Privacy)
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "EnableHwkbTextPrediction" /t REG_DWORD /d "0" /f
+
+rem Typing insights (Privacy)
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Multilingual text suggestions (Privacy)
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "MultilingualEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Autocorrect misspelled words (Privacy)
+reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableAutocorrection" /t REG_DWORD /d "0" /f
+
+rem 1 - Highlight misspelled words (Privacy)
+reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableSpellchecking" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem 1 - Multilingual voice suggestions (Privacy)
+reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
+
+rem Remove Text Input Host (TIP/to restore run SFC scan)
+takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe"
+icacls "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /inheritance:r /grant:r %username%:F
+taskkill /im TextInputHost.exe /f
+del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /s /f /q
+
+
+rem =================================== Windows Settings ===================================
 rem -------------------------------------- Accounts ----------------------------------------
 rem ................................... Sing-in options ....................................
 
@@ -1655,21 +1718,27 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------------- Apps ------------------------------------------
 rem ................................... Apps & features ....................................
 
-rem Choose where you can get apps from - Anywhere / PreferStore / StoreOnly / Recommendations
+rem Choose where to get apps  - Anywhere / PreferStore / StoreOnly / Recommendations
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AicEnabled" /t REG_SZ /d "Anywhere" /f
+
+rem Share across devices / 0 - Off / 1 - My devices only / 2 - Everyone nearby
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CDP" /v "CdpSessionUserAuthzPolicy" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CDP" /v "RomeSdkChannelUserAuthzPolicy" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CDP" /v "NearShareChannelUserAuthzPolicy" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------------- Apps ------------------------------------------
-rem ................................... Apps & features ....................................
-rem . . . . . . . . . . . . . . . . Programs and Features . . . . . . . . . . . . . . . . .
+rem .................................. Optional features ...................................
 
 rem Dism /Online /Get-Features
 rem Windows Basics
 
 
 rem =================================== Windows Settings ===================================
-rem --------------------------------------- Devices ----------------------------------------
+rem --------------------------------- Bluetooth & Devices ----------------------------------
 rem ...................................... Autoplay .......................................
 
 rem 0 - Use Autoplay for all media and devices
@@ -1682,7 +1751,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "N
 
 
 rem =================================== Windows Settings ===================================
-rem --------------------------------------- Devices ----------------------------------------
+rem --------------------------------- Bluetooth & Devices ----------------------------------
 rem ........................................ Mouse .........................................
 rem . . . . . . . . . . . . . . . . Additional mouse options . . . . . . . . . . . . . . . .
 
@@ -1690,94 +1759,56 @@ rem 1/6/10 - Enhance pointer precision (Mouse Acceleration)
 reg add "HKCU\Control Panel\Mouse" /v "MouseSpeed" /t REG_SZ /d "0" /f
 reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold1" /t REG_SZ /d "0" /f
 reg add "HKCU\Control Panel\Mouse" /v "MouseThreshold2" /t REG_SZ /d "0" /f
+
 rem ________________________________________________________________________________________
 reg add "HKCU\Control Panel\Desktop" /v "SmoothScroll" /t REG_DWORD /d "0" /f
 reg add "HKCU\Control Panel\Mouse" /v "MouseTrails" /t REG_SZ /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
-rem --------------------------------------- Devices ---------------.------------------------
-rem ....................................... Typing .........................................
+rem --------------------------------- Bluetooth & Devices ----------------------------------
+rem ....................................... Devices ........................................
 
-rem Autocorrect misspelled words (Privacy)
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableAutocorrection" /t REG_DWORD /d "0" /f
-
-rem Highlight misspelled words (Privacy)
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableSpellchecking" /t REG_DWORD /d "0" /f
-
-rem Show text suggestions as I type on the software keyboard (Privacy)
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableTextPrediction" /t REG_DWORD /d "0" /f
-
-rem Add a space after I choose a text suggestion (Privacy)
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnablePredictionSpaceInsertion" /t REG_DWORD /d "0" /f
-
-rem Add a period after I double-tap the Spacebar (Privacy)
-reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableDoubleTapSpace" /t REG_DWORD /d "0" /f
+rem 1 - Download over metered connections
+reg add "HKLM\Microsoft\Windows\CurrentVersion\DeviceSetup" /v "CostedNetworkPolicy" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
-rem --------------------------------------- Devices ---------------.------------------------
-rem ....................................... Typing .........................................
-rem . . . . . . . . . . . . . . . . How AI has helped you . . . .  . . . . . . . . . . . . .
+rem --------------------------------- Bluetooth & Devices ----------------------------------
+rem ..................................... Your Phone .......................................
 
-rem Typing insights (Privacy)
-reg add "HKCU\Software\Microsoft\Input\Settings" /v "InsightsEnabled" /t REG_DWORD /d "0" /f
-rem ________________________________________________________________________________________
-reg add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v "AllowLinguisticDataCollection" /t REG_DWORD /d "0" /f
-
-
-rem =================================== Windows Settings ===================================
-rem --------------------------------------- Devices ---------------.-------------------------
-rem .................................. Pen & Windows Ink ....................................
-
-rem Show recommended app suggestions (Privacy)
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PenWorkspace" /v "PenWorkspaceAppSuggestionsEnabled" /t REG_DWORD /d "0" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ------------------------------------ Easy of Access ------------------------------------
-rem ....................................... Keyboard .......................................
-
-rem Sticky Keys / 26 - Disable All / 511 - Default
-reg add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "26" /f
-
-rem Toggle Keys / 58 - Disable All / 63 - Default
-reg add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "58" /f
+rem 1 - Show me suggestions for using my Android phone with Windows
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem 1 - Disable Windows Key Hotkeys
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoWinKeys" /t REG_DWORD /d "1" /f
-rem Disable specific Windows Key Hotkeys only (like R = Win+R)
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DisabledHotkeys" /t REG_EXPAND_SZ /d "R" /f
+rem Remove Your Phone app (to restore run SFC scan)
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+taskkill /im YourPhone.exe /f
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
-
-rem =================================== Windows Settings ===================================
-rem ------------------------------------ Easy of Access ------------------------------------
-rem ........................................ Mouse ........................................
-
-rem Mouse Keys / 254 - Disable / 255 - Default
-reg add "HKCU\Control Panel\Accessibility\MouseKeys" /v "Flags" /t REG_SZ /d "254" /f
+rem Remove Your Phone server (to restore run SFC scan)
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
+taskkill /im YourPhoneServer.exe /f
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------------- Gaming ----------------------------------------
-rem ....................................... Game bar .......................................
+rem ....................................... Captures .......................................
 
-rem 1 - Record game clips, screenshots, and broadcast using Game bar / Disable the message "Press Win + G to open Game bar"
+rem 1 - Record what happened
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Open Game bar using this button on a controller
-reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
+rem 1 - Capture audio when recording a game
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptureEnabled" /t REG_DWORD /d "0" /f
 
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Gaming ----------------------------------------
-rem ....................................... Game DVR .......................................
+rem 1 - Capture mosue cursor when recording a game
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem 1 - Show tips when I start a game (ADs)
-reg add "HKCU\Software\Microsoft\GameBar" /v "ShowStartupPanel" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "MicrophoneCaptureEnabled" /t REG_DWORD /d "0" /f
 
 rem 0 - Disable Fullscreen Optimizations for Current User / 0 - Enabled / 2 - Disabled
 reg add "HKCU\System\GameConfigStore" /v "GameDVR_FSEBehavior" /t REG_DWORD /d "2" /f
@@ -1795,32 +1826,26 @@ sc config XboxGipSvc start= disabled
 sc config XboxNetApiSvc start= disabled
 schtasks /Change /TN "Microsoft\XblGameSave\XblGameSaveTask" /Disable
 
-rem Remove Game Bar Presence (to restore run "sfc /scannow")
-takeown /s %computername% /u %username% /f "%WinDir%\System32\GameBarPresenceWriter.exe"
-icacls "%WinDir%\System32\GameBarPresenceWriter.exe" /grant:r %username%:F
-taskkill /im GameBarPresenceWriter.exe /f
-del "%WinDir%\System32\GameBarPresenceWriter.exe" /s /f /q
 
-reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptureEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
+rem =================================== Windows Settings ===================================
+rem ---------------------------------------- Gaming ----------------------------------------
+rem ...................................... Game Mode .......................................
+
+rem 1 - Game Mode
+reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------------- Gaming ----------------------------------------
-rem ....................................... Game Mode ......................................
+rem .................................... Xbox Game Bar .....................................
 
-rem 0 - Disable support for Game Mode
-reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Use Game Mode
-reg add "HKCU\Software\Microsoft\GameBar" /v "AllowAutoGameMode" /t REG_DWORD /d "0" /f
+rem 1 - Open Xbox Game Bar
+reg add "HKCU\Software\Microsoft\GameBar" /v "UseNexusForGameBarEnabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------- Network & Internet ----------------------------------
-rem ................................ Change adapter options ................................
+rem ---------------------------------- Network & internet ----------------------------------
+rem ............................... Advanced network settings ..............................
 
 rem Show public/external IP
 rem nslookup myip.opendns.com. resolver1.opendns.com
@@ -1915,7 +1940,6 @@ rem Choose a fit / 10 - Fill / 6 - Fit / 2 - Stretch / 0 - Tile/Center
 reg add "HKCU\Control Panel\Desktop" /v "WallpaperStyle" /t REG_SZ /d "2" /f
 
 rem ________________________________________________________________________________________
-
 rem 60-100% Wallpaper's image quality / 85 - Default
 reg add "HKCU\Control Panel\Desktop" /v "JPEGImportQuality" /t REG_DWORD /d "100" /f
 
@@ -1930,10 +1954,10 @@ reg add "HKCU\Control Panel\Desktop" /v "AutoColorization" /t REG_SZ /d "1" /f
 rem 1 - Transparency Effects
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
 
-rem 1 - Show accent color on the following surfaces - Start, taskbar, and action center
+rem 1 - Show accent color on Start and taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "ColorPrevalence" /t REG_DWORD /d "1" /f
 
-rem 1 - Show accent color on the following surfaces - Title bars
+rem 1 - Show accent color on the title bars and windows borders
 reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "1" /f
 
 
@@ -1941,20 +1965,11 @@ rem =================================== Windows Settings =======================
 rem ----------------------------------- Personalization ------------------------------------
 rem ..................................... Lock screen ......................................
 
-rem 1 - Get fun facts, tips, tricks, and more on your lock screen (ADs) / Windows Spotlight
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_ALLOW_TOASTS_ABOVE_LOCK" /t REG_DWORD /d "0" /f
-
 rem ________________________________________________________________________________________
 rem 1 - Disable LockScreen
 reg add "HKLM\Software\Policies\Microsoft\Windows\Personalization" /v "NoLockScreen" /t REG_DWORD /d "1" /f
-
 rem 1 - Disable Sign-in Screen Background Image
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgroundImage" /t REG_DWORD /d "1" /f
-
-rem 1 - Disable Windows spotlight (provides features such as different background images and text on the lock screen, suggested apps)
-reg add "HKLM\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableWindowsSpotlightFeatures" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -1979,135 +1994,42 @@ rem =================================== Windows Settings =======================
 rem ----------------------------------- Personalization ------------------------------------
 rem ........................................ Start .........................................
 
-rem 1 - Show suggestions occasionally in Start (ADs)
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Show recently opened items in Jump Lists on Start or the taskbar
+rem 1 - Show recently opened items in Start, Jump Lists, and File Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem Start position / 0 - Left / 1 - Center
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ----------------------------------- Personalization ------------------------------------
 rem ....................................... Taskbar ........................................
 
-rem Lock the taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSizeMove" /t REG_DWORD /d "0" /f
-
-rem Replace Command Prompt with Windows Powershell in the menu when I right-click the start button or press Windows key+X
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DontUsePowerShellOnWinX" /t REG_DWORD /d "1" /f
-
-rem Combine taskbar buttons / 0 - Always hide labels / 1 - When taskbar is full / 2 - Never
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarGlomLevel" /t REG_DWORD /d "0" /f
-
-rem 1 - Show People on the taskbar Icon
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" /v "PeopleBand" /t REG_DWORD /d "0" /f
-
-rem News and Interests (Cortana in disguise) / 0 - Show icon and text (default) / 1 - Show icon only / 2 - Turn off
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t REG_DWORD /d "2" /f
-
-rem News and Interests Reduce taskbar updates / 0 - No / 1 - Yes
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarContentUpdateMode" /t REG_DWORD /d "1" /f
-
-rem News and Interests Open on hover / 0 - No / 1 - Yes
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarOpenOnHover" /t REG_DWORD /d "0" /f
-
-rem News and Interests Taskbar Menu / 0 - Hide / 1 - Show
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "IsFeedsAvailable" /t REG_DWORD /d "0" /f
-
-rem 0 - Hide Task View button
+rem Task view / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
 
-rem 0 - Disable Cortana in Taskbar search
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaEnabled" /t REG_DWORD /d "0" /f
+rem Widgets / 0 - Off / 1 - On
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
 
-rem 0 - Cortana Button on Taskbar / 0 - Hide / 1 - Show
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCortanaButton" /t REG_DWORD /d "0" /f
-
-rem 0 - Hide Taskbar search / 1 - Show search icon / 2 - Show search box
+rem Search / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem Disable Cortana
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Cortana" /v "IsAvailable" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaCapabilities" /t REG_SZ /d "" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "DeviceHistoryEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "IsAssignedAccess" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "IsWindowsHelloActive" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\PolicyManager\default\Experience\AllowCortana" /v "value" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\SearchCompanion" /v "DisableContentFileUpdates" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCloudSearch" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortana" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowCortanaAboveLock" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowIndexingEncryptedStoresOrItems" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "AllowSearchToUseLocation" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchPrivacy" /t REG_DWORD /d "3" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWeb" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "ConnectedSearchUseWebOverMeteredConnections" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableWebSearch" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DoNotUseWebResults" /t REG_DWORD /d "1" /f
-
-rem 1 - Let Cortana respond to "Hey Cortana"
-reg add "HKCU\Software\Microsoft\Speech_OneCore\Preferences" /v "VoiceActivationOn" /t REG_DWORD /d "0" /f
-
-rem 1- Let Cortana listen for my commands when I press Windows key + C
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "VoiceShortcut" /t REG_DWORD /d "0" /f
-
-rem 1 - Use Cortana even when my device is locked
-reg add "HKCU\Software\Microsoft\Speech_OneCore\Preferences" /v "VoiceActivationEnableAboveLockscreen" /t REG_DWORD /d "0" /f
-
-rem Disable keyboard input/monitoring in apps like Calc, Edge, Search, Start, Store
-schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Disable
-
-rem Remove Cortana app (News and Interests)
-takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe"
-icacls "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /inheritance:r /grant:r %username%:F
-taskkill /im SearchApp.exe /f
-del "%WINDIR%\SystemApps\Microsoft.Windows.Search_cw5n1h2txyewy\SearchApp.exe" /s /f /q
-
-rem Remove Your Phone app
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.104.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.104.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
-taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.104.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
-
-rem 0 - Turn on Quiet Hours in Action Center / Disable/Hide the message: Turn on Windows Security Center service
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings" /v "NOC_GLOBAL_SETTING_TOASTS_ENABLED" /t REG_DWORD /d "0" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ----------------------------------- Personalization ------------------------------------
-rem ....................................... Taskbar ........................................
-rem . . . . . . . . . . . . . Select which icons appear on the taskbar . . . . . . . . . . .
-
 rem 0 - Always show all icons in the notification area / 1 - Hide Inactive Icons
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAutoTray" /t REG_DWORD /d "0" /f
 
+rem Remove Search (Cortana/to restore run SFC scan)
+takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe"
+icacls "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /inheritance:r /grant:r %username%:F
+taskkill /im SearchHost.exe /f
+del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /s /f /q
 
-rem =================================== Windows Settings ===================================
-rem ----------------------------------- Personalization ------------------------------------
-rem ....................................... Taskbar ........................................
-rem . . . . . . . . . . . . . . . . . Turn on system icons . . . . . . . . . . . . . . . . .
-
-rem ________________________________________________________________________________________
-rem 1 - Hide Action Center System Tray Icon in Taskbar
-reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "0" /f
-
-rem 1 - Hide Meet Now Tray Icon in Taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAMeetNow" /t REG_DWORD /d "1" /f
-
-rem 1 - Hide Network System Tray Icon in Taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCANetwork" /t REG_DWORD /d "1" /f
-
-rem 1 - Hide Power System Tray Icon in Taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAPower" /t REG_DWORD /d "0" /f
-
-rem 1 - Hide Volume System Tray Icon in Taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAVolume" /t REG_DWORD /d "1" /f
+rem Remove Widgets (News/to restore run SFC scan)
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.17400.0.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
+icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.17400.0.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
+taskkill /im Widgets.exe /f
+del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.17400.0.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2138,274 +2060,156 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcon
 
 
 rem =================================== Windows Settings ===================================
-rem ----------------------------------- Personalization ------------------------------------
-rem ....................................... Themes .........................................
-rem . . . . . . . . . . . . . . . . . . . . Sounds . . . . . . . . . . . . . . . . . . . . .
-
-rem Delete Windows Default Sounds (Permanently)
-reg delete "HKCU\AppEvents\Schemes\Apps" /f
-
-rem When windows detects communications activity / 0 - Mute all other sounds / 1 - Reduce all other by 80% / 2 - Reduce all other by 50% / 3 - Do nothing
-reg add "HKCU\Software\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-
-rem Let apps access ... / 0 - Default / 1 - Enabled / 2 - Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessGazeInput" /t REG_DWORD /d "2" /f
-
-rem Let apps access ... / 0 - Default / 1 - Enabled / 2 - Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessMotion" /t REG_DWORD /d "2" /f
-
-rem Let apps access ... / 0 - Default / 1 - Enabled / 2 - Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessPhone" /t REG_DWORD /d "2" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ...................................... Account info ....................................
 
-rem Allow/Deny - Allow access to account info on this device
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Allow" /f
-
-rem Allow/Deny - Allow apps to access your account info
+rem Allow/Deny - Account info access
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Allow" /f
 
-rem Let apps access my name, picture, and other account info / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessAccountInfo" /t REG_DWORD /d "0" /f
+rem Allow/Deny - Let apps access your account info / Microsoft Content / Email and accounts
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.AccountsControl_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.MicrosoftEdge_8wekyb3d8bbwe" /v "Value" /t REG_SZ /d "Allow" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
+
+rem ________________________________________________________________________________________
+rem Allow/Deny - Allow access to account info on this device
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem .................................... Activity History ..................................
+rem ---------------------------------- Privacy & security ----------------------------------
+rem .................................... App diagnostic ....................................
 
-rem Allow/Deny - Allow access to app diagnostic info on this device
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Allow Apps to access diagnostic info about your other apps
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\activity" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Collect Activity History / 0 - Disabled / 1 - Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableActivityFeed" /t REG_DWORD /d "0" /f
-
-rem Let Windows collect my activities from this PC / 0 - Disabled / 1 - Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d "0" /f
-
-rem Let Windows collect my activities from this PC to the cloud / 0 - Disabled / 1 - Enabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /t REG_DWORD /d "0" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem ..................................... App diagnostic ...................................
-
-rem Allow/Deny - Allow access to app diagnostic info on this device
+rem Allow/Deny - App diagnostic access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access diagnostic info about your other apps
+rem Allow/Deny - Let apps access diagnostic info about your other apps
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Let apps access diagnostic information / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsGetDiagnosticInfo" /t REG_DWORD /d "2" /f
-
-rem ________________________________________________________________________________________
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{2297E4E2-5DBE-466D-A12B-0F8286F0D9CA}" /v "Value" /t REG_SZ /d "Deny" /f
-
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem .................................... Background apps ..................................
-
-rem Let apps run in the background / 1 - Enabled / 0 - Disabled
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /t REG_DWORD /d "0" /f
-
-rem Let apps run in the background / 0 - Enabled / 1 - Disabled
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f
-
-rem Let apps run in the background / 0 - Default / 1 - Enabled / 2 - Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d "2" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Calendar .......................................
 
-rem Allow/Deny - Allow access to calendars on this device
+rem Allow/Deny - Calendar access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow apps to access your calendar
+rem Allow/Deny - Let apps access your calendar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Let Windows apps access contacts / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCalendar" /t REG_DWORD /d "2" /f
-
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ..................................... Call history .....................................
 
-rem Allow/Deny - Allow access to call history on this device
+rem Allow/Deny - Call history access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow apps to access your call history
+rem Allow/Deny - Let apps access your call history
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Let apps access my call history / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCallHistory" /t REG_DWORD /d "2" /f
-
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ........................................ Camera ........................................
 
-rem Allow/Deny - Allow access to camera on this device
+rem Allow/Deny - Camera access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your camera
+rem Allow/Deny - Let Apps access your camera
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Let apps use my camera / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCamera" /t REG_DWORD /d "2" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCamera_ForceAllowTheseApps" /t REG_MULTI_SZ /d "" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCamera_ForceDenyTheseApps" /t REG_MULTI_SZ /d "" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCamera_UserInControlOfTheseApps" /t REG_MULTI_SZ /d "" /f
-
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem ..................................... Cellular Data ....................................
-
-rem Allow/Deny - Allow access to cellular data on this device
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\cellularData" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Allow apps to access your cellular data
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\cellularData" /v "Value" /t REG_SZ /d "Deny" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem ......................................... Chat .........................................
-
-rem Allow/Deny - Allow access to messaging on this device
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Allow Apps to read or send messages
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem ________________________________________________________________________________________
-reg add "HKCU\Software\Microsoft\Messaging" /v "CloudServiceSyncEnabled" /t REG_DWORD /d "0" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Contacts .......................................
 
-rem Allow/Deny - Allow access to contacts on this device
+rem Allow/Deny - Contacts access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your contacts
+rem Allow/Deny - Let apps access your contacts
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Let Windows apps access contacts / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessContacts" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
+rem ................................ Diagnostics & feedback ................................
+
+rem 1 - Improve inking and typing
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\ImproveInkingAndTyping" /v "Value" /t REG_DWORD /d "0" /f
+
+rem 3 - Send optional diagnostic data / 1 - No
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "3" /f
+
+rem 1 - Tailored experiences
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem Send optional dianostgic data / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
+
+rem Feedback Frequency - Windows should ask for my feedback: 0 - Never / Removed - Automatically
+rem reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
+rem reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /t REG_DWORD /d "0" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Documents ......................................
 
-rem Allow/Deny - Document libraries access for this device
+rem Allow/Deny - Documents library access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\documentsLibrary" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your documents library
+rem Allow/Deny - Let apps access your documents library
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\documentsLibrary" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ................................... Downloads folder ...................................
 
-rem Allow/Deny - Downloads folders access on this device
+rem Allow/Deny - Downloads folders access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\downloadsFolder" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your downloads folder
+rem Allow/Deny - Let apps access your downloads folder
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\downloadsFolder" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ......................................... Email ........................................
 
-rem Allow/Deny - Allow access to email on this device
+rem Allow/Deny - Email access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow apps to access your email
+rem Allow/Deny - Let apps access your email
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Let apps access and send email / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessEmail" /t REG_DWORD /d "2" /f
-
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem ................................. Feedback & diagnostics ...............................
-
-rem Diagnostic and usage data - Select how much data you send to Microsoft / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
-rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsoft-Windows-Application-Experience/Program-Telemetry" /v "Enabled" /t REG_DWORD /d "0" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowDeviceNameInTelemetry" /t REG_DWORD /d "0" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "DoNotShowFeedbackNotifications" /t REG_DWORD /d "1" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\DataCollection" /v "MaxTelemetryAllowed" /t REG_DWORD /d "0" /f
-rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
-
-rem 1 - Let Microsoft provide more tailored experiences with relevant tips and recommendations by using your diagnostic data
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Policies\Microsoft\Windows\CloudContent" /v "DisableTailoredExperiencesWithDiagnosticData" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
-
-rem Feedback Frequency - Windows should ask for my feedback: 0 - Never / Removed - Automatically
-reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /t REG_DWORD /d "0" /f
-
-rem ________________________________________________________________________________________
-rem 0 - Disable Help Experience Improvement Program (HEIP)
-reg add "HKCU\Software\Microsoft\Assistance\Client\1.0\Settings" /v "ImplicitFeedback" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Assistance\Client\1.0\Settings" /v "OnlineAssist" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Assistance\Client\1.0\Settings" /v "FirstTimeHelppaneStartup" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Assistance\Client\1.0\Settings" /v "NoActiveHelp" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Microsoft\Assistance\Client\1.0\Settings" /v "NoExplicitFeedback" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Microsoft\Assistance\Client\1.0\Settings" /v "NoImplicitFeedback" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Microsoft\Assistance\Client\1.0\Settings" /v "NoOnlineAssist" /t REG_DWORD /d "1" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ...................................... File System .....................................
 
-rem Allow/Deny - File system access for this device
+rem Allow/Deny - File system access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your file system
+rem Allow/Deny - Let apps access your file system
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ........................................ General ......................................
 
-rem Let apps use advertising ID to make ads more interesting to you based on your app usage
+rem 1 - Let apps show me personalized ads by using my advertising ID
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\AdvertisingInfo" /v "DisabledByGroupPolicy" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\AdvertisingInfo" /v "Value" /t REG_DWORD /d "0" /f
 
-rem 0 - Let websites provide locally relevant content by accessing my language list (let browsers access your local language)
+rem 0 - Let websites show me locally relevant content by accessing my language list (let browsers access your local language)
 reg add "HKCU\Control Panel\International\User Profile" /v "HttpAcceptLanguageOptOut" /t REG_DWORD /d "1" /f
 
-rem 1 - Let Windows track app launches to improve Start and search results (Remember commands typed in Run) / 0 - Disable and Disable "Show most used apps"
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "1" /f
+rem 1 - Let Windows improve Start and search results by tracking app launches (Remember commands typed in Run) / 0 - Disable and Disable "Show most used apps"
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackProgs" /t REG_DWORD /d "0" /f
 
 rem 1 - Show me suggested content in the Settings app
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f
@@ -2414,192 +2218,204 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Location .......................................
 
-rem 1 - Location for this device is Off
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableLocation" /t REG_DWORD /d "1" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableLocationScripting" /t REG_DWORD /d "1" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableSensors" /t REG_DWORD /d "1" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors" /v "DisableWindowsLocationProvider" /t REG_DWORD /d "1" /f
+rem Allow/Deny - Location services
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem 0 - Default / 1 - Enabled / 2 - Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessLocation" /t REG_DWORD /d "0" /f
-
-rem ________________________________________________________________________________________
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}" /v "Value" /t REG_SZ /d "Deny" /f
+rem Allow/Deny - Let apps access your location
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem ....................................... Messaging ......................................
+rem ---------------------------------- Privacy & security ----------------------------------
+rem ...................................... Messaging .......................................
 
-rem Let apps read or send messages (text or MMS) / 0 - Default / 1 - Enabled / 2 - Disabled
-reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessMessaging" /t REG_DWORD /d "2" /f
+rem Allow/Deny - Messaging access
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
+
+rem Allow/Deny - Let apps read or send messages
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ...................................... Microphone ......................................
 
-rem Allow/Deny - Allow access to the microphone on this device
+rem Allow/Deny - Microphone access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your microphone
+rem Allow/Deny - Let apps access your microphone
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Let apps use my microphone / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessMicrophone" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem .................................... Music library .....................................
 
-rem Allow/Deny - Allow access to screenshot border settings on this device
+rem Allow/Deny - Allow access to music libraries on this device
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\musicLibrary" /v "Value" /t REG_SZ /d "Deny" /f
+
+rem Allow/Deny - Allow apps to access your music library
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\musicLibrary" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ..................................... Notifications ....................................
 
-rem Allow/Deny - Allow access to user notifications on this device
+rem Allow/Deny - Notifications access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Allow" /f
 
-rem Allow/Deny - Allow apps to access your notifications
+rem Allow/Deny - Let apps access your notifications
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Allow" /f
-
-rem Let apps access my notifications / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessNotifications" /t REG_DWORD /d "0" /f
-
-rem ________________________________________________________________________________________
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\DeviceAccess\Global\{52079E78-A92B-413F-B213-E8FE35712E72}" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ..................................... Other devices ....................................
 
 rem Allow/Deny - Communicate with unpaired devices
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetooth" /v "Value" /t REG_SZ /d "Deny" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Use trusted devices
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\bluetoothSync" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Let apps automatically share and sync info with wireless devices that don't explicitly pair with your PC, tablet, or phone / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsSyncWithDevices" /t REG_DWORD /d "2" /f
-rem reg add "HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessTrustedDevices" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ..................................... Phone calls ......................................
 
-rem Allow/Deny - Allow phone calls on this device
+rem Allow/Deny - Phone calls access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow apps to make phone calls
+rem Allow/Deny - Let apps make phone calls
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Pictures .......................................
 
-rem Allow/Deny - Pictures library access for this device
+rem Allow/Deny - Pictures library access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\picturesLibrary" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow apps to access your pictures library
+rem Allow/Deny - Let apps access your pictures library
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\picturesLibrary" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
-rem ............................... Speech, inking, & typing ...............................
+rem ---------------------------------- Privacy & security ----------------------------------
+rem ........................................ Speech ........................................
 
-rem ________________________________________________________________________________________
-reg add "HKCU\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Input\TIPC" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
-reg add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Input" /v "InputServiceEnabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Input" /v "InputServiceEnabledForCCI" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "AllowInputPersonalization" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\HandwritingErrorReports" /v "PreventHandwritingErrorReports" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\TabletPC" /v "PreventHandwritingDataSharing" /t REG_DWORD /d "1" /f
+rem 1 - Help make online speech recognition better
+reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\OnlineSpeechPrivacy" /v "HasAccepted" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ........................................ Radios ........................................
 
-rem Allow/Deny - Allow access to control radios on this device
+rem Allow/Deny - Radio control access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to control device radios
+rem Allow/Deny - Let apps control device radios
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Let apps control radios / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessRadios" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem .................................. Screenshot borders ..................................
 
-rem Allow/Deny - Allow access to screenshot border settings on this device
+rem Allow/Deny - Screenshot borders access
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureWithoutBorder" /v "Value" /t REG_SZ /d "Deny" /f
+
+rem Allow/Deny - Let apps turn off the screenshot border
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureWithoutBorder" /v "Value" /t REG_SZ /d "Deny" /f
+
+rem Allow/Deny - Let desktop apps turn off the screenshot border
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureWithoutBorder" /v "Value" /t REG_SZ /d "Deny" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ................................. Screenshots and apps .................................
 
-rem Allow/Deny - Allow Apps to take screenshots of various windows or displays on this device
+rem Allow/Deny - Screenshot access
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic" /v "Value" /t REG_SZ /d "Deny" /f
+
+rem Allow/Deny - Let apps take screenshots of various windows or displays
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic" /v "Value" /t REG_SZ /d "Deny" /f
 
+rem Allow/Deny - Let desktop apps take screenshots of various windows or displays
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic\NonPackaged" /v "Value" /t REG_SZ /d "Deny" /f
+
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
+rem .................................. Search permissions ..................................
+
+rem 1 - Cloud content search
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsAADCloudSearchEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Search history on this device
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsDeviceSearchHistoryEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Cloud content search
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "IsMSACloudSearchEnabled" /t REG_DWORD /d "0" /f
+
+rem SafeSearch / 0 - Off / 1 - Moderate - 2 - Strict
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SearchSettings" /v "SafeSearchMode" /t REG_DWORD /d "0" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ......................................... Tasks ........................................
 
-rem Allow/Deny - Allow access to tasks on this device
+rem Allow/Deny - Task access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your tasks
+rem Allow/Deny - Let apps access your tasks
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Let apps access tasks / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessTasks" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
-rem ---------------------------------------- Privacy ---------------------------------------
+rem ---------------------------------- Privacy & security ----------------------------------
 rem ........................................ Videos ........................................
 
-rem Allow/Deny - Videos library access for this device
+rem Allow/Deny - Videos library access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /v "Value" /t REG_SZ /d "Deny" /f
 
-rem Allow/Deny - Allow Apps to access your videos library
+rem Allow/Deny - Let apps access your videos library
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\videosLibrary" /v "Value" /t REG_SZ /d "Deny" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------- Privacy & security ----------------------------------
+rem ................................... Voice activation ...................................
+
+rem 1 - Let apps access voice activation services
+reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v "AgentActivationEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Let apps use voice activation when device is locked
+reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v "AgentActivationOnLockScreenEnabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
 rem --------------------------------------- System -----------------------------------------
 rem ........................................ About .........................................
 
-rem PC Name: LianLiPC-7NB (Computer name should not be longer than 15 characters, no spaces either)
+rem Rename this PC: LianLiPC-7NB (Computer name should not be longer than 15 characters, no spaces either)
 reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
 reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
 
+
+rem =================================== Windows Settings ===================================
+rem --------------------------------------- System -----------------------------------------
+rem ........................................ About .........................................
+rem . . . . . . . . . . . . . . . . . . . System info . . . . . . . . . . . . . . . . . . .
+
+rem ________________________________________________________________________________________
 rem Support
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "TairikuOkami" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "MSI Radeon RX 580 ARMOR 8G OC" /f
@@ -2610,22 +2426,24 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Supp
 rem Computer Description
 reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "300/30 MBps" /f
 
-
-rem =================================== Windows Settings ===================================
-rem --------------------------------------- System -----------------------------------------
-rem ........................................ About .........................................
-rem . . . . . . . . . . . . . . . . . . . System info . . . . . . . . . . . . . . . . . . .
-
 rem System info (Logo - 120x120.bmp)
 rem shell:::{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Logo" /t REG_SZ /d "D:\OneDrive\Pictures\Logo.bmp" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "(-_-)" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOwner" /t REG_SZ /d "Brony" /f
 
-rem Remote Settings - Disable Remote Assistance
-reg add "HKLM\System\CurrentControlSet\Control\Remote Assistance" /v "fAllowToGetHelp" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\Remote Assistance" /v "fAllowFullControl" /t REG_DWORD /d "0" /f
 
+rem =================================== Windows Settings ===================================
+rem --------------------------------------- System -----------------------------------------
+rem ........................................ About .........................................
+rem . . . . . . . . . . . . . . . . . System protection . . . . . . . . . . . . . . . . . .
+
+rem System Protection - Disable System restore and Set the minimal size
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /t REG_DWORD /d "1" /f
+schtasks /Change /TN "Microsoft\Windows\SystemRestore\SR" /Disable
+vssadmin Resize ShadowStorage /For=C: /On=C: /Maxsize=320MB
+
+rem ________________________________________________________________________________________
 rem System Protection - Enable System restore and Set the size
 rem reg delete "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableConfig" /f
@@ -2637,31 +2455,52 @@ rem sc config swprv start= demand
 rem sc config vds start= demand
 rem sc config VSS start= demand
 
-rem System Protection - Disable System restore and Set the size
-reg add "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /t REG_DWORD /d "1" /f
-schtasks /Change /TN "Microsoft\Windows\SystemRestore\SR" /Disable
-vssadmin Resize ShadowStorage /For=C: /On=C: /Maxsize=320MB
 
-rem Advanced system settings - Performance - Advanced - Processor Scheduling
+rem =================================== Windows Settings ===================================
+rem --------------------------------------- System -----------------------------------------
+rem ........................................ About .........................................
+rem . . . . . . . . . . . . . . . . Advanced system settings . . . . . . . . . . . . . . . .
+
+rem Performance - Advanced - Processor Scheduling
 rem 0 - Foreground and background applications equally responsive / 1 - Foreground application more responsive than background / 2 - Best foreground application response time (Default)
 rem 38 - Adjust for best performance of Programs / 24 - Adjust for best performance of Background Services
 reg add "HKLM\System\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation " /t REG_DWORD /d "38" /f
 
-rem Advanced system settings - Performance - Advanced - Virtual memory
+rem Performance - Settings - Advanced - Virtual memory
 rem Disable pagefile
 wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
 wmic pagefileset where name="%SystemDrive%\\pagefile.sys" set InitialSize=0,MaximumSize=0
 wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
 
-rem Advanced system settings - Startup and Recovery
-rem 5 - 5 secs / Time to display list of operating systems
-bcdedit /timeout 5
+rem Performance - Visual effects / Keep: Show thumbnails instead of icons/Show windows contents/Smooth edges
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d "3" /f
+rem reg add "HKCU\Control Panel\Desktop" /v "DragFullWindows" /t REG_SZ /d "1" /f
+rem reg add "HKCU\Control Panel\Desktop" /v "FontSmoothingType" /t REG_DWORD /d "2" /f
+rem reg add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9012038010000000" /f
+rem reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v "MinAnimate" /t REG_SZ /d "0" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "IconsOnly" /t REG_DWORD /d "0" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewAlphaSelect" /t REG_DWORD /d "0" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewShadow" /t REG_DWORD /d "0" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d "0" /f
+rem reg add "HKCU\Software\Microsoft\Windows\DWM" /v "AlwaysHibernateThumbnails" /t REG_DWORD /d "0" /f
+rem reg add "HKCU\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /d "0" /f
 
-rem Advanced system settings - Startup and Recovery
+rem Remote Settings - Disable Remote Assistance
+reg add "HKLM\System\CurrentControlSet\Control\Remote Assistance" /v "fAllowToGetHelp" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\Remote Assistance" /v "fAllowFullControl" /t REG_DWORD /d "0" /f
+
+rem Startup and Recovery
 rem 1 - Automatically Restart (on System Failure)
 reg add "HKLM\System\CurrentControlSet\Control\CrashControl" /v "AutoReboot" /t REG_DWORD /d "0" /f
 
+rem Startup and Recovery
+rem 5 - 5 secs / Time to display list of operating systems
+bcdedit /timeout 5
+
 rem ________________________________________________________________________________________
+rem Encrypt the Pagefile
+rem fsutil behavior set EncryptPagingFile 1
+
 rem Disable Remote Assistance
 sc config RemoteRegistry start= disabled
 reg add "HKLM\Software\Policies\Microsoft\Windows\WinRM\Service\WinRS" /v "AllowRemoteShellAccess" /t REG_DWORD /d "0" /f
@@ -2673,87 +2512,42 @@ reg add "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "TSAp
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "TSEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "TSUserEnabled" /t REG_DWORD /d "0" /f
 
-rem Encrypt the Pagefile
-rem fsutil behavior set EncryptPagingFile 1
-
 
 rem =================================== Windows Settings ===================================
 rem --------------------------------------- System -----------------------------------------
 rem ..................................... Clipboard ........................................
 
-rem Save multiple items / 0 - Disable / 1 - Enable
-reg add "HKCU\Software\Microsoft\Clipboard" /v "EnableClipboardHistory " /t REG_DWORD /d "0" /f
-
-rem Sync across devices / 0 - Disable / 1 - Enable
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "AllowCrossDeviceClipboard " /t REG_DWORD /d "0" /f
-
 rem ________________________________________________________________________________________
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "AllowClipboardHistory" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "AllowCrossDeviceClipboard " /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
 rem --------------------------------------- System -----------------------------------------
-rem ............................... Notifications & actions ................................
+rem .................................... Notifications .....................................
 
-rem 1 - Get tips, tricks, and suggestions as you use Windows (ADs)
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d "0" /f
-
-rem 0 - Get notifications from apps and other senders
-reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoToastApplicationNotification" /t REG_DWORD /d "0" /f
-
-rem 1 - Show me the Windows welcome experience after updates and occasionally when I sign in to highlight what's new and suggested (ADs)
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Suggest ways I can finish setting up my device to get the most out of Windows
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" /v "ScoobeSystemSettingEnabled" /t REG_DWORD /d "0" /f
-
-rem ________________________________________________________________________________________
-rem reg add "HKCU\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoCloudApplicationNotification" /t REG_DWORD /d "1" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" /v "NoCloudApplicationNotification" /t REG_DWORD /d "1" /f
-
-
-rem =================================== Windows Settings ===================================
-rem --------------------------------------- System -----------------------------------------
-rem .................................... Power & sleep .....................................
-rem . . . . . . . . . . . . . . . . Additional power settings . . . . . . . . . . . . . . .
-
-rem Change plan settings - Change advanced power settings - Hard disk - Turn off hard disk (on battery) after
-rem 0 - Never / 4294967295 - max value in seconds
-reg add "HKLM\Software\Policies\Microsoft\Power\PowerSettings\E69653CA-CF7F-4F05-AA73-CB833FA90AD4" /v "DCSettingIndex" /t REG_DWORD /d "0" /f
-
-rem Change plan settings - Change adavnced power settings - Hard disk - Turn off hard disk (plugged in) after
-rem 0 - Never / 4294967295 - max value in seconds
-reg add "HKLM\Software\Policies\Microsoft\Power\PowerSettings\6738E2C4-E8A5-4A42-B16A-E040E769756E" /v "ACSettingIndex" /t REG_DWORD /d "0" /f
-
-
-rem =================================== Windows Settings ===================================
-rem --------------------------------------- System -----------------------------------------
-rem ................................. Shared Experiences ...................................
-
-rem Let apps on other devices open apps and message apps on this device, and vice versa / 0 - Disabled
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CDP" /v "EnableRemoteLaunchToast" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableCdp" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableMmx" /t REG_DWORD /d "0" /f
+rem 1 - Notifications
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\PushNotifications" /v "ToastEnabled" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Settings ===================================
 rem --------------------------------------- System -----------------------------------------
 rem ....................................... Storage ........................................
 
+
+rem 1 - Storage Sense
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\StorageSense\Parameters\StoragePolicy" /v "01" /t REG_DWORD /d "0" /f
+
 rem ________________________________________________________________________________________
+reg add "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "AllowStorageSenseGlobal" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "AllowStorageSenseTemporaryFilesCleanup" /t REG_DWORD /d "0" /f
+
 rem fsutil storagereserve query C:
 rem Dism /Online /Set-ReservedStorageState /State:Disabled /Quiet /NoRestart
 rem 2/0/0 - Disable Reserved Storage (7GB) / 1/1/1 - Enabled
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\MiscPolicyInfo" /v "ShippedWithReserves" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\PassedPolicy" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
-
-reg add "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "AllowStorageSenseGlobal" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "AllowStorageSenseTemporaryFilesCleanup" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "ConfigStorageSenseCloudContentDehydrationThreshold" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "ConfigStorageSenseRecycleBinCleanupThreshold" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "ConfigStorageSenseDownloadsCleanupThreshold" /t REG_DWORD /d "0" /f
-reg delete "HKLM\Software\Policies\Microsoft\Windows\StorageSense" /v "ConfigStorageSenseGlobalCadence" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2768,6 +2562,10 @@ rem =================================== Windows Settings =======================
 rem ----------------------------------- Time & language -------------------------------------
 rem ..................................... Date & time .......................................
 rem . . . . . . . . . . . . Additional date, time, & regional settings . . . . . . . . . . .
+
+rem ________________________________________________________________________________________
+rem 244 - Set Location to United States / 143 - Slovakia
+reg add "HKCU\Control Panel\International\Geo" /v "Nation" /t REG_SZ /d "143" /f
 
 rem Set Formats to Metric
 reg add "HKCU\Control Panel\International" /v "iDigits" /t REG_SZ /d "2" /f
@@ -2801,16 +2599,13 @@ reg add "HKCU\Control Panel\International" /v "sTimeFormat" /t REG_SZ /d "HH:mm:
 reg add "HKCU\Control Panel\International" /v "sShortTime" /t REG_SZ /d "HH:mm" /f
 reg add "HKCU\Control Panel\International" /v "sYearMonth" /t REG_SZ /d "MMMM yyyy" /f
 
-rem 244 - Set Location to United States / 143 - Slovakia
-reg add "HKCU\Control Panel\International\Geo" /v "Nation" /t REG_SZ /d "143" /f
-
 
 rem =================================== Windows Settings ===================================
 rem ----------------------------------- Time & Language ------------------------------------
-rem .................................. Region & Language ...................................
+rem ....................................... Typing .........................................
 rem . . . . . . . . . . . . . . . Advanced keyboard settings . . . . . . . . . . . . . . . .
 
-rem Language bar options - Advanced key settings - Change Key Sequence
+rem Input language hot keys - Change Key Sequence
 rem 3 - Not assigned / 2 - CTRL+SHIFT / 1 - Left ALT+SHIFT
 reg add "HKCU\Keyboard Layout\Toggle" /v "Language Hotkey" /t REG_SZ /d "3" /f
 reg add "HKCU\Keyboard Layout\Toggle" /v "Hotkey" /t REG_SZ /d "3" /f
@@ -2822,29 +2617,16 @@ reg add "HKCU\Control Panel\Keyboard" /v "InitialKeyboardIndicators" /t REG_SZ /
 reg add "HKU\.DEFAULT\Control Panel\Keyboard" /v "InitialKeyboardIndicators" /t REG_SZ /d "2" /f
 
 
-
 rem =================================== Windows Settings ===================================
-rem ----------------------------------- Update & security ----------------------------------
-rem ........................................ Backup .......................................
+rem ------------------------------------ Windows Update ------------------------------------
+rem ................................... Advanced options ...................................
 
+rem Active hours (18 hours) 6am to 0am - Windows Updates will not automatically restart your device during active hours
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursStart" /t REG_DWORD /d "6" /f
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursEnd" /t REG_DWORD /d "0" /f
 rem ________________________________________________________________________________________
 rem 1 - Disable File History (Creating previous versions of files/Windows Backup)
 reg add "HKLM\Software\Policies\Microsoft\Windows\FileHistory" /v "Disabled" /t REG_DWORD /d "1" /f
-
-
-rem =================================== Windows Settings ===================================
-rem ----------------------------------- Update & security ----------------------------------
-rem .................................... Windows update ....................................
-
-rem Check for installed updates
-rem DISM /Online /get-packages
-
-rem Change active hours (18 hours) 6am to 0am - Windows Updates will not automatically restart your device during active hours
-reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursStart" /t REG_DWORD /d "6" /f
-reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursEnd" /t REG_DWORD /d "0" /f
-
-rem Restart options - 1 - We'll show a reminder when we're going to restart.
-reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "RestartNotificationsAllowed" /t REG_DWORD /d "1" /f
 
 rem 1 - Disable Malicious Software Removal Tool offered via Windows Updates (MRT) + Disable Heartbeat Telemetry
 reg add "HKLM\Software\Microsoft\RemovalTools\MpGears" /v "HeartbeatTrackingIndex" /t REG_DWORD /d "0" /f
@@ -2852,15 +2634,12 @@ reg add "HKLM\Software\Microsoft\RemovalTools\MpGears" /v "SpyNetReportingLocati
 reg add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\MRT" /v "DontReportInfectionInformation" /t REG_DWORD /d "1" /f
 
-
-rem =================================== Windows Settings ===================================
-rem ----------------------------------- Update & security ----------------------------------
-rem .................................... Windows update ....................................
-rem . . . . . . . . . . . . . . . . . . Advanced options . . . . . . . . . . . . . . . . . .
-
 rem Choose how updates are delivered / 0 - Turns off Delivery Optimization / 1 - Gets or sends updates and apps to PCs on the same NAT only / 2 - Gets or sends updates and apps to PCs on the same local network domain / 3 - Gets or sends updates and apps to PCs on the Internet / 99 - Simple download mode with no peering / 100 - Use BITS instead of Windows Update Delivery Optimization
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v "DODownloadMode" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "0" /f
+
+rem Update apps automatically / 2 - Off / 4 - On
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /v "AutoDownload" /t REG_DWORD /d "4" /f
 
 
 rem ==================================== Windows Shell =====================================
@@ -2905,21 +2684,23 @@ reg delete "HKLM\Software\Classes\Directory\shellex\CopyHookHandlers\Sharing" /f
 reg delete "HKLM\Software\Classes\Directory\shellex\PropertySheetHandlers\Sharing" /f
 
 
-rem ==================================== Windows Store =====================================
-rem -------------------------------------- Settings ----------------------------------------
-
-rem Update apps automatically / 2 - Off / 4 - On
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WindowsStore\WindowsUpdate" /v "AutoDownload" /t REG_DWORD /d "4" /f
-
 rem ________________________________________________________________________________________
-rem Disable Auto-install subscribed/suggested apps (games like Candy Crush Soda Saga/Minecraft)
+rem Disable ADs and Auto-install subscribed/suggested apps (games like Candy Crush Soda Saga/Minecraft)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SlideshowEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-88000326Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\PushToInstall" /v "DisablePushToInstall" /t REG_DWORD /d "1" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f
@@ -3000,6 +2781,9 @@ rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-xp
 rem https://docs.microsoft.com/en-us/archive/blogs/b8/redesigning-chkdsk-and-the-new-ntfs-health-model
 rem Repair bad sectors
 rem chkdsk %SystemDrive% /r
+
+rem Reset digital certificates used by Windows and browsers
+rem https://www.thewindowsclub.com/catroot-catroot2-folder-reset-windows
 
 rem Reset password/gain admin access/enable local admin account
 rem https://www.technibble.com/bypass-windows-logons-utilman/
