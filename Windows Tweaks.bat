@@ -15,7 +15,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks.
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise.
 
-rem Critical processes removed - SearchHost.exe / TextInputHost.exe / Widgets.exe
+rem Critical processes removed - SearchHost.exe / Widgets.exe
 rem Disabled task MsCtfMonitor is required to be able to search/type within Settings
 rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
 rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
@@ -1699,12 +1699,6 @@ rem ____________________________________________________________________________
 rem 1 - Multilingual voice suggestions (Privacy)
 reg add "HKCU\Software\Microsoft\Input\Settings" /v "VoiceTypingEnabled" /t REG_DWORD /d "0" /f
 
-rem Remove Text Input Host (TIP/to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe"
-icacls "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /inheritance:r /grant:r %username%:F
-taskkill /im TextInputHost.exe /f
-del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\TextInputHost.exe" /s /f /q
-
 
 rem =================================== Windows Settings ===================================
 rem -------------------------------------- Accounts ----------------------------------------
@@ -1948,8 +1942,8 @@ rem =================================== Windows Settings =======================
 rem ----------------------------------- Personalization ------------------------------------
 rem ....................................... Colors .........................................
 
-rem 1 - Automatically pick an accent color from my background
-reg add "HKCU\Control Panel\Desktop" /v "AutoColorization" /t REG_SZ /d "1" /f
+rem Accent color / 0 - Manual / 1 - Automatic (from wallpaper)
+reg add "HKCU\Control Panel\Desktop" /v "AutoColorization" /t REG_SZ /d "0" /f
 
 rem 1 - Transparency Effects
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
@@ -2881,5 +2875,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/3KkqQgG5/0.jpg
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/JzwPqD74/0.jpg
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
