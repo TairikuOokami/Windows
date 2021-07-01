@@ -9,13 +9,13 @@ rem Or even better, create a system image!
 rem https://www.aomeitech.com/ab/standard.html
 rem https://www.easeus.com/backup-software/tb-free.html
 
-rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server."
+rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 
 rem If you enable "SeparateProcess" you will get the old File Explorer plus the old context menu within it (not on the desktop though)
 
-rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks.
-rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise.
+rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
+rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe / Widgets.exe
 rem Disabled task MsCtfMonitor is required to be able to search/type within Settings
@@ -1107,6 +1107,9 @@ rem rem https://admx.help/?Category=EdgeChromium
 rem edge://policy
 
 rem ________________________________________________________________________________________
+rem Automatic HTTPS functionality / 0 - Disabled / 1 - Switch to supported domains / 2 - Always
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutomaticHttpsDefault" /t REG_DWORD /d "2" /f
+
 rem 1 - Allow users to open files using the DirectInvoke protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DirectInvokeEnabled" /t REG_DWORD /d "0" /f
 
@@ -2546,9 +2549,6 @@ rem =================================== Windows Settings =======================
 rem --------------------------------------- System -----------------------------------------
 rem .................................... Multitasking ......................................
 
-rem 1 - Snap windows
-reg add "HKCU\Control Panel\Desktop" /v "WindowArrangementActive" /t REG_SZ /d "1" /f
-
 rem 1 - Show snap layouts when I hover over a window's maximize button
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d "0" /f
 
@@ -2764,7 +2764,10 @@ rem Windows Update Troubleshooter - https://support.microsoft.com/en-us/windows/
  
 rem Boot into safemode - https://www.tenforums.com/tutorials/2304-boot-into-safe-mode-windows-10-a.html#option3
 rem bcdedit /set {identifier} safeboot minimal
- 
+
+rem Create shortcut to Settings (Volume Mixer)
+rem %WinDir%\explorer.exe ms-settings:apps-volume
+
 rem DISM Commands - https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deployment-image-servicing-and-management--dism--command-line-options
 rem DISM /Cleanup-Wim
 rem DISM /Get-WimInfo /WimFile:E:\sources\install.esd /index:1
@@ -2922,5 +2925,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/JzwPqD74/0.jpg
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/Wp6dRL7w/0.jpg
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
