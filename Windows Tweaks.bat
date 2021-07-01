@@ -1974,6 +1974,15 @@ rem =================================== Windows Settings =======================
 rem ----------------------------------- Personalization ------------------------------------
 rem ..................................... Lock screen ......................................
 
+rem Personalize your lock screen / 0 - Picture / 1 - Slideshow
+reg add "HKCU\Control Panel\Desktop" /v "LockScreenAutoLockActive" /t REG_SZ /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Lock Screen" /v "SlideshowEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Get fun facts, tips, and more from Windows and Cortana on your lock screen (Windows spotlight)
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d "0" /f
+
 rem ________________________________________________________________________________________
 rem 1 - Disable LockScreen
 rem reg add "HKLM\Software\Policies\Microsoft\Windows\Personalization" /v "NoLockScreen" /t REG_DWORD /d "1" /f
@@ -2538,7 +2547,7 @@ rem --------------------------------------- System -----------------------------
 rem .................................... Multitasking ......................................
 
 rem 1 - Snap windows
-reg add "HKCU\Control Panel\Desktop" /v "WindowArrangementActive" /t REG_DWORD /d "1" /f
+reg add "HKCU\Control Panel\Desktop" /v "WindowArrangementActive" /t REG_SZ /d "1" /f
 
 rem 1 - Show snap layouts when I hover over a window's maximize button
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d "0" /f
