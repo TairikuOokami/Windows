@@ -2018,6 +2018,10 @@ rem ........................................ Start .............................
 rem 1 - Show recently opened items in Start, Jump Lists, and File Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
 
+rem ________________________________________________________________________________________
+rem 1 - Restore Classic Start Menu
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_ShowClassicMode" /t REG_DWORD /d "1" /f
+
 
 rem =================================== Windows Settings ===================================
 rem ----------------------------------- Personalization ------------------------------------
