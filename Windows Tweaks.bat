@@ -868,6 +868,7 @@ rem 1 - Disable the Encrypting File System (EFS)
 fsutil behavior set disableencryption 1
 
 rem 1 - When listing directories, NTFS does not update the last-access timestamp, and it does not record time stamp updates in the NTFS log
+rem fsutil behavior query disablelastaccess
 fsutil behavior set disablelastaccess 3
 
 rem 5 - 5 secs / Delay Chkdsk startup time at OS Boot
@@ -1416,6 +1417,7 @@ schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.
 schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64 Critical" /Disable
 schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 Critical" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\PcaPatchDbTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /Disable
@@ -1536,6 +1538,12 @@ rem Windows Image Acquisition (WIA) / required by scanners
 rem Windows Management Instrumentation / required by wmic commands / disabled to prevent some fileless malware
 rem Windows Push Notifications User Service / required by Logitech Setpoint to avoid Runtime Error and upon disabling, Windows and network is sluggish
 
+rem AMD Crash Defender Driver
+sc config "amdfendr" start= disabled
+
+rem AMD Crash Defender Driver
+sc config "amdfendrmgr" start= disabled
+
 rem AMD Crash Defender Service
 sc config "AMD Crash Defender Service" start= disabled
 
@@ -1560,6 +1568,9 @@ sc config DusmSvc start= disabled
 rem DevQuery Background Discovery Broker
 sc config DevQueryBroker start= disabled
 
+rem Display Enhancement Service
+sc config DisplayEnhancementService start= disabled
+
 rem Display Policy Service
 sc config DispBrokerDesktopSvc start= disabled
 
@@ -1568,6 +1579,12 @@ sc config dLauncherLoopback start= demand
 
 rem EaseUS Agent Service
 sc config "EaseUS Agent" start= demand
+
+rem Function Discovery Provider Host
+sc config "fdPHost" start= disabled
+
+rem Function Discovery Resource Publication
+sc config "FDResPub" start= disabled
 
 rem Geolocation Service
 sc config lfsvc start= disabled
@@ -1583,6 +1600,9 @@ sc config NPSMSvc start= disabled
 
 rem Payments and NFC/SE Manager
 sc config SEMgrSvc start= disabled
+
+rem Program Compatibility Assistant Service
+sc config PcaSvc start= disabled
 
 rem Print Spooler
 sc config Spooler start= disabled
@@ -1622,6 +1642,9 @@ sc config TabletInputService start= disabled
 
 rem WebClient
 sc config WebClient start= disabled
+
+rem Windows Font Cache Service
+sc config FontCache start= disabled
 
 rem Windows Remote Management (WS-Management)
 sc config WinRM start= disabled
@@ -1794,16 +1817,16 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.124.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.124.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.124.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.124.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.124.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhoneServer.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21052.120.4_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2929,5 +2952,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/Wp6dRL7w/0.jpg
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/4dpR6vqV/capture-07032021-134231.jpg
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
