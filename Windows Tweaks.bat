@@ -1,12 +1,7 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem Before making any changes, it is preferable to create a registry backup!
-rem https://support.microsoft.com/en-us/topic/how-to-back-up-and-restore-the-registry-in-windows-855140ad-e318-2a13-2829-d428a2ab0692
-rem https://www.tweaking.com/content/page/registry_backup.html
-
-rem Or even better, create a system image!
-rem https://www.aomeitech.com/ab/standard.html
+rem Create a system backup to reverse any changes !!!!!
 rem https://www.easeus.com/backup-software/tb-free.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
@@ -276,7 +271,7 @@ rem Settings / ControlUWP - https://github.com/builtbybel/control-uwp/releases
 rem SoundCard Third Party Drivers / ASUS, C-Media and Creative - https://danielkawakami.blogspot.com
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / Streamlabs OBS - https://streamlabs.com
-rem System Imaging / EaseUS Todo Backup - https://www.easeus.com/backup-software/tb-free.html
+rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/standard.html
 rem System Restore / RollBack Rx Home Edition - https://horizondatasys.com/rollback-rx-time-machine/rollback-rx-home
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
 rem Undervolting / ThrottleStop - https://www.techpowerup.com/download/techpowerup-throttlestop
@@ -492,11 +487,6 @@ reg add "HKCU\Software\7-Zip\Options" /v "ContextMenu" /t "REG_DWORD" /d "263" /
 rem Audials Radio
 taskkill /im AudialsNotifier.exe /f
 del "%ProgramFiles(x86)%\Audials\Audials 2021\AudialsNotifier.exe" /s /f /q
-
-rem EaseUS Todo Backup Context Menu Removal
-reg delete "HKLM\Software\Classes\*\shellex\ContextMenuHandlers\SimpleShlExt" /f
-reg delete "HKLM\Software\Classes\Drive\shellex\ContextMenuHandlers\SimpleShlExt" /f
-reg delete "HKLM\Software\Classes\Directory\shellex\ContextMenuHandlers\SimpleShlExt" /f
 
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
@@ -1550,6 +1540,9 @@ sc config "AMD Crash Defender Service" start= disabled
 rem AMD External Events Utility
 sc config "AMD External Events Utility" start= disabled
 
+rem AOMEI Backupper Scheduler Service
+sc config "Backupper Service" start= demand
+
 rem AVCTP service
 sc config BthAvctpSvc start= disabled
 
@@ -1576,9 +1569,6 @@ sc config DispBrokerDesktopSvc start= disabled
 
 rem dLauncherLoopback
 sc config dLauncherLoopback start= demand
-
-rem EaseUS Agent Service
-sc config "EaseUS Agent" start= demand
 
 rem Function Discovery Provider Host
 sc config "fdPHost" start= disabled
@@ -1896,7 +1886,7 @@ rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
+rem wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
@@ -1939,6 +1929,7 @@ rem netsh dns show encryption
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
 
 rem Setup DNS over HTTPS (DoH) Add Custom Servers
+rem HKLM\System\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers
 netsh dns add encryption server=1.0.0.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
 netsh dns add encryption server=1.1.1.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
 netsh dns add encryption server=9.9.9.9 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
@@ -2041,10 +2032,6 @@ rem ........................................ Start .............................
 rem 1 - Show recently opened items in Start, Jump Lists, and File Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
 
-rem ________________________________________________________________________________________
-rem 1 - Restore Classic Start Menu
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_ShowClassicMode" /t REG_DWORD /d "1" /f
-
 
 rem =================================== Windows Settings ===================================
 rem ----------------------------------- Personalization ------------------------------------
@@ -2063,9 +2050,6 @@ rem Search / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem 0 - Always show all icons in the notification area / 1 - Hide Inactive Icons
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAutoTray" /t REG_DWORD /d "0" /f
-
 rem Size of Taskbar Icons / 0 - Small / 1 - Medium / 2 - Large
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSi" /t REG_DWORD /d "1" /f
 
