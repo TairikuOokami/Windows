@@ -1,13 +1,11 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem Create a system backup to reverse any changes !!!!!
-rem https://www.easeus.com/backup-software/tb-free.html
+rem Create a system backup to reverse any changes
+rem https://www.aomeitech.com/ab/standard.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
-
-rem If you enable "SeparateProcess" you will get the old File Explorer plus the old context menu within it (not on the desktop though)
 
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
@@ -465,6 +463,7 @@ bcdedit /set {default} recoveryenabled no
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9002\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles% (x86)\Microsoft OneDrive\OneDrive.exe\" /background" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "TranslucentTB" /t REG_SZ /d "%ProgramFiles% (x86)\TranslucentTB\TranslucentTB.exe" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
@@ -811,7 +810,7 @@ rem Determines whether user processes end automatically when the user either log
 reg add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f
 
 rem Specifies the number of times the taskbar button flashes to notify the user that the system has activated a background window
-rem If the time elapsed since the last user input exceeds the value of the ForegroundLockTimeout entry, the window will automatically be brought to the foreground
+rem If the time elapsed since the last user input exceeds the value of the ForegroundLockTimeout entry, the window will automatically be brought to the foreground (focus)
 reg add "HKCU\Control Panel\Desktop" /v "ForegroundFlashCount" /t REG_SZ /d "0" /f
 
 rem ForegroundLockTimeout specifies the time in milliseconds, following user input, during which the system keeps applications from moving into the foreground / 0 - Disabled / 200000 - Default
@@ -1807,16 +1806,16 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.124.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.124.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.124.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.124.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.124.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhoneServer.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.124.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
