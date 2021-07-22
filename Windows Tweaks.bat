@@ -561,7 +561,7 @@ rem Specifies how the System responds when a user tries to install device driver
 reg add "HKLM\Software\Microsoft\Driver Signing" /v "Policy" /t REG_BINARY /d "01" /f
 
 rem Prevent device metadata retrieval from the Internet / Do not automatically download manufacturers’ apps and custom icons available for your devices
-rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d "0" /f 
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Device Metadata" /v "PreventDeviceMetadataFromNetwork" /t REG_DWORD /d "1" /f 
 rem sc config DsmSvc start= disabled
 
 rem Do you want Windows to download driver Software / 0 - Never / 1 - Allways / 2 - Install driver Software, if it is not found on my computer
@@ -1663,7 +1663,7 @@ rem When windows detects communications activity / 0 - Mute all other sounds / 1
 reg add "HKCU\Software\Microsoft\Multimedia\Audio" /v "UserDuckingPreference" /t REG_DWORD /d "3" /f
 
 rem 0 - Play Windows Startup sound
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\BootAnimation" /v "DisableStartupSound" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableStartupSound" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -1806,16 +1806,16 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.147.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.147.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.147.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.147.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.147.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhoneServer.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.137.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21062.147.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -1858,6 +1858,13 @@ rem ...................................... Game Mode ...........................
 rem 1 - Game Mode
 reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD /d "0" /f
 
+rem ________________________________________________________________________________________
+rem Remove GameBarPresenceWriter.exe (to restore run SFC scan)
+takeown /s %computername% /u %username% /f "%WINDIR%\System32\GameBarPresenceWriter.exe"
+icacls "%WINDIR%\System32\GameBarPresenceWriter.exe" /inheritance:r /grant:r %username%:F
+taskkill /im GameBarPresenceWriter.exe /f
+del "%WINDIR%\System32\GameBarPresenceWriter.exe" /s /f /q
+
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------------- Gaming ----------------------------------------
@@ -1885,7 +1892,7 @@ rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-rem wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
