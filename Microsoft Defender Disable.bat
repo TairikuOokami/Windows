@@ -1,5 +1,8 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
+rem https://i.postimg.cc/zvXh7xQ8/capture-07182021-200926.jpg
+rem https://www.sordum.org/9480/defender-control-v1-8
+
 rem https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware
 rem "DisableAntiSpyware" is discontinued and will be ignored on client devices, as of the August 2020 (version 4.18.2007.8) update to Microsoft Defender Antivirus.
 
@@ -9,11 +12,12 @@ reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection
 
 rem https://technet.microsoft.com/en-us/itpro/powershell/windows/defender/set-mppreference
 rem https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0290
+rem https://rootdaemon.com/2021/07/20/this-new-malware-hides-itself-among-windows-defender-exclusions-to-evade-detection
 
-rem To disable System Guard Runtime Monitor Broker (when disabled, it might cause BSOD Critical Process Died)
+rem Disable System Guard Runtime Monitor Broker (when disabled, it might cause BSOD Critical Process Died)
 rem reg add "HKLM\System\CurrentControlSet\Services\SgrmBroker" /v "Start" /t REG_DWORD /d "4" /f
 
-rem To disable Windows Defender Security Center include this
+rem Disable Windows Defender Security Center
 rem reg add "HKLM\System\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
 
 rem 1 - Disable Real-time protection
