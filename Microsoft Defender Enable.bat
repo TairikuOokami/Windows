@@ -53,7 +53,7 @@ rem Cloud-based Protection / 0 - Disable / 1 - Basic / 2 - Advanced
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SpynetReporting" /t REG_DWORD /d "1" /f
 
 rem Send file samples when further analysis is required / 0 - Always prompt / 1 - Send safe samples automatically / 2 - Never send / 3 - Send all samples automatically
-rem reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SubmitSamplesConsent" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SpyNet" /v "SubmitSamplesConsent" /t REG_DWORD /d "1" /f
 
 rem reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "1" /f
 
