@@ -57,7 +57,7 @@ rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefil
 rem Browser Leaks - https://browserleaks.com / https://whoer.net / CanvasFingerprint / WebRTC
 rem Browser Tracking Test - https://panopticlick.eff.org
 rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-based-adblocking-support
-rem Privacy Etags - https://lucb1e.com/rp/cookielesscookies
+rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Tools - https://www.ghacks.net/2015/08/14/comparison-of-windows-10-privacy-tools
@@ -153,7 +153,6 @@ rem WiseVector StopX (CN) - https://www.wisevector.com/en
 
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
-rem LMT Anti Logger (VN) - https://www.leminhthanh.me/antilogger
 rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
 rem OSArmor (IT) - https://www.osarmor.com
 rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/endpoint-protection-platform
@@ -239,7 +238,7 @@ rem Hardware Information / HWiNFO - https://www.hwinfo.com/download.php
 rem Hardware Monitor / HWMonitor - https://www.cpuid.com/softwares/hwmonitor.html
 rem Image Viewer / XnView - https://www.xnview.com/en/xnview/#downloads
 rem Media Player / PotPlayer - https://daumpotplayer.com
-rem Monitor's Refresh rate Test / https://www.testufo.com
+rem Monitor Test / https://www.testufo.com
 rem NET 3.5 Feature Installer for Windows 10 x86/x64 - https://github.com/abbodi1406/dotNetFx35W10/releases
 rem Network Optimization / TCP Optimizer - https://www.speedguide.net/downloads.php
 rem Network Settings Manager / NetSetMan - https://www.netsetman.com/en/freeware
@@ -1750,7 +1749,7 @@ rem Let apps run in the background / 1 - Enabled / 0 - Disabled
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BackgroundAppGlobalToggle" /t REG_DWORD /d "0" /f
 
 rem Let apps run in the background / 0 - Default / 1 - Enabled / 2 - Disabled
-rem reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsRunInBackground" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -1806,16 +1805,16 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21071.104.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21071.104.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21071.104.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21071.104.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21071.104.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhoneServer.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21071.104.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2054,6 +2053,9 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 rem Widgets / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
 
+rem Chat / 0 - Off / 1 - On
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarMn" /t REG_DWORD /d "0" /f
+
 rem Search / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 
@@ -2068,10 +2070,10 @@ taskkill /im SearchHost.exe /f
 del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /s /f /q
 
 rem Remove Widgets (News/to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20002.25.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
-icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20002.25.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20009.95.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
+icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20009.95.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
 taskkill /im Widgets.exe /f
-del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20002.25.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20009.95.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2878,7 +2880,7 @@ rem User Accounts - netplwiz
 rem Windows Updates Block
 rem https://www.tenforums.com/tutorials/8013-enable-disable-windows-update-automatic-updates-windows-10-a.html
 rem https://www.sordum.org/9470/windows-update-blocker-v1-6
-rem Block svchost.exe in the firewall (TCP 80) or create a nonexistant symlink
+rem Block svchost.exe in the firewall (TCP 80) or create a 1. nonexistent symlink
 rem rd "%WINDIR%\SoftwareDistribution\Download" /s /q
 rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
 
