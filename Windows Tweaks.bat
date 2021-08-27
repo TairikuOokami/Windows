@@ -1805,16 +1805,16 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.123.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.123.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.123.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
-taskkill /im YourPhoneServer.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
+rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
+rem icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
+rem taskkill /im YourPhoneServer.exe /f
+rem del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2013,6 +2013,9 @@ rem reg add "HKLM\Software\Policies\Microsoft\Windows\Personalization" /v "NoLoc
 rem 1 - Disable Sign-in Screen Background Image
 rem reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableLogonBackgroundImage" /t REG_DWORD /d "1" /f
 
+rem 1 Disable Sign-in screen acrylic (blur) background 
+reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "DisableAcrylicBackgroundOnLogon" /t REG_DWORD /d "1" /f
+
 
 rem =================================== Windows Settings ===================================
 rem ----------------------------------- Personalization ------------------------------------
@@ -2070,10 +2073,10 @@ taskkill /im SearchHost.exe /f
 del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /s /f /q
 
 rem Remove Widgets (News/to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20009.95.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
-icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20009.95.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20014.145.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
+icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20014.145.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
 taskkill /im Widgets.exe /f
-del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20009.95.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20014.145.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2880,7 +2883,7 @@ rem User Accounts - netplwiz
 rem Windows Updates Block
 rem https://www.tenforums.com/tutorials/8013-enable-disable-windows-update-automatic-updates-windows-10-a.html
 rem https://www.sordum.org/9470/windows-update-blocker-v1-6
-rem Block svchost.exe in the firewall (TCP 80) or create a 1. nonexistent symlink
+rem Block svchost.exe in the firewall (TCP 80) or create a nonexistent symlink
 rem rd "%WINDIR%\SoftwareDistribution\Download" /s /q
 rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
 
