@@ -26,6 +26,24 @@ icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
 icacls D:\OneDrive /deny "System":(OI)(CI)F /t /l /q /c
 
+takeown /s %computername% /u %username% /f D:\Documents /r /d y
+icacls ‪D:\Documents /inheritance:r
+icacls ‪D:\Documents /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls ‪D:\Documents /grant "Users":(OI)(CI)RX /t /l /q /c
+icacls ‪D:\Documents /deny "System":(OI)(CI)F /t /l /q /c
+
+takeown /s %computername% /u %username% /f D:\Euro Truck Simulator 2 /r /d y
+icacls D:\Euro Truck Simulator 2 /inheritance:r
+icacls D:\Euro Truck Simulator 2 /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\Euro Truck Simulator 2 /grant "Users":(OI)(CI)RX /t /l /q /c
+icacls D:\Euro Truck Simulator 2 /deny "System":(OI)(CI)F /t /l /q /c
+
+takeown /s %computername% /u %username% /f D:\Software /r /d y
+icacls D:\Software /inheritance:r
+icacls D:\Software /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\Software /grant "Users":(OI)(CI)RX /t /l /q /c
+icacls D:\Software /deny "System":(OI)(CI)F /t /l /q /c
+
 rem Access CMD with SYSTEM rights at logon (Win+U)
 takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
 icacls "%WINDIR%\System32\utilman.exe" /grant:r %username%:F
@@ -207,17 +225,16 @@ rem Temp Folders to RAMDisk
 reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "Z:\TEMP" /f
 reg add "HKCU\Environment" /v "TMP" /t REG_SZ /d "Z:\TEMP" /f
 
+start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
+start "" /wait "D:\OneDrive\Setup\3.exe"
 start "" /wait "D:\OneDrive\Setup\4.exe"
 start "" /wait "D:\OneDrive\Setup\5.exe"
 start "" /wait "D:\OneDrive\Setup\6.exe"
 start "" /wait "D:\OneDrive\Setup\7.exe"
-start "" /wait "D:\OneDrive\Setup\8.exe"
-start "" /wait "D:\OneDrive\Setup\9.exe"
-start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
-
-%WINDIR%\System32\WindowsPowerShell\v1.0\powershell.exe "Set-ExecutionPolicy bypass - noprofile"
 
 pause
+
+start "" /wait "D:\Software"
 
 rem Restart in ...
 
