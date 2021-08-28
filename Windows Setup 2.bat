@@ -19,17 +19,9 @@ start ms-settings:optionalfeatures
 
 pause
 
-start "" /wait "%USERPROFILE%\Desktop\freeoffice2018.msi"
-start "" /wait "D:\Software\AudialsRadio-Setup.exe"
-start "" /wait "‪D:\Software\GIHO_TubeGet_Pro.exe"
 start "" /wait "D:\OneDrive\Setup\10.exe" /ai
 
-rem Disable scanning and updating Process Hacker
-start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\PatchMyPc\PatchMyPC.exe"
-start "" /wait "D:\OneDrive\Setup\3.exe"
-start "" /wait "D:\OneDrive\Setup\15.exe"
-
-taskkill /im msedge.exe /
+taskkill /im msedge.exe /f
 takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
 xcopy "%LocalAppData%\Microsoft\Edge" "Z:\Edge" /s /i /y
 rd "%LocalAppData%\Microsoft\Edge" /s /q
@@ -60,16 +52,18 @@ rem Disabled #heavy-ad-privacy-mitigations
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem Disabled #enable-quic
+rem Disabled #tab-hover-cards
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
+rem Enabled #edge-automatic-https
 
 pause
 
 reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "D:\TruckersMP Launcher" /f
 reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
 start "" /wait "D:\Steam\steam.exe"
-start "" /wait "D:\OneDrive\Setup\13.exe"
-start "" /wait "D:\OneDrive\Setup\14.exe"
+start "" /wait "D:\OneDrive\Setup\8.exe"
+start "" /wait "D:\OneDrive\Setup\9.exe"
 
 pause
 
