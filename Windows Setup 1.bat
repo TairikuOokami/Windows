@@ -54,6 +54,7 @@ copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\sethc.exe
 
 rem Disable Auto-install subscribed/suggested apps (games like Candy Crush Soda Saga/Minecraft)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d "0" /f
@@ -136,8 +137,14 @@ slmgr /cpky
 
 pause
 
-copy "D:\OneDrive\Setup\0.msi" "%USERPROFILE%\Desktop"
-start "" /wait "%USERPROFILE%\Desktop\0.msi"
+start "" /wait "D:\OneDrive\Setup\install.bat"
+
+rem copy "D:\OneDrive\Setup\0.msi" "%USERPROFILE%\Desktop"
+rem start "" /wait "%USERPROFILE%\Desktop\0.msi"
+
+pause
+
+start "" /wait "%ProgramFiles%\ImDisk\RamDiskUI.exe"
 
 pause
 
@@ -221,16 +228,22 @@ rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folde
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{35286A68-3C57-41A1-BBB1-0EAE73D76C95}" /t REG_EXPAND_SZ /d "D:\Movies" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "My Video" /t REG_EXPAND_SZ /d "D:\Movies" /f
 
+rem Remove OneDrive's default location
+taskkill /im onedrive.exe /f
+takeown /s %computername% /u %username% /f "%USERPROFILE%\OneDrive" /r /d y
+rd "%USERPROFILE%\OneDrive" /s /q
+mklink /d "%USERPROFILE%\OneDrive" "D:\OneDrive"
+start "" /wait "%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
+
 rem Temp Folders to RAMDisk
 reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "Z:\TEMP" /f
 reg add "HKCU\Environment" /v "TMP" /t REG_SZ /d "Z:\TEMP" /f
 
 start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
-start "" /wait "D:\OneDrive\Setup\3.exe"
-start "" /wait "D:\OneDrive\Setup\4.exe"
-start "" /wait "D:\OneDrive\Setup\5.exe"
-start "" /wait "D:\OneDrive\Setup\6.exe"
-start "" /wait "D:\OneDrive\Setup\7.exe"
+start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
+start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
+start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
+start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
 
 pause
 
