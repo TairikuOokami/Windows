@@ -19,7 +19,7 @@ start ms-settings:optionalfeatures
 
 pause
 
-start "" /wait "D:\OneDrive\Setup\10.exe" /ai
+start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
 
 taskkill /im msedge.exe /f
 takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
@@ -41,7 +41,6 @@ start ms-settings:appsfeatures
 
 pause
 
-start "" /wait "%ProgramFiles(x86)%\SoftMaker FreeOffice 2018\PlanMaker.exe"
 start "" "D:\OneDrive\Mikai.7z"
 
 pause
@@ -56,14 +55,14 @@ rem Disabled #tab-hover-cards
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
 rem Enabled #edge-automatic-https
+rem Enabled #edge-pc-ui-integration
 
 pause
 
-reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "D:\TruckersMP Launcher" /f
+reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "D:\Euro Truck Simulator 2\TruckersMP Launcher" /f
 reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
 start "" /wait "D:\Steam\steam.exe"
-start "" /wait "D:\OneDrive\Setup\8.exe"
-start "" /wait "D:\OneDrive\Setup\9.exe"
+start "" /wait "D:\OneDrive\Setup\Install TruckersMP.exe"
 
 pause
 
@@ -111,7 +110,7 @@ rem Windows Tweaks - https://pastebin.com/m26z309a
 
 rem Make Sure Secure Boot is ON after BIOS Update !!!!!
 
-rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
+rem Take Ownership of the Registry key and give permissions to Admin - https://www.youtube.com/watch?v=M1l5ifYKefg
 rem To remove Network from Explorer/allow cleaning WebCache
 rem "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder"
 rem "HKCR\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}"
@@ -121,16 +120,6 @@ rem "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}"
 rem "HKCR\Wow6432Node\AppID\{0358b920-0ac7-461f-98f4-58e32cd89148}"
 rem "HKLM\Software\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}"
 rem "HKLM\Software\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}"
-
-rem Disabled #heavy-ad-privacy-mitigations
-rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
-rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
-rem Disabled #enable-quic
-rem Enabled #block-insecure-private-network-requests
-rem Enabled #disallow-doc-written-script-loads
-rem Enabled #enable-heavy-ad-intervention
-rem Enabled #enable-quic
-rem Enabled #enable-webrtc-hide-local-ips-with-mdns
 
 rem Enhancer for Youtube
 rem {"version":"2.0.104.8","settings":{"blur":0,"brightness":100,"contrast":100,"grayscale":0,"huerotate":0,"invert":0,"saturate":100,"sepia":0,"applyvideofilters":false,"backgroundcolor":"#000000","backgroundopacity":50,"blackbars":false,"blockads":true,"blockadsexceptforsubs":false,"blockautoplay":false,"blockhfrformats":false,"blockwebmformats":false,"cinemamode":false,"cinemamodewideplayer":false,"controlbar":{"active":true,"autohide":false,"centered":true,"position":"fixed"},"controls":[],"controlsvisible":false,"controlspeed":false,"controlspeedmousebutton":false,"controlvolume":false,"controlvolumemousebutton":false,"customcolors":{"--dimmer-text":"#cccccc","--hover-background":"#232323","--main-background":"#111111","--main-color":"#00adee","--main-text":"#eff0f1","--second-background":"#181818","--shadow":"#000000"},"customcssrules":"","customscript":"","customtheme":false,"darktheme":true,"date":1590884155282,"defaultvolume":false,"disableautoplay":false,"executescript":false,"expanddescription":false,"filter":"none","hidecardsendscreens":false,"hidechat":false,"hidecomments":false,"hiderelated":false,"ignoreplaylists":false,"ignorepopupplayer":true,"localecode":"en_US","localedir":"ltr","message":false,"miniplayer":false,"miniplayerposition":"_top-left","miniplayersize":"_400x225","newestcomments":false,"overridespeeds":false,"pauseforegroundtab":false,"pausevideos":false,"popuplayersize":"640x360","qualityembeds":"hd720","qualityembedsfullscreen":"hd1080","qualityplaylists":"hd1080","qualityplaylistsfullscreen":"hd1080","qualityvideos":"hd1080","qualityvideosfullscreen":"hd1080","reload":false,"reversemousewheeldirection":false,"selectquality":true,"selectqualityfullscreenoff":false,"selectqualityfullscreenon":false,"speed":1,"speedvariation":0.1,"stopvideos":false,"theatermode":false,"theme":"default-dark","themevariant":"youtube-deep-dark.css","update":1619098163598,"volume":50,"volumemultiplier":3,"volumevariation":5,"whitelist":"","wideplayer":false,"wideplayerviewport":false}}
