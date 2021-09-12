@@ -1,7 +1,3 @@
-start ms-settings:windowsupdate-action
-
-pause
-
 rem Disable Indexing C:/Z:
 explorer
 
@@ -80,8 +76,6 @@ pause
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TCPOptimizer.exe"
 
 pause
-
-start "" /wait "D:\OneDrive\Setup\FREEAV.exe"
 
 rem Restart Now !
 
