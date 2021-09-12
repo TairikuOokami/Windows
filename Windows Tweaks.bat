@@ -108,14 +108,10 @@ rem https://www.msgsafe.io
 rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 
 rem Windows 10 ISO
-rem https://www.deskmodder.de/blog/2021/02/18/windows-10-21h1-19043-iso-esd-inkl-updates-deutsch-english
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
-rem https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewiso
 rem https://tb.rg-adguard.net
 
 rem https://genuineisoverifier.weebly.com
-rem https://msdn.rg-adguard.net
-rem https://uup.rg-adguard.net
 rem https://uupdump.ml/known.php?q=19042.450
 
 rem Check ISO Windows versions and build version
@@ -218,7 +214,6 @@ rem Compact/Compress Files / Compact GUI - https://github.com/ImminentFate/Compa
 rem Computer Management / NirLauncher - https://launcher.nirsoft.net
 rem CPU Info / CPU-Z - https://www.cpuid.com/softwares/cpu-z.html
 rem CPU Test / Prime95 - https://www.mersenne.org/download
-rem Data Recovery / DMDE Free Edition - https://dmde.com/download.html - https://www.techradar.com/how-to/computing/how-to-recover-lost-or-deleted-files-1307921/2
 rem Data Recovery / EaseUS Data Recovery Wizard - https://www.easeus.com/datarecoverywizard/free-data-recovery-software.htm
 rem Directx 9.0 Runtimes / DirectX Redistributable June 2010 - https://www.softpedia.com/get/System/OS-Enhancements/DirectX-9.0c-Redistributable.shtml
 rem Disc to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
@@ -243,7 +238,7 @@ rem NET 3.5 Feature Installer for Windows 10 x86/x64 - https://github.com/abbodi
 rem Network Optimization / TCP Optimizer - https://www.speedguide.net/downloads.php
 rem Network Settings Manager / NetSetMan - https://www.netsetman.com/en/freeware
 rem Notepad / Notepad3 - https://www.rizonesoft.com/downloads/notepad3
-rem Office Suite / FreeOffice - https://www.freeoffice.com/en/freeoffice
+rem Office Suite / LibreOffice - https://www.libreoffice.org
 rem Partition Manager / Macrorit Partition Expert - https://macrorit.com/partition-magic-manager/free-edition.html
 rem Password Manager (Offline) / KeePass Professional Edition - https://keepass.info/download.html
 rem Password Manager (Online) / Bitwarden - https://bitwarden.com
@@ -325,11 +320,11 @@ rd "%LocalAppData%\Microsoft\Windows\INetCookies" /s /q
 rd "%LocalAppData%\Microsoft\Windows\WebCache" /s /q
 rd "%LocalAppData%\Steam\htmlcache" /s /q
 rd "%LocalAppData%\Temp" /s /q
-rd "C:\Users\Mikai\3D Objects" /s /q
-rd "C:\Users\Mikai\Favorites" /s /q
-rd "C:\Users\Mikai\Links" /s /q
-rd "C:\Users\Mikai\Music" /s /q
-rd "C:\Users\Mikai\Searches" /s /q
+rd "C:\Users\Tairi\3D Objects" /s /q
+rd "C:\Users\Tairi\Favorites" /s /q
+rd "C:\Users\Tairi\Links" /s /q
+rd "C:\Users\Tairi\Music" /s /q
+rd "C:\Users\Tairi\Searches" /s /q
 rd "D:\OneDriveTemp" /s /q
 
 rem Remove/Rebuild Font Cache
@@ -461,12 +456,10 @@ bcdedit /set {default} lastknowngood yes
 bcdedit /set {default} recoveryenabled no
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9002\Discord.exe --start-minimized" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles% (x86)\Microsoft OneDrive\OneDrive.exe\" /background" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "TranslucentTB" /t REG_SZ /d "%ProgramFiles% (x86)\TranslucentTB\TranslucentTB.exe" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
-reg add "HKLM\Software\WOW6432Node\Microsoft\Windows\CurrentVersion\Run" /v "PSUAMain" /t REG_SZ /d "\"%ProgramFiles% (x86)\Panda Security\Panda Security Protection\PSUAMain.exe\" /LaunchSysTray" /f
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "autocheck autochk *" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE" /t REG_MULTI_SZ /d "" /f
@@ -1089,7 +1082,7 @@ reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "SMB
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 
-rem https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Microsoft-Security-Baselines/label-name/Edge
+rem https://docs.microsoft.com/en-us/deployedge/microsoft-edge-relnote-beta-channel
 rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
 rem rem https://admx.help/?Category=EdgeChromium
@@ -1527,10 +1520,10 @@ rem Windows Management Instrumentation / required by wmic commands / disabled to
 rem Windows Push Notifications User Service / required by Logitech Setpoint to avoid Runtime Error and upon disabling, Windows and network is sluggish
 
 rem AMD Crash Defender Driver
-sc config "amdfendr" start= disabled
+sc config amdfendr start= disabled
 
 rem AMD Crash Defender Driver
-sc config "amdfendrmgr" start= disabled
+sc config amdfendrmgr start= disabled
 
 rem AMD Crash Defender Service
 sc config "AMD Crash Defender Service" start= disabled
@@ -1543,6 +1536,9 @@ sc config "Backupper Service" start= demand
 
 rem AVCTP service
 sc config BthAvctpSvc start= disabled
+
+rem BitLocker Drive Encryption Service
+sc config BDESVC start= disabled
 
 rem Clipboard User Service
 sc config cbdhsvc start= disabled
@@ -1568,11 +1564,14 @@ sc config DispBrokerDesktopSvc start= disabled
 rem dLauncherLoopback
 sc config dLauncherLoopback start= demand
 
+rem Encrypting File System (EFS)
+sc config EFS start= disabled
+
 rem Function Discovery Provider Host
-sc config "fdPHost" start= disabled
+sc config fdPHost start= disabled
 
 rem Function Discovery Resource Publication
-sc config "FDResPub" start= disabled
+sc config FDResPub start= disabled
 
 rem Geolocation Service
 sc config lfsvc start= disabled
@@ -1805,10 +1804,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.123.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.123.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.132.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.132.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.123.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.132.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
 rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
@@ -2073,10 +2072,10 @@ taskkill /im SearchHost.exe /f
 del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /s /f /q
 
 rem Remove Widgets (News/to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20014.145.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
-icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20014.145.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20019.195.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
+icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20019.195.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
 taskkill /im Widgets.exe /f
-del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20014.145.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20019.195.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2186,18 +2185,18 @@ rem 1 - Improve inking and typing
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CPSS\Store\ImproveInkingAndTyping" /v "Value" /t REG_DWORD /d "0" /f
 
 rem 3 - Send optional diagnostic data / 1 - No
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "3" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Diagnostics\DiagTrack" /v "ShowedToastAtLevel" /t REG_DWORD /d "1" /f
 
 rem 1 - Tailored experiences
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 rem Send optional dianostgic data / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
 
 rem Feedback Frequency - Windows should ask for my feedback: 0 - Never / Removed - Automatically
-rem reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
-rem reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "PeriodInNanoSeconds" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2767,6 +2766,7 @@ reg delete "HKLM\Software\Classes\Directory\shellex\PropertySheetHandlers\Sharin
 rem ________________________________________________________________________________________
 rem Disable ADs and Auto-install subscribed/suggested apps (games like Candy Crush Soda Saga/Minecraft)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d "0" /f
@@ -2962,5 +2962,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/4dpR6vqV/capture-07032021-134231.jpg
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/KF4qNMdm/12-Sep-21.png
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
