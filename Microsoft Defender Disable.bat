@@ -1,18 +1,15 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-rem https://i.postimg.cc/zvXh7xQ8/capture-07182021-200926.jpg
-rem https://www.sordum.org/9480/defender-control-v1-8
+start windowsdefender:
+rem Disable Tamper and Real Protection in Defender
+rem Install 3rd party AV (any that registers) - https://www.360totalsecurity.com/en/features/360-total-security-essential
+rem Disable Defender (run .bat) - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Disable.bat 
+rem Uninstall 3rd party AV and Restart
 
-rem https://docs.microsoft.com/en-us/windows-hardware/customize/desktop/unattend/security-malware-windows-defender-disableantispyware
-rem "DisableAntiSpyware" is discontinued and will be ignored on client devices, as of the August 2020 (version 4.18.2007.8) update to Microsoft Defender Antivirus.
+pause
 
-rem Disable Tamper Protection First !!!!!
 rem https://www.tenforums.com/tutorials/123792-turn-off-tamper-protection-windows-defender-antivirus.html
 reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
-
-rem https://technet.microsoft.com/en-us/itpro/powershell/windows/defender/set-mppreference
-rem https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2017-0290
-rem https://rootdaemon.com/2021/07/20/this-new-malware-hides-itself-among-windows-defender-exclusions-to-evade-detection
 
 rem Disable System Guard Runtime Monitor Broker (when disabled, it might cause BSOD Critical Process Died)
 rem reg add "HKLM\System\CurrentControlSet\Services\SgrmBroker" /v "Start" /t REG_DWORD /d "4" /f
@@ -63,7 +60,12 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
-rem You need to run twice or restart and run the .bat again to disable services (MsMpEng.exe) !!!!!
-rem If it does not work, install 3rd party AV temporarily, then run .bat and uninstall 3rd party AV.
+rem https://technet.microsoft.com/en-us/itpro/powershell/windows/defender/set-mppreference
+rem https://i.postimg.cc/vG1X7FjX/capture-09122021-174801.jpg
+
+shutdown /r
+
+rem To stop restart type
+rem shutdown -a
 
 pause
