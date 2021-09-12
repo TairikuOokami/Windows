@@ -1,3 +1,5 @@
+rem DO NOT enable OneDrive during Windows setup, otherwise you will not be able to choose the folder's location!
+
 powercfg -h off
 
 rem Disable Reserved Storage (7GB)
@@ -6,12 +8,18 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "Misc
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
 
-windowsdefender://threat
+start ms-settings:windowsupdate-action
+rem Check for updates and Optional updates in Advanced options and RESTART!
 
-rem Disable Tamper Protection First and Windows Defender !!!!!
-rem Install AMD Chipset Drivers (restart) and AMD GPU Drivers !!!!!
+pause
 
 start "" "D:\Software"
+rem Install Chipset Drivers and GPU Drivers and RESTART!
+
+pause
+
+start windowsdefender:
+rem Disable Tamper and Real Protection in Defender
 
 pause
 
@@ -104,6 +112,7 @@ wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
 rem Setup Encrypted DNS
+start ‪"" /wait "D:\OneDrive\Downloads\UnValidate.bat"
 start ms-settings:network-ethernet
 
 pause
@@ -138,9 +147,6 @@ slmgr /cpky
 pause
 
 start "" /wait "D:\OneDrive\Setup\install.bat"
-
-rem copy "D:\OneDrive\Setup\0.msi" "%USERPROFILE%\Desktop"
-rem start "" /wait "%USERPROFILE%\Desktop\0.msi"
 
 pause
 
@@ -227,13 +233,6 @@ rem Move Videos
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "My Video" /t REG_SZ /d "D:\Movies" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{35286A68-3C57-41A1-BBB1-0EAE73D76C95}" /t REG_EXPAND_SZ /d "D:\Movies" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "My Video" /t REG_EXPAND_SZ /d "D:\Movies" /f
-
-rem Remove OneDrive's default location
-taskkill /im onedrive.exe /f
-takeown /s %computername% /u %username% /f "%USERPROFILE%\OneDrive" /r /d y
-rd "%USERPROFILE%\OneDrive" /s /q
-mklink /d "%USERPROFILE%\OneDrive" "D:\OneDrive"
-start "" /wait "%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
 
 rem Temp Folders to RAMDisk
 reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "Z:\TEMP" /f
