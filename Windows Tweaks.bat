@@ -11,7 +11,7 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe / Widgets.exe
-rem Disabled task MsCtfMonitor is required to be able to search/type within Settings
+rem Disabled task MsCtfMonitor is required to be able to search/type within UWP apps
 rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
 rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
 
@@ -107,10 +107,9 @@ rem https://www.safetydetectives.com/best-vpns
 rem https://www.msgsafe.io
 rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 
-rem Windows 10 ISO
+rem Windows ISO
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
-
 rem https://genuineisoverifier.weebly.com
 rem https://uupdump.ml/known.php?q=19042.450
 
@@ -1092,6 +1091,12 @@ rem ____________________________________________________________________________
 rem Automatic HTTPS functionality / 0 - Disabled / 1 - Switch to supported domains / 2 - Always
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutomaticHttpsDefault" /t REG_DWORD /d "2" /f
 
+rem 1 - AllowJavaScriptJit / 2 - BlockJavaScriptJit (Do not allow any site to run JavaScript JIT)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultJavaScriptJitSetting" /t REG_DWORD /d "0" /f
+
+rem 1 - DeveloperToolsAllowed / 2 - DeveloperToolsDisallowed (Don't allow using the developer tools)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DeveloperToolsAvailability" /t REG_DWORD /d "2" /f
+
 rem 1 - Allow users to open files using the DirectInvoke protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DirectInvokeEnabled" /t REG_DWORD /d "0" /f
 
@@ -1104,8 +1109,14 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DW
 rem 1 - Allow QUIC protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
 
+rem 1 - Allow remote debugging
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RemoteDebuggingAllowed" /t REG_DWORD /d "0" /f
+
 rem 1 - Allow screen capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow notifications to set Microsoft Edge as default PDF reader
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowPDFDefaultRecommendationsEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow Speech Recognition
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpeechRecognitionEnabled" /t REG_DWORD /d "0" /f
