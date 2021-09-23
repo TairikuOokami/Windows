@@ -1,5 +1,7 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
+rem https://www.sordum.org/9480/defender-control-v2-0
+
 start windowsdefender:
 rem Disable Tamper and Real Protection in Defender
 rem Install 3rd party AV (any that registers) - https://www.360totalsecurity.com/en/features/360-total-security-essential
