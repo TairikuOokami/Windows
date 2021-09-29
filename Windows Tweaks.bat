@@ -66,6 +66,7 @@ rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
+rem https://www.reddit.com/r/antivirus/comments/o9xcvi/summary_of_av_test_results_june_2021
 rem https://www.programmifree.com/confronti
 rem https://checklab.pl/en/publications
 rem https://www.av-comparatives.org/latest-tests
@@ -74,7 +75,7 @@ rem https://www.mrg-effitas.com/test-library
 rem https://www.lifewire.com/best-free-antivirus-software-4151895
 
 rem AVs/SSL Filtering - https://adguard.com/en/blog/everything-about-https-filtering.html - https://badssl.com
-rem AV is as vulnerable as any other software, but since it uses SYSTEM rights, it is more dangerous - https://cybellum.com/doubleagent-taking-full-control-antivirus
+rem AV is as vulnerable as any other software, but since it uses SYSTEM rights, it is more dangerous - https://www.darkreading.com/threat-intelligence/windows-doubleagent-attack-turns-av-tools-into-malware
 rem Disable webfiltering, AV replacing legitimate certificates - https://www.eff.org/deeplinks/2015/02/dear-software-vendors-please-stop-trying-intercept-your-customers-encrypted
 rem MD NeverEnding Story https://www.bleepingcomputer.com/news/security/12-year-old-windows-defender-bug-gives-hackers-admin-rights/
 rem https://www.bleepingcomputer.com/news/security/smartservice-and-s5mark-acts-like-an-adware-bodyguard-by-blocking-antivirus-software/
@@ -148,9 +149,10 @@ rem WiseVector StopX (CN) - https://www.wisevector.com/en
 
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
+rem Ghostpress (DE) - https://www.schiffer.tech/ghostpress.html
 rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
-rem OSArmor (IT) - https://www.osarmor.com
-rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/endpoint-protection-platform
+rem SysHardener (IT) - https://www.novirusthanks.org/products/syshardener
+rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/home-malware-protection
 rem VoodooShield (US) - https://voodooshield.com
 
 rem Browser Extensions useful against (99% malware comes via an email or a browser)
@@ -224,7 +226,7 @@ rem Disk Surface Test / Macrorit Disk Scanner - https://macrorit.com/disk-surfac
 rem Driver Updates / Driver Easy - https://www.drivereasy.com
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
 rem eMail Client Browser Extension / Checker Plus for Gmail - https://chrome.google.com/webstore/detail/checker-plus-for-gmail/oeopbcgkkoapgobdbedcemjljbihmemj
-rem File Archiver / 7-zip - https://www.7-zip.org
+rem File Archiver / NanaZip - https://www.microsoft.com/en-us/p/nanazip/9n8g7tscl18r?activetab=pivot:overviewtab
 rem Folder View Globally Set / WinSetView - https://github.com/brake4bots/WinSetView
 rem GPU Info / GPU-Z - https://www.techpowerup.com/gpuz
 rem GPU Test / Furmark - https://geeks3d.com/furmark
@@ -251,7 +253,6 @@ rem Process Monitor / Process Monitor - https://docs.microsoft.com/en-us/sysinte
 rem Radio / Audials Radio - https://audials.com/en/radio
 rem RAM Fix / Intelligent standby list cleaner (+Timer Resolution) - https://www.wagnardsoft.com/content/intelligent-standby-list-cleaner-v1000-released
 rem RAM Free / Mem Reduct - https://www.henrypp.org/product/memreduct
-rem RAM Disk / AMD Radeon RAMDisk (4GB) - https://www.radeonramdisk.com/software_downloads.php
 rem RAM Disk / ImDisk Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/imdisk-toolkit
 rem RAM Test / Memtest (run one process per each 2GB) - https://hcidesign.com/memtest
 rem Remote Support / TeamViewer - https://www.teamviewer.com/en/download/windows
@@ -261,10 +262,12 @@ rem Search / UltraSearch - https://www.jam-software.com/ultrasearch_free
 rem Settings / ControlUWP - https://github.com/builtbybel/control-uwp/releases
 rem SoundCard Third Party Drivers / ASUS, C-Media and Creative - https://danielkawakami.blogspot.com
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
-rem Streaming / Streamlabs OBS - https://streamlabs.com
+rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/standard.html
 rem System Restore / RollBack Rx Home Edition - https://horizondatasys.com/rollback-rx-time-machine/rollback-rx-home
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
+rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
+rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
 rem Undervolting / ThrottleStop - https://www.techpowerup.com/download/techpowerup-throttlestop
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
 rem Visual C++ / AIO Repack - https://github.com/abbodi1406/vcredist/releases
@@ -273,7 +276,6 @@ rem VM Android / BlueStacks - https://www.bluestacks.com
 rem Wallpaper - Live / Wallpaper Engine - https://store.steampowered.com/app/431960
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
 rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
-rem Windows Updates / Windows Update Manager - https://github.com/DavidXanatos/wumgr/releases
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -454,7 +456,7 @@ bcdedit /set {default} disabledynamictick yes
 bcdedit /set {default} lastknowngood yes
 bcdedit /set {default} recoveryenabled no
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9002\Discord.exe --start-minimized" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9003\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
@@ -1081,11 +1083,14 @@ reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "SMB
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 
-rem https://docs.microsoft.com/en-us/deployedge/microsoft-edge-relnote-beta-channel
+rem https://docs.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel
 rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
 rem rem https://admx.help/?Category=EdgeChromium
 rem edge://policy
+
+rem reg delete "HKCU\Software\Policies\Microsoft\Edge" /f
+rem reg delete "HKLM\Software\Policies\Microsoft\Edge" /f
 
 rem ________________________________________________________________________________________
 rem Automatic HTTPS functionality / 0 - Disabled / 1 - Switch to supported domains / 2 - Always
@@ -1282,6 +1287,11 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" 
 
 rem Choose whether users can receive customized background images and text, suggestions, notifications, and tips for Microsoft services)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecommendationsEnabled" /t REG_DWORD /d "0" /f
+
+rem Use secure DNS (DoH)
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClientEnabled" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsMode" /t REG_SZ /d "secure" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx?" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1815,10 +1825,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.132.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.132.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21081.132.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
 rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
