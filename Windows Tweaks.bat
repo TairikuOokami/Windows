@@ -1258,6 +1258,17 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageQuickLinksEnabled"
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
+rem ....................................... Personal .......................................
+
+rem 1 - Add profile
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserAddProfileEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Browse as guest
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserGuestModeEnabled" /t REG_DWORD /d "0" /f
+
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
 rem ............................ Privacy, search, and services .............................
 
 rem 1 - Suggest similar sites when a website can't be found
@@ -1298,20 +1309,35 @@ rem =================================== Windows Policies =======================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 rem ...................................... Profiles ........................................
 
+rem 1 - AADWebSiteSSOUsingThisProfileEnabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AADWebSiteSSOUsingThisProfileEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Save and fill personal info
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Save and fill payment info
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Show rewards points in Microsoft Edge user profile
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Suggest strong passwords
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordGeneratorEnabled" /t REG_DWORD /d "1" /f
+
 rem 1 - Offer to save passwords
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordManagerEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordManagerEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Show alerts when passwords are found in an online leak
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordMonitorAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Show alerts when passwords are found in an online leak
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordMonitorAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Show the "Reveal password" button in password fields
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordRevealEnabled" /t REG_DWORD /d "0" /f
+
+rem Sign in: / 0 - Automatically / 1 - With device password
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PrimaryPasswordSetting" /t REG_DWORD /d "1" /f
 
 rem 1 - Use a web service to help resolve navigation errors
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
