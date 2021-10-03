@@ -1851,10 +1851,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
-taskkill /im YourPhone.exe /f
-del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
+rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe"
+rem icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
+rem taskkill /im YourPhone.exe /f
+rem del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 rem Remove Your Phone server (to restore run SFC scan)
 rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
@@ -2119,10 +2119,10 @@ taskkill /im SearchHost.exe /f
 del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /s /f /q
 
 rem Remove Widgets (News/to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20019.195.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
-icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20019.195.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
+icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
 taskkill /im Widgets.exe /f
-del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20019.195.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
+del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
