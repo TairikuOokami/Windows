@@ -35,16 +35,10 @@ icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
 icacls D:\OneDrive /deny "System":(OI)(CI)F /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\Documents /r /d y
-icacls ‪D:\Documents /inheritance:r
-icacls ‪D:\Documents /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls ‪D:\Documents /grant "Users":(OI)(CI)RX /t /l /q /c
-icacls ‪D:\Documents /deny "System":(OI)(CI)F /t /l /q /c
-
-takeown /s %computername% /u %username% /f D:\Euro Truck Simulator 2 /r /d y
-icacls D:\Euro Truck Simulator 2 /inheritance:r
-icacls D:\Euro Truck Simulator 2 /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\Euro Truck Simulator 2 /grant "Users":(OI)(CI)RX /t /l /q /c
-icacls D:\Euro Truck Simulator 2 /deny "System":(OI)(CI)F /t /l /q /c
+icacls D:\Documents /inheritance:r
+icacls D:\Documents /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\Documents /grant "Users":(OI)(CI)RX /t /l /q /c
+icacls D:\Documents /deny "System":(OI)(CI)F /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\Software /r /d y
 icacls D:\Software /inheritance:r
@@ -75,6 +69,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\PushToInstall" /v "DisablePushToInstall" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f
@@ -114,6 +109,23 @@ wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 rem Setup Encrypted DNS
 start ‪"" /wait "D:\OneDrive\Downloads\UnValidate.bat"
 start ms-settings:network-ethernet
+
+pause
+
+rem winget list
+winget uninstall "cortana"
+winget uninstall "get help"
+winget uninstall "microsoft people"
+winget uninstall "microsoft photos"
+winget uninstall "windows alarms & clock"
+winget uninstall "windows camera"
+winget uninstall "windows maps"
+winget uninstall "windows web experience pack"
+winget uninstall "xbox game bar"
+winget uninstall "xbox game bar plugin"
+winget uninstall "xbox game speech window"
+winget uninstall "xbox identity provider"
+winget uninstall "your phone"
 
 pause
 
@@ -200,7 +212,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 
-Move Desktop
+rem Move Desktop
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "Z:\Desktop" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{754AC886-DF64-4CBA-86B5-F7FBF4FBCEF5}" /t REG_EXPAND_SZ /d "Z:\Desktop" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "Z:\Desktop" /f
