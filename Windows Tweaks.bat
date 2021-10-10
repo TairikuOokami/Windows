@@ -333,12 +333,10 @@ del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
 rem Remove Windows Powershell (to restore run "sfc /scannow")
+rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
 rem https://threatpost.com/powershell-payload-analysis-malware/165188
 rem https://threatpost.com/fileless-malware-critical-ioc-threats-2020/159422
-rem https://blog.netspi.com/15-ways-to-bypass-the-powershell-execution-policy
-rem https://www.mrg-effitas.com/research/current-state-of-malicious-powershell-script-blocking
-rem https://enigma0x3.net/2016/08/15/fileless-uac-bypass-using-eventvwr-exe-and-registry-hijacking
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
 takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
@@ -440,6 +438,7 @@ bcdedit /deletevalue {default} safebootalternateshell
 bcdedit /deletevalue {default} removememory
 bcdedit /deletevalue {default} truncatememory
 bcdedit /deletevalue {default} useplatformclock
+bcdedit /set hypervisorlaunchtype off
 bcdedit /set {bootmgr} displaybootmenu no
 bcdedit /set {current} advancedoptions false
 bcdedit /set {current} bootems no
@@ -852,6 +851,10 @@ fsutil behavior set disableencryption 1
 rem 1 - When listing directories, NTFS does not update the last-access timestamp, and it does not record time stamp updates in the NTFS log
 rem fsutil behavior query disablelastaccess
 fsutil behavior set disablelastaccess 3
+
+rem 1 - Enable virtualization-based security / run msinfo32 to check
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f
 
 rem 5 - 5 secs / Delay Chkdsk startup time at OS Boot
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "AutoChkTimeout" /t REG_DWORD /d "5" /f
@@ -1851,16 +1854,11 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /
 
 rem ________________________________________________________________________________________
 rem Remove Your Phone app (to restore run SFC scan)
+rem winget uninstall "your phone"
 rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe"
 rem icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
 rem taskkill /im YourPhone.exe /f
 rem del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
-
-rem Remove Your Phone server (to restore run SFC scan)
-rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe"
-rem icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /inheritance:r /grant:r %username%:F
-rem taskkill /im YourPhoneServer.exe /f
-rem del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21072.153.0_x64__8wekyb3d8bbwe\YourPhoneServer\YourPhoneServer.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2113,16 +2111,18 @@ rem Size of Taskbar Icons / 0 - Small / 1 - Medium / 2 - Large
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSi" /t REG_DWORD /d "1" /f
 
 rem Remove Search (Cortana/to restore run SFC scan)
+rem winget uninstall "cortana"
 takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe"
 icacls "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /inheritance:r /grant:r %username%:F
 taskkill /im SearchHost.exe /f
 del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /s /f /q
 
 rem Remove Widgets (News/to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
-icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
-taskkill /im Widgets.exe /f
-del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
+rem winget uninstall "windows web experience pack"
+rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
+rem icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
+rem taskkill /im Widgets.exe /f
+rem del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
