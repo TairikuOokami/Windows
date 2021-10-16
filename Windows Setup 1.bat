@@ -8,8 +8,14 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "Misc
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
 
+reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
+reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
+
 start ms-settings:windowsupdate-action
 rem Check for updates and Optional updates in Advanced options and RESTART!
+rem In the meantime install store apps, app installer included (winget)!
 
 pause
 
@@ -107,7 +113,7 @@ wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
 rem Setup Encrypted DNS
-start ‪"" /wait "D:\OneDrive\Downloads\UnValidate.bat"
+start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
 start ms-settings:network-ethernet
 
 pause
@@ -117,6 +123,7 @@ winget uninstall "cortana"
 winget uninstall "get help"
 winget uninstall "microsoft people"
 winget uninstall "microsoft photos"
+winget uninstall "microsoft tips"
 winget uninstall "windows alarms & clock"
 winget uninstall "windows camera"
 winget uninstall "windows maps"
