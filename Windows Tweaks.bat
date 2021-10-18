@@ -46,6 +46,7 @@ rem ================================= Basic informations =======================
 
 
 rem SeDebugPrivilege/SeTcbPrivilege - https://youtu.be/hZKLEw-Our4 - Self-elevation to System (even on SUA) used by ransomware (NotPetya/WannaCry)
+rem https://unifiedguru.com/blackmatter-ransomware-analysis-the-dark-side-returns
 rem https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/act-as-part-of-the-operating-system
 
 rem https://docs.microsoft.com/en-us/windows/deployment/update/waas-overview
@@ -60,8 +61,8 @@ rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-b
 rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
+rem Privacy Guides - https://privacyguides.org
 rem Privacy Tools - https://www.ghacks.net/2015/08/14/comparison-of-windows-10-privacy-tools
-rem Privacy Tools - https://www.privacytools.io
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
@@ -266,6 +267,7 @@ rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/standard.html
 rem System Restore / RollBack Rx Home Edition - https://horizondatasys.com/rollback-rx-time-machine/rollback-rx-home
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
+rem Task Manager in SysTray / TrayTM - https://github.com/AzadKurt/TrayTM
 rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
 rem Undervolting / ThrottleStop - https://www.techpowerup.com/download/techpowerup-throttlestop
@@ -276,6 +278,7 @@ rem VM Android / BlueStacks - https://www.bluestacks.com
 rem Wallpaper - Live / Wallpaper Engine - https://store.steampowered.com/app/431960
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
 rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
+rem WinGet GUI / HandyWinGet - https://github.com/HandyOrg/HandyWinGet
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -1283,6 +1286,12 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
 
+rem 1 - Use a web service to help resolve navigation errors
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
+
+rem 1 - Show me search and site suggestions using my typed characters
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
+
 rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
 
@@ -1341,12 +1350,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordRevealEnabled" /t RE
 
 rem Sign in: / 0 - Automatically / 1 - With device password
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PrimaryPasswordSetting" /t REG_DWORD /d "1" /f
-
-rem 1 - Use a web service to help resolve navigation errors
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
-
-rem 1 - Show me search and site suggestions using my typed characters
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Show rewards points in Microsoft Edge user profile
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
@@ -1903,10 +1906,10 @@ reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD 
 
 rem ________________________________________________________________________________________
 rem Remove GameBarPresenceWriter.exe (to restore run SFC scan)
-takeown /s %computername% /u %username% /f "%WINDIR%\System32\GameBarPresenceWriter.exe"
-icacls "%WINDIR%\System32\GameBarPresenceWriter.exe" /inheritance:r /grant:r %username%:F
-taskkill /im GameBarPresenceWriter.exe /f
-del "%WINDIR%\System32\GameBarPresenceWriter.exe" /s /f /q
+rem takeown /s %computername% /u %username% /f "%WINDIR%\System32\GameBarPresenceWriter.exe"
+rem icacls "%WINDIR%\System32\GameBarPresenceWriter.exe" /inheritance:r /grant:r %username%:F
+rem taskkill /im GameBarPresenceWriter.exe /f
+rem del "%WINDIR%\System32\GameBarPresenceWriter.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -2960,8 +2963,6 @@ rem Clean caches and cookies (not covered by CookieAutodelete, since the browser
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data" /s /f /q
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q
@@ -3009,5 +3010,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://i.postimg.cc/KF4qNMdm/12-Sep-21.png
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/6TVyNhVS
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
