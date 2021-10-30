@@ -279,6 +279,7 @@ rem Wallpaper - Live / Wallpaper Engine - https://store.steampowered.com/app/431
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
 rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
 rem WinGet GUI / HandyWinGet - https://github.com/HandyOrg/HandyWinGet
+rem WMIC / Restore WMIC Tool - https://forums.mydigitallife.net/threads/project-restore-deprecated-wmic-tool.84375/
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -1295,6 +1296,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG
 rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
 
+rem Visual search / 0 - Off 
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VisualSearchEnabled" /t REG_DWORD /d "0" /f
+
 rem ________________________________________________________________________________________
 rem Enable Microsoft Search in Bing suggestions in the address bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
@@ -1808,7 +1812,7 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------------- Apps ------------------------------------------
 rem .................................. Optional features ...................................
 
-rem Dism /Online /Get-Features
+rem DISM /Online /Get-Features /Format:Table
 rem Windows Basics
 
 
