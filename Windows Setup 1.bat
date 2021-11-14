@@ -127,6 +127,7 @@ winget uninstall "microsoft tips"
 winget uninstall "windows alarms & clock"
 winget uninstall "windows camera"
 winget uninstall "windows maps"
+winget uninstall "windows terminal"
 winget uninstall "windows web experience pack"
 winget uninstall "xbox game bar"
 winget uninstall "xbox game bar plugin"
@@ -137,7 +138,7 @@ winget uninstall "your phone"
 pause
 
 rem https://msdn.microsoft.com/en-us/windows/hardware/commercialize/manufacture/desktop/enable-or-disable-windows-features-using-dism
-rem Dism /Online /Get-Features
+rem DISM /Online /Get-Features /Format:Table
 Dism /Online /Disable-Feature /FeatureName:MediaPlayback /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Microsoft-Windows-Subsystem-Linux /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:MicrosoftWindowsPowerShellV2 /Quiet /NoRestart
@@ -242,6 +243,8 @@ rem Move Downloads
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "D:\OneDrive\Downloads" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "D:\OneDrive\Downloads" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "D:\OneDrive\Downloads" /f
+rd "%USERPROFILE%\Downloads" /s /q
+mklink /d "%USERPROFILE%\Downloads" "D:\OneDrive\Downloads"
 
 rem Move Pictures
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "My Pictures" /t REG_SZ /d "D:\OneDrive\Pictures" /f
