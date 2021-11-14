@@ -17,6 +17,8 @@ start ms-settings:windowsupdate-action
 rem Check for updates and Optional updates in Advanced options and RESTART!
 rem In the meantime install store apps, app installer included (winget)!
 
+start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
+
 pause
 
 start "" "D:\Software"
