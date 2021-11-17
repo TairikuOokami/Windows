@@ -2,7 +2,7 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes
-rem https://www.aomeitech.com/ab/standard.html
+rem https://www.ubackup.com/help/create-windows-recovery-environment.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
@@ -10,7 +10,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
-rem Critical processes removed - SearchHost.exe / Widgets.exe
+rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem Disabled task MsCtfMonitor is required to be able to search/type within UWP apps
 rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
 rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
@@ -443,7 +443,9 @@ bcdedit /deletevalue {default} removememory
 bcdedit /deletevalue {default} truncatememory
 bcdedit /deletevalue {default} useplatformclock
 bcdedit /set hypervisorlaunchtype off
+Bcdedit /set flightsigning off
 bcdedit /set {bootmgr} displaybootmenu no
+Bcdedit /set {bootmgr} flightsigning off
 bcdedit /set {current} advancedoptions false
 bcdedit /set {current} bootems no
 bcdedit /set {current} bootmenupolicy legacy
@@ -460,7 +462,9 @@ bcdedit /set {default} lastknowngood yes
 bcdedit /set {default} recoveryenabled no
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9003\Discord.exe --start-minimized" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"c\Microsoft OneDrive\OneDrive.exe\" /background" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
@@ -2093,6 +2097,13 @@ rem ........................................ Start .............................
 rem 1 - Show recently opened items in Start, Jump Lists, and File Explorer
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "Start_TrackDocs" /t REG_DWORD /d "0" /f
 
+rem ________________________________________________________________________________________
+rem Remove Start (to restore run SFC scan)
+takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe"
+icacls "%WINDIR%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /inheritance:r /grant:r %username%:F
+taskkill /im StartMenuExperienceHost.exe /f
+del "%WINDIR%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe" /s /f /q
+
 
 rem =================================== Windows Settings ===================================
 rem ----------------------------------- Personalization ------------------------------------
@@ -3014,5 +3025,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/6TVyNhVS
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/nsfhncHr
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
