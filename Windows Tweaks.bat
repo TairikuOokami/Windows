@@ -268,6 +268,7 @@ rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/sta
 rem System Restore / RollBack Rx Home Edition - https://horizondatasys.com/rollback-rx-time-machine/rollback-rx-home
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
 rem Task Manager in SysTray / TrayTM - https://github.com/AzadKurt/TrayTM
+rem Taskbar Drag & Drop / Windows 11 Drag & Drop to the Taskbar - https://github.com/HerMajestyDrMona/Windows11DragAndDropToTaskbarFix
 rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
 rem Undervolting / ThrottleStop - https://www.techpowerup.com/download/techpowerup-throttlestop
@@ -464,7 +465,7 @@ bcdedit /set {default} recoveryenabled no
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9003\Discord.exe --start-minimized" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"c\Microsoft OneDrive\OneDrive.exe\" /background" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
@@ -482,10 +483,6 @@ reg add "HKCU\Software\7-Zip\Compression" /v "Level" /t "REG_DWORD" /d "9" /f
 reg add "HKCU\Software\7-Zip\Compression\Options\7z" /v "Level" /t "REG_DWORD" /d "9" /f
 reg add "HKCU\Software\7-Zip\Options" /v "CascadedMenu" /t "REG_DWORD" /d "1" /f
 reg add "HKCU\Software\7-Zip\Options" /v "ContextMenu" /t "REG_DWORD" /d "263" /f
-
-rem Audials Radio
-taskkill /im AudialsNotifier.exe /f
-del "%ProgramFiles(x86)%\Audials\Audials 2021\AudialsNotifier.exe" /s /f /q
 
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
@@ -1277,6 +1274,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserAddProfileEnabled" /t
 rem 1 - Browse as guest
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserGuestModeEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Allow users to configure Family safety and Kids Mode
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "FamilySafetySettingsEnabled" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -2021,8 +2021,8 @@ rem =================================== Windows Settings =======================
 rem ----------------------------------- Personalization ------------------------------------
 rem ..................................... Background .......................................
 
-rem Choose your picture (Black/Dark recommended)
-reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "D:\OneDrive\Pictures\MLP\Wallpaper.jpg" /f
+rem Choose your picture (use PNG to display 100% quality of the original image)
+reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "D:\OneDrive\Pictures\MLP\Wallpaper.png" /f
 
 rem Choose a fit / 10 - Fill / 6 - Fit / 2 - Stretch / 0 - Tile/Center
 reg add "HKCU\Control Panel\Desktop" /v "WallpaperStyle" /t REG_SZ /d "2" /f
