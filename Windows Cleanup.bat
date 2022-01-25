@@ -125,6 +125,9 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Wi
 rem cleanmgr /sageset:6553
 cleanmgr /sagerun:6553
 
+rem Cleanup done, you can close this window!
+timeout -1
+
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
