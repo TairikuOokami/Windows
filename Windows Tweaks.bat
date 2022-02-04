@@ -114,6 +114,7 @@ rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-wind
 rem https://tb.rg-adguard.net
 rem https://genuineisoverifier.weebly.com
 rem https://uupdump.ml/known.php?q=19042.450
+rem Windows ReviOS - https://www.revi.cc/revios
 
 rem Check ISO Windows versions and build version
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
@@ -338,10 +339,10 @@ del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
 rem Remove Windows Powershell (to restore run "sfc /scannow")
+rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
 rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
 rem https://threatpost.com/powershell-payload-analysis-malware/165188
-rem https://threatpost.com/fileless-malware-critical-ioc-threats-2020/159422
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
 takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
@@ -899,7 +900,7 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "S
 rem =================================== Windows Policies ===================================
 
 
-rem https://admx.help
+rem rem https://admx.help/?Category=Windows_11_2022
 rem https://docs.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/new-in-windows-mdm-enrollment-management#whatsnew10
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
@@ -1118,9 +1119,6 @@ rem reg delete "HKCU\Software\Policies\Microsoft\Edge" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Edge" /f
 
 rem ________________________________________________________________________________________
-rem Automatic HTTPS functionality / 0 - Disabled / 1 - Switch to supported domains / 2 - Always
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutomaticHttpsDefault" /t REG_DWORD /d "2" /f
-
 rem 1 - AllowJavaScriptJit / 2 - BlockJavaScriptJit (Do not allow any site to run JavaScript JIT)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultJavaScriptJitSetting" /t REG_DWORD /d "0" /f
 
@@ -1133,8 +1131,20 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DirectInvokeEnabled" /t REG_
 rem 1 - Disable taking screenshots
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DisableScreenshots" /t REG_DWORD /d "1" /f
 
+rem 1 - Microsoft Edge can automatically enhance images to show you sharper images with better color, lighting, and contrast
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Allows the Microsoft Edge browser to enable Follow service and apply it to users
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeFollowEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Allow Google Cast to connect to Cast devices on all IP addresses, Edge trying to connect to 239.255.255.250 via UDP port 1900
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DWORD /d "0" /f
+
+rem The Experimentation and Configuration Service is used to deploy Experimentation and Configuration payloads to the client / 0 - RestrictedMode / 1 - ConfigurationsOnlyMode / 2 - FullMode
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExperimentationAndConfigurationServiceControl" /t REG_DWORD /d "0" /f
+
+rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow QUIC protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
@@ -1302,8 +1312,14 @@ rem ............................ Privacy, search, and services .................
 rem 1 - Suggest similar sites when a website can't be found
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AlternateErrorPagesEnabled" /t REG_DWORD /d "0" /f
 
+rem Automatically switch to more secure connections with Automatic HTTPS / 0 - Disabled / 1 - Switch to supported domains / 2 - Always
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutomaticHttpsDefault" /t REG_DWORD /d "2" /f
+
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
+
+rem 1 - Enhance the security state in Microsoft Edge / 0 - Standard mode / 1 - Balanced mode / 2 - Strict mode
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityMode" /t REG_DWORD /d "2" /f
 
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
@@ -1317,12 +1333,18 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG
 rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
 
-rem Visual search / 0 - Off 
+rem 1 - Typosquatting Checker (just sending what you type to MS)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TyposquattingCheckerEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Visual search (sending what you are looking at to MS)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VisualSearchEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 rem Enable Microsoft Search in Bing suggestions in the address bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow sending URLs to Microsoft Bing to search for related recommendations
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeDiscoverEnabled" /t REG_DWORD /d "0" /f
 
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
@@ -1382,10 +1404,13 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
-rem ....................................... System .........................................
+rem ................................ System and performance ................................
 
 rem 1 - Continue running background apps when Microsoft Edge is closed
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Turn on efficiency mode
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyMode" /t REG_DWORD /d "0" /f
 
 rem 1 - Use hardware acceleration when available
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "1" /f
@@ -2921,7 +2946,6 @@ rem tasklist/svc>c:\processlist.txt
 rem wmic startup get caption,command > c:\StartupApps.txt
 
 rem Malware Live - Real AV Testing
-rem http://vxvault.net/ViriList.php
 rem rem https://app.any.run/submissions
 rem https://urlhaus.abuse.ch/browse
 rem https://www.hybrid-analysis.com/submissions/sandbox/files
