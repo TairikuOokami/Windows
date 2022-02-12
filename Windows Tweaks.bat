@@ -133,21 +133,27 @@ rem =============================== Software recommendations ===================
 
 
 rem AntiVirus software
-rem 360 Total Security (CN) - https://www.360totalsecurity.com
-rem Adaware (MT) - https://www.adaware.com/free-antivirus-download (Bitdefender's signatures)
-rem Adaware Silent - App Managment - Enable Gaming Mode / Disable ThreatWork Alliance
-rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/thank-you/free-antivirus-download
-rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended - uncheck All
+rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
+rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
+rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
+rem 360 Total Security Setup - uncheck Join 360 User Experience Improvement Program
+rem Adaware (MT) - https://www.adaware.com/free-antivirus-download (Bitdefender's signatures + install/uninstall without restart) - https://postimg.cc/30CN1yFK
+rem Adaware Silent - App Managment - Enable Gaming Mode
+rem Adaware Silent - Scan Computer - Disable Automated Scan
+rem Microsoft Defender - https://github.com/AndyFul/ConfigureDefender - https://postimg.cc/ZBsbb1xh
+rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/try-free-cloud-antivirus - https://postimg.cc/Yvry2J40
+rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended uncheck All
 rem Kaspersky Security Cloud Setup - Uninstall Kaspersky Secure Connection (trial VPN)
-rem Kaspersky Security Cloud Setup -  Settings - Additional - Notifications - uncheck News Notifications and Promotional Materials
-rem Kaspersky Security Cloud Performance - Settings - Protection - Turn Off All, but File Anti-Virus
-rem Kaspersky Security Cloud Performance - Settings - Additional - uncheck Inject script into web traffic / Do not scan encrypted connections
+rem Kaspersky Security Cloud Setup - Settings - Interface - uncheck Receive informational messages + Show information about special offers
+rem Kaspersky Security Cloud Performance - Settings - Additional - uncheck Use hardware virtualization + Show password strength + Warn about using the same password
+rem Kaspersky Security Cloud Performance - Settings - General - uncheck Use Advanced Disinfection
+rem Kaspersky Security Cloud Performance - Settings - Protection - Turn Off All, but File Anti-Virus / File Anti-Virus Advanced - set Security level Low
+rem Kaspersky Security Cloud Performance - Settings - Network settings - check Do not scan encrypted connections (to avoid MITM)
+rem Kaspersky Security Cloud Performance - Settings - Network settings - uncheck Inject script into web traffic + Monitor all ports + Decrypt + Scan secure traffic
 
 rem AntiVirus software (Cloud only)
-rem Immunet (US) - https://www.immunet.com/index
-rem Panda (ES) (it has to be updated manually to the latest version) - https://www.pandasecurity.com/en-us/homeusers/free-antivirus
-rem Panda Performance - Settings - General - Disable Panda news / Antivirus - Block files for 10 seconds/Disable show warning/Process Monitor - Disable both
-rem WiseVector StopX (CN) - https://www.wisevector.com/en
+rem Immunet (US) - https://www.immunet.com/index - https://postimg.cc/TpjzQjM8
+rem WiseVector StopX (CN) - https://www.wisevector.com/en - https://postimg.cc/HVjS8QY4
 
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
@@ -281,7 +287,6 @@ rem Wallpaper - Live / Wallpaper Engine - https://store.steampowered.com/app/431
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
 rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
 rem WinGet GUI / HandyWinGet - https://github.com/HandyOrg/HandyWinGet
-rem WMIC / Restore WMIC Tool - https://forums.mydigitallife.net/threads/project-restore-deprecated-wmic-tool.84375/
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -934,52 +939,51 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "6" /t REG_SZ /d "bginfo.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "7" /t REG_SZ /d "bitsadmin.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "8" /t REG_SZ /d "cdb.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "9" /t REG_SZ /d "cipher.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "10" /t REG_SZ /d "cscript.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "11" /t REG_SZ /d "csi.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "12" /t REG_SZ /d "dbghost.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "13" /t REG_SZ /d "dnx.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "14" /t REG_SZ /d "dotnet.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "15" /t REG_SZ /d "fsi.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "16" /t REG_SZ /d "fsiAnyCpu.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "17" /t REG_SZ /d "infdefaultinstall.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "18" /t REG_SZ /d "hh.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "19" /t REG_SZ /d "kd.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "20" /t REG_SZ /d "kill.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "21" /t REG_SZ /d "lxrun.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "22" /t REG_SZ /d "msbuild.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "23" /t REG_SZ /d "mshta.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "24" /t REG_SZ /d "msra.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "25" /t REG_SZ /d "nc.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "26" /t REG_SZ /d "nc64.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "27" /t REG_SZ /d "ntkd.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "28" /t REG_SZ /d "ntsd.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "29" /t REG_SZ /d "powershell.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "30" /t REG_SZ /d "powershell_ise.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "31" /t REG_SZ /d "powershellcustomhost.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "32" /t REG_SZ /d "psexec.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "33" /t REG_SZ /d "rcsi.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "34" /t REG_SZ /d "regsvr32.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "35" /t REG_SZ /d "runscripthelper.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "36" /t REG_SZ /d "scrcons.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "37" /t REG_SZ /d "texttransform.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "38" /t REG_SZ /d "visualuiaverifynative.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "39" /t REG_SZ /d "wbemtest.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "40" /t REG_SZ /d "wecutil.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "41" /t REG_SZ /d "werfault.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "42" /t REG_SZ /d "finger.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "43" /t REG_SZ /d "windbg.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "44" /t REG_SZ /d "winrm.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "45" /t REG_SZ /d "winrs.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "46" /t REG_SZ /d "wmic.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "47" /t REG_SZ /d "wscript.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "48" /t REG_SZ /d "wsl.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "49" /t REG_SZ /d "wslconfig.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "50" /t REG_SZ /d "wslhost.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "51" /t REG_SZ /d "ftp.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "52" /t REG_SZ /d "certutil.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "regsvr32.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "rundll32.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "9" /t REG_SZ /d "certutil.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "10" /t REG_SZ /d "cipher.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "11" /t REG_SZ /d "cscript.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "12" /t REG_SZ /d "csi.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "13" /t REG_SZ /d "dbghost.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "14" /t REG_SZ /d "dnx.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "15" /t REG_SZ /d "dotnet.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "16" /t REG_SZ /d "finger.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "17" /t REG_SZ /d "fsi.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "18" /t REG_SZ /d "fsiAnyCpu.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "19" /t REG_SZ /d "ftp.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "20" /t REG_SZ /d "infdefaultinstall.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "21" /t REG_SZ /d "hh.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "22" /t REG_SZ /d "kd.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "23" /t REG_SZ /d "kill.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "24" /t REG_SZ /d "lxrun.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "25" /t REG_SZ /d "msbuild.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "26" /t REG_SZ /d "mshta.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "27" /t REG_SZ /d "msra.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "28" /t REG_SZ /d "nc.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "29" /t REG_SZ /d "nc64.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "30" /t REG_SZ /d "ntkd.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "31" /t REG_SZ /d "ntsd.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "32" /t REG_SZ /d "powershell.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "33" /t REG_SZ /d "powershell_ise.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "34" /t REG_SZ /d "powershellcustomhost.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "35" /t REG_SZ /d "psexec.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "36" /t REG_SZ /d "rcsi.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "37" /t REG_SZ /d "regsvr32.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "38" /t REG_SZ /d "rundll32.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "39" /t REG_SZ /d "runscripthelper.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "40" /t REG_SZ /d "scrcons.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "41" /t REG_SZ /d "texttransform.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "42" /t REG_SZ /d "visualuiaverifynative.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "43" /t REG_SZ /d "wbemtest.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "44" /t REG_SZ /d "wecutil.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "45" /t REG_SZ /d "werfault.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "46" /t REG_SZ /d "windbg.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "47" /t REG_SZ /d "winrm.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "48" /t REG_SZ /d "winrs.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "49" /t REG_SZ /d "wmic.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "50" /t REG_SZ /d "wscript.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "51" /t REG_SZ /d "wsl.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "52" /t REG_SZ /d "wslconfig.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "wslhost.exe" /f
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
 reg add "HKLM\Software\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f
@@ -1038,9 +1042,8 @@ rem Locky ransomware using VBscript (Visual Basic Script) - https://blog.avast.c
 rem https://www.wietzebeukema.nl/blog/hijacking-dlls-in-windows - https://dmcxblue.net/2021/08/30/fileless-malware
 rem 0 - Disable Windows Script Host (WSH) (prevents majority of malware from working, especially when removing PowerShell as well, Disable ExecutionPolicy can be easily bypassed)
 rem Also disabled via DisallowRun "wscript.exe" and "cscript.exe"
-reg add "HKCU\Software\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\WOW6432Node\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
+
+
 
 rem Disable Customer Experience Improvement (CEIP/SQM - Software Quality Management)
 reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\SQM" /v "DisableCustomerImprovementProgram" /t REG_DWORD /d "0" /f
