@@ -132,7 +132,7 @@ rem https://www.tenforums.com/tutorials/78214-settings-pages-list-uri-shortcuts-
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software
+rem AntiVirus software (Bitdefender, Panda, ZoneAlarm are dead - Avast, AVG, Avira, Sophos are out of question)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
 rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
@@ -140,7 +140,6 @@ rem 360 Total Security Setup - uncheck Join 360 User Experience Improvement Prog
 rem Adaware (MT) - https://www.adaware.com/free-antivirus-download (Bitdefender's signatures + install/uninstall without restart) - https://postimg.cc/30CN1yFK
 rem Adaware Silent - App Managment - Enable Gaming Mode
 rem Adaware Silent - Scan Computer - Disable Automated Scan
-rem Microsoft Defender - https://github.com/AndyFul/ConfigureDefender - https://postimg.cc/ZBsbb1xh
 rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/try-free-cloud-antivirus - https://postimg.cc/Yvry2J40
 rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended uncheck All
 rem Kaspersky Security Cloud Setup - Uninstall Kaspersky Secure Connection (trial VPN)
@@ -150,6 +149,7 @@ rem Kaspersky Security Cloud Performance - Settings - General - uncheck Use Adva
 rem Kaspersky Security Cloud Performance - Settings - Protection - Turn Off All, but File Anti-Virus / File Anti-Virus Advanced - set Security level Low
 rem Kaspersky Security Cloud Performance - Settings - Network settings - check Do not scan encrypted connections (to avoid MITM)
 rem Kaspersky Security Cloud Performance - Settings - Network settings - uncheck Inject script into web traffic + Monitor all ports + Decrypt + Scan secure traffic
+rem Microsoft Defender - https://github.com/AndyFul/ConfigureDefender - https://postimg.cc/ZBsbb1xh
 
 rem AntiVirus software (Cloud only)
 rem Immunet (US) - https://www.immunet.com/index - https://postimg.cc/TpjzQjM8
@@ -1649,6 +1649,12 @@ sc config BDESVC start= disabled
 rem Clipboard User Service
 sc config cbdhsvc start= disabled
 
+rem Connected Devices Platform Service
+sc config CDPSvc start= disabled
+
+rem Connected Devices Platform User Service
+sc config CDPUserSvc start= disabled
+
 rem Connected User Experiences and Telemetry
 sc config DiagTrack start= disabled
 
@@ -1661,11 +1667,20 @@ sc config DusmSvc start= disabled
 rem DevQuery Background Discovery Broker
 sc config DevQueryBroker start= disabled
 
+rem DevicesFlow
+sc config DevicesFlowUserSvc start= disabled
+
+rem Device Management Wireless Application Protocol (WAP) Push message Routing Service
+sc config dmwappushservice start= disabled
+
 rem Display Enhancement Service
 sc config DisplayEnhancementService start= disabled
 
 rem Display Policy Service
 sc config DispBrokerDesktopSvc start= disabled
+
+rem Distributed Link Tracking Client
+sc config TrkWks start= disabled
 
 rem dLauncherLoopback
 sc config dLauncherLoopback start= demand
@@ -1688,11 +1703,17 @@ sc config IKEEXT start= disabled
 rem IP Helper
 sc config iphlpsvc start= disabled
 
+rem Microsoft (R) Diagnostics Hub Standard Collector Service
+sc config diagnosticshub.standardcollector.service start= disabled
+
 rem Network Policy Server Management Service
 sc config NPSMSvc start= disabled
 
 rem Payments and NFC/SE Manager
 sc config SEMgrSvc start= disabled
+
+rem Portable Device Enumerator ServicePayments and NFC/SE Manager
+sc config WPDBusEnum start= disabled
 
 rem Program Compatibility Assistant Service
 sc config PcaSvc start= disabled
@@ -1727,17 +1748,32 @@ sc config SSDPSRV start= disabled
 rem Superfetch
 sc config SysMain start= disabled
 
+rem Sync Host
+sc config OneSyncSvc start= disabled
+
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
 
 rem Touch Keyboard and Handwriting Panel Service (keeps ctfmon.exe running)
 sc config TabletInputService start= disabled
 
+rem User Data Access
+sc config UserDataSvc start= disabled
+
+rem User Data Storage
+sc config UnistoreSvc start= disabled
+
 rem WebClient
 sc config WebClient start= disabled
 
+rem Windows Connection Manager
+sc config Wcmsvc start= disabled
+
 rem Windows Font Cache Service
 sc config FontCache start= disabled
+
+rem Windows Image Acquisition (WIA)
+sc config StiSvc start= disabled
 
 rem Windows Remote Management (WS-Management)
 sc config WinRM start= disabled
@@ -3069,5 +3105,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/nsfhncHr
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/TyF3kxZ4 / https://postimg.cc/2bW8MJY8
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
