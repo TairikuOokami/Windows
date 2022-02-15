@@ -16,8 +16,6 @@ start ms-settings:optionalfeatures
 
 pause
 
-start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
-
 taskkill /im msedge.exe /f
 takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
 xcopy "%LocalAppData%\Microsoft\Edge" "Z:\Edge" /s /i /y
@@ -44,19 +42,14 @@ pause
 
 start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 
-rem Disabled #heavy-ad-privacy-mitigations
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
-rem Disabled #edge-share-menu
 rem Disabled #edge-show-feature-recommendations
 rem Disabled #enable-quic
-rem Disabled #tab-hover-cards
 
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
 rem Enabled #edge-automatic-https
-rem Enabled #edge-enable-super-duper-secure-mode
-rem Enabled #edge-pc-ui-integration
 rem Enabled #strict-extension-isolation
 
 
@@ -67,9 +60,7 @@ reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Ste
 start "" /wait "D:\Steam\steam.exe"
 start "" /wait "D:\OneDrive\Setup\Install TruckersMP.exe"
 
-pause
-
-start ms-windows-store:
+rem start ms-windows-store:
 
 pause
 
