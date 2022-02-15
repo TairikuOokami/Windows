@@ -46,8 +46,8 @@ rem ================================= Basic informations =======================
 
 
 rem SeDebugPrivilege/SeTcbPrivilege - https://youtu.be/hZKLEw-Our4 - Self-elevation to System (even on SUA) used by ransomware (NotPetya/WannaCry)
-rem https://unifiedguru.com/blackmatter-ransomware-analysis-the-dark-side-returns
 rem https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/act-as-part-of-the-operating-system
+rem https://unifiedguru.com/blackmatter-ransomware-analysis-the-dark-side-returns
 
 rem https://docs.microsoft.com/en-us/windows/deployment/update/waas-overview
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
@@ -62,7 +62,6 @@ rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
-rem Privacy Tools - https://www.ghacks.net/2015/08/14/comparison-of-windows-10-privacy-tools
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
@@ -113,7 +112,6 @@ rem Windows ISO
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
 rem https://genuineisoverifier.weebly.com
-rem https://uupdump.ml/known.php?q=19042.450
 rem Windows ReviOS - https://www.revi.cc/revios
 
 rem Check ISO Windows versions and build version
@@ -121,12 +119,10 @@ rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim /index:1
 rem dism /Get-WimInfo /WimFile:E:\sources\install.esd /index:1
 
-rem https://www.tenforums.com/tutorials/3109-shell-commands-list-windows-10-a.html
-rem https://www.tenforums.com/tutorials/3123-clsid-key-guid-shortcuts-list-windows-10-a.html
-rem https://www.tenforums.com/tutorials/3234-environment-variables-windows-10-a.html
-rem https://www.tenforums.com/tutorials/77458-rundll32-commands-list-windows-10-a.html
-rem https://www.tenforums.com/tutorials/78108-app-commands-list-windows-10-a.html
-rem https://www.tenforums.com/tutorials/78214-settings-pages-list-uri-shortcuts-windows-10-a.html
+rem https://www.elevenforum.com/t/create-shortcuts-to-open-pages-in-settings-in-windows-11.522
+rem https://www.elevenforum.com/t/list-of-uri-commands-to-open-microsoft-store-apps-in-windows-11.2683
+rem https://www.elevenforum.com/t/list-of-windows-11-clsid-key-guid-shortcuts.1075
+rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-folder-shortcuts.1080
 
 
 rem =============================== Software recommendations ===============================
@@ -138,7 +134,7 @@ rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
 rem 360 Total Security Setup - uncheck Join 360 User Experience Improvement Program
 rem Adaware (MT) - https://www.adaware.com/free-antivirus-download (Bitdefender's signatures + install/uninstall without restart) - https://postimg.cc/30CN1yFK
-rem Adaware Silent - App Managment - Enable Gaming Mode
+rem Adaware Silent - App Managment - Enable Gaming Mode / Disable Threat Alliance for a better privacy
 rem Adaware Silent - Scan Computer - Disable Automated Scan
 rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/try-free-cloud-antivirus - https://postimg.cc/Yvry2J40
 rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended uncheck All
@@ -212,11 +208,12 @@ rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/produc
 
 rem Software
 rem Application Updates / Patch My PC - https://patchmypc.com
+rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bootable USB / Universal USB Installer - https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3
 rem Bootloader / EasyBCD - https://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
-rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy!
+rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy/security!
 rem Cloud Backup / IceDrive - https://icedrive.net/plans
 rem Cloud Backup / PolarBackup - https://www.polarbackup.com/#pricing
 rem Compact/Compress Files / Compact GUI - https://github.com/ImminentFate/CompactGUI
@@ -225,17 +222,17 @@ rem CPU Info / CPU-Z - https://www.cpuid.com/softwares/cpu-z.html
 rem CPU Test / Prime95 - https://www.mersenne.org/download
 rem Data Recovery / EaseUS Data Recovery Wizard - https://www.easeus.com/datarecoverywizard/free-data-recovery-software.htm
 rem Directx 9.0 Runtimes / DirectX Redistributable June 2010 - https://www.softpedia.com/get/System/OS-Enhancements/DirectX-9.0c-Redistributable.shtml
-rem Disc to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
 rem Disk Info / CrystalDiskInfo - https://crystalmark.info/en/software/crystaldiskinfo
 rem Disk Scan / HDDScan - https://hddscan.com
 rem Disk Space Usage / WizTree - https://wiztreefree.com
 rem Disk Speed Test / CCSIO Benchmark - https://ccsiobench.com
 rem Disk Surface Test / Macrorit Disk Scanner - https://macrorit.com/disk-surface-test/disk-surface-test.html
 rem Driver Updates / Driver Easy - https://www.drivereasy.com
+rem DVD to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
 rem eMail Client Browser Extension / Checker Plus for Gmail - https://chrome.google.com/webstore/detail/checker-plus-for-gmail/oeopbcgkkoapgobdbedcemjljbihmemj
 rem File Archiver / NanaZip - https://www.microsoft.com/en-us/p/nanazip/9n8g7tscl18r?activetab=pivot:overviewtab
-rem Folder View Globally Set / WinSetView - https://github.com/brake4bots/WinSetView
+rem Folder View Globally Set / WinSetView - https://github.com/LesFerch/WinSetView
 rem GPU Info / GPU-Z - https://www.techpowerup.com/gpuz
 rem GPU Test / Furmark - https://geeks3d.com/furmark
 rem Hardware Information / HWiNFO - https://www.hwinfo.com/download.php
@@ -260,7 +257,8 @@ rem Permissions / Reset permissions/Take Ownership - http://lallouslab.net/2013/
 rem Process Monitor / Process Monitor - https://docs.microsoft.com/en-us/sysinternals/downloads/procmon
 rem Radio / Audials Radio - https://audials.com/en/radio
 rem RAM Fix / Intelligent standby list cleaner (+Timer Resolution) - https://www.wagnardsoft.com/content/intelligent-standby-list-cleaner-v1000-released
-rem RAM Free / Mem Reduct - https://www.henrypp.org/product/memreduct
+rem RAM Free (Memory Leak) / Mem Reduct - https://www.henrypp.org/product/memreduct
+rem RAM Free (Memory Leak) / Reduce Memory - https://www.sordum.org/9197/reduce-memory-v1-6
 rem RAM Disk / ImDisk Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/imdisk-toolkit
 rem RAM Test / Memtest (run one process per each 2GB) - https://hcidesign.com/memtest
 rem Remote Support / TeamViewer - https://www.teamviewer.com/en/download/windows
@@ -275,6 +273,7 @@ rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/sta
 rem System Restore / RollBack Rx Home Edition - https://horizondatasys.com/rollback-rx-time-machine/rollback-rx-home
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
 rem Task Manager in SysTray / TrayTM - https://github.com/AzadKurt/TrayTM
+rem Taskbar Always On Top Bug / Rude Window Fixer - https://github.com/dechamps/RudeWindowFixer
 rem Taskbar Drag & Drop / Windows 11 Drag & Drop to the Taskbar - https://github.com/HerMajestyDrMona/Windows11DragAndDropToTaskbarFix
 rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
@@ -483,13 +482,6 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE
 rem =================================== Software Setup =====================================
 
 
-rem 7-zip
-reg add "HKCU\Software\7-Zip\Compression" /v "Archiver" /t "REG_SZ" /d "7z" /f
-reg add "HKCU\Software\7-Zip\Compression" /v "Level" /t "REG_DWORD" /d "9" /f
-reg add "HKCU\Software\7-Zip\Compression\Options\7z" /v "Level" /t "REG_DWORD" /d "9" /f
-reg add "HKCU\Software\7-Zip\Options" /v "CascadedMenu" /t "REG_DWORD" /d "1" /f
-reg add "HKCU\Software\7-Zip\Options" /v "ContextMenu" /t "REG_DWORD" /d "263" /f
-
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z:/TEMP/Gihosoft/temp" /f
@@ -605,8 +597,7 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-rem netsh advfirewall firewall add rule name="MS Edge TCP" dir=out action=allow protocol=TCP remoteport=443 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-rem netsh advfirewall firewall add rule name="MS Edge Update TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255,40.74.0.0-40.125.127.255,52.145.0.0-52.191.255.255 remoteport=443 program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"rem netsh advfirewall firewall add rule name="MS Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
+rem netsh advfirewall firewall add rule name="MS Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
 rem netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
 rem netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.10.0.0-51.13.255.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
 rem netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
@@ -1995,10 +1986,10 @@ reg add "HKCU\Software\Microsoft\GameBar" /v "AutoGameModeEnabled" /t REG_DWORD 
 
 rem ________________________________________________________________________________________
 rem Remove GameBarPresenceWriter.exe (to restore run SFC scan)
-rem takeown /s %computername% /u %username% /f "%WINDIR%\System32\GameBarPresenceWriter.exe"
-rem icacls "%WINDIR%\System32\GameBarPresenceWriter.exe" /inheritance:r /grant:r %username%:F
-rem taskkill /im GameBarPresenceWriter.exe /f
-rem del "%WINDIR%\System32\GameBarPresenceWriter.exe" /s /f /q
+takeown /s %computername% /u %username% /f "%WINDIR%\System32\GameBarPresenceWriter.exe"
+icacls "%WINDIR%\System32\GameBarPresenceWriter.exe" /inheritance:r /grant:r %username%:F
+taskkill /im GameBarPresenceWriter.exe /f
+del "%WINDIR%\System32\GameBarPresenceWriter.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -3027,7 +3018,7 @@ rem User Accounts - netplwiz
 
 rem Windows Updates Block
 rem https://www.tenforums.com/tutorials/8013-enable-disable-windows-update-automatic-updates-windows-10-a.html
-rem https://www.sordum.org/9470/windows-update-blocker-v1-6
+rem https://www.sordum.org/9470/windows-update-blocker-v1-7
 rem Block svchost.exe in the firewall (TCP 80) or create a nonexistent symlink
 rem rd "%WINDIR%\SoftwareDistribution\Download" /s /q
 rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
@@ -3035,6 +3026,10 @@ rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
 
 rem ==================================== Windows Waypoint ==================================
 
+
+timeout 5
+
+winget upgrade --all
 
 timeout 5
 
