@@ -49,7 +49,7 @@ icacls D:\RamDisk /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\RamDisk /grant:r "System":(OI)(CI)F /t /l /q /c
 icacls D:\RamDisk /grant "Users":(OI)(CI)RX /t /l /q /c
 
-takeown /s %computername% /u %username% /f ‪D:\Steam /r /d y
+takeown /s %computername% /u %username% /f D:\Steam /r /d y
 icacls D:\Steam /inheritance:r
 icacls D:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
