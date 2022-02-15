@@ -34,25 +34,26 @@ pause
 takeown /s %computername% /u %username% /f D: /r /d y
 icacls D: /inheritance:r
 icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D: /grant "System":(OI)(CI)RX /t /l /q /c
 icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
 
-takeown /s %computername% /u %username% /f D:\OneDrive /r /d y
-icacls D:\OneDrive /inheritance:r
-icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
-icacls D:\OneDrive /deny "System":(OI)(CI)F /t /l /q /c
+takeown /s %computername% /u %username% /f D:\Backup /r /d y
+icacls D:\Backup /inheritance:r
+icacls D:\Backup /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\Backup /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls D:\Backup /grant "Users":(OI)(CI)RX /t /l /q /c
 
-takeown /s %computername% /u %username% /f D:\Documents /r /d y
-icacls D:\Documents /inheritance:r
-icacls D:\Documents /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\Documents /grant "Users":(OI)(CI)RX /t /l /q /c
-icacls D:\Documents /deny "System":(OI)(CI)F /t /l /q /c
+takeown /s %computername% /u %username% /f D:\RamDisk /r /d y
+icacls D:\RamDisk /inheritance:r
+icacls D:\RamDisk /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\RamDisk /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls D:\RamDisk /grant "Users":(OI)(CI)RX /t /l /q /c
 
-takeown /s %computername% /u %username% /f D:\Software /r /d y
-icacls D:\Software /inheritance:r
-icacls D:\Software /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\Software /grant "Users":(OI)(CI)RX /t /l /q /c
-icacls D:\Software /deny "System":(OI)(CI)F /t /l /q /c
+takeown /s %computername% /u %username% /f ‪D:\Steam /r /d y
+icacls D:\Steam /inheritance:r
+icacls D:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls D:\Steam /grant "Users":(OI)(CI)RX /t /l /q /c
 
 rem Access CMD with SYSTEM rights at logon (Win+U)
 takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
@@ -266,7 +267,12 @@ start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
 start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
 start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
-start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
+start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
+rem start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
+
+pause
+
+winget import -i D:\OneDrive\Setup\winget.txt
 
 pause
 
