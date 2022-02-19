@@ -1033,8 +1033,9 @@ rem Locky ransomware using VBscript (Visual Basic Script) - https://blog.avast.c
 rem https://www.wietzebeukema.nl/blog/hijacking-dlls-in-windows - https://dmcxblue.net/2021/08/30/fileless-malware
 rem 0 - Disable Windows Script Host (WSH) (prevents majority of malware from working, especially when removing PowerShell as well, Disable ExecutionPolicy can be easily bypassed)
 rem Also disabled via DisallowRun "wscript.exe" and "cscript.exe"
-
-
+reg add "HKCU\Software\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\WOW6432Node\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
 
 rem Disable Customer Experience Improvement (CEIP/SQM - Software Quality Management)
 reg add "HKLM\Software\Policies\Microsoft\Internet Explorer\SQM" /v "DisableCustomerImprovementProgram" /t REG_DWORD /d "0" /f
