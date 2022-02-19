@@ -1,11 +1,10 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
+rem https://www.defenderui.com
 rem https://www.microsoft.com/en-us/wdsi/defenderupdates
 rem https://support.microsoft.com/en-us/help/4568292/defender-update-for-windows-operating-system-installation-images
 rem https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=win10-ps
 rem https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/customize-exploit-protection
-rem https://github.com/AndyFul/ConfigureDefender
-rem https://github.com/AndyFul/Hard_Configurator
 
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /t REG_EXPAND_SZ /d "\"%windir%\system32\SecurityHealthSystray.exe\"" /f
@@ -62,3 +61,8 @@ rem C:\Program Files\Windows Defender\MsMpEng.exe
 rem reg add "HKLM\Software\Microsoft\Windows Defender\Exclusions\Paths" /v "C:\Program Files\Windows Defender\MsMpEng.exe" /t REG_DWORD /d "0" /f
 
 shutdown /r
+
+rem To stop restart type
+rem shutdown -a
+
+pause
