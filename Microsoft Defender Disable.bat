@@ -4,7 +4,7 @@ rem https://www.sordum.org/9480/defender-control-v2-0
 
 start windowsdefender:
 rem Disable Tamper and Real Protection in Defender
-rem Install 3rd party AV (any that registers) - https://www.360totalsecurity.com/en/features/360-total-security-essential
+rem Install 3rd party AV (any that registers) - https://www.adaware.com/free-antivirus-download
 rem Disable Defender (run .bat) - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Disable.bat 
 rem Uninstall 3rd party AV and Restart
 
