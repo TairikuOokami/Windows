@@ -2,16 +2,16 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 rem https://www.sordum.org/9480/defender-control-v2-0
 
-start windowsdefender:
 rem Disable Tamper and Real Protection in Defender
 rem Install 3rd party AV (any that registers) - https://www.adaware.com/free-antivirus-download
 rem Disable Defender (run .bat) - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Disable.bat 
 rem Uninstall 3rd party AV and Restart
+start windowsdefender:
 
 pause
 
 rem https://www.tenforums.com/tutorials/123792-turn-off-tamper-protection-windows-defender-antivirus.html
-reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
+rem reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 
 rem Disable System Guard Runtime Monitor Broker (when disabled, it might cause BSOD Critical Process Died)
 rem reg add "HKLM\System\CurrentControlSet\Services\SgrmBroker" /v "Start" /t REG_DWORD /d "4" /f
