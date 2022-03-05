@@ -31,6 +31,11 @@ rem Disable Tamper and Real Protection in Defender
 
 pause
 
+rem Remove the user from D:\
+explorer
+
+pause
+
 takeown /s %computername% /u %username% /f D: /r /d y
 icacls D: /inheritance:r
 icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
@@ -268,7 +273,6 @@ start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
 start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
 start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
-rem start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
 
 pause
 
