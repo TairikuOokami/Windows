@@ -467,7 +467,7 @@ bcdedit /set {default} disabledynamictick yes
 bcdedit /set {default} lastknowngood yes
 bcdedit /set {default} recoveryenabled no
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9003\Discord.exe --start-minimized" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9004\Discord.exe --start-minimized" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
@@ -1030,7 +1030,7 @@ rem Determines how many user account entries Windows saves in the logon cache on
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "CachedLogonsCount" /t REG_DWORD /d "0" /f
 
 rem Locky ransomware using VBscript (Visual Basic Script) - https://blog.avast.com/a-closer-look-at-the-locky-ransomware
-rem https://www.wietzebeukema.nl/blog/hijacking-dlls-in-windows - https://dmcxblue.net/2021/08/30/fileless-malware
+rem https://www.wietzebeukema.nl/blog/hijacking-dlls-in-windows - https://dmcxblue.net/2021/08/30/fileless-malware - https://www.ryadel.com/en/disable-windows-script-host-wsh-block-vbs-malware
 rem 0 - Disable Windows Script Host (WSH) (prevents majority of malware from working, especially when removing PowerShell as well, Disable ExecutionPolicy can be easily bypassed)
 rem Also disabled via DisallowRun "wscript.exe" and "cscript.exe"
 reg add "HKCU\Software\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -1114,6 +1114,9 @@ rem reg delete "HKCU\Software\Policies\Microsoft\Edge" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Edge" /f
 
 rem ________________________________________________________________________________________
+rem 1 - Allow users to access the games menu
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowGamesMenu" /t REG_DWORD /d "0" /f
+
 rem 1 - AllowJavaScriptJit / 2 - BlockJavaScriptJit (Do not allow any site to run JavaScript JIT)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultJavaScriptJitSetting" /t REG_DWORD /d "0" /f
 
@@ -1138,11 +1141,20 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DW
 rem The Experimentation and Configuration Service is used to deploy Experimentation and Configuration payloads to the client / 0 - RestrictedMode / 1 - ConfigurationsOnlyMode / 2 - FullMode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExperimentationAndConfigurationServiceControl" /t REG_DWORD /d "0" /f
 
+rem 1 - Hide restore pages dialog after browser crash
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HideRestoreDialogEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Show Hubs Sidebar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow QUIC protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Configure Related Matches in Find on Page, the results are processed in a cloud service
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RelatedMatchesCloudServiceEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow remote debugging
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RemoteDebuggingAllowed" /t REG_DWORD /d "0" /f
@@ -1200,11 +1212,11 @@ rem =================================== Windows Policies =======================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 rem .............................. Cookies and site permissions ............................
 
-rem Motion or light sensors / 1 - AllowSensors / 2 - BlockSensors
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultSensorsSetting" /t REG_DWORD /d "2" /f
-
 rem PDF Documents
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AlwaysOpenPdfExternally" /t REG_DWORD /d "1" /f
+
+rem Ads setting for sites with intrusive ads / 1 - Allow ads on all sites / 2 - Block ads on sites with intrusive ads. (Default value)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AdsSettingForIntrusiveAdsSites" /t REG_DWORD /d "1" /f
 
 rem File Editing / 2 - BlockFileSystemRead / 3 - AskFileSystemRead
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultFileSystemReadGuardSetting" /t REG_DWORD /d "2" /f
@@ -1220,6 +1232,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultInsecureContentSettin
 
 rem Notifications / 1 - AllowNotifications / 2 - BlockNotifications / 3 - AskNotifications
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultNotificationsSetting" /t REG_DWORD /d "2" /f
+
+rem Motion or light sensors / 1 - AllowSensors / 2 - BlockSensors
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultSensorsSetting" /t REG_DWORD /d "2" /f
 
 rem Serial ports / 2 - BlockSerial / 3 - AskSerial 
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultSerialGuardSetting" /t REG_DWORD /d "2" /f
@@ -1244,6 +1259,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadDirectory" /t REG_SZ
 
 rem 1 - Ask me what to do with each download (Ignored when download directory is set)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /t REG_DWORD /d "1" /f
+
+rem 1 - Open Office files in the browser
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickViewOfficeFilesEnabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1395,6 +1413,12 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PrimaryPasswordSetting" /t R
 
 rem 1 - Show rewards points in Microsoft Edge user profile
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem 1 - Show rewards points in Microsoft Edge user profile
+reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "1" /t REG_SZ /d "https://malwaretips.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "2" /t REG_SZ /d "https://steamcommunity.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "3" /t REG_SZ /d "https://store.steampowered.com" /f
 
 
 rem =================================== Windows Policies ===================================
