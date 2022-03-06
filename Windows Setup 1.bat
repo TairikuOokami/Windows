@@ -129,6 +129,7 @@ pause
 rem winget list
 winget uninstall "cortana"
 winget uninstall "get help"
+winget uninstall "Microsoft Edge WebView2 Runtime"
 winget uninstall "microsoft people"
 winget uninstall "microsoft photos"
 winget uninstall "microsoft tips"
@@ -141,7 +142,6 @@ winget uninstall "xbox game bar"
 winget uninstall "xbox game bar plugin"
 winget uninstall "xbox game speech window"
 winget uninstall "xbox identity provider"
-winget uninstall "your phone"
 
 pause
 
@@ -207,12 +207,6 @@ reg add "HKCU\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /
 rem Ponified system icons / 3 - Default / 4 - Opened
 rem https://www.tenforums.com/tutorials/81222-change-icons-folders-pc-windows-10-a.html
 reg add "HKCR\CompressedFolder\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.001\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.7z\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.cab\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.rar\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.wim\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
-reg add "HKCR\7-Zip.zip\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
 reg add "HKCR\batfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Join.me.ico" /f
 reg add "HKCR\Folder\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 reg add "HKCR\regfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Cheerilee.ico" /f
