@@ -142,6 +142,7 @@ winget uninstall "xbox game bar"
 winget uninstall "xbox game bar plugin"
 winget uninstall "xbox game speech window"
 winget uninstall "xbox identity provider"
+winget uninstall "your phone"
 
 pause
 
