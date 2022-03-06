@@ -52,16 +52,24 @@ rem Enabled #edge-automatic-https
 rem Enabled #strict-extension-isolation
 rem edge://flags
 
+pause
+
 rem Disable - Allow recently closed sites to finish sending and receiving data (recommended)
 rem edge://settings/content/backgroundSync
+
+pause
 
 rem Disable - Save and fill basic info
 rem Disable - Save and fill custom info
 rem edge://settings/personalinfo
 
+pause
+
 rem Disable - Block potentially unwanted apps
 rem Disable - Turn on site safety services to get more info about the sites you visit
 rem edge://settings/privacy
+
+pause
 
 rem Disable - Basic info
 rem Disable - Collections
@@ -69,13 +77,20 @@ rem Disable - History
 rem Disable - Open tabs
 rem edge://settings/profiles/sync
 
+pause
+
 rem Disable - Show me suggestions from history, favorites and other data on this device using my typed characters
 rem Search engine used in the address bar - DDG
 rem edge://settings/search
 
+pause
+
 rem Plain text
 rem edge://settings/shareCopyPaste
 
+pause
+
+rem Set Default Location for Weather
 
 pause
 
