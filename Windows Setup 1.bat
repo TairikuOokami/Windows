@@ -15,9 +15,13 @@ reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostnam
 
 start ms-settings:windowsupdate-action
 rem Check for updates and Optional updates in Advanced options and RESTART!
-rem In the meantime install store apps, app installer included (winget)!
+rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+rem Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage
+
+pause
 
 start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
+rem App Installer, Audials Radio, MSN Weather, Nanazip, Netflix
 
 pause
 
@@ -148,6 +152,7 @@ pause
 
 rem https://msdn.microsoft.com/en-us/windows/hardware/commercialize/manufacture/desktop/enable-or-disable-windows-features-using-dism
 rem DISM /Online /Get-Features /Format:Table
+rem DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
 Dism /Online /Disable-Feature /FeatureName:MediaPlayback /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Microsoft-Windows-Subsystem-Linux /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:MicrosoftWindowsPowerShellV2 /Quiet /NoRestart
