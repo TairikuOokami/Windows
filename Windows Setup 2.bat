@@ -1,5 +1,5 @@
 rem Disable Indexing C:/Z:
-rem Disable Hardware Acceleration in Discord
+rem Disable Hardware Acceleration, Overlay, Sounds in Discord
 explorer
 
 pause
@@ -27,7 +27,7 @@ pause
 start "" /wait "D:\OneDrive\Setup\Setup.exe"
 start "" /wait "D:\OneDrive\Setup\0.reg"
 taskkill /im explorer.exe /f & explorer.exe
-xcopy "C:\Setup" "%USERPROFILE%\Desktop" /s /i /y
+xcopy "C:\Setup" "Z:\Desktop" /s /i /y
 rd "C:\Setup" /s /q
 
 pause
