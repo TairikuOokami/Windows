@@ -1,6 +1,7 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 rem https://www.sordum.org/9480/defender-control-v2-1
+rem https://www.adaware.com/free-antivirus-download
 
 rem Disable Tamper and Real Protection in Defender
 rem Install any 3rd party AV that registers within Windows Security (Adaware installs without needing a reboot)
@@ -11,7 +12,7 @@ start windowsdefender:
 
 pause
 
-rem https://www.tenforums.com/tutorials/123792-turn-off-tamper-protection-windows-defender-antivirus.html
+rem https://www.elevenforum.com/t/turn-on-or-off-tamper-protection-for-microsoft-defender-antivirus-in-windows-11.3973
 rem reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 
 rem Disable System Guard Runtime Monitor Broker (when disabled, it might cause BSOD Critical Process Died)
@@ -62,9 +63,6 @@ reg add "HKLM\System\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
-
-rem https://technet.microsoft.com/en-us/itpro/powershell/windows/defender/set-mppreference
-rem https://i.postimg.cc/vG1X7FjX/capture-09122021-174801.jpg
 
 shutdown /r
 
