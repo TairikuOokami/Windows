@@ -3,9 +3,10 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 rem https://www.sordum.org/9480/defender-control-v2-1
 
 rem Disable Tamper and Real Protection in Defender
-rem Install 3rd party AV (any that registers) - https://www.adaware.com/free-antivirus-download
-rem Disable Defender (run .bat) - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Disable.bat 
-rem Uninstall 3rd party AV and Restart
+rem Install any 3rd party AV that registers within Windows Security (Adaware installs without needing a reboot)
+rem Run "MD Disable.bat" TWICE !!!!! (it will restart a computer within a minute to disable type "shutdown -a")
+rem After restart, uninstall 3rd party AV (preferably using HiBit Uninstaller)
+rem Restart (HiBit Uninstaller will run to remove leftovers)
 start windowsdefender:
 
 pause
@@ -69,5 +70,8 @@ shutdown /r
 
 rem To stop restart type
 rem shutdown -a
+
+rem Last Tested on Windows 11 Home 22000.527 using Microsoft Defender Platform Version 4.18.2201.10 (8 March 2022)
+rem Running bat file TWICE with 3rd party AV running https://postimg.cc/D8wrGfHX / DONE https://postimg.cc/KRjTzq37
 
 pause
