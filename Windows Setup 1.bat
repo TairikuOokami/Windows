@@ -168,6 +168,7 @@ Dism /Online /Disable-Feature /FeatureName:WCF-TCP-PortSharing45 /Quiet /NoResta
 Dism /Online /Disable-Feature /FeatureName:Windows-Defender-Default-Definitions /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:WorkFolders-Client /Quiet /NoRestart
 Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Quiet /NoRestart
+DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
 rem Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Source:E:\sources\sxs /LimitAccess
 
 rem start "" /wait "D:\OneDrive\Setup\dotNetFx35_WX_9_x86_x64.exe" /ai
