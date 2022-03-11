@@ -44,15 +44,20 @@ start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
+rem Disabled #edge-share-menu
 rem Disabled #edge-show-feature-recommendations
 rem Disabled #enable-quic
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
 rem Enabled #edge-automatic-https
-rem Enabled #strict-extension-isolation
+rem Enabled #edge-visual-rejuv-materials-menu
+rem Enabled #edge-visual-rejuv-materials-title-bar
 rem edge://flags
 
 pause
+
+rem Disable - Use F12 key to open the Developer tools
+rem edge://settings/accessibility
 
 rem Disable - Allow recently closed sites to finish sending and receiving data (recommended)
 rem edge://settings/content/backgroundSync
@@ -67,6 +72,10 @@ pause
 
 rem Disable - Block potentially unwanted apps
 rem Disable - Turn on site safety services to get more info about the sites you visit
+rem Enable Clear browsing data on close - Autofill form data (includes forms and cards)
+rem Enable Clear browsing data on close - Cached images and files
+rem Enable Clear browsing data on close - Download history
+rem Enable Clear browsing data on close - Site permissions
 rem edge://settings/privacy
 
 pause
@@ -79,8 +88,8 @@ rem edge://settings/profiles/sync
 
 pause
 
-rem Disable - Show me suggestions from history, favorites and other data on this device using my typed characters
-rem Search engine used in the address bar - DDG
+rem Search engine used in the address bar - Set Brave (uncensored)
+start "" "https://search.brave.com"
 rem edge://settings/search
 
 pause
