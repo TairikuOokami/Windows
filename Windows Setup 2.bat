@@ -113,8 +113,14 @@ rem start ms-windows-store:
 pause
 
 rem Update Drivers!
-rem Disable AMD PSP / AMD HDMI
-rem Set Disk Drives - XPG Policies
+rem Enable - Disk Drives - XPG Policies
+rem Enable - Hidden devices
+rem Disable IDE ATA - All not used
+rem Disable Ports - All not used
+rem Disable Security Devices - AMD PSP
+rem Disable Software Devices - All not used
+rem Disable Sound - AMD HDAD, AMD Streaming, Broadcaster
+rem Disable System Devices - AMD Crash Defender, AMD Link, MS Hyper-V, MS Virtual Drive, NDIS Virtual, Remote Desktop, System Speaker
 devmgmt.msc
 
 pause
