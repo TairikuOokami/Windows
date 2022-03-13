@@ -23,6 +23,8 @@ pause
 start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
 rem App Installer (winget)
 
+pause
+
 winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
 winget install --id 9nvkj68ql691 --exact --source msstore --accept-package-agreements --accept-source-agreements
 winget install --id 9wzdncrfj3tj --exact --source msstore --accept-package-agreements --accept-source-agreements
