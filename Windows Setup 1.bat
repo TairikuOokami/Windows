@@ -21,7 +21,12 @@ rem Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxP
 pause
 
 start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
-rem App Installer, Audials Radio, MSN Weather, Nanazip, Netflix
+rem App Installer (winget)
+
+winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
+winget install --id 9nvkj68ql691 --exact --source msstore --accept-package-agreements --accept-source-agreements
+winget install --id 9wzdncrfj3tj --exact --source msstore --accept-package-agreements --accept-source-agreements
+winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
