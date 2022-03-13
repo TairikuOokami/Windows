@@ -2,7 +2,7 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes
-rem https://www.ubackup.com/help/create-windows-recovery-environment.html
+rem https://www.ubackup.com/help/create-bootable-disk.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
@@ -275,6 +275,7 @@ rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
 rem Task Manager in SysTray / TrayTM - https://github.com/AzadKurt/TrayTM
 rem Taskbar Always On Top Bug / Rude Window Fixer - https://github.com/dechamps/RudeWindowFixer
 rem Taskbar Drag & Drop / Windows 11 Drag & Drop to the Taskbar - https://github.com/HerMajestyDrMona/Windows11DragAndDropToTaskbarFix
+rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
 rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
 rem Undervolting / ThrottleStop - https://www.techpowerup.com/download/techpowerup-throttlestop
@@ -304,6 +305,9 @@ icacls "Z:\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
 
 rem Flush DNS Cache
 ipconfig /flushdns
+
+rem Remove default user
+net user defaultuser100000 /delete
 
 rem Remove random files/folders - https://github.com/MoscaDotTo/Winapp2/blob/master/Winapp3/Winapp3.ini
 del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
@@ -438,34 +442,25 @@ rem =========================== Restore essential startup entries ==============
 
 rem Run bcdedit command to check for the current status / Yes = True / No = False
 rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
-bcdedit /deletevalue {current} safeboot
-bcdedit /deletevalue {current} safebootalternateshell
-bcdedit /deletevalue {current} removememory
-bcdedit /deletevalue {current} truncatememory
-bcdedit /deletevalue {current} useplatformclock
-bcdedit /deletevalue {default} safeboot
-bcdedit /deletevalue {default} safebootalternateshell
-bcdedit /deletevalue {default} removememory
-bcdedit /deletevalue {default} truncatememory
-bcdedit /deletevalue {default} useplatformclock
+rem https://docs.google.com/document/d/1c2-lUJq74wuYK1WrA_bIvgb89dUN0sj8-hO3vqmrau4/edit
+bcdedit /deletevalue safeboot
+bcdedit /deletevalue safebootalternateshell
+bcdedit /deletevalue removememory
+bcdedit /deletevalue truncatememory
+bcdedit /deletevalue useplatformclock
 bcdedit /set hypervisorlaunchtype off
 Bcdedit /set flightsigning off
 bcdedit /set {bootmgr} displaybootmenu no
 Bcdedit /set {bootmgr} flightsigning off
-bcdedit /set {current} advancedoptions false
-bcdedit /set {current} bootems no
-bcdedit /set {current} bootmenupolicy legacy
-bcdedit /set {current} bootstatuspolicy IgnoreAllFailures
-bcdedit /set {current} disabledynamictick yes
-bcdedit /set {current} lastknowngood yes
-bcdedit /set {current} recoveryenabled no
-bcdedit /set {default} advancedoptions false
-bcdedit /set {default} bootems no
-bcdedit /set {default} bootmenupolicy legacy
-bcdedit /set {default} bootstatuspolicy IgnoreAllFailures
-bcdedit /set {default} disabledynamictick yes
-bcdedit /set {default} lastknowngood yes
-bcdedit /set {default} recoveryenabled no
+bcdedit /set advancedoptions false
+bcdedit /set bootems no
+bcdedit /set bootmenupolicy legacy
+bcdedit /set bootstatuspolicy IgnoreAllFailures
+bcdedit /set disabledynamictick yes
+bcdedit /set lastknowngood yes
+bcdedit /set recoveryenabled no
+bcdedit /set quietboot yes
+bcdedit /set useplatformtick yes
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9004\Discord.exe --start-minimized" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
@@ -1135,7 +1130,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t
 rem 1 - Allows the Microsoft Edge browser to enable Follow service and apply it to users
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeFollowEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Allow Google Cast to connect to Cast devices on all IP addresses, Edge trying to connect to 239.255.255.250 via UDP port 1900
+rem 1 - Allow Google Cast to connect to Cast devices on all IP addresses (Multicast), Edge trying to connect to 239.255.255.250 via UDP port 1900
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DWORD /d "0" /f
 
 rem The Experimentation and Configuration Service is used to deploy Experimentation and Configuration payloads to the client / 0 - RestrictedMode / 1 - ConfigurationsOnlyMode / 2 - FullMode
@@ -1341,7 +1336,7 @@ rem 1 - Use a web service to help resolve navigation errors
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
 
 rem 1 - Show me search and site suggestions using my typed characters
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "1" /f
 
 rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
@@ -1959,14 +1954,6 @@ rem ..................................... Your Phone ...........................
 
 rem 1 - Show me suggestions for using my Android phone with Windows
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Mobility" /v "OptedIn" /t REG_DWORD /d "0" /f
-
-rem ________________________________________________________________________________________
-rem Remove Your Phone app (to restore run SFC scan)
-rem winget uninstall "your phone"
-rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe"
-rem icacls "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /inheritance:r /grant:r %username%:F
-rem taskkill /im YourPhone.exe /f
-rem del "%ProgramFiles%\WindowsApps\Microsoft.YourPhone_1.21084.76.0_x64__8wekyb3d8bbwe\YourPhone.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -3054,6 +3041,7 @@ rem ==================================== Windows Waypoint ======================
 
 timeout 5
 
+winget uninstall "Microsoft Edge WebView2 Runtime"
 winget upgrade --all
 
 timeout 5
