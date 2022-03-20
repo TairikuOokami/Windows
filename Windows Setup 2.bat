@@ -1,173 +1,315 @@
-rem Disable Indexing C:/Z:
-rem Disable Hardware Acceleration, Overlay, Sounds in Discord
+rem DO NOT enable OneDrive during Windows setup, otherwise you will not be able to choose the folder's location!
+
+rem Disable Hibernation and thus also Fast Startup
+powercfg -h off
+
+rem DWindows Recovery Partition
+reagentc /disable
+
+rem Disable Reserved Storage (7GB)
+Dism /Online /Set-ReservedStorageState /State:Disabled /Quiet /NoRestart
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "MiscPolicyInfo" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
+
+reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
+reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
+
+start "" "D:\Software"
+rem Install Chipset Drivers and GPU Drivers and RESTART!
+
+pause
+
+start windowsdefender:
+rem Disable Tamper and Real Protection in Defender
+
+pause
+
+rem Remove the user from D:\
 explorer
 
 pause
 
-rem Set 75 Hz
-rem Disable Sound Devices
-rem Network Connection - all adapters - Uncheck all but IPv4
-control
+takeown /s %computername% /u %username% /f D: /r /d y
+icacls D: /inheritance:r
+icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D: /grant "System":(OI)(CI)RX /t /l /q /c
+icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f D:\Backup /r /d y
+icacls D:\Backup /inheritance:r
+icacls D:\Backup /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\Backup /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls D:\Backup /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f D:\RamDisk /r /d y
+icacls D:\RamDisk /inheritance:r
+icacls D:\RamDisk /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\RamDisk /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls D:\RamDisk /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f D:\Steam /r /d y
+icacls D:\Steam /inheritance:r
+icacls D:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls D:\Steam /grant "Users":(OI)(CI)RX /t /l /q /c
+
+rem Access CMD with SYSTEM rights at logon (Win+U)
+takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
+icacls "%WINDIR%\System32\utilman.exe" /grant:r %username%:F
+copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\utilman.exe
+takeown /s %computername% /u %username% /f "%WINDIR%\System32\sethc.exe"
+icacls "%WINDIR%\System32\sethc.exe" /grant:r %username%:F
+copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\sethc.exe
+
+rem Disable Auto-install subscribed/suggested apps (games like Candy Crush Soda Saga/Minecraft)
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "FeatureManagementEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "OemPreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353694Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v "DODownloadMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\PushToInstall" /v "DisablePushToInstall" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f
+reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f
+
+rem Disable Bitlocker, EFS and Decrypt C:
+reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d "1" /f
+fsutil behavior set disableencryption 1
+cipher /d /s:C:\
+
+rem Enable Windows File Compression
+rem compact /compactos:query
+fsutil behavior set disablecompression 0
+compact /CompactOs:always
+
+rem Disable pagefile
+rem fsutil behavior set EncryptPagingFile 1
+wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
+wmic pagefileset where name="%SystemDrive%\\pagefile.sys" set InitialSize=0,MaximumSize=0
+wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
+
+rem Setup Network (NetBIOS might be required for aDSL/LAN)
+rem Disable IPv6/LMHOSTS lookup/NetBIOS and Set DNS Servers
+wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
+netsh int ipv6 isatap set state disabled
+netsh int teredo set state disabled
+netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
+reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
+wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
+wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
+
+rem Setup Encrypted DNS
+start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
+start ms-settings:network-ethernet
 
 pause
 
-rem Uninstall all but Notepad and Wordpad
-start ms-settings:optionalfeatures
+start ms-settings:windowsupdate-action
+rem Check for updates and Optional updates in Advanced options and RESTART!
+
+rem Uninstall all store apps except MS store
+rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+rem Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage
 
 pause
 
-taskkill /im msedge.exe /f
-takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
-xcopy "%LocalAppData%\Microsoft\Edge" "Z:\Edge" /s /i /y
-rd "%LocalAppData%\Microsoft\Edge" /s /q
-mklink /d "%LocalAppData%\Microsoft\Edge" "Z:\Edge"
+start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
+rem App Installer (winget)
 
 pause
 
-start "" /wait "D:\OneDrive\Setup\Setup.exe"
-start "" /wait "D:\OneDrive\Setup\0.reg"
-taskkill /im explorer.exe /f & explorer.exe
-xcopy "C:\Setup" "Z:\Desktop" /s /i /y
-rd "C:\Setup" /s /q
+rem Audials Play - Radio
+winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Calc
+winget install --id 9wzdncrfhvn5 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem MSN Weather
+winget install --id 9wzdncrfj3q2 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem NanaZip
+winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Netflix
+winget install --id 9wzdncrfj3tj --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Notepad
+winget install --id 9msmlrh6lzf3 --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
-start ms-settings:appsfeatures
+rem winget list
+rem winget source list
+winget uninstall "cortana"
+winget uninstall "get help"
+winget uninstall "Microsoft Edge WebView2 Runtime"
+winget uninstall "microsoft people"
+winget uninstall "microsoft photos"
+winget uninstall "microsoft tips"
+winget uninstall "windows alarms & clock"
+winget uninstall "windows camera"
+winget uninstall "windows maps"
+winget uninstall "windows terminal"
+winget uninstall "windows web experience pack"
+winget uninstall "xbox game bar"
+winget uninstall "xbox game bar plugin"
+winget uninstall "xbox game speech window"
+winget uninstall "xbox identity provider"
+winget uninstall "your phone"
 
 pause
 
-start "" "D:\OneDrive\Mikai.7z"
+rem https://msdn.microsoft.com/en-us/windows/hardware/commercialize/manufacture/desktop/enable-or-disable-windows-features-using-dism
+rem DISM /Online /Get-Features /Format:Table
+rem DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
+Dism /Online /Disable-Feature /FeatureName:MediaPlayback /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:Microsoft-Windows-Subsystem-Linux /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:MicrosoftWindowsPowerShellV2 /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:MicrosoftWindowsPowerShellV2Root /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:MSRDC-Infrastructure /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:Printing-Foundation-Features /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:Printing-Foundation-InternetPrinting-Client /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:Printing-PrintToPDFServices-Features /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:Printing-XPSServices-Features /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:SMB1Protocol /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:SearchEngine-Client-Package /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:WCF-TCP-PortSharing45 /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:Windows-Defender-Default-Definitions /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:WorkFolders-Client /Quiet /NoRestart
+Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Quiet /NoRestart
+DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
+rem Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Source:E:\sources\sxs /LimitAccess
+
+rem start "" /wait "D:\OneDrive\Setup\dotNetFx35_WX_9_x86_x64.exe" /ai
+
+rem Activate Windows
+slmgr.vbs /ato
+
+rem Remove Windows product key from the registry
+slmgr /cpky
 
 pause
 
-start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-
-rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
-rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
-rem Disabled #edge-share-menu
-rem Disabled #edge-show-feature-recommendations
-rem Disabled #enable-quic
-rem Enabled #block-insecure-private-network-requests
-rem Enabled #disallow-doc-written-script-loads
-rem Enabled #edge-automatic-https
-rem Enabled #edge-visual-rejuv-materials-menu
-rem Enabled #edge-visual-rejuv-materials-title-bar
-rem edge://flags
+start "" /wait "D:\OneDrive\Setup\install.bat"
 
 pause
 
-rem Disable - Use F12 key to open the Developer tools
-rem edge://settings/accessibility
-
-rem Disable - Allow recently closed sites to finish sending and receiving data (recommended)
-rem edge://settings/content/backgroundSync
+start "" /wait "%ProgramFiles%\ImDisk\RamDiskUI.exe"
 
 pause
 
-rem Disable - Save and fill basic info
-rem Disable - Save and fill custom info
-rem edge://settings/personalinfo
+rem Single-click to open an item (point to select)
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShellState" /t REG_BINARY /d "2400000017a8000000000000000000000000000001000000130000000000000073000000" /f
+
+rem 1 - Launch folder windows in a separate process
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "SeparateProcess" /t REG_DWORD /d "1" /f
+
+rem 0 - All of the components of Windows Explorer run a single process / 1 - All instances of Windows Explorer run in one process and the Desktop and Taskbar run in a separate process
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "DesktopProcess" /t REG_DWORD /d "1" /f
+
+rem Windows Settings - System - System info - Advanced system settings - Keep: Show thumbnails instead of icons/Show windows contents/Smooth edges
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d "3" /f
+reg add "HKCU\Control Panel\Desktop" /v "DragFullWindows" /t REG_SZ /d "1" /f
+reg add "HKCU\Control Panel\Desktop" /v "FontSmoothingType" /t REG_DWORD /d "2" /f
+reg add "HKCU\Control Panel\Desktop" /v "UserPreferencesMask" /t REG_BINARY /d "9012038010000000" /f
+reg add "HKCU\Control Panel\Desktop\WindowMetrics" /v "MinAnimate" /t REG_SZ /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "IconsOnly" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewAlphaSelect" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ListviewShadow" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAnimations" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\DWM" /v "AlwaysHibernateThumbnails" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\DWM" /v "EnableAeroPeek" /t REG_DWORD /d "0" /f
+
+rem Ponified system icons / 3 - Default / 4 - Opened
+rem https://www.tenforums.com/tutorials/81222-change-icons-folders-pc-windows-10-a.html
+reg add "HKCR\CompressedFolder\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\WinZIP Folder.ico" /f
+reg add "HKCR\batfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Join.me.ico" /f
+reg add "HKCR\Folder\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
+reg add "HKCR\regfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Cheerilee.ico" /f
+reg add "HKCR\txtfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Notepad.ico" /f
+reg add "HKCU\Software\Classes\CLSID\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\applebloomicon.ico" /f
+reg add "HKCU\Software\Classes\CLSID\{088e3905-0323-4b02-9826-5d99428e115f}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\scooticon2.ico" /f
+reg add "HKCU\Software\Classes\CLSID\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Sweetiebelleicon.ico" /f
+reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\C\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\rarityticon2.ico" /f
+reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\D\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Pinkie_Pie.ico" /f
+reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\Z\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Speed Runners.ico" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
+
+rem Move Desktop
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "Z:\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{754AC886-DF64-4CBA-86B5-F7FBF4FBCEF5}" /t REG_EXPAND_SZ /d "Z:\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "Z:\Desktop" /f
+takeown /s %computername% /u %username% /f "%USERPROFILE%\Desktop" /r /d y
+icacls "%USERPROFILE%\Desktop" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%USERPROFILE%\Desktop" /s /q
+md "Z:\Desktop"
+mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
+
+rem Move Documents
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{F42EE2D3-909F-4907-8871-4C22FC0BF756}" /t REG_EXPAND_SZ /d "D:\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Personal" /t REG_EXPAND_SZ /d "D:\Documents" /f
+takeown /s %computername% /u %username% /f "%USERPROFILE%\Documents" /r /d y
+icacls "%USERPROFILE%\Documents" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%USERPROFILE%\Documents" /s /q
+mklink /d "%USERPROFILE%\Documents" "D:\Documents"
+
+rem Move Downloads
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "D:\OneDrive\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_EXPAND_SZ /d "D:\OneDrive\Downloads" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{7D83EE9B-2244-4E70-B1F5-5393042AF1E4}" /t REG_EXPAND_SZ /d "D:\OneDrive\Downloads" /f
+rd "%USERPROFILE%\Downloads" /s /q
+mklink /d "%USERPROFILE%\Downloads" "D:\OneDrive\Downloads"
+
+rem Move Pictures
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "My Pictures" /t REG_SZ /d "D:\OneDrive\Pictures" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{0DDD015D-B06C-45D5-8C4C-F59713854639}" /t REG_EXPAND_SZ /d "D:\OneDrive\Pictures" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "My Pictures" /t REG_EXPAND_SZ /d "D:\OneDrive\Pictures" /f
+
+rem Move Videos
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "My Video" /t REG_SZ /d "D:\Movies" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{35286A68-3C57-41A1-BBB1-0EAE73D76C95}" /t REG_EXPAND_SZ /d "D:\Movies" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "My Video" /t REG_EXPAND_SZ /d "D:\Movies" /f
+
+rem Temp Folders to RAMDisk
+reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "Z:\TEMP" /f
+reg add "HKCU\Environment" /v "TMP" /t REG_SZ /d "Z:\TEMP" /f
+
+start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
+start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
+start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
+start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
+start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
 
 pause
 
-rem Disable - Block potentially unwanted apps
-rem Disable - Turn on site safety services to get more info about the sites you visit
-rem Enable Clear browsing data on close - Autofill form data (includes forms and cards)
-rem Enable Clear browsing data on close - Cached images and files
-rem Enable Clear browsing data on close - Download history
-rem Enable Clear browsing data on close - Site permissions
-rem edge://settings/privacy
+winget import -i D:\OneDrive\Setup\winget.txt
 
 pause
 
-rem Disable - Basic info
-rem Disable - Collections
-rem Disable - History
-rem Disable - Open tabs
-rem edge://settings/profiles/sync
+start "" /wait "D:\Software"
+
+rem Restart in ...
 
 pause
 
-rem Search engine used in the address bar - Set Brave (uncensored)
-start "" "https://search.brave.com"
-rem edge://settings/search
-
-pause
-
-rem Plain text
-rem edge://settings/shareCopyPaste
-
-pause
-
-rem Set Default Location for Weather
-
-pause
-
-reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "C:\Program Files\TruckersMP Launcher" /f
-reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
-start "" /wait "D:\Steam\steam.exe"
-start "" /wait "D:\OneDrive\Setup\Install TruckersMP.exe"
-
-rem start ms-windows-store:
-
-pause
-
-rem Update Drivers!
-rem Enable - Disk Drives - XPG Policies
-rem Enable - Hidden devices
-rem Disable IDE ATA - All not used
-rem Disable Ports - All not used
-rem Disable Security Devices - AMD PSP
-rem Disable Software Devices - All not used
-rem Disable Sound - AMD HDAD, AMD Streaming, Broadcaster
-rem Disable System Devices - AMD Crash Defender, AMD Link, MS Hyper-V, MS Virtual Drive, NDIS Virtual, Remote Desktop, System Speaker
-devmgmt.msc
-
-pause
-
-start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TCPOptimizer.exe"
-
-pause
-
-rem Restart Now !
-
-pause
-
-rem Restart NOW !!!
-
-pause
-
-rem Anti-ransomware prevention, E: is read only (for backup) Administrator rights are required to modify, SYSTEM is blocked
-rem https://medium.com/tenable-techblog/bypass-windows-10-user-group-policy-and-more-with-this-one-weird-trick-552d4bc5cc1b
-rem This means if we set an explicit entry to “DENY” SYSTEM writable permissions, then it will effectively block “SYSTEM” from obtaining writable permissions since our “DENY” rule will take precedence over the “ALLOW” rule that it tries to add.
-rem takeown /f E: /a /r /d y
-rem icacls E: /inheritance:r
-rem icacls E: /grant "Users":(OI)(CI)RX /t /l /q /c
-rem icacls E: /deny "System":(OI)(CI)F /t /l /q /c
-
-
-rem ============================ Manual Config Required / Optional =============================
-
-
-rem Apply Windows Tweaks at will / <(^.^)>
-rem Windows Cleanup - https://github.com/TairikuOokami/Windows/blob/main/Windows%20Cleanup.bat
-rem Windows Defender Disable - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Disable.bat
-rem Windows Tweaks - https://github.com/TairikuOokami/Windows/blob/main/Windows%20Tweaks.bat
-
-rem Make Sure Secure Boot is ON after BIOS Update !!!!!
-
-rem Take Ownership of the Registry key and give permissions to Admin - https://www.youtube.com/watch?v=M1l5ifYKefg
-rem To remove Network from Explorer/allow cleaning WebCache
-rem "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder"
-rem "HKCR\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}"
-rem "HKCR\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}"
-rem ________________________________________________________________________________________
-rem "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}"
-rem "HKCR\Wow6432Node\AppID\{0358b920-0ac7-461f-98f4-58e32cd89148}"
-rem "HKLM\Software\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}"
-rem "HKLM\Software\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}"
-
-rem Enhancer for Youtube
-rem {"version":"2.0.108","settings":{"blur":0,"brightness":100,"contrast":100,"grayscale":0,"huerotate":0,"invert":0,"saturate":100,"sepia":0,"applyvideofilters":false,"backgroundcolor":"#000000","backgroundopacity":50,"blackbars":false,"blockads":true,"blockadsexceptforsubs":false,"blockautoplay":false,"blockhfrformats":false,"blockwebmformats":false,"cinemamode":false,"cinemamodewideplayer":false,"controlbar":{"active":true,"autohide":false,"centered":true,"position":"fixed"},"controls":[],"controlsvisible":false,"controlspeed":false,"controlspeedmousebutton":false,"controlvolume":false,"controlvolumemousebutton":false,"customcolors":{"--dimmer-text":"#cccccc","--hover-background":"#232323","--main-background":"#111111","--main-color":"#00adee","--main-text":"#eff0f1","--second-background":"#181818","--shadow":"#000000"},"customcssrules":"","customscript":"","customtheme":false,"darktheme":true,"date":1590884155282,"defaultvolume":false,"disableautoplay":false,"executescript":false,"expanddescription":false,"filter":"none","hidecardsendscreens":false,"hidechat":false,"hidecomments":false,"hiderelated":false,"ignoreplaylists":false,"ignorepopupplayer":true,"localecode":"en_US","localedir":"ltr","message":false,"miniplayer":false,"miniplayerposition":"_top-left","miniplayersize":"_400x225","newestcomments":false,"overridespeeds":false,"pauseforegroundtab":false,"pausevideos":false,"popuplayersize":"640x360","qualityembeds":"hd720","qualityembedsfullscreen":"hd1080","qualityplaylists":"hd1080","qualityplaylistsfullscreen":"hd1080","qualityvideos":"hd1080","qualityvideosfullscreen":"hd1080","reload":false,"reversemousewheeldirection":false,"selectquality":true,"selectqualityfullscreenoff":false,"selectqualityfullscreenon":false,"speed":1,"speedvariation":0.1,"stopvideos":false,"theatermode":false,"theme":"default-dark","themevariant":"youtube-deep-dark.css","update":1619098163598,"volume":50,"volumemultiplier":3,"volumevariation":5,"whitelist":"","wideplayer":false,"wideplayerviewport":false}}
-
-rem eyJzZWFyY2hFbmdpbmVzIjpbeyJuYW1lIjoiWW91dHViZSIsInVybCI6Imh0dHBzOi8vd3d3LnlvdXR1YmUuY29tL3Jlc3VsdHM/c2VhcmNoX3F1ZXJ5PSVzIn0seyJuYW1lIjoiSU1EYiIsInVybCI6Imh0dHBzOi8vd3d3LmltZGIuY29tL2ZpbmQ/cz1hbGwmcT0lcyJ9LHsibmFtZSI6IlNvZnRwZWRpYSIsInVybCI6Imh0dHBzOi8vd2luLnNvZnRwZWRpYS5jb20vZHluLXNlYXJjaC5waHA/c2VhcmNoX3Rlcm09JXMifSx7Im5hbWUiOiJEaWN0aW9uYXJ5IiwidXJsIjoiaHR0cHM6Ly93d3cudGhlZnJlZWRpY3Rpb25hcnkuY29tLyVzIn0seyJuYW1lIjoibTR1ZnJlZSIsInVybCI6Imh0dHBzOi8vbTR1ZnJlZS50by9zZWFyY2gvJXMuaHRtbCJ9LHsibmFtZSI6IjEyM01vdmllcyIsInVybCI6Imh0dHBzOi8vd3c1LjAxMjNtb3ZpZS5uZXQvc2VhcmNoLyVzLmh0bWwifSx7Im5hbWUiOiIxMjNTZXJpZXMiLCJ1cmwiOiJodHRwczovLzEyM3Nlcmllcy5uZXQvc2VhcmNoP2tleXdvcmQ9JXMifSx7Im5hbWUiOiJNeUFuaW1lIiwidXJsIjoiaHR0cHM6Ly9teWFuaW1lbGlzdC5uZXQvYW5pbWUucGhwP3E9JXMmY2F0PWFuaW1lIn1dLCJzdHlsZVNoZWV0IjoiLnBvcHVwIC5lbmdpbmUtbmFtZSwgLnBvcHVwLm1haW5tZW51ID4gbGk6Zmlyc3QtY2hpbGR7XG4gZGlzcGxheTogbm9uZTtcbn1cbi5wb3B1cCBhLCAucG9wdXAgbGl7XG4gZGlzcGxheTogaW5saW5lLWJsb2NrOyBwYWRkaW5nOiAwLjJlbTtcbn1cbi5wb3B1cCBpbWd7XG4gbWFyZ2luOiAwOyBwYWRkaW5nOiAwO1xufVxuLnBvcHVwIHtcbiB3aWR0aDogYXV0bztcbiBwYWRkaW5nOiAwLjFlbTtcbiB3aGl0ZS1zcGFjZTpub3dyYXA7XG59XG4ucG9wdXAgLmVuZ2luZS1zZXBhcmF0b3J7XG4gd2lkdGg6IDFweDsgaGVpZ2h0OiAyMHB4OyBtYXJnaW46IDAgM3B4IDNweCAzcHg7IHBhZGRpbmc6IDA7IHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG59XG4vKkNPTkZJR19TVEFSVHtcInN1Ym1lbnVfcG9zaXRpb25cIjpcInRvcHJpZ2h0XCIsXCJzdWJtZW51X2Nvcm5lclwiOlwiYm90dG9tbGVmdFwifUNPTkZJR19FTkQqLyIsIm9wdGlvbnMiOnsiYnV0dG9uIjowLCJuZXd0YWIiOnRydWUsImFjdGl2YXRvciI6ImRpc2FibGVkIiwicmVtb3ZlX2ljb25zIjoibm8iLCJzaG93X2luX2lucHV0cyI6dHJ1ZSwiYmFja2dyb3VuZF90YWIiOmZhbHNlLCJrX2FuZF9tX2NvbWJvIjpbMTcsMF0sImNvbnRleHRfbWVudSI6ImVuYWJsZWQiLCJ0b29sYmFyX3BvcHVwIjoiZGlzYWJsZWQiLCJ0b29sYmFyX3BvcHVwX3N0eWxlIjoiZGVmYXVsdCIsInRvb2xiYXJfcG9wdXBfaG90a2V5cyI6ZmFsc2UsInRvb2xiYXJfcG9wdXBfc3VnZ2VzdGlvbnMiOnRydWUsInNlcGFyYXRlX21lbnVzIjpmYWxzZSwiaGlkZV9vbl9jbGljayI6dHJ1ZSwiZGlzYWJsZV9mb3JtZXh0cmFjdG9yIjp0cnVlLCJvcGVuX29uX2RibGNsaWNrIjpmYWxzZSwiZGJsY2xpY2tfaW5faW5wdXRzIjp0cnVlLCJvcGVuX25ld190YWJfbGFzdCI6ZmFsc2UsImRpc2FibGVfZWZmZWN0cyI6ZmFsc2UsImF1dG9fcG9wdXBfcmVsYXRpdmVfdG9fbW91c2UiOmZhbHNlLCJhdXRvX3BvcHVwX3Nob3dfbWVudV9kaXJlY3RseSI6ZmFsc2UsImF1dG9fcG9wdXBfaW5faW5wdXRzIjpmYWxzZSwiYWN0aXZhdG9yX2NvbWJvIjpbXSwic2hvd190b29sdGlwcyI6ZmFsc2UsImNpcmN1bGFyX21lbnUiOmZhbHNlLCJzb3J0X2J5X2NsaWNrIjpmYWxzZSwic2VsZWN0aW9uX2xlbmd0aF9saW1pdCI6LTEsImF1dG9faGlkZV9kZWxheSI6MCwiYXV0b19vcGVuX2RlbGF5IjozMDAsImhpZGVfb25fc2Nyb2xsIjpmYWxzZSwic2VsZWN0aW9uX2FsbG93X25ld2xpbmUiOmZhbHNlLCJ1c2Vfd2hpdGVsaXN0IjpmYWxzZX0sIlZFUlNJT04iOiIwLjguNTcifQ==
+shutdown /r /f /t 0
