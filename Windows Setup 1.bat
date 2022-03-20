@@ -1,6 +1,10 @@
 rem DO NOT enable OneDrive during Windows setup, otherwise you will not be able to choose the folder's location!
 
+rem Disable Hibernation and thus also Fast Startup
 powercfg -h off
+
+rem DWindows Recovery Partition
+reagentc /disable
 
 rem Disable Reserved Storage (7GB)
 Dism /Online /Set-ReservedStorageState /State:Disabled /Quiet /NoRestart
@@ -12,25 +16,6 @@ reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" 
 reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
-
-start ms-settings:windowsupdate-action
-rem Check for updates and Optional updates in Advanced options and RESTART!
-rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-rem Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage
-
-pause
-
-start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
-rem App Installer (winget)
-
-pause
-
-winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
-winget install --id 9nvkj68ql691 --exact --source msstore --accept-package-agreements --accept-source-agreements
-winget install --id 9wzdncrfj3tj --exact --source msstore --accept-package-agreements --accept-source-agreements
-winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
-
-pause
 
 start "" "D:\Software"
 rem Install Chipset Drivers and GPU Drivers and RESTART!
@@ -96,12 +81,15 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-353696Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SystemPaneSuggestionsEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config" /v "DODownloadMode" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\DeliveryOptimization" /v "DODownloadMode" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\PushToInstall" /v "DisablePushToInstall" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_DWORD /d "1" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f
 
-rem Disable EFS and Decrypt everything on C:
+rem Disable Bitlocker, EFS and Decrypt C:
+reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d "1" /f
 fsutil behavior set disableencryption 1
 cipher /d /s:C:\
 
@@ -137,7 +125,37 @@ start ms-settings:network-ethernet
 
 pause
 
+start ms-settings:windowsupdate-action
+rem Check for updates and Optional updates in Advanced options and RESTART!
+
+rem Uninstall all store apps except MS store
+rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
+rem Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage
+
+pause
+
+start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
+rem App Installer (winget)
+
+pause
+
+rem Audials Play - Radio
+winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Calc
+winget install --id 9wzdncrfhvn5 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem MSN Weather
+winget install --id 9wzdncrfj3q2 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem NanaZip
+winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Netflix
+winget install --id 9wzdncrfj3tj --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Notepad
+winget install --id 9msmlrh6lzf3 --exact --source msstore --accept-package-agreements --accept-source-agreements
+
+pause
+
 rem winget list
+rem winget source list
 winget uninstall "cortana"
 winget uninstall "get help"
 winget uninstall "Microsoft Edge WebView2 Runtime"
