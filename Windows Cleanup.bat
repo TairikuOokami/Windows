@@ -70,6 +70,13 @@ del "%LocalAppData%\Microsoft\Windows\WebCache" /s /f /q
 del "%LocalAppData%\Temp" /s /f /q
 del "%ProgramData%\USOPrivate\UpdateStore" /s /f /q
 del "%ProgramData%\USOShared\Logs" /s /f /q
+rd "%SystemDrive%\$GetCurrent" /s /q
+rd "%SystemDrive%\$SysReset" /s /q
+rd "%SystemDrive%\$Windows.~BT" /s /q
+rd "%SystemDrive%\$Windows.~WS" /s /q
+rd "%SystemDrive%\$WinREAgent" /s /q
+rd "%SystemDrive%\OneDriveTemp" /s /q
+rd "%SystemDrive%\Recovery" /s /q
 del "%temp%" /s /f /q
 del "%WINDIR%\Logs" /s /f /q
 del "%WINDIR%\Installer\$PatchCache$" /s /f /q
@@ -128,8 +135,12 @@ cleanmgr /sagerun:6553
 rem Cleanup done, you can close this window!
 timeout -1
 
+winget export -o D:\OneDrive\Setup\winget.txt
+
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
+start "" /wait "D:\OneDrive\Setup\wfc6setup"
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\Rapr.exe"
 start "" /wait "%ProgramFiles(x86)%\ADATA\SSD ToolBox\SSDToolBox.exe"
+start "" D:\OneDrive\Downloads\UnValidate.bat
