@@ -842,7 +842,8 @@ rem 0 - Enables 8dot3 name creation for all volumes on the system / 1 - Disables
 rem fsutil 8dot3name scan c:\
 fsutil behavior set disable8dot3 1
 
-rem 1 - Disable the Encrypting File System (EFS)
+rem 1 - Disable Bitlocker and Encrypting File System (EFS)
+reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d "1" /f
 fsutil behavior set disableencryption 1
 
 rem 1 - When listing directories, NTFS does not update the last-access timestamp, and it does not record time stamp updates in the NTFS log
@@ -1025,7 +1026,9 @@ rem Determines how many user account entries Windows saves in the logon cache on
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "CachedLogonsCount" /t REG_DWORD /d "0" /f
 
 rem Locky ransomware using VBscript (Visual Basic Script) - https://blog.avast.com/a-closer-look-at-the-locky-ransomware
-rem https://www.wietzebeukema.nl/blog/hijacking-dlls-in-windows - https://dmcxblue.net/2021/08/30/fileless-malware - https://www.ryadel.com/en/disable-windows-script-host-wsh-block-vbs-malware
+rem https://www.wietzebeukema.nl/blog/hijacking-dlls-in-windows - https://dmcxblue.net/2021/08/30/fileless-malware
+rem https://www.ryadel.com/en/disable-windows-script-host-wsh-block-vbs-malware
+rem https://www.varonis.com/blog/living-off-the-land-lol-with-microsoft-part-ii-mshta-hta-and-ransomware
 rem 0 - Disable Windows Script Host (WSH) (prevents majority of malware from working, especially when removing PowerShell as well, Disable ExecutionPolicy can be easily bypassed)
 rem Also disabled via DisallowRun "wscript.exe" and "cscript.exe"
 reg add "HKCU\Software\Microsoft\Windows Script Host\Settings" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -1649,7 +1652,7 @@ rem AMD External Events Utility
 sc config "AMD External Events Utility" start= disabled
 
 rem AOMEI Backupper Scheduler Service
-sc config "Backupper Service" start= demand
+sc config "Backupper Service" start= disabled
 
 rem AVCTP service
 sc config BthAvctpSvc start= disabled
@@ -1830,7 +1833,7 @@ rem ------------------------------------ Accessibility -------------------------
 rem ...................................... Keyboard .......................................
 
 rem Filter keys / 126 - Disable All / 127 - Default
-reg add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "126" /f
+reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_SZ /d "126" /f
 
 rem Sticky keys / 26 - Disable All / 511 - Default
 reg add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "26" /f
@@ -2054,7 +2057,7 @@ reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKCR\Wow6432Node\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
-schtasks /Change /TN "Microsoft\Windows\Wininet\CacheTask" /Disable
+rem schtasks /Change /TN "Microsoft\Windows\Wininet\CacheTask" /Disable
 
 rem 0 - Disable WiFi Sense (shares your WiFi network login with other people)
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v "value" /t REG_DWORD /d "0" /f
