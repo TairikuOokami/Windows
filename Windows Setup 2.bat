@@ -133,15 +133,6 @@ pause
 
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TCPOptimizer.exe"
 
-pause
-
-rem reagentc /info
-reagentc /disable
-diskpart
-rem list volume
-rem select volume 3 (WinRE)
-rem delete volume
-
 rem Restart Now !
 
 pause
