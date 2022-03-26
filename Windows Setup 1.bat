@@ -3,7 +3,7 @@ rem DO NOT enable OneDrive during Windows setup, otherwise you will not be able 
 rem Disable Hibernation and thus also Fast Startup
 powercfg -h off
 
-rem DWindows Recovery Partition
+rem Disable Windows Recovery Partition
 reagentc /disable
 
 rem Disable Reserved Storage (7GB)
@@ -125,12 +125,13 @@ start ms-settings:network-ethernet
 
 pause
 
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "$Applist | Where-Object {$_.PackageName -Like "*3D*"} | Remove-AppxProvisionedPackage -Online"
+
 start ms-settings:windowsupdate-action
 rem Check for updates and Optional updates in Advanced options and RESTART!
 
 rem Uninstall all store apps except MS store
-rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe
-rem Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage"
 
 pause
 
@@ -151,6 +152,8 @@ rem Netflix
 winget install --id 9wzdncrfj3tj --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Notepad
 winget install --id 9msmlrh6lzf3 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Paint
+winget install --id 9pcfs5b6t72h --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
