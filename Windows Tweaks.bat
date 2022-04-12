@@ -164,10 +164,9 @@ rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
 rem Coinhive, Malware and Popups (Chrome/Firefox/Opera) - https://add0n.com/popup-blocker.html
 rem Cookie Warnings (Chrome/Firefox/Opera) - https://www.i-dont-care-about-cookies.eu
 rem Filter Lists - https://filterlists.com - https://github.com/EnergizedProtection/block#packs
-rem Malware (Chrome/Firefox/Opera) - https://www.bitdefender.com/solutions/trafficlight.html
-rem Malware (Chrome/Firefox) - https://www.malwarebytes.com/browserguard
-rem Phishing (Chrome/Firefox/Opera) - https://www.netcraft.com/apps/browser
-rem Punycode Domains (Chrome/Firefox/Opera) - https://github.com/AykutCevik/IDN-Safe
+rem Malware (Chrome/Firefox) - https://www.bitdefender.com/solutions/trafficlight.html
+rem Malware (Chrome/Edge/Firefox) - https://microsoftedge.microsoft.com/addons/detail/emsisoft-browser-security/jlpdpddffjddlfdbllimedpemaodbjgn
+rem Phishing (Chrome/Edge/Firefox/Opera) - https://www.netcraft.com/apps/browser
 
 rem Cleanup software
 rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
@@ -201,13 +200,13 @@ rem RKill (BleepingComputer) - https://www.bleepingcomputer.com/download/rkill/
 rem Security cleanup software (online/updatable on-demand scanners)
 rem ESET Online Scanner (SK) - https://www.eset.com/us/home/online-scanner
 rem F-Secure Online Scanner (US) - https://www.f-secure.com/en/home/free-tools/online-scanner
-rem HitmanPro (UK) - https://www.softpedia.com/get/Internet/Popup-Ad-Spyware-Blockers/Hitman-Pro.shtml
 rem Norton Power Eraser (US) - https://support.norton.com/sp/static/external/tools/npe.html
 rem Panda Cloud Cleaner (ES) - https://www.pandasecurity.com/en-us/homeusers/solutions/cloud-cleaner
+rem Sophos Scan & Clean alas HitmanPro (UK) - https://www.sophos.com/en-us/products/free-tools/virus-removal-tool
 rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/products/housecall.html
 
 rem Software
-rem Application Updates / Patch My PC - https://patchmypc.com
+rem Application Updates / Patch My PC - https://patchmypc.com/home-updater
 rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bootable USB / Universal USB Installer - https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3
@@ -857,11 +856,15 @@ reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorE
 rem 5 - 5 secs / Delay Chkdsk startup time at OS Boot
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "AutoChkTimeout" /t REG_DWORD /d "5" /f
 
-rem 0 - Establishes a standard size file-system cache of approximately 8 MB / 1 - Establishes a large system cache working set that can expand to physical memory, minus 4 MB, if needed
-reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "LargeSystemCache" /t REG_DWORD /d "1" /f
-
 rem 0 - Drivers and the kernel can be paged to disk as needed / 1 - Drivers and the kernel must remain in physical memory
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f
+
+rem 0/3 - Enable / 3/3 - Disable mitigations for CVE-2017-5715 (Spectre Variant 2) and CVE-2017-5754 (Meltdown)
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverride" /t REG_DWORD /d "3" /f
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "FeatureSettingsOverrideMask" /t REG_DWORD /d "3" /f
+
+rem 0 - Establishes a standard size file-system cache of approximately 8 MB / 1 - Establishes a large system cache working set that can expand to physical memory, minus 4 MB, if needed
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "LargeSystemCache" /t REG_DWORD /d "1" /f
 
 rem 0 - Disable Prefetch / 1 - Enable Prefetch when the application starts / 2 - Enable Prefetch when the device starts up / 3 - Enable Prefetch when the application or device starts up
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management\PrefetchParameters" /v "EnablePrefetcher" /t REG_DWORD /d "0" /f
@@ -1013,6 +1016,7 @@ reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "Aut
 reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "RestrictNullSessAccess" /t REG_DWORD /d "0" /f
 
 rem Disabling PowerShell script execution / Restricting PowerShell to Constrained Language mode
+rem https://teamt5.org/en/posts/a-deep-dive-into-powershell-s-constrained-language-mode
 rem Set-ExecutionPolicy bypass - noprofile
 reg add "HKLM\Software\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
 reg add "HKLM\Software\WOW6432Node\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
@@ -1246,6 +1250,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioCaptureAllowed" /t REG_
 
 rem Bluetooth / 2 - BlockWebBluetooth / 3 - AskWebBluetooth
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultWebBluetoothGuardSetting" /t REG_DWORD /d "2" /f
+
+rem Access to HID devices via the WebHID API / 2 - BlockWebHid / 3 - AskWebHid
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultWebHidGuardSetting" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -2057,7 +2064,7 @@ reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKCR\Wow6432Node\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
-rem schtasks /Change /TN "Microsoft\Windows\Wininet\CacheTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Wininet\CacheTask" /Disable
 
 rem 0 - Disable WiFi Sense (shares your WiFi network login with other people)
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v "value" /t REG_DWORD /d "0" /f
@@ -2945,13 +2952,13 @@ rem Do not run ResetBase! It breaks Windows Updates (0x800f081f) and it can not 
 rem Apps - FixWin - http://www.thewindowsclub.com/fixwin-for-windows-10
 rem Windows Cleanup - https://drive.google.com/file/d/1AQLr94IQPBpZYEyKNi_CsI5WAOC4BCKp/view
 rem Windows Drivers - https://www.catalog.update.microsoft.com
-rem Windows Forums - https://www.tenforums.com/general-support/58375-newly-added-tutorials.html
-rem Windows Repair Install - https://www.tenforums.com/tutorials/16397-repair-install-windows-10-place-upgrade.html
+rem Windows Forums - https://www.elevenforum.com/whats-new
+rem Windows Repair Install - https://www.elevenforum.com/t/repair-install-windows-11-with-an-in-place-upgrade.418
 rem Windows Repair Toolbox - https://windows-repair-toolbox.com
 rem Windows Update Agent Reset - https://gallery.technet.microsoft.com/scriptcenter/reset-windows-update-agent-d824badc
 rem Windows Update Troubleshooter - https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-for-windows-10-19bc41ca-ad72-ae67-af3c-89ce169755dd
  
-rem Boot into safemode - https://www.tenforums.com/tutorials/2304-boot-into-safe-mode-windows-10-a.html#option3
+rem Boot into safemode - https://www.elevenforum.com/t/boot-to-safe-mode-in-windows-11.538
 rem bcdedit /set {identifier} safeboot minimal
 
 rem Create shortcut to Settings (Volume Mixer)
