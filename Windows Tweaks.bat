@@ -11,9 +11,6 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
-rem Disabled task MsCtfMonitor is required to be able to search/type within UWP apps or to change password at lockscreen (run via utilman)
-rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
-rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
 
 
 rem ________________________________________________________________________________________
@@ -656,11 +653,14 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShellState
 rem 2 - Underline icon titles consistent with my browser / 3 - Underline icon titles only when I point at them
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "IconUnderline" /t REG_DWORD /d "2" /f
 
-rem 1 - Show recently used folders in Quick Access
+rem 1 - Show recently used folders
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowRecent" /t REG_DWORD /d "0" /f
 
-rem 1 - Show frequently folders in Quick Access
+rem 1 - Show frequently folders
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowFrequent" /t REG_DWORD /d "0" /f
+
+rem 1 - Show files from Office.com
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShowCloudFilesInQuickAccess" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Explorer ===================================
@@ -1639,9 +1639,9 @@ rem DHCP Client / required by Windows Updates (0x80240022)
 rem Distributed Link Tracking Client / sometimes required to open shortcuts and System apps - "Windows cannot access the specified device, path, or file. You may not have the appropriate permission to access the item"
 rem Geolocation Service / required by some Windows Store apps, it can not be enabled when Connected User Experiences and Telemetry is disabled
 rem Microsoft Account Sign-in Assistant / required to login to Microsoft Account
-rem Network Connections / required to manage Network Connections
+rem Network Connections / required to manage old Network Connections
 rem Network Connection Broker / required to change Network Settings
-rem Network List Service / required by Windows Update and to change Network Settings (when disabled Windows fails to boot - Critical Service Died)
+rem Network List Service / required by Windows Update and to change Network Settings (when disabled desktop fails to load)
 rem Network Location Awareness / required by Windows Update and Windows Defender Firewall
 rem Network Store Interface Service / disabling disables Windows Firewall (when disabled Windows might fail to boot - Critical Service Died)
 rem Print Spooler / required by printers
@@ -1698,6 +1698,9 @@ sc config DevQueryBroker start= disabled
 rem Device Management Wireless Application Protocol (WAP) Push message Routing Service
 sc config dmwappushservice start= disabled
 
+rem DHCP Client
+sc config Dhcp start= disabled
+
 rem Display Enhancement Service
 sc config DisplayEnhancementService start= disabled
 
@@ -1730,6 +1733,9 @@ sc config iphlpsvc start= disabled
 
 rem Microsoft (R) Diagnostics Hub Standard Collector Service
 sc config diagnosticshub.standardcollector.service start= disabled
+
+rem Network Connections
+sc config Netman start= disabled
 
 rem Network Policy Server Management Service
 sc config NPSMSvc start= disabled
@@ -2068,7 +2074,7 @@ rem https://www.codeproject.com/articles/1158641/windows-continuous-disk-write-p
 rem Disable WinInetCacheServer (WinINet Caching/V01.log/WebCacheV01.dat)
 rem %LocalAppData%\Microsoft\Windows\WebCache
 rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
-rem CacheTask is required to be able to change PIN/password at lockscreen vua Microsoft WWA Host (wwahost.exe) upon TPM reset after BIOS update
+rem CacheTask is required to be able to change PIN/password at lockscreen via Microsoft WWA Host (wwahost.exe) upon TPM reset after BIOS update
 reg delete "HKCR\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKCR\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
@@ -2230,6 +2236,9 @@ rem Search / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
+rem 1 - Always show all icons and notifications on the taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAutoTray" /t REG_DWORD /d "0" /f
+
 rem Size of Taskbar Icons / 0 - Small / 1 - Medium / 2 - Large
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSi" /t REG_DWORD /d "1" /f
 
@@ -3129,5 +3138,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/TyF3kxZ4 / https://postimg.cc/2bW8MJY8
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/XXwrjq0C
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
