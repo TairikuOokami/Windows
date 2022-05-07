@@ -11,7 +11,7 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
-rem Disabled task MsCtfMonitor is required to be able to search/type within UWP apps
+rem Disabled task MsCtfMonitor is required to be able to search/type within UWP apps or to change password at lockscreen (run via utilman)
 rem schtasks /Change /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor" /Enable
 rem schtasks /Run /TN "Microsoft\Windows\TextServicesFramework\MsCtfMonitor"
 
@@ -66,12 +66,11 @@ rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
-rem https://www.reddit.com/r/antivirus/comments/o9xcvi/summary_of_av_test_results_june_2021
 rem https://www.programmifree.com/confronti
 rem https://checklab.pl/en/publications
 rem https://www.av-comparatives.org/latest-tests
 rem https://www.av-test.org/en/antivirus/home-windows
-rem https://www.mrg-effitas.com/test-library
+rem https://www.mrg-effitas.com/test-library/
 rem https://www.lifewire.com/best-free-antivirus-software-4151895
 
 rem AVs/SSL Filtering - https://adguard.com/en/blog/everything-about-https-filtering.html - https://badssl.com
@@ -84,6 +83,8 @@ rem https://www.makeuseof.com/tag/antivirus-tracking-youd-surprised-sends/
 rem https://www.av-test.org/en/news/news-single-view/data-protection-or-virus-protection
 
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
+rem DNS Check / https://dnscheck.tools/#advanced
+rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dynamic-dns-domains
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
 rem DNS ESNI Test - https://www.cloudflare.com/ssl/encrypted-sni/
@@ -269,7 +270,7 @@ rem SoundCard Third Party Drivers / ASUS, C-Media and Creative - https://danielk
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/standard.html
-rem System Restore / RollBack Rx Home Edition - https://horizondatasys.com/rollback-rx-time-machine/rollback-rx-home
+rem System Restore / Reboot Restore Rx - https://horizondatasys.com/reboot-restore-rx-freeware
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
 rem Task Manager in SysTray / TrayTM - https://github.com/AzadKurt/TrayTM
 rem Taskbar Always On Top Bug / Rude Window Fixer - https://github.com/dechamps/RudeWindowFixer
@@ -306,6 +307,7 @@ rem Flush DNS Cache
 ipconfig /flushdns
 
 rem Remove default user
+net user defaultuser1 /delete
 net user defaultuser100000 /delete
 
 rem Remove random files/folders - https://github.com/MoscaDotTo/Winapp2/blob/master/Winapp3/Winapp3.ini
@@ -372,7 +374,7 @@ del "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Startup\*" /s /f /q
 del "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\*" /s /f /q
 
 rem Remove random reg keys (Startup/Privacy/Policies/Malware related)
-reg delete "HKCU\Software\Classes\ms-settings\shell\open" /f
+rem reg delete "HKCU\Software\Classes\ms-settings\shell\open" /f
 reg delete "HKCU\Software\Microsoft\Command Processor" /v "AutoRun" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /f
@@ -1122,9 +1124,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowGamesMenu" /t REG_DWORD
 rem 1 - AllowJavaScriptJit / 2 - BlockJavaScriptJit (Do not allow any site to run JavaScript JIT)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultJavaScriptJitSetting" /t REG_DWORD /d "0" /f
 
-rem 1 - DeveloperToolsAllowed / 2 - DeveloperToolsDisallowed (Don't allow using the developer tools)
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DeveloperToolsAvailability" /t REG_DWORD /d "2" /f
-
 rem 1 - Allow users to open files using the DirectInvoke protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DirectInvokeEnabled" /t REG_DWORD /d "0" /f
 
@@ -1273,6 +1272,13 @@ rem =================================== Windows Policies =======================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 rem ..................................... Extensions .......................................
 
+rem 1 - Allow extensions from other stores
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ControlDefaultStateOfAllowExtensionFromOtherStoresSettingEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - DeveloperToolsAllowed / 2 - DeveloperToolsDisallowed (Don't allow using the developer tools)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DeveloperToolsAvailability" /t REG_DWORD /d "2" /f
+
+rem ________________________________________________________________________________________
 rem 1 - Blocks external extensions from being installed
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BlockExternalExtensions" /t REG_DWORD /d "1" /f
 
@@ -1347,6 +1353,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWe
 
 rem 1 - Show me search and site suggestions using my typed characters
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Turn on site safety services to get more info about the sites you visit
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SiteSafetyServicesEnabled" /t REG_DWORD /d "0" /f
 
 rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
@@ -1621,8 +1630,10 @@ rem AppX Deployment Service (AppXSVC) / required by Store
 rem Background Intelligent Transfer Service / required by Windows Updates / depends on Network List Service (starts even when disabled)
 rem Base Filtering Engine / required by Windows Defender Firewall
 rem CNG Key Isolation / required to login to Windows Insider / Switch to Local Account / Set up PIN / Basically everything Credentials related
+rem Connected Devices Platform / required to open Windos Backup
 rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app.
 rem Delivery Optimization / required by Windows Updates
+rem DevicesFlow / required to open Bluetooth and devices 
 rem Diagnostic Policy Service / required by Windows Diagnostic (Troubleshooting)
 rem DHCP Client / required by Windows Updates (0x80240022)
 rem Distributed Link Tracking Client / sometimes required to open shortcuts and System apps - "Windows cannot access the specified device, path, or file. You may not have the appropriate permission to access the item"
@@ -1637,6 +1648,7 @@ rem Print Spooler / required by printers
 rem Radio Management Service / required to display WiFi networks
 rem Security Accounts Manager / when disabled, explorer.exe (Desktop) crashes constantly
 rem Storage Service / required to update store apps
+rem User Data services / required to be able to change PIN/password at lockscreen or to login via Microsoft Authenticator
 rem Web Account Manager / required to login to Microsoft Account/Store
 rem Windows Biometric Service / required by biometric devices like a fingerprint reader
 rem Windows Connection Manager / required by WiFi and Data Usage and Windows Update (starts even when disabled)
@@ -1670,12 +1682,6 @@ sc config BDESVC start= disabled
 rem Clipboard User Service
 sc config cbdhsvc start= disabled
 
-rem Connected Devices Platform Service
-sc config CDPSvc start= disabled
-
-rem Connected Devices Platform User Service
-sc config CDPUserSvc start= disabled
-
 rem Connected User Experiences and Telemetry
 sc config DiagTrack start= disabled
 
@@ -1687,9 +1693,6 @@ sc config DusmSvc start= disabled
 
 rem DevQuery Background Discovery Broker
 sc config DevQueryBroker start= disabled
-
-rem DevicesFlow
-sc config DevicesFlowUserSvc start= disabled
 
 rem Device Management Wireless Application Protocol (WAP) Push message Routing Service
 sc config dmwappushservice start= disabled
@@ -1777,12 +1780,6 @@ sc config lmhosts start= disabled
 
 rem Touch Keyboard and Handwriting Panel Service (keeps ctfmon.exe running)
 sc config TabletInputService start= disabled
-
-rem User Data Access
-sc config UserDataSvc start= disabled
-
-rem User Data Storage
-sc config UnistoreSvc start= disabled
 
 rem WebClient
 sc config WebClient start= disabled
@@ -1875,6 +1872,12 @@ reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableAutocorrection" /t REG
 
 rem 1 - Highlight misspelled words (Privacy)
 reg add "HKCU\Software\Microsoft\TabletTip\1.7" /v "EnableSpellchecking" /t REG_DWORD /d "0" /f
+
+rem Inking & Typing Personalization (Privacy)
+reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitInkCollection" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\InputPersonalization" /v "RestrictImplicitTextCollection " /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\InputPersonalization\TrainedDataStore" /v "HarvestContacts " /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Personalization\Settings" /v "AcceptedPrivacyPolicy  " /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 reg add "HKCU\Software\Microsoft\Input" /v "IsInputAppPreloadEnabled" /t REG_DWORD /d "0" /f
@@ -2048,9 +2051,12 @@ rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificPa
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
 
-rem 2 - Disable NetBIOS over TCP/IP on all adapters / 1 - Enable / 0 - Default
+rem 2 - Disable NetBIOS over TCP/IP on all adapters1 - Enable / 0 - Default
 wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
+
+rem NetBIOS / 0 - Disabled / 1 - Allowed / 2 - Disabled on public networks / 3 - Learning mode
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableNetbios" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 rem https://docs.microsoft.com/en-us/windows/win32/wininet/caching?
@@ -2058,13 +2064,14 @@ rem https://www.codeproject.com/articles/1158641/windows-continuous-disk-write-p
 rem Disable WinInetCacheServer (WinINet Caching/V01.log/WebCacheV01.dat)
 rem %LocalAppData%\Microsoft\Windows\WebCache
 rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
+rem CacheTask is required to be able to change PIN/password at lockscreen upon TPM reset after BIOS update
 reg delete "HKCR\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKCR\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKCR\Wow6432Node\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
-schtasks /Change /TN "Microsoft\Windows\Wininet\CacheTask" /Disable
+rem schtasks /Change /TN "Microsoft\Windows\Wininet\CacheTask" /Disable
 
 rem 0 - Disable WiFi Sense (shares your WiFi network login with other people)
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots" /v "value" /t REG_DWORD /d "0" /f
@@ -2629,7 +2636,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Supp
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://discordapp.com/TairikuOkami#2826" /f
 
 rem Computer Description
-reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "300/30 MBps" /f
+reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "400/40 MBps" /f
 
 rem System info (Logo - 120x120.bmp)
 rem shell:::{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}
@@ -2802,6 +2809,9 @@ rem ..................................... Date & time ..........................
 rem . . . . . . . . . . . . Additional date, time, & regional settings . . . . . . . . . . .
 
 rem ________________________________________________________________________________________
+rem To Change Clock to 12 hour or 24 hour Time Format on Default Lock Screen
+rem https://www.tenforums.com/tutorials/73416-change-lock-screen-clock-12-hour-24-hour-format-windows-10-a.html#option2
+
 rem 244 - Set Location to United States / 143 - Slovakia
 reg add "HKCU\Control Panel\International\Geo" /v "Nation" /t REG_SZ /d "143" /f
 
@@ -3041,7 +3051,7 @@ rem User Accounts - netplwiz
 rem Windows Updates Block
 rem https://www.tenforums.com/tutorials/8013-enable-disable-windows-update-automatic-updates-windows-10-a.html
 rem https://www.sordum.org/9470/windows-update-blocker-v1-7
-rem Block svchost.exe in the firewall (TCP 80) or create a nonexistent symlink
+rem Block svchost.exe in the firewall or create a nonexistent symlink
 rem rd "%WINDIR%\SoftwareDistribution\Download" /s /q
 rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
 
@@ -3051,8 +3061,8 @@ rem ==================================== Windows Waypoint ======================
 
 timeout 5
 
-winget uninstall "Microsoft Edge WebView2 Runtime"
 winget upgrade --all
+winget uninstall "Microsoft Edge WebView2 Runtime"
 
 timeout 5
 
