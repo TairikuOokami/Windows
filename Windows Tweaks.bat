@@ -1630,10 +1630,10 @@ rem AppX Deployment Service (AppXSVC) / required by Store
 rem Background Intelligent Transfer Service / required by Windows Updates / depends on Network List Service (starts even when disabled)
 rem Base Filtering Engine / required by Windows Defender Firewall
 rem CNG Key Isolation / required to login to Windows Insider / Switch to Local Account / Set up PIN / Basically everything Credentials related
-rem Connected Devices Platform / required to open Windos Backup
+rem Connected Devices Platform / required to open Settings - Windows Backup and to synv with android
 rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app.
 rem Delivery Optimization / required by Windows Updates
-rem DevicesFlow / required to open Bluetooth and devices 
+rem DevicesFlow / required to open Settings - Bluetooth and devices 
 rem Diagnostic Policy Service / required by Windows Diagnostic (Troubleshooting)
 rem DHCP Client / required by Windows Updates (0x80240022)
 rem Distributed Link Tracking Client / sometimes required to open shortcuts and System apps - "Windows cannot access the specified device, path, or file. You may not have the appropriate permission to access the item"
@@ -1648,6 +1648,7 @@ rem Print Spooler / required by printers
 rem Radio Management Service / required to display WiFi networks
 rem Security Accounts Manager / when disabled, explorer.exe (Desktop) crashes constantly
 rem Storage Service / required to update store apps
+rem Text Input Management Service (keeps ctfmon.exe running) / required to be able to login at all
 rem User Data services / required to be able to change PIN/password at lockscreen or to login via Microsoft Authenticator
 rem Web Account Manager / required to login to Microsoft Account/Store
 rem Windows Biometric Service / required by biometric devices like a fingerprint reader
@@ -1778,11 +1779,14 @@ sc config OneSyncSvc start= disabled
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
 
-rem Touch Keyboard and Handwriting Panel Service (keeps ctfmon.exe running)
-sc config TabletInputService start= disabled
-
 rem WebClient
 sc config WebClient start= disabled
+
+rem Web Threat Defense Service (Phishing protection_
+sc config webthreatdefsvc start= disabled
+
+rem Web Threat Defense User Service (Phishing protection)
+sc config webthreatdefusersvc start= disabled
 
 rem Windows Connection Manager
 sc config Wcmsvc start= disabled
@@ -2051,7 +2055,7 @@ rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificPa
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
 
-rem 2 - Disable NetBIOS over TCP/IP on all adapters1 - Enable / 0 - Default
+rem 2 - Disable NetBIOS over TCP/IP on all adapters / 1 - Enable / 0 - Default
 wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
@@ -2064,7 +2068,7 @@ rem https://www.codeproject.com/articles/1158641/windows-continuous-disk-write-p
 rem Disable WinInetCacheServer (WinINet Caching/V01.log/WebCacheV01.dat)
 rem %LocalAppData%\Microsoft\Windows\WebCache
 rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
-rem CacheTask is required to be able to change PIN/password at lockscreen upon TPM reset after BIOS update
+rem CacheTask is required to be able to change PIN/password at lockscreen vua Microsoft WWA Host (wwahost.exe) upon TPM reset after BIOS update
 reg delete "HKCR\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
 reg delete "HKCR\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
@@ -2922,15 +2926,7 @@ rem Remove Send To from context Menu
 reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f
 
 rem Remove Share from Context menu
-reg delete "HKLM\Software\Classes\*\shellex\ContextMenuHandlers\ModernSharing" /f
-reg delete "HKLM\Software\Classes\*\shellex\ContextMenuHandlers\Sharing" /f
-reg delete "HKLM\Software\Classes\Drive\shellex\ContextMenuHandlers\Sharing" /f
-reg delete "HKLM\Software\Classes\Drive\shellex\PropertySheetHandlers\Sharing" /f
-reg delete "HKLM\Software\Classes\Directory\background\shellex\ContextMenuHandlers\Sharing" /f
-reg delete "HKLM\Software\Classes\Directory\shellex\ContextMenuHandlers\Sharing" /f
-reg delete "HKLM\Software\Classes\Directory\shellex\CopyHookHandlers\Sharing" /f
-reg delete "HKLM\Software\Classes\Directory\shellex\PropertySheetHandlers\Sharing" /f
-
+reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing" /f
 
 rem ________________________________________________________________________________________
 rem Disable ADs and Auto-install subscribed/suggested apps (games like Candy Crush Soda Saga/Minecraft)
