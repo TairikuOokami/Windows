@@ -100,6 +100,7 @@ rem OpenDNS - https://www.opendns.com/setupguide/#familyshield
 rem UltraDNS - https://www.publicdns.neustar
 
 rem VPN Comparison / Anonymity
+rem Don't use VPN services - https://gist.github.com/joepie91/5a9909939e6ce7d09e29
 rem https://arstechnica.com/tech-policy/2017/03/senate-votes-to-let-isps-sell-your-web-browsing-history-to-advertisers
 rem https://sec.hpi.de/ilc/search
 rem https://www.safetydetectives.com/best-vpns
@@ -349,6 +350,7 @@ rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
 rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
 rem https://threatpost.com/powershell-payload-analysis-malware/165188
+rem https://www.bleepingcomputer.com/news/security/emotet-malware-now-installs-via-powershell-in-windows-shortcut-files
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
 takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
@@ -2092,7 +2094,8 @@ rem Disable IDN (internationalized domain name)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableIdnMapping" /t REG_DWORD /d "0" /f
 
-rem Disable Multicast
+rem Disable Multicast/mDNS repeater / https://f20.be/blog/mdns
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableMDNS" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMulticast" /t REG_DWORD /d "0" /f
 
 rem Setup DNS over HTTPS (DoH)
@@ -2371,7 +2374,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExp
 
 rem ________________________________________________________________________________________
 rem Send optional dianostgic data / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
 
 rem Feedback Frequency - Windows should ask for my feedback: 0 - Never / Removed - Automatically
 reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
@@ -2978,6 +2981,9 @@ rem bcdedit /set {identifier} safeboot minimal
 
 rem Create shortcut to Settings (Volume Mixer)
 rem %WinDir%\explorer.exe ms-settings:apps-volume
+
+rem Create shortcut to Store Apps
+rem shell:AppsFolder
 
 rem DISM Commands - https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deployment-image-servicing-and-management--dism--command-line-options
 rem DISM /Cleanup-Wim
