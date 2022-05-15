@@ -10,6 +10,10 @@ explorer
 
 pause
 
+start "" /wait "D:\OneDrive\Setup\SBZSeriesDriverInstaller.exe"
+
+pause
+
 rem Set 75 Hz
 rem Disable Sound Devices
 rem Network Connection - all adapters - Uncheck all but IPv4
@@ -65,8 +69,17 @@ pause
 rem Disable - Use F12 key to open the Developer tools
 rem edge://settings/accessibility
 
+rem Disable - Automatically block or allow apps based on a list from Microsoft
+rem edge://settings/content/applicationLinks
+
 rem Disable - Allow recently closed sites to finish sending and receiving data (recommended)
 rem edge://settings/content/backgroundSync
+
+rem Disable - Ask when a site wants to see text and images copied to the clipboard (recommended)
+rem edge://settings/content/clipboard
+
+rem Disable - Ask when a site wants to use system exclusive messages to access MIDI devices (recommended)
+rem edge://settings/content/midiDevices
 
 pause
 
@@ -122,10 +135,11 @@ rem Update Drivers!
 rem Enable - Disk Drives - XPG Policies
 rem Enable - Hidden devices
 rem Disable IDE ATA - All not used
+rem Disable Network Adapters - All not used
 rem Disable Ports - All not used
 rem Disable Security Devices - AMD PSP
 rem Disable Software Devices - All not used
-rem Disable Sound - AMD HDAD, AMD Streaming, Broadcaster
+rem Disable Sound - AMD HDAD, AMD Streaming
 rem Disable System Devices - AMD Crash Defender, AMD Link, MS Hyper-V, MS Virtual Drive, NDIS Virtual, Remote Desktop, System Speaker
 devmgmt.msc
 
