@@ -140,6 +140,8 @@ rem App Installer (winget)
 
 pause
 
+rem 2fast – Two Factor Authenticator Supporting TOTP
+winget install --id 9P9D81GLH89Q --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Audials Play - Radio
 winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Calc
@@ -149,11 +151,15 @@ winget install --id 9wzdncrfj3q2 --exact --source msstore --accept-package-agree
 rem NanaZip
 winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Netflix
-winget install --id 9wzdncrfj3tj --exact --source msstore --accept-package-agreements --accept-source-agreements
+winget install --id 9WZDNCRFJ3TJ --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Notepad
 winget install --id 9msmlrh6lzf3 --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Paint
 winget install --id 9pcfs5b6t72h --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Rufus
+winget install --id 9PC3H3V7Q9CH --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Strong Password Generator
+winget install --id 9NNKGKL4V8HV --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
@@ -252,10 +258,10 @@ reg add "HKCU\Software\Classes\CLSID\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}\Defa
 reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\C\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\rarityticon2.ico" /f
 reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\D\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Pinkie_Pie.ico" /f
 reg add "HKCU\Software\Classes\Applications\Explorer.exe\Drives\Z\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Speed Runners.ico" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
+rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "3" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Folder - UserFluttershy.ico" /f
+rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 
 rem Move Desktop
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "Z:\Desktop" /f
