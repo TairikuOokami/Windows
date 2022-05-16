@@ -477,6 +477,11 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE
 rem =================================== Software Setup =====================================
 
 
+rem Audials
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\audialsag.audialsplay_2022.0.22600.0_x86__3eby6px24ctcy\Audials\WebView2" /r /d y
+icacls "%ProgramFiles%\WindowsApps\audialsag.audialsplay_2022.0.22600.0_x86__3eby6px24ctcy\Audials\WebView2" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%ProgramFiles%\WindowsApps\audialsag.audialsplay_2022.0.22600.0_x86__3eby6px24ctcy\Audials\WebView2" /s /q
+
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z:/TEMP/Gihosoft/temp" /f
@@ -2295,9 +2300,9 @@ rem Allow/Deny - Account info access
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Allow" /f
 
 rem Allow/Deny - Let apps access your account info / Microsoft Content / Email and accounts
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.AccountsControl_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.MicrosoftEdge_8wekyb3d8bbwe" /v "Value" /t REG_SZ /d "Allow" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.AccountsControl_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.MicrosoftEdge_8wekyb3d8bbwe" /v "Value" /t REG_SZ /d "Allow" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
 
 rem ________________________________________________________________________________________
 rem Allow/Deny - Allow access to account info on this device
@@ -2745,9 +2750,14 @@ rem =================================== Windows Settings =======================
 rem --------------------------------------- System -----------------------------------------
 rem ..................................... Clipboard ........................................
 
-rem ________________________________________________________________________________________
+rem 1 - Clipboard history
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "AllowClipboardHistory" /t REG_DWORD /d "0" /f
+
+rem 1 - Sync across your devices
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "AllowCrossDeviceClipboard " /t REG_DWORD /d "0" /f
+
+rem 0 - Suggested actions
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\SmartClipboard" /v "Disabled" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -3144,5 +3154,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/XXwrjq0C
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/14S3YNrK
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
