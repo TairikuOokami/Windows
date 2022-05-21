@@ -119,6 +119,7 @@ rem dism /Get-WimInfo /WimFile:E:\sources\install.wim /index:1
 rem dism /Get-WimInfo /WimFile:E:\sources\install.esd /index:1
 
 rem https://www.elevenforum.com/t/create-shortcuts-to-open-pages-in-settings-in-windows-11.522
+rem https://www.elevenforum.com/t/keyboard-shortcuts-in-windows-11.2253
 rem https://www.elevenforum.com/t/list-of-uri-commands-to-open-microsoft-store-apps-in-windows-11.2683
 rem https://www.elevenforum.com/t/list-of-windows-11-clsid-key-guid-shortcuts.1075
 rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-folder-shortcuts.1080
@@ -127,7 +128,7 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Bitdefender, Panda, ZoneAlarm are dead - Avast, AVG, Avira, Sophos are out of question)
+rem AntiVirus software (Panda, ZoneAlarm are dead - Avast, Avira, Bitdefender, Sophos are out of question)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
 rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
@@ -135,15 +136,22 @@ rem 360 Total Security Setup - uncheck Join 360 User Experience Improvement Prog
 rem Adaware (MT) - https://www.adaware.com/free-antivirus-download (Bitdefender's signatures + install/uninstall without restart) - https://postimg.cc/30CN1yFK
 rem Adaware Silent - App Managment - Enable Gaming Mode / Disable Threat Alliance for a better privacy
 rem Adaware Silent - Scan Computer - Disable Automated Scan
+rem AVG (CZ) - https://www.avg.com - https://postimg.cc/N95JB34V
+rem Avast (CZ) - https://www.avast.com - https://postimg.cc/CZHBd5vn
+rem AVG/Avast Setup - Customize - Minimal Protection - File Shield only for max perfomance (DNS can replace web shield avoiding MITM)
+rem AVG/Avast Setup - Menu - Settings - Personal Privacy - uncheck all
+rem AVG/Avast Performance - Menu - Settings - Troubleshooting - uncheck hardware virtualization + LSA protection
+rem AVG/Avast Performance - Menu - Basic protection - Troubleshooting - uncheck hardware virtualization + LSA protection
+rem AVG/Avast Performance - Menu - Basic protection - Core SHield/Detection - Low sensitivty / uncheck CyberCapture + Anti-Rootkit + Generate report
 rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/try-free-cloud-antivirus - https://postimg.cc/Yvry2J40
 rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended uncheck All
 rem Kaspersky Security Cloud Setup - Uninstall Kaspersky Secure Connection (trial VPN)
 rem Kaspersky Security Cloud Setup - Settings - Interface - uncheck Receive informational messages + Show information about special offers
-rem Kaspersky Security Cloud Performance - Settings - Additional - uncheck Use hardware virtualization + Show password strength + Warn about using the same password
+rem Kaspersky Security Cloud Performance - Settings - Additional - uncheck Use hardware virtualization + Secure Keyboard + Show password strength + Warn about using the same password
 rem Kaspersky Security Cloud Performance - Settings - General - uncheck Use Advanced Disinfection
 rem Kaspersky Security Cloud Performance - Settings - Protection - Turn Off All, but File Anti-Virus / File Anti-Virus Advanced - set Security level Low
 rem Kaspersky Security Cloud Performance - Settings - Network settings - check Do not scan encrypted connections (to avoid MITM)
-rem Kaspersky Security Cloud Performance - Settings - Network settings - uncheck Inject script into web traffic + Monitor all ports + Decrypt + Scan secure traffic
+rem Kaspersky Security Cloud Performance - Settings - Network settings - uncheck Inject script into web traffic + Monitor ports + Decrypt + Scan secure traffic
 rem Microsoft Defender - https://github.com/AndyFul/ConfigureDefender - https://postimg.cc/ZBsbb1xh
 
 rem AntiVirus software (Cloud only)
@@ -208,7 +216,7 @@ rem Software
 rem Application Updates / Patch My PC - https://patchmypc.com/home-updater
 rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
-rem Bootable USB / Universal USB Installer - https://www.pendrivelinux.com/universal-usb-installer-easy-as-1-2-3
+rem Bootable USB / Rufus - https://apps.microsoft.com/store/detail/rufus/9PC3H3V7Q9CH?hl=en-us&gl=US
 rem Bootloader / EasyBCD - https://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
 rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy/security!
@@ -229,6 +237,7 @@ rem Driver Updates / Driver Easy - https://www.drivereasy.com
 rem DVD to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
 rem eMail Client Browser Extension / Checker Plus for Gmail - https://chrome.google.com/webstore/detail/checker-plus-for-gmail/oeopbcgkkoapgobdbedcemjljbihmemj
+rem eMail Client Browser Extension / Microsoft Outlook - https://microsoftedge.microsoft.com/addons/detail/microsoft-outlook/kkpalkknhlklpbflpcpkepmmbnmfailf
 rem File Archiver / NanaZip - https://www.microsoft.com/en-us/p/nanazip/9n8g7tscl18r?activetab=pivot:overviewtab
 rem Folder View Globally Set / WinSetView - https://github.com/LesFerch/WinSetView
 rem GPU Info / GPU-Z - https://www.techpowerup.com/gpuz
@@ -270,9 +279,6 @@ rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/standard.html
 rem System Restore / Reboot Restore Rx - https://horizondatasys.com/reboot-restore-rx-freeware
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
-rem Task Manager in SysTray / TrayTM - https://github.com/AzadKurt/TrayTM
-rem Taskbar Always On Top Bug / Rude Window Fixer - https://github.com/dechamps/RudeWindowFixer
-rem Taskbar Drag & Drop / Windows 11 Drag & Drop to the Taskbar - https://github.com/HerMajestyDrMona/Windows11DragAndDropToTaskbarFix
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
 rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
@@ -463,7 +469,7 @@ bcdedit /set quietboot yes
 bcdedit /set useplatformtick yes
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9004\Discord.exe --start-minimized" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
@@ -472,7 +478,7 @@ reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userini
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "autocheck autochk *" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE" /t REG_MULTI_SZ /d "" /f
-
+License_usermd5
 
 rem =================================== Software Setup =====================================
 
@@ -485,7 +491,6 @@ rd "%ProgramFiles%\WindowsApps\audialsag.audialsplay_2022.0.22600.0_x86__3eby6px
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z:/TEMP/Gihosoft/temp" /f
-reg delete "HKCU\Software\Gihosoft\TubeGet" /v "Net_DayLink5Times" /f
 
 rem Notepad
 reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosDX" /t REG_DWORD /d "1934" /f
@@ -1528,10 +1533,10 @@ rem MsCtfMonitor Task (keylogger) is required to be able to type within Settings
 schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
-schtasks /DELETE /TN "Driver Easy Scheduled Scan" /f
 schtasks /DELETE /TN "ModifyLinkUpdate" /f
-schtasks /DELETE /TN "SoftMakerUpdater" /f
+schtasks /DELETE /TN "StartAUEP" /f
 schtasks /DELETE /TN "StartCN" /f
+schtasks /DELETE /TN "StartCNBM" /f
 schtasks /DELETE /TN "StartDVR" /f
 
 schtasks /Change /TN "CreateExplorerShellUnelevatedTask" /Enable
@@ -1637,12 +1642,12 @@ rem AppX Deployment Service (AppXSVC) / required by Store
 rem Background Intelligent Transfer Service / required by Windows Updates / depends on Network List Service (starts even when disabled)
 rem Base Filtering Engine / required by Windows Defender Firewall
 rem CNG Key Isolation / required to login to Windows Insider / Switch to Local Account / Set up PIN / Basically everything Credentials related
-rem Connected Devices Platform / required to open Settings - Windows Backup and to synv with android
+rem Connected Devices Platform / required to open Settings - Windows Backup and to sync with android
 rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app.
 rem Delivery Optimization / required by Windows Updates
 rem DevicesFlow / required to open Settings - Bluetooth and devices 
 rem Diagnostic Policy Service / required by Windows Diagnostic (Troubleshooting)
-rem DHCP Client / required by Windows Updates (0x80240022)
+rem DHCP Client / sometimes required by Windows Updates (0x80240022)
 rem Distributed Link Tracking Client / sometimes required to open shortcuts and System apps - "Windows cannot access the specified device, path, or file. You may not have the appropriate permission to access the item"
 rem Geolocation Service / required by some Windows Store apps, it can not be enabled when Connected User Experiences and Telemetry is disabled
 rem Microsoft Account Sign-in Assistant / required to login to Microsoft Account
@@ -1677,6 +1682,9 @@ sc config "AMD Crash Defender Service" start= disabled
 
 rem AMD External Events Utility
 sc config "AMD External Events Utility" start= disabled
+
+rem AMD User Experience Program Data Uploader
+sc config "AUEPLauncher" start= disabled
 
 rem AOMEI Backupper Scheduler Service
 sc config "Backupper Service" start= disabled
@@ -2379,7 +2387,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExp
 
 rem ________________________________________________________________________________________
 rem Send optional dianostgic data / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
 
 rem Feedback Frequency - Windows should ask for my feedback: 0 - Never / Removed - Automatically
 reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
@@ -3083,7 +3091,6 @@ rem ==================================== Windows Waypoint ======================
 timeout 5
 
 winget upgrade --all
-winget uninstall "Microsoft Edge WebView2 Runtime"
 
 timeout 5
 
@@ -3106,9 +3113,6 @@ rd "%AppData%\Discord\Code Cache" /s /q
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - edge://settings/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History" /s /f /q
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Media History-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q
@@ -3123,25 +3127,31 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Visited Links" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AutofillStrikeDatabase" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\blob_storage" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\BudgetDatabase" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Collections" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\data_reduction_proxy_leveldb" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Continuous Migration" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\coupon_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\File System" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsTopSites" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_model_and_features_store" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Pdf" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PDF Restore Data" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Platform Notifications" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Session Storage" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Sessions" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q
 
 rem Run Wise Disk Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
