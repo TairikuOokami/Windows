@@ -2,11 +2,16 @@ rem Delete Windows Recovery Partition
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-free-portable\x64\dm.exe"
 
 rem Extend Windows Partition
-start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-free-portable\x64\dm.exe"
+diskmgmt.msc
+
+pause
 
 rem Disable Indexing C:/Z:
-rem Disable Hardware Acceleration, Overlay, Sounds in Discord
 explorer
+
+pause
+
+"C:\Program Files (x86)\Creative\Sound Blaster Command\Creative.SBCommand.exe"
 
 pause
 
@@ -21,11 +26,12 @@ control
 
 pause
 
-rem Uninstall all
+rem Uninstall all but Notepad nad WMIC
 start ms-settings:optionalfeatures
 
 pause
 
+rd "Z:\Edge" /s /q
 taskkill /im msedge.exe /f
 takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
 xcopy "%LocalAppData%\Microsoft\Edge" "Z:\Edge" /s /i /y
@@ -42,15 +48,16 @@ rd "C:\Setup" /s /q
 
 pause
 
-start ms-settings:appsfeatures
-
-pause
-
-start "" "D:\OneDrive\Mikai.7z"
-
-pause
-
+rem Disable Hardware Acceleration, Overlay, Sounds in Discord
 start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+start "" /wait %LocalAppData%\Discord\app-1.0.9004\Discord.exe
+
+pause
+
+start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\NanaZip.lnk"
+start "" "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\2fast - two factor authenticator supporting TOTP.lnk"
+
+pause
 
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
@@ -126,8 +133,6 @@ reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "C:\Program File
 reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
 start "" /wait "D:\Steam\steam.exe"
 start "" /wait "D:\OneDrive\Setup\Install TruckersMP.exe"
-
-rem start ms-windows-store:
 
 pause
 
