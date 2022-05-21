@@ -1,4 +1,6 @@
-rem DO NOT enable OneDrive during Windows setup, otherwise you will not be able to choose the folder's location!
+rem Setup OneDrive first then Unlink to change the location!
+
+pause
 
 rem Disable Hibernation and thus also Fast Startup
 powercfg -h off
@@ -27,16 +29,14 @@ rem Disable Tamper and Real Protection in Defender
 
 pause
 
-rem Remove the user from D:\
-explorer
-
-pause
-
 takeown /s %computername% /u %username% /f D: /r /d y
 icacls D: /inheritance:r
 icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D: /grant "System":(OI)(CI)RX /t /l /q /c
 icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
+
+rem Remove the user from D:\
+explorer
 
 takeown /s %computername% /u %username% /f D:\Backup /r /d y
 icacls D:\Backup /inheritance:r
@@ -55,6 +55,8 @@ icacls D:\Steam /inheritance:r
 icacls D:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
 icacls D:\Steam /grant "Users":(OI)(CI)RX /t /l /q /c
+
+pause
 
 rem Access CMD with SYSTEM rights at logon (Win+U)
 takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
@@ -125,11 +127,6 @@ start ms-settings:network-ethernet
 
 pause
 
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "$Applist | Where-Object {$_.PackageName -Like "*3D*"} | Remove-AppxProvisionedPackage -Online"
-
-start ms-settings:windowsupdate-action
-rem Check for updates and Optional updates in Advanced options and RESTART!
-
 rem Uninstall all store apps except MS store
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage"
 
@@ -161,26 +158,24 @@ winget install --id 9PC3H3V7Q9CH --exact --source msstore --accept-package-agree
 rem Strong Password Generator
 winget install --id 9NNKGKL4V8HV --exact --source msstore --accept-package-agreements --accept-source-agreements
 
-pause
-
 rem winget list
 rem winget source list
-winget uninstall "cortana"
-winget uninstall "get help"
-winget uninstall "Microsoft Edge WebView2 Runtime"
-winget uninstall "microsoft people"
-winget uninstall "microsoft photos"
-winget uninstall "microsoft tips"
-winget uninstall "windows alarms & clock"
-winget uninstall "windows camera"
-winget uninstall "windows maps"
-winget uninstall "windows terminal"
-winget uninstall "windows web experience pack"
-winget uninstall "xbox game bar"
-winget uninstall "xbox game bar plugin"
-winget uninstall "xbox game speech window"
-winget uninstall "xbox identity provider"
-winget uninstall "your phone"
+rem winget uninstall "cortana"
+rem winget uninstall "get help"
+rem winget uninstall "Microsoft Edge WebView2 Runtime"
+rem winget uninstall "microsoft people"
+rem winget uninstall "microsoft photos"
+rem winget uninstall "microsoft tips"
+rem winget uninstall "windows alarms & clock"
+rem winget uninstall "windows camera"
+rem winget uninstall "windows maps"
+rem winget uninstall "windows terminal"
+rem winget uninstall "windows web experience pack"
+rem winget uninstall "xbox game bar"
+rem winget uninstall "xbox game bar plugin"
+rem winget uninstall "xbox game speech window"
+rem winget uninstall "xbox identity provider"
+rem winget uninstall "your phone"
 
 pause
 
