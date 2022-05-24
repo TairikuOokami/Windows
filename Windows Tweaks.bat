@@ -2,7 +2,7 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes
-rem https://www.ubackup.com/help/create-bootable-disk.html
+rem https://www.easeus.com/support/todo-backup/enable-disable-pre-os.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
@@ -60,6 +60,7 @@ rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
+rem Search Engines: Brave, MetaGerm, SearXNG, Swisscows
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -161,6 +162,7 @@ rem WiseVector StopX (CN) - https://www.wisevector.com/en - https://postimg.cc/H
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
 rem Ghostpress (DE) - https://www.schiffer.tech/ghostpress.html
+rem KeyScrambler (US) - https://www.qfxsoftware.com
 rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
 rem SysHardener (IT) - https://www.novirusthanks.org/products/syshardener
 rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/home-malware-protection
@@ -276,7 +278,7 @@ rem Settings / ControlUWP - https://github.com/builtbybel/control-uwp/releases
 rem SoundCard Third Party Drivers / ASUS, C-Media and Creative - https://danielkawakami.blogspot.com
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / XSplit - https://www.xsplit.com
-rem System Imaging / AOMEI Backupper Standard - https://www.aomeitech.com/ab/standard.html
+rem System Imaging / EaseUS Todo Backup Free - https://www.softpedia.com/get/System/Back-Up-and-Recovery/EASEUS-Todo-Backup.shtml
 rem System Restore / Reboot Restore Rx - https://horizondatasys.com/reboot-restore-rx-freeware
 rem Task Manager / Process Hacker - https://wj32.org/processhacker/nightly.php
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
@@ -344,6 +346,7 @@ rd "C:\Users\Tairi\3D Objects" /s /q
 rd "C:\Users\Tairi\Favorites" /s /q
 rd "C:\Users\Tairi\Links" /s /q
 rd "C:\Users\Tairi\Music" /s /q
+rd "C:\Users\Tairi\OneDrive" /s /q
 rd "C:\Users\Tairi\Searches" /s /q
 rd "D:\OneDriveTemp" /s /q
 
@@ -1685,9 +1688,6 @@ sc config "AMD External Events Utility" start= disabled
 rem AMD User Experience Program Data Uploader
 sc config "AUEPLauncher" start= disabled
 
-rem AOMEI Backupper Scheduler Service
-sc config "Backupper Service" start= disabled
-
 rem AVCTP service
 sc config BthAvctpSvc start= disabled
 
@@ -1726,6 +1726,9 @@ sc config TrkWks start= disabled
 
 rem dLauncherLoopback
 sc config dLauncherLoopback start= demand
+
+rem EaseUS Agent Service
+sc config "EaseUS Agent" start= disabled
 
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
