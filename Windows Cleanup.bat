@@ -135,12 +135,19 @@ cleanmgr /sagerun:6553
 rem Cleanup done, you can close this window!
 timeout -1
 
+winget uninstall "Microsoft Edge WebView2 Runtime"
 winget export -o D:\OneDrive\Setup\winget.txt
 
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
-start "" /wait "D:\OneDrive\Setup\wfc6setup"
+
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\Rapr.exe"
 start "" /wait "%ProgramFiles(x86)%\ADATA\SSD ToolBox\SSDToolBox.exe"
+
+start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
+sc config "EaseUS Agent" start= demand
+net start "EaseUS Agent"
+start "" /wait "C:\Program Files (x86)\EaseUS\Todo Backup\bin\Loader.exe"
+
 start "" D:\OneDrive\Downloads\UnValidate.bat
