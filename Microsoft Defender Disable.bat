@@ -4,7 +4,7 @@ rem https://www.sordum.org/9480/defender-control-v2-1
 rem https://www.adaware.com/free-antivirus-download
 
 rem Disable Tamper and Real Protection in Defender
-rem Install any 3rd party AV that registers within Windows Security (Adaware installs without needing a reboot)
+rem Install any 3rd party AV that registers within Windows Security (like Adaware), update definitions, restart!
 rem Run "MD Disable.bat" TWICE !!!!! (it will restart a computer within a minute to disable type "shutdown -a")
 rem After restart, uninstall 3rd party AV (preferably using HiBit Uninstaller)
 rem Restart (HiBit Uninstaller will run to remove leftovers)
