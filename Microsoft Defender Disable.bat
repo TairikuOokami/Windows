@@ -69,7 +69,7 @@ shutdown /r
 rem To stop restart type
 rem shutdown -a
 
-rem Last Tested on Windows 11 Home 22000.527 using Microsoft Defender Platform Version 4.18.2201.10 (8 March 2022)
-rem Running bat file TWICE with 3rd party AV running https://postimg.cc/D8wrGfHX / DONE https://postimg.cc/KRjTzq37
+rem Last Tested on Windows 11 Home 22621.1 using Microsoft Defender Platform Version 4.18.2204.4 (29 March 2022)
+rem Running bat file TWICE with 3rd party AV running https://postimg.cc/D8wrGfHX / DONE https://postimg.cc/wRQXRwNZ
 
 pause
