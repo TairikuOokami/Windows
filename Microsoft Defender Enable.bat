@@ -2,9 +2,9 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 rem https://www.defenderui.com
 rem https://www.microsoft.com/en-us/wdsi/defenderupdates
-rem https://support.microsoft.com/en-us/help/4568292/defender-update-for-windows-operating-system-installation-images
-rem https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=win10-ps
-rem https://docs.microsoft.com/en-us/windows/security/threat-protection/microsoft-defender-atp/customize-exploit-protection
+rem https://docs.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=windowsserver2022-ps
+rem https://docs.microsoft.com/en-us/microsoft-365/security/defender-endpoint/customize-exploit-protection?view=o365-worldwide
+rem https://support.microsoft.com/en-us/topic/microsoft-defender-update-for-windows-operating-system-installation-images-1c89630b-61ff-00a1-04e2-2d1f3865450d
 
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /t REG_EXPAND_SZ /d "\"%windir%\system32\SecurityHealthSystray.exe\"" /f
