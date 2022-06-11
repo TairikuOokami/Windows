@@ -60,7 +60,7 @@ rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
-rem Search Engines: Brave, MetaGerm, SearXNG, Swisscows
+rem Search Engines: Brave, MetaGerm, Searx, Swisscows
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -129,7 +129,7 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Panda, ZoneAlarm are dead - Avast, Avira, Bitdefender, Sophos are out of question)
+rem AntiVirus software (Avira, Bitdefender, Panda, Sophos, ZoneAlarm are out of question)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
 rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
@@ -143,7 +143,7 @@ rem AVG/Avast Setup - Customize - Minimal Protection - File Shield only for max 
 rem AVG/Avast Setup - Menu - Settings - Personal Privacy - uncheck all
 rem AVG/Avast Performance - Menu - Settings - Troubleshooting - uncheck hardware virtualization + LSA protection
 rem AVG/Avast Performance - Menu - Basic protection - Troubleshooting - uncheck hardware virtualization + LSA protection
-rem AVG/Avast Performance - Menu - Basic protection - Core SHield/Detection - Low sensitivty / uncheck CyberCapture + Anti-Rootkit + Generate report
+rem AVG/Avast Performance - Menu - Basic protection - Core Shield/Detection - Low sensitivty / uncheck CyberCapture + Anti-Rootkit + Generate report
 rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/try-free-cloud-antivirus - https://postimg.cc/Yvry2J40
 rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended uncheck All
 rem Kaspersky Security Cloud Setup - Uninstall Kaspersky Secure Connection (trial VPN)
@@ -358,7 +358,6 @@ rem Remove Windows Powershell (to restore run "sfc /scannow")
 rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
 rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
-rem https://threatpost.com/powershell-payload-analysis-malware/165188
 rem https://www.bleepingcomputer.com/news/security/emotet-malware-now-installs-via-powershell-in-windows-shortcut-files
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
@@ -471,7 +470,7 @@ bcdedit /set recoveryenabled no
 bcdedit /set quietboot yes
 bcdedit /set useplatformtick yes
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9004\Discord.exe --start-minimized" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9005\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
@@ -1033,6 +1032,7 @@ reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "Res
 
 rem Disabling PowerShell script execution / Restricting PowerShell to Constrained Language mode
 rem https://teamt5.org/en/posts/a-deep-dive-into-powershell-s-constrained-language-mode
+rem https://www.thewindowsclub.com/how-to-disable-powershell-windows-10
 rem Set-ExecutionPolicy bypass - noprofile
 reg add "HKLM\Software\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
 reg add "HKLM\Software\WOW6432Node\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
@@ -1644,7 +1644,7 @@ rem AppX Deployment Service (AppXSVC) / required by Store
 rem Background Intelligent Transfer Service / required by Windows Updates / depends on Network List Service (starts even when disabled)
 rem Base Filtering Engine / required by Windows Defender Firewall
 rem CNG Key Isolation / required to login to Windows Insider / Switch to Local Account / Set up PIN / Basically everything Credentials related
-rem Connected Devices Platform / required to open Settings - Windows Backup and to sync with android
+rem Connected Devices Platform / required to open Settings - Windows Backup and to sync Edge with android
 rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app.
 rem Delivery Optimization / required by Windows Updates
 rem DevicesFlow / required to open Settings - Bluetooth and devices 
@@ -2690,7 +2690,7 @@ rem ____________________________________________________________________________
 rem System Protection - Enable System restore and Set the size
 rem reg delete "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableConfig" /f
-rem reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\SPP\Clients" /v " {09F7EDC5-294E-4180-AF6A-FB0E6A0E9513}" /t REG_MULTI_SZ /d "1" /f
+rem reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\SPP\Clients" /v "{09F7EDC5-294E-4180-AF6A-FB0E6A0E9513}" /t REG_MULTI_SZ /d "1" /f
 rem schtasks /Change /TN "Microsoft\Windows\SystemRestore\SR" /Enable
 rem vssadmin Resize ShadowStorage /For=C: /On=C: /Maxsize=5GB
 rem sc config wbengine start= demand
@@ -2774,8 +2774,14 @@ rem =================================== Windows Settings =======================
 rem --------------------------------------- System -----------------------------------------
 rem .................................... Multitasking ......................................
 
+rem 1 - When I drag a window, let me snap it without dragging all the way to the screen edge
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "DITest" /t REG_DWORD /d "0" /f
+
 rem 1 - Show snap layouts when I hover over a window's maximize button
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableSnapAssistFlyout" /t REG_DWORD /d "0" /f
+
+rem 1 - Show snap layouts when I drag window to the top of my screen
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableSnapBar" /t REG_DWORD /d "0" /f
 
 rem 1 - Show snap layouts that the app is part of when I hover over the taskbar buttons
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "EnableTaskGroups" /t REG_DWORD /d "0" /f
@@ -3092,15 +3098,23 @@ rem ==================================== Windows Waypoint ======================
 
 timeout 5
 
+taskkill /im discord.exe /f
+taskkill /im dllhost.exe /f
+taskkill /im msedge.exe /f
+taskkill /im rundll32.exe /f
+taskkill /im steam.exe /f
+
 winget upgrade --all
 
 timeout 5
 
 fsutil usn deletejournal /d /n c:
 
+taskkill /im discord.exe /f
 taskkill /im dllhost.exe /f
 taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
+taskkill /im steam.exe /f
 
 taskkill /im cncmd.exe /f
 taskkill /im QtWebEngineProcess.exe /f
