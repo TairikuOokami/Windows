@@ -20,8 +20,10 @@ start "" /wait "D:\OneDrive\Setup\SBZSeriesDriverInstaller.exe"
 pause
 
 rem Set 75 Hz
+rem Disable variable refresh rate and optimizations for windowed games
 rem Disable Sound Devices
 rem Network Connection - all adapters - Uncheck all but IPv4
+
 control
 
 pause
@@ -50,7 +52,7 @@ pause
 
 rem Disable Hardware Acceleration, Overlay, Sounds in Discord
 start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-start "" /wait %LocalAppData%\Discord\app-1.0.9004\Discord.exe
+start "" /wait %LocalAppData%\Discord\app-1.0.9005\Discord.exe
 
 pause
 
@@ -67,8 +69,9 @@ rem Disabled #enable-quic
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
 rem Enabled #edge-automatic-https
+rem Enabled #edge-overlay-scrollbars-win-style
 rem Enabled #edge-visual-rejuv-materials-menu
-rem Enabled #edge-visual-rejuv-materials-title-bar
+rem Enabled #edge-visual-rejuv-show-settings
 rem edge://flags
 
 pause
