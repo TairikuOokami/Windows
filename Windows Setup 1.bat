@@ -121,13 +121,19 @@ reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHO
 wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
+rem Change Adapter's ID
+rem https://github.com/adamhl8/batch-scripts/blob/main/win11-set-doh.cmd
+regedit
+explorer D:\OneDrive\Downloads
+pause
+
 rem Setup Encrypted DNS
 start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
 start ms-settings:network-ethernet
 
 pause
 
-rem Uninstall all store apps except MS store
+rem Uninstall all apps except MS store
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage"
 
 pause
@@ -140,23 +146,23 @@ pause
 rem 2fast – Two Factor Authenticator Supporting TOTP
 winget install --id 9P9D81GLH89Q --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Audials Play - Radio
-winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Calc
-winget install --id 9wzdncrfhvn5 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9wzdncrfhvn5 --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem MSN Weather
-winget install --id 9wzdncrfj3q2 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9wzdncrfj3q2 --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem NanaZip
-winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Netflix
-winget install --id 9WZDNCRFJ3TJ --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9WZDNCRFJ3TJ --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Notepad
-winget install --id 9msmlrh6lzf3 --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9msmlrh6lzf3 --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Paint
-winget install --id 9pcfs5b6t72h --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9pcfs5b6t72h --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Rufus
-winget install --id 9PC3H3V7Q9CH --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9PC3H3V7Q9CH --exact --source msstore --accept-package-agreements --accept-source-agreements
 rem Strong Password Generator
-winget install --id 9NNKGKL4V8HV --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem winget install --id 9NNKGKL4V8HV --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 rem winget list
 rem winget source list
