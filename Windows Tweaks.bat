@@ -153,7 +153,7 @@ rem Kaspersky Security Cloud Performance - Settings - General - uncheck Use Adva
 rem Kaspersky Security Cloud Performance - Settings - Protection - Turn Off All, but File Anti-Virus / File Anti-Virus Advanced - set Security level Low
 rem Kaspersky Security Cloud Performance - Settings - Network settings - check Do not scan encrypted connections (to avoid MITM)
 rem Kaspersky Security Cloud Performance - Settings - Network settings - uncheck Inject script into web traffic + Monitor ports + Decrypt + Scan secure traffic
-rem Microsoft Defender - https://github.com/AndyFul/ConfigureDefender - https://postimg.cc/ZBsbb1xh
+rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/ZBsbb1xh
 
 rem AntiVirus software (Cloud only)
 rem Immunet (US) - https://www.immunet.com/index - https://postimg.cc/TpjzQjM8
@@ -321,15 +321,13 @@ del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
 del "%LocalAppData%\Microsoft\Windows\ActionCenterCache" /s /f /q
 del "%SystemDrive%\AMFTrace.log" /s /f /q
 del "%WINDIR%\System32\sru\*" /s /f /q
-rd "%SystemDrive%\AMD" /s /q
-rd "%SystemDrive%\OneDriveTemp" /s /q
-rd "%SystemDrive%\PerfLogs" /s /q
-rd "%SystemDrive%\Recovery" /s /q
-rd "%ProgramData%\Microsoft\Diagnosis" /s /q
-rd "%ProgramData%\Microsoft\DiagnosticLogCSP" /s /q
-rd "%ProgramData%\Microsoft\Network" /s /q
-rd "%ProgramData%\Microsoft\Search" /s /q
-rd "%ProgramData%\Microsoft\SmsRouter" /s /q
+rd "C:\Users\Tairi\3D Objects" /s /q
+rd "C:\Users\Tairi\Favorites" /s /q
+rd "C:\Users\Tairi\Links" /s /q
+rd "C:\Users\Tairi\Music" /s /q
+rd "C:\Users\Tairi\OneDrive" /s /q
+rd "C:\Users\Tairi\Searches" /s /q
+rd "D:\OneDriveTemp" /s /q
 rd "%AppData%\AMD" /s /q
 rd "%AppData%\ArtifexMundi\SparkPromo" /s /q
 rd "%LocalAppData%\Microsoft\Internet Explorer" /s /q
@@ -342,13 +340,16 @@ rd "%LocalAppData%\Microsoft\Windows\INetCookies" /s /q
 rd "%LocalAppData%\Microsoft\Windows\WebCache" /s /q
 rd "%LocalAppData%\Steam\htmlcache" /s /q
 rd "%LocalAppData%\Temp" /s /q
-rd "C:\Users\Tairi\3D Objects" /s /q
-rd "C:\Users\Tairi\Favorites" /s /q
-rd "C:\Users\Tairi\Links" /s /q
-rd "C:\Users\Tairi\Music" /s /q
-rd "C:\Users\Tairi\OneDrive" /s /q
-rd "C:\Users\Tairi\Searches" /s /q
-rd "D:\OneDriveTemp" /s /q
+rd "%ProgramData%\Microsoft\Diagnosis" /s /q
+rd "%ProgramData%\Microsoft\DiagnosticLogCSP" /s /q
+rd "%ProgramData%\Microsoft\Network" /s /q
+rd "%ProgramData%\Microsoft\Search" /s /q
+rd "%ProgramData%\Microsoft\SmsRouter" /s /q
+rd "%ProgramFiles(x86)%\EaseUS\Todo Backup\bin\PEtools" /s /q
+rd "%SystemDrive%\AMD" /s /q
+rd "%SystemDrive%\OneDriveTemp" /s /q
+rd "%SystemDrive%\PerfLogs" /s /q
+rd "%SystemDrive%\Recovery" /s /q
 
 rem Remove/Rebuild Font Cache
 del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/s /f /q
@@ -470,7 +471,6 @@ bcdedit /set recoveryenabled no
 bcdedit /set quietboot yes
 bcdedit /set useplatformtick yes
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Discord" /t REG_SZ /d "%LocalAppData%\Discord\app-1.0.9005\Discord.exe --start-minimized" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
@@ -485,9 +485,9 @@ rem =================================== Software Setup =========================
 
 
 rem Audials
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\audialsag.audialsplay_2022.0.22600.0_x86__3eby6px24ctcy\Audials\WebView2" /r /d y
-icacls "%ProgramFiles%\WindowsApps\audialsag.audialsplay_2022.0.22600.0_x86__3eby6px24ctcy\Audials\WebView2" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%ProgramFiles%\WindowsApps\audialsag.audialsplay_2022.0.22600.0_x86__3eby6px24ctcy\Audials\WebView2" /s /q
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\AudialsAG.AudialsPlay_2022.0.23400.0_x86__3eby6px24ctcy\Audials\WebView2" /r /d y
+icacls "%ProgramFiles%\WindowsApps\AudialsAG.AudialsPlay_2022.0.23400.0_x86__3eby6px24ctcy\Audials\WebView2" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%ProgramFiles%\WindowsApps\AudialsAG.AudialsPlay_2022.0.23400.0_x86__3eby6px24ctcy\Audials\WebView2" /s /q
 
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
@@ -1730,6 +1730,9 @@ sc config dLauncherLoopback start= demand
 rem EaseUS Agent Service
 sc config "EaseUS Agent" start= disabled
 
+rem EaseUS UPDATE SERVICE
+sc config "EaseUS UPDATE SERVICE" start= disabled
+
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
 
@@ -2772,6 +2775,16 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SmartActionPlatform\Smar
 
 rem =================================== Windows Settings ===================================
 rem --------------------------------------- System -----------------------------------------
+rem ....................................... Display ........................................
+rem . . . . . . . . . . . . . . . . . . . . Graphics . . . . . . . . . . . . . . . . . . . . 
+
+rem Change default graphics settings
+rem 0 - Variable refresh rate / O[timizations for windowed games
+reg add "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "DirectXUserGlobalSettings " /t REG_SZ /d "VRROptimizeEnable=0;SwapEffectUpgradeEnable=0;" /f
+
+
+rem =================================== Windows Settings ===================================
+rem --------------------------------------- System -----------------------------------------
 rem .................................... Multitasking ......................................
 
 rem 1 - When I drag a window, let me snap it without dragging all the way to the screen edge
@@ -2957,13 +2970,16 @@ rem reg add "HKCR\Directory\shell\runas" /v "NoWorkingDirectory" /t REG_SZ /d ""
 rem reg add "HKCR\Directory\shell\runas\command" /ve /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
 rem reg add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ /d "cmd.exe /c takeown /f \"%%1\" /r /d y && icacls \"%%1\" /grant administrators:F /t" /f
 
-rem Remove open in Windows Terminal from context menu
+rem Remove "Add to Favorites" Context Menu
+reg delete "HKCR\*\shell\pintohomefile" /f
+
+rem Remove "Open in Windows Terminal" Context Menu
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{9F156763-7844-4DC4-B2B1-901F640F5155}" /t REG_SZ /d "" /f
 
-rem Remove Send To from context Menu
+rem Remove "Send To" Context Menu
 reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f
 
-rem Remove Share from Context menu
+rem Remove "Share" Context Menu
 reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\ModernSharing" /f
 
 rem ________________________________________________________________________________________
@@ -3098,7 +3114,6 @@ rem ==================================== Windows Waypoint ======================
 
 timeout 5
 
-taskkill /im discord.exe /f
 taskkill /im dllhost.exe /f
 taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
@@ -3110,7 +3125,6 @@ timeout 5
 
 fsutil usn deletejournal /d /n c:
 
-taskkill /im discord.exe /f
 taskkill /im dllhost.exe /f
 taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
@@ -3121,10 +3135,6 @@ taskkill /im QtWebEngineProcess.exe /f
 taskkill /im RadeonSoftware.exe /f
 taskkill /im amdow.exe /f
 taskkill /im AMDRSServ.exe /f
-
-rem Clean Discord's caches
-rd "%AppData%\Discord\Cache" /s /q
-rd "%AppData%\Discord\Code Cache" /s /q
 
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - edge://settings/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
