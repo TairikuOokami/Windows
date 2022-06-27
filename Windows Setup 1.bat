@@ -139,6 +139,7 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 pause
 
 start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
+start https://www.softpedia.com/get/System/System-Miscellaneous/Windows-Package-Manager-WinGet.shtml
 rem App Installer (winget)
 
 pause
