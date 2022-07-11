@@ -55,7 +55,7 @@ rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefil
 rem Browser Leaks - https://browserleaks.com / https://whoer.net / CanvasFingerprint / WebRTC
 rem Browser Tracking Test - https://panopticlick.eff.org
 rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-based-adblocking-support
-rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies
+rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies / https://fpresearch.httpjames.space
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
@@ -129,7 +129,7 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Avira, Bitdefender, Panda, Sophos, ZoneAlarm are out of question)
+rem AntiVirus software (Avira, Bitdefender, ESET, Norton, Panda, Sophos, ZoneAlarm are out of question)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
 rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
@@ -261,6 +261,7 @@ rem PDF Editor / FreePDF - https://www.getfreepdf.com
 rem PDF Viewer / Sumatra PDF - https://www.sumatrapdfreader.org/free-pdf-reader.html
 rem Performance / LatencyMon - https://www.resplendence.com/latencymon
 rem Performance / Process Lasso - https://bitsum.com
+rem Performance / WhySoSlow - https://www.resplendence.com/whysoslow
 rem Performance / Windows System Timer Tool - https://vvvv.org/contribution/windows-system-timer-tool
 rem Permissions / Reset permissions/Take Ownership - http://lallouslab.net/2013/08/26/resetting-ntfs-files-permission-in-windows-graphical-utility/
 rem Process Monitor / Process Monitor - https://docs.microsoft.com/en-us/sysinternals/downloads/procmon
@@ -346,6 +347,7 @@ rd "%ProgramData%\Microsoft\Network" /s /q
 rd "%ProgramData%\Microsoft\Search" /s /q
 rd "%ProgramData%\Microsoft\SmsRouter" /s /q
 rd "%ProgramFiles(x86)%\EaseUS\Todo Backup\bin\PEtools" /s /q
+rd "%ProgramFiles(x86)%\EaseUS\Todo Backup\BUILDPE" /s /q
 rd "%SystemDrive%\AMD" /s /q
 rd "%SystemDrive%\OneDriveTemp" /s /q
 rd "%SystemDrive%\PerfLogs" /s /q
@@ -356,6 +358,7 @@ del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
 rem Remove Windows Powershell (to restore run "sfc /scannow")
+rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-windows-devices-with-powershell
 rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
 rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
@@ -452,15 +455,16 @@ rem =========================== Restore essential startup entries ==============
 rem Run bcdedit command to check for the current status / Yes = True / No = False
 rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
 rem https://docs.google.com/document/d/1c2-lUJq74wuYK1WrA_bIvgb89dUN0sj8-hO3vqmrau4/edit
+rem To get the latest Insider updates enable flightsigning - https://aka.ms/WIPSettingsFix
 bcdedit /deletevalue safeboot
 bcdedit /deletevalue safebootalternateshell
 bcdedit /deletevalue removememory
 bcdedit /deletevalue truncatememory
 bcdedit /deletevalue useplatformclock
 bcdedit /set hypervisorlaunchtype off
-Bcdedit /set flightsigning off
+bcdedit /set flightsigning off
 bcdedit /set {bootmgr} displaybootmenu no
-Bcdedit /set {bootmgr} flightsigning off
+bcdedit /set {bootmgr} flightsigning off
 bcdedit /set advancedoptions false
 bcdedit /set bootems no
 bcdedit /set bootmenupolicy legacy
@@ -534,7 +538,7 @@ rem Off - Disable Windows SmartScreen / On - Enable Windows SmartScreen
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
 
 rem 0 - Disable SmartScreen Filter in Microsoft Edge / 1 - Enable
-reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
 
 rem 0 - Disable SmartScreen PUA in Microsoft Edge / 1 - Enable
 reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
@@ -1156,6 +1160,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DW
 rem The Experimentation and Configuration Service is used to deploy Experimentation and Configuration payloads to the client / 0 - RestrictedMode / 1 - ConfigurationsOnlyMode / 2 - FullMode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExperimentationAndConfigurationServiceControl" /t REG_DWORD /d "0" /f
 
+rem 1 - Allows Microsoft Edge to prompt the user to switch to the appropriate profile when Microsoft Edge detects that a link is a personal or work link
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "GuidedSwitchEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Hide restore pages dialog after browser crash
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HideRestoreDialogEnabled" /t REG_DWORD /d "1" /f
 
@@ -1219,8 +1226,11 @@ rem ____________________________________________________________________________
 rem 1 - Enables background updates to the list of available templates for Collections and other features that use templates
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundTemplateListUpdatesEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Enable Web Widget
+rem 1 - Allow the Edge bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow the Edge bar at Windows startup
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebWidgetIsEnabledOnStartup" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1418,7 +1428,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t R
 rem 1 - Save and fill payment info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "1" /f
 
-rem 1 - Show rewards points in Microsoft Edge user profile
+rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Suggest strong passwords
@@ -1439,14 +1449,13 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordRevealEnabled" /t RE
 rem Sign in: / 0 - Automatically / 1 - With device password
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PrimaryPasswordSetting" /t REG_DWORD /d "1" /f
 
-rem 1 - Show rewards points in Microsoft Edge user profile
+rem 1 - Show Microsoft Rewards experience and notifications
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem 1 - Show rewards points in Microsoft Edge user profile
-reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "1" /t REG_SZ /d "https://malwaretips.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "2" /t REG_SZ /d "https://steamcommunity.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "3" /t REG_SZ /d "https://store.steampowered.com" /f
+rem Configure the list of domains where Microsoft Edge should disable the password manager
+reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "1" /t REG_SZ /d "https://steamcommunity.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "2" /t REG_SZ /d "https://store.steampowered.com" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -2112,6 +2121,11 @@ rem Disable IDN (internationalized domain name)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableIdnMapping" /t REG_DWORD /d "0" /f
 
+rem Disable smart multi-homed name resolution
+rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd197552(v=ws.10)
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableSmartNameResolution" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "DisableParallelAandAAAA" /t REG_DWORD /d "1" /f
+
 rem Disable Multicast/mDNS repeater / https://f20.be/blog/mdns
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableMDNS" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMulticast" /t REG_DWORD /d "0" /f
@@ -2667,7 +2681,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manu
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "MSI Radeon RX 580 ARMOR 8G OC" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportHours" /t REG_SZ /d "Within 24-48 hours" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportPhone" /t REG_SZ /d "TairikuOkami@pm.me" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://discordapp.com/TairikuOkami#2826" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://vk.com/tairikuokami" /f
 
 rem Computer Description
 reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "400/40 MBps" /f
@@ -2779,7 +2793,7 @@ rem ....................................... Display ............................
 rem . . . . . . . . . . . . . . . . . . . . Graphics . . . . . . . . . . . . . . . . . . . . 
 
 rem Change default graphics settings
-rem 0 - Variable refresh rate / O[timizations for windowed games
+rem Variable refresh rate / Optimizations for windowed games
 reg add "HKCU\Software\Microsoft\DirectX\UserGpuPreferences" /v "DirectXUserGlobalSettings " /t REG_SZ /d "VRROptimizeEnable=0;SwapEffectUpgradeEnable=0;" /f
 
 
@@ -3119,7 +3133,7 @@ taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 
-winget upgrade --all
+winget upgrade --all --include-unknown
 
 timeout 5
 
