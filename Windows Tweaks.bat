@@ -109,6 +109,7 @@ rem https://www.msgsafe.io
 rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 
 rem Windows ISO
+rem https://www.microsoft.com/en-us/software-download/windows11
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
 rem https://genuineisoverifier.weebly.com
@@ -260,6 +261,7 @@ rem Password Manager (Online) / Bitwarden - https://bitwarden.com
 rem PDF Editor / FreePDF - https://www.getfreepdf.com
 rem PDF Viewer / Sumatra PDF - https://www.sumatrapdfreader.org/free-pdf-reader.html
 rem Performance / LatencyMon - https://www.resplendence.com/latencymon
+rem Performance / HoneCtrl - https://github.com/auraside/HoneCtrl/releases
 rem Performance / Process Lasso - https://bitsum.com
 rem Performance / WhySoSlow - https://www.resplendence.com/whysoslow
 rem Performance / Windows System Timer Tool - https://vvvv.org/contribution/windows-system-timer-tool
@@ -276,7 +278,6 @@ rem Remove Locked File/Folder / ThisIsMyFile - https://www.softwareok.com/?seite
 rem Screen Recorder / FlashBack Express - https://www.flashbackrecorder.com/express
 rem Search / UltraSearch - https://www.jam-software.com/ultrasearch_free
 rem Settings / ControlUWP - https://github.com/builtbybel/control-uwp/releases
-rem SoundCard Third Party Drivers / ASUS, C-Media and Creative - https://danielkawakami.blogspot.com
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / EaseUS Todo Backup Free - https://www.softpedia.com/get/System/Back-Up-and-Recovery/EASEUS-Todo-Backup.shtml
@@ -358,11 +359,11 @@ del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
 rem Remove Windows Powershell (to restore run "sfc /scannow")
+rem https://www.bleepingcomputer.com/news/security/as-microsoft-blocks-office-macros-hackers-find-new-attack-vectors
 rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-windows-devices-with-powershell
 rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
 rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
-rem https://www.bleepingcomputer.com/news/security/emotet-malware-now-installs-via-powershell-in-windows-shortcut-files
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
 takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
@@ -465,15 +466,25 @@ bcdedit /set hypervisorlaunchtype off
 bcdedit /set flightsigning off
 bcdedit /set {bootmgr} displaybootmenu no
 bcdedit /set {bootmgr} flightsigning off
+bcdedit /set {globalsettings} custom:16000067 true
+bcdedit /set {globalsettings} custom:16000069 true
 bcdedit /set advancedoptions false
+bcdedit /set allowedinmemorysettings 0x0
 bcdedit /set bootems no
-bcdedit /set bootmenupolicy legacy
+bcdedit /set bootmenupolicy standard
 bcdedit /set bootstatuspolicy IgnoreAllFailures
+bcdedit /set bootux disabled
 bcdedit /set disabledynamictick yes
 bcdedit /set lastknowngood yes
 bcdedit /set recoveryenabled no
 bcdedit /set quietboot yes
+bcdedit /set uselegacyapicmode No
+bcdedit /set usefirmwarepcisettings No
+bcdedit /set usephysicaldestination No
 bcdedit /set useplatformtick yes
+bcdedit /set vsmlaunchtype off
+bcdedit /set vm no
+bcdedit /set x2apicpolicy Enable
 
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
@@ -848,6 +859,9 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize" /v "
 rem n - Disable Background disk defragmentation / y - enable
 reg add "HKLM\Software\Microsoft\Dfrg\BootOptimizeFunction" /v "Enable" /t REG_SZ /d "n" /f
 
+rem 0 - Disable FTH (Fault Tolerant Heap)
+reg add "HKLM\Software\Microsoft\FTH" /v "Enabled" /t Reg_DWORD /d "0" /f
+
 rem 0 - Disable Background auto-layout / Disable Optimize Hard Disk when idle
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OptimalLayout" /v "EnableAutoLayout" /t REG_DWORD /d "0" /f
 
@@ -868,9 +882,15 @@ rem 1 - When listing directories, NTFS does not update the last-access timestamp
 rem fsutil behavior query disablelastaccess
 fsutil behavior set disablelastaccess 3
 
+rem 2 - Raise the limit of paged pool memory / 1 - Default
+fsutil behavior set memoryusage 2
+
 rem 1 - Enable virtualization-based security / run msinfo32 to check
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d 0 /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Require UEFI Memory Attributes Table
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f
 
 rem 5 - 5 secs / Delay Chkdsk startup time at OS Boot
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "AutoChkTimeout" /t REG_DWORD /d "5" /f
@@ -1080,7 +1100,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsof
 rem 1 - Specifies that Windows does not automatically encrypt eDrives
 reg add "HKLM\Software\Policies\Microsoft\Windows\EnhancedStorageDevices" /v "TCGSecurityActivationDisabled" /t REG_DWORD /d "1" /f
 
-rem Network Connection Status Indicator (NCSI) - HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet
+rem Network Connection Status Indicator (NCSI/ping/test) - HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet
 reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet" /v "EnableActiveProbing" /t REG_DWORD /d "0" /f
 
@@ -1209,6 +1229,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "FavoritesBarEnabled" /t REG_
 
 rem 1 - Show Math Solver button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MathSolverEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Show mini menu when selecting text
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickSearchShowMiniMenu" /t REG_DWORD /d "0" /f
 
 rem 1 - Show home button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowHomeButton" /t REG_DWORD /d "0" /f
@@ -1465,8 +1488,8 @@ rem ................................ System and performance ....................
 rem 1 - Continue running background apps when Microsoft Edge is closed
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Turn on efficiency mode
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyMode" /t REG_DWORD /d "0" /f
+rem Efficiency Mode / 0 - AlwaysActive / 1 - NeverActive / 2 - ActiveWhenUnplugged / 3 - ActiveWhenUnpluggedBatteryLow 
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyMode" /t REG_DWORD /d "1" /f
 
 rem 1 - Use hardware acceleration when available
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "1" /f
@@ -1768,6 +1791,9 @@ sc config Netman start= disabled
 
 rem Network Policy Server Management Service
 sc config NPSMSvc start= disabled
+
+rem Optimize drives
+sc config defragsvc start= disabled
 
 rem Payments and NFC/SE Manager
 sc config SEMgrSvc start= disabled
