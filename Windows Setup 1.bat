@@ -144,48 +144,6 @@ rem App Installer (winget)
 
 pause
 
-rem 2fast – Two Factor Authenticator Supporting TOTP
-winget install --id 9P9D81GLH89Q --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Audials Play - Radio
-rem winget install --id 9pgfn1fjm5tl --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Calc
-rem winget install --id 9wzdncrfhvn5 --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem MSN Weather
-rem winget install --id 9wzdncrfj3q2 --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem NanaZip
-rem winget install --id 9n8g7tscl18r --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Netflix
-rem winget install --id 9WZDNCRFJ3TJ --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Notepad
-rem winget install --id 9msmlrh6lzf3 --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Paint
-rem winget install --id 9pcfs5b6t72h --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Rufus
-rem winget install --id 9PC3H3V7Q9CH --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Strong Password Generator
-rem winget install --id 9NNKGKL4V8HV --exact --source msstore --accept-package-agreements --accept-source-agreements
-
-rem winget list
-rem winget source list
-rem winget uninstall "cortana"
-rem winget uninstall "get help"
-rem winget uninstall "Microsoft Edge WebView2 Runtime"
-rem winget uninstall "microsoft people"
-rem winget uninstall "microsoft photos"
-rem winget uninstall "microsoft tips"
-rem winget uninstall "windows alarms & clock"
-rem winget uninstall "windows camera"
-rem winget uninstall "windows maps"
-rem winget uninstall "windows terminal"
-rem winget uninstall "windows web experience pack"
-rem winget uninstall "xbox game bar"
-rem winget uninstall "xbox game bar plugin"
-rem winget uninstall "xbox game speech window"
-rem winget uninstall "xbox identity provider"
-rem winget uninstall "your phone"
-
-pause
-
 rem https://msdn.microsoft.com/en-us/windows/hardware/commercialize/manufacture/desktop/enable-or-disable-windows-features-using-dism
 rem DISM /Online /Get-Features /Format:Table
 rem DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
@@ -254,6 +212,7 @@ reg add "HKCR\batfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Ic
 reg add "HKCR\Folder\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 reg add "HKCR\regfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Cheerilee.ico" /f
 reg add "HKCR\txtfile\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Notepad.ico" /f
+reg add "HKCU\Software\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\SyncToy.ico" /f
 reg add "HKCU\Software\Classes\CLSID\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\applebloomicon.ico" /f
 reg add "HKCU\Software\Classes\CLSID\{088e3905-0323-4b02-9826-5d99428e115f}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\scooticon2.ico" /f
 reg add "HKCU\Software\Classes\CLSID\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}\DefaultIcon" /ve /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\Sweetiebelleicon.ico" /f
