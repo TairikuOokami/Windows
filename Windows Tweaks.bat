@@ -78,7 +78,6 @@ rem MD NeverEnding Story https://www.bleepingcomputer.com/news/security/12-year-
 rem https://www.bleepingcomputer.com/news/security/smartservice-and-s5mark-acts-like-an-adware-bodyguard-by-blocking-antivirus-software/
 rem https://blog.emsisoft.com/2015/01/17/has-the-antivirus-industry-gone-mad
 rem https://www.makeuseof.com/tag/antivirus-tracking-youd-surprised-sends/
-rem https://www.av-test.org/en/news/news-single-view/data-protection-or-virus-protection
 
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
 rem DNS Check / https://dnscheck.tools/#advanced
@@ -467,24 +466,20 @@ bcdedit /set flightsigning off
 bcdedit /set {bootmgr} displaybootmenu no
 bcdedit /set {bootmgr} flightsigning off
 bcdedit /set {globalsettings} custom:16000067 true
+bcdedit /set {globalsettings} custom:16000068 true
 bcdedit /set {globalsettings} custom:16000069 true
 bcdedit /set advancedoptions false
-bcdedit /set allowedinmemorysettings 0x0
 bcdedit /set bootems no
-bcdedit /set bootmenupolicy standard
+bcdedit /set bootmenupolicy legacy
 bcdedit /set bootstatuspolicy IgnoreAllFailures
 bcdedit /set bootux disabled
 bcdedit /set disabledynamictick yes
 bcdedit /set lastknowngood yes
 bcdedit /set recoveryenabled no
 bcdedit /set quietboot yes
-bcdedit /set uselegacyapicmode No
-bcdedit /set usefirmwarepcisettings No
-bcdedit /set usephysicaldestination No
 bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
-bcdedit /set x2apicpolicy Enable
 
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Process Hacker" /t REG_SZ /d "%ProgramFiles%\Process Hacker\ProcessHacker.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
@@ -712,61 +707,29 @@ rem Remove Network Icon from Navigation Panel
 rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
 reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
 
-rem 1 - Hide Quick access from This PC / 0 - Show
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f
+rem Add Desktop under This PC
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /v "HideIfEnabled" /f
 
-rem Show/Hide - 3D Objects from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{31C0DD25-9439-4F12-BF41-7FF4EDA38722}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+rem Add Downloads under This PC
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /v "HideIfEnabled" /f
 
-rem Show/Hide - Desktop from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Show" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Show" /f
+rem Add Pictures under This PC
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /v "HideIfEnabled" /f
 
-rem Show/Hide - Documents from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{f42ee2d3-909f-4907-8871-4c22fc0bf756}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+rem Remove 3D Folders from This PC
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f
 
-rem Show/Hide - Downloads from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Show" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{7d83ee9b-2244-4e70-b1f5-5393042af1e4}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Show" /f
+rem Remove Home (Quick access) from This PC
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
 
-rem Show/Hide - Movies/Videos from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{35286a68-3c57-41a1-bbb1-0eae73d76c95}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+rem Remove Documents from This PC
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /v "HideIfEnabled" /t REG_DWORD /d "36354489" /f
 
-rem Show/Hide - Music from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{a0c69a99-21c8-4671-8703-7934162fcf1d}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Hide" /f
+rem Remove Music from This PC
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /v "HideIfEnabled" /t REG_DWORD /d "36354489" /f
 
-rem Show/Hide - Pictures from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Show" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\FolderDescriptions\{0ddd015d-b06c-45d5-8c4c-f59713854639}\PropertyBag" /v "ThisPCPolicy" /t REG_SZ /d "Show" /f
-
-rem Remove Desktop folder from This PC
-rem reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /f
-rem reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /f
-
-rem Remove Documents folder from This PC
-rem reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f
-rem reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f
-
-rem Remove Downloads folder from This PC
-rem reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /f
-rem reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /f
-
-rem Remove Movies folder from This PC
-rem reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /f
-rem reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /f
-
-rem Remove Music folder from This PC on
-rem reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /f
-rem reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /f
-
-rem Remove Pictures folder from This PC
-rem reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f
-rem reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /f
-
+rem Remove Videos from This PC
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /v "HideIfEnabled" /t REG_DWORD /d "36354489" /f
 
 rem =================================== Windows Explorer ===================================
 rem --------------------------------------- Options ----------------------------------------
@@ -884,6 +847,9 @@ fsutil behavior set disablelastaccess 3
 
 rem 2 - Raise the limit of paged pool memory / 1 - Default
 fsutil behavior set memoryusage 2
+
+rem 0 - Default / 1 - On / 2 - Off
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "ConfigureSystemGuardLaunch" /t REG_DWORD /d "2" /f
 
 rem 1 - Enable virtualization-based security / run msinfo32 to check
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
@@ -3165,7 +3131,9 @@ timeout 5
 
 fsutil usn deletejournal /d /n c:
 
+taskkill /im brave.exe /f
 taskkill /im dllhost.exe /f
+taskkill /im librewolf.exe /f
 taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
