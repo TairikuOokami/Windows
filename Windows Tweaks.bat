@@ -56,11 +56,12 @@ rem Browser Leaks - https://browserleaks.com / https://whoer.net / CanvasFingerp
 rem Browser Tracking Test - https://panopticlick.eff.org
 rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-based-adblocking-support
 rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies / https://fpresearch.httpjames.space
+rem Privacy Futile (Encryption) - https://www.bleepingcomputer.com/news/security/an-encrypted-zip-file-can-have-two-correct-passwords-heres-why
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
-rem Search Engines: Brave, MetaGerm, Searx, Swisscows
+rem Privacy Search Engines: Brave, MetaGerm, Searx, Swisscows
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -95,7 +96,7 @@ rem Cloudflare - https://developers.cloudflare.com/1.1.1.1/1.1.1.1-for-families/
 rem CleanBrowsing - https://cleanbrowsing.org/ip-address - https://categorify.org/recategorize
 rem DNS Family - https://dnsforfamily.com/#DNS_Servers
 rem Enforce Safe Search (=Adult Filter) - https://chrome.google.com/webstore/detail/enforce-safe-search-adult/fiopkogmohpinncfhneadmpkcikmgkgc
-rem NextDNS - https://www.nextdns.io / https://test.nextdns.io
+rem NextDNS - https://www.nextdns.io / https://test.nextdns.io / https://ping.nextdns.io / https://github.com/scafroglia93/nextdns-setting/commit/21aba1d2f7442e1017be000ef3fbe5d03b4f4837
 rem OpenDNS - https://www.opendns.com/setupguide/#familyshield
 rem UltraDNS - https://www.publicdns.neustar
 
@@ -111,7 +112,7 @@ rem Windows ISO
 rem https://www.microsoft.com/en-us/software-download/windows11
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
-rem https://genuineisoverifier.weebly.com
+rem https://genuine-iso-verifier.weebly.com/
 rem Windows ReviOS - https://www.revi.cc/revios
 
 rem Check ISO Windows versions and build version
@@ -465,9 +466,6 @@ bcdedit /set hypervisorlaunchtype off
 bcdedit /set flightsigning off
 bcdedit /set {bootmgr} displaybootmenu no
 bcdedit /set {bootmgr} flightsigning off
-bcdedit /set {globalsettings} custom:16000067 true
-bcdedit /set {globalsettings} custom:16000068 true
-bcdedit /set {globalsettings} custom:16000069 true
 bcdedit /set advancedoptions false
 bcdedit /set bootems no
 bcdedit /set bootmenupolicy legacy
@@ -1154,6 +1152,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HideRestoreDialogEnabled" /t
 
 rem 1 - Show Hubs Sidebar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow sites to be reloaded in Internet Explorer mode (IE mode)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationReloadInIEModeAllowed" /t REG_DWORD /d "0" /f
 
 rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
@@ -2673,7 +2674,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manu
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "MSI Radeon RX 580 ARMOR 8G OC" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportHours" /t REG_SZ /d "Within 24-48 hours" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportPhone" /t REG_SZ /d "TairikuOkami@pm.me" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://vk.com/tairikuokami" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://www.reddit.com/user/TairikuOokami" /f
 
 rem Computer Description
 reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "400/40 MBps" /f
@@ -3186,6 +3187,8 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Session Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q
+
+start "" "D:\OneDrive\Downloads\CD.bat"
 
 rem Run Wise Disk Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
