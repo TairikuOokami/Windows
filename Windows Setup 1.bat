@@ -41,7 +41,7 @@ explorer
 takeown /s %computername% /u %username% /f "D:\My Backups" /r /d y
 icacls "D:\My Backups" /inheritance:r
 icacls "D:\My Backups" /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls "D:\My Backups"s /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls "D:\My Backups" /grant:r "System":(OI)(CI)F /t /l /q /c
 icacls "D:\My Backups" /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\RamDisk /r /d y
