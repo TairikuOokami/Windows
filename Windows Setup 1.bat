@@ -38,11 +38,11 @@ icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
 rem Remove the user from D:\
 explorer
 
-takeown /s %computername% /u %username% /f D:\Backup /r /d y
-icacls D:\Backup /inheritance:r
-icacls D:\Backup /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\Backup /grant:r "System":(OI)(CI)F /t /l /q /c
-icacls D:\Backup /grant "Users":(OI)(CI)RX /t /l /q /c
+takeown /s %computername% /u %username% /f "D:\My Backups" /r /d y
+icacls "D:\My Backups" /inheritance:r
+icacls "D:\My Backups" /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls "D:\My Backups"s /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls "D:\My Backups" /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\RamDisk /r /d y
 icacls D:\RamDisk /inheritance:r
@@ -91,8 +91,11 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManage
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f
 
 rem Disable Bitlocker, EFS and Decrypt C:
+rem manage-bde -status
 reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d "1" /f
 fsutil behavior set disableencryption 1
+manage-bde -off C:
+manage-bde -off D:
 cipher /d /s:C:\
 
 rem Enable Windows File Compression
@@ -121,26 +124,16 @@ reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHO
 wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
-rem Change Adapter's ID
+rem Setup DoH and then Change Adapter's ID in Unvalidate
 rem https://github.com/adamhl8/batch-scripts/blob/main/win11-set-doh.cmd
-regedit
-explorer D:\OneDrive\Downloads
-pause
-
-rem Setup Encrypted DNS
-start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
 start ms-settings:network-ethernet
+explorer D:\OneDrive\Downloads
+regedit
 
 pause
 
 rem Uninstall all apps except MS store
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name –notlike '*store*'} | Remove-AppxPackage"
-
-pause
-
-start https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
-start https://www.softpedia.com/get/System/System-Miscellaneous/Windows-Package-Manager-WinGet.shtml
-rem App Installer (winget)
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name -notlike '*store*'} | Remove-AppxPackage"
 
 pause
 
@@ -264,17 +257,19 @@ rem Temp Folders to RAMDisk
 reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "Z:\TEMP" /f
 reg add "HKCU\Environment" /v "TMP" /t REG_SZ /d "Z:\TEMP" /f
 
+pause
+
+winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --accept-source-agreements
+
+pause
+
 start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
 start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
 start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
+start "" /wait "D:\OneDrive\Setup\Notepad3_5.21.1129.1_Setup.exe"
 start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
-
-pause
-
-winget import -i D:\OneDrive\Setup\winget.txt
-
-pause
+start "" /wait "D:\OneDrive\Setup\tb_free_2208B.exe"
 
 start "" /wait "D:\Software"
 
