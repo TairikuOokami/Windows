@@ -52,8 +52,10 @@ rem https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-
 rem https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Microsoft-Security-Baselines
 
 rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefilters.org
-rem Browser Leaks - https://browserleaks.com / https://whoer.net / CanvasFingerprint / WebRTC
+rem Browser Leaks - https://browserleaks.com / CanvasFingerprint / WebRTC
 rem Browser Tracking Test - https://panopticlick.eff.org
+rem Privacy Cloud - https://www.technologyreview.com/2022/07/15/1056042/chinese-novel-censored-before-shared
+rem Privacy Cloud - https://www.nytimes.com/2022/08/21/technology/google-surveillance-toddler-photo.html
 rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-based-adblocking-support
 rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies / https://fpresearch.httpjames.space
 rem Privacy Futile (Encryption) - https://www.bleepingcomputer.com/news/security/an-encrypted-zip-file-can-have-two-correct-passwords-heres-why
@@ -61,7 +63,7 @@ rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
-rem Privacy Search Engines: Brave, MetaGerm, Searx, Swisscows
+rem Privacy Search Engines: Brave, MetaGerm, Searx, Swisscows - https://searchengine.party
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -88,7 +90,6 @@ rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org 
 rem DNS ESNI Test - https://www.cloudflare.com/ssl/encrypted-sni/
 rem DNS ECH - Good-bye ESNI, hello ECH! - https://blog.cloudflare.com/encrypted-client-hello/
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-4/
-rem DNS List - https://wiki.ipfire.org/dns/public-servers
 
 rem Family Filtering (adult/proxy/search)
 rem Adguard - https://adguard.com/en/adguard-dns/overview.html
@@ -158,14 +159,15 @@ rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/ZBsbb1x
 
 rem AntiVirus software (Cloud only)
 rem Immunet (US) - https://www.immunet.com/index - https://postimg.cc/TpjzQjM8
+rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus
 rem WiseVector StopX (CN) - https://www.wisevector.com/en - https://postimg.cc/HVjS8QY4
 
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
 rem Ghostpress (DE) - https://www.schiffer.tech/ghostpress.html
+rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
 rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
-rem SysHardener (IT) - https://www.novirusthanks.org/products/syshardener
 rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/home-malware-protection
 rem VoodooShield (US) - https://voodooshield.com
 
@@ -195,7 +197,7 @@ rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
 rem 360 Total Security Essential (CN) - https://www.360totalsecurity.com/en/features/360-total-security-essential
-rem Shade Sandbox (US) - https://www.shadesandbox.com
+rem Comodo Antivirus (US) - https://antivirus.comodo.com
 
 rem Security cleanup software (portable on-demand scanners, some still leave traces/drivers)
 rem Antivirus Rescue Disks - https://www.techradar.com/in/best/best-antivirus-rescue-disk
@@ -216,12 +218,16 @@ rem Sophos Scan & Clean alas HitmanPro (UK) - https://www.sophos.com/en-us/produ
 rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/products/housecall.html
 
 rem Software
+rem 2FA / 2fast - two factor authenticator supporting TOTP - https://apps.microsoft.com/store/detail/2fast-%E2%80%93-two-factor-authenticator-supporting-totp/9P9D81GLH89Q
 rem Application Updates / Patch My PC - https://patchmypc.com/home-updater
 rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
+rem Application Updates / App Installer GUI (winget) - https://github.com/martinet101/WingetUI - https://winget.run
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bootable USB / Rufus - https://apps.microsoft.com/store/detail/rufus/9PC3H3V7Q9CH?hl=en-us&gl=US
 rem Bootloader / EasyBCD - https://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
+rem Browser / Brave - https://brave.com - Great for Google/Youtube only
+rem Browser / LibreWolf - https://librewolf.net - Great for privacy, like for Facebook
 rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy/security!
 rem Cloud Backup / IceDrive - https://icedrive.net/plans
 rem Cloud Backup / PolarBackup - https://www.polarbackup.com/#pricing
@@ -238,6 +244,7 @@ rem Disk Speed Test / CCSIO Benchmark - https://ccsiobench.com
 rem Disk Surface Test / Macrorit Disk Scanner - https://macrorit.com/disk-surface-test/disk-surface-test.html
 rem Driver Updates / Driver Easy - https://www.drivereasy.com
 rem DVD to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
+rem eMail / SimpleLogin - https://simplelogin.io/pricing
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
 rem eMail Client Browser Extension / Checker Plus for Gmail - https://chrome.google.com/webstore/detail/checker-plus-for-gmail/oeopbcgkkoapgobdbedcemjljbihmemj
 rem eMail Client Browser Extension / Microsoft Outlook - https://microsoftedge.microsoft.com/addons/detail/microsoft-outlook/kkpalkknhlklpbflpcpkepmmbnmfailf
@@ -247,6 +254,7 @@ rem GPU Info / GPU-Z - https://www.techpowerup.com/gpuz
 rem GPU Test / Furmark - https://geeks3d.com/furmark
 rem Hardware Information / HWiNFO - https://www.hwinfo.com/download.php
 rem Hardware Monitor / HWMonitor - https://www.cpuid.com/softwares/hwmonitor.html
+rem HEVC Video Extensions from Device Manufacturer - https://apps.microsoft.com/store/detail/hevc-video-extensions-from-device-manufacturer/9N4WGH0Z6VHQ?hl=en-us&gl=us
 rem Image Viewer / XnView - https://www.xnview.com/en/xnview/#downloads
 rem Media Player / PotPlayer - https://daumpotplayer.com
 rem Monitor Test / https://www.testufo.com
@@ -256,6 +264,7 @@ rem Network Settings Manager / NetSetMan - https://www.netsetman.com/en/freeware
 rem Notepad / Notepad3 - https://www.rizonesoft.com/downloads/notepad3
 rem Office Suite / LibreOffice - https://www.libreoffice.org
 rem Partition Manager / Macrorit Partition Expert - https://macrorit.com/partition-magic-manager/free-edition.html
+rem Password Generator / Strong Password Generator - https://apps.microsoft.com/store/detail/strong-password-generator/9NNKGKL4V8HV?hl=en-us&gl=us
 rem Password Manager (Offline) / KeePass Professional Edition - https://keepass.info/download.html
 rem Password Manager (Online) / Bitwarden - https://bitwarden.com
 rem PDF Editor / FreePDF - https://www.getfreepdf.com
@@ -267,7 +276,7 @@ rem Performance / WhySoSlow - https://www.resplendence.com/whysoslow
 rem Performance / Windows System Timer Tool - https://vvvv.org/contribution/windows-system-timer-tool
 rem Permissions / Reset permissions/Take Ownership - http://lallouslab.net/2013/08/26/resetting-ntfs-files-permission-in-windows-graphical-utility/
 rem Process Monitor / Process Monitor - https://docs.microsoft.com/en-us/sysinternals/downloads/procmon
-rem Radio / Audials Radio - https://audials.com/en/radio
+rem Radio / Audials Play - https://apps.microsoft.com/store/detail/audials-play-radio-music-tv-podcasts/9PGFN1FJM5TL?hl=en-us&gl=us
 rem RAM Fix / Intelligent standby list cleaner (+Timer Resolution) - https://www.wagnardsoft.com/content/intelligent-standby-list-cleaner-v1000-released
 rem RAM Free (Memory Leak) / Mem Reduct - https://www.henrypp.org/product/memreduct
 rem RAM Free (Memory Leak) / Reduce Memory - https://www.sordum.org/9197/reduce-memory-v1-6
@@ -291,10 +300,12 @@ rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsup
 rem Visual C++ / AIO Repack - https://github.com/abbodi1406/vcredist/releases
 rem Visual C++ / Latest Visual C++ Downloads - https://support.microsoft.com/en-au/help/2977003/the-latest-supported-visual-c-downloads
 rem VM Android / BlueStacks - https://www.bluestacks.com
-rem Wallpaper - Live / Wallpaper Engine - https://store.steampowered.com/app/431960
+rem VPN / Proton VPN - https://protonvpn.com
+rem VPN / WARP - https://cloudflarewarp.com
+rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/lively-wallpaper/9NTM2QC6QWS7?hl=en-us&gl=us
+rem Wallpaper / Wallpaper Engine - https://store.steampowered.com/app/431960
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
 rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
-rem WinGet GUI / HandyWinGet - https://github.com/HandyOrg/HandyWinGet
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -721,13 +732,13 @@ rem Remove Home (Quick access) from This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
 
 rem Remove Documents from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /v "HideIfEnabled" /t REG_DWORD /d "36354489" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f
 
 rem Remove Music from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /v "HideIfEnabled" /t REG_DWORD /d "36354489" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{3dfdf296-dbec-4fb4-81d1-6a3438bcf4de}" /f
 
 rem Remove Videos from This PC
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /v "HideIfEnabled" /t REG_DWORD /d "36354489" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f86fa3ab-70d2-4fc7-9c99-fcbf05467f3a}" /f
 
 rem =================================== Windows Explorer ===================================
 rem --------------------------------------- Options ----------------------------------------
@@ -1302,11 +1313,16 @@ rem ------------------------------------ Microsoft Edge ------------------------
 rem ...................................... Languages .......................................
 
 rem 1 - Enable spellcheck
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Offer to translate pages that aren't in a language I read
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TranslateEnabled" /t REG_DWORD /d "0" /f
 
+rem ________________________________________________________________________________________
+rem 1 - The Microsoft Editor service provides enhanced spell and grammar checking for editable text fields on web pages
+rem https://www.bleepingcomputer.com/news/security/google-microsoft-can-get-your-passwords-via-web-browsers-spellcheck
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEditorProofingEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEditorSynonymsEnabled" /t REG_DWORD /d "0" /f
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1366,7 +1382,7 @@ rem 1 - Use a web service to help resolve navigation errors
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
 
 rem 1 - Show me search and site suggestions using my typed characters
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Turn on site safety services to get more info about the sites you visit
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SiteSafetyServicesEnabled" /t REG_DWORD /d "0" /f
@@ -1409,9 +1425,6 @@ rem =================================== Windows Policies =======================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 rem ...................................... Profiles ........................................
 
-rem 1 - AADWebSiteSSOUsingThisProfileEnabled
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AADWebSiteSSOUsingThisProfileEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - Save and fill personal info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t REG_DWORD /d "1" /f
 
@@ -1443,6 +1456,12 @@ rem 1 - Show Microsoft Rewards experience and notifications
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
+rem 1 - Single sign-on for work or school sites using this profile enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AADWebSiteSSOUsingThisProfileEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow single sign-on for Microsoft personal sites using this profile
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MSAWebSiteSSOUsingThisProfileAllowed" /t REG_DWORD /d "0" /f
+
 rem Configure the list of domains where Microsoft Edge should disable the password manager
 reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "1" /t REG_SZ /d "https://steamcommunity.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\PasswordManagerBlocklist" /v "2" /t REG_SZ /d "https://store.steampowered.com" /f
@@ -2125,6 +2144,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMultic
 
 rem Setup DNS over HTTPS (DoH)
 rem netsh dns show encryption
+rem netsh dns show global
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
 
 rem Setup DNS over HTTPS (DoH) Add Custom Servers
@@ -2139,6 +2159,10 @@ rem netsh dns add encryption server=94.140.14.15 dohtemplate=https://dns-family.
 rem netsh dns add encryption server=94.140.15.16 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
 rem netsh dns add encryption server=185.228.168.10 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
 rem netsh dns add encryption server=185.228.169.11 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
+
+rem Setup DNS over TLS (DoT)
+rem netsh dns add global dot=yes
+rem netsh dns add encryption server=9.9.9.9 dothost=: autoupgrade=yes
 
 rem Restrict NTLM: Incoming NTLM traffic - Deny All
 reg add "HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0" /v "RestrictReceivingNTLMTraffic" /t REG_DWORD /d "2" /f
@@ -3126,10 +3150,11 @@ taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 
-winget upgrade --all --include-unknown
-
+winget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements
 timeout 5
 
+rem https://kalilinuxtutorials.com/webview2-cookie-stealer
+winget uninstall "Microsoft Edge WebView2 Runtime"
 fsutil usn deletejournal /d /n c:
 
 taskkill /im brave.exe /f
