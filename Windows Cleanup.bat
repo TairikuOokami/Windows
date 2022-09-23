@@ -56,6 +56,7 @@ net stop UsoSvc /y
 net stop winmgmt /y
 winmgmt /salvagerepository
 net stop wuauserv /y
+schtasks /End /TN "\Microsoft\Windows\Wininet\CacheTask"
 
 takeown /f "%WINDIR%\winsxs\pending.xml" /a
 icacls "%WINDIR%\winsxs\pending.xml" /grant:r Administrators:F /c
@@ -135,11 +136,24 @@ cleanmgr /sagerun:6553
 rem Cleanup done, you can close this window!
 timeout -1
 
+rem https://www.bleepingcomputer.com/news/security/clever-phishing-method-bypasses-mfa-using-microsoft-webview2-apps
 winget uninstall "Microsoft Edge WebView2 Runtime"
 winget export -o D:\OneDrive\Setup\winget.txt
 
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
+
+taskkill /im brave.exe /f
+taskkill /im msedge.exe /f
+taskkill /im librewolf.exe /f
+
+rd "D:\OneDrive\Soft\Brave" /s /q
+rd "D:\OneDrive\Soft\Edge" /s /q
+rd "D:\OneDrive\Soft\Librewolf" /s /q
+
+xcopy "Z:\Brave" "D:\OneDrive\Soft\Brave" /s /i /y
+xcopy "Z:\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
+xcopy "Z:\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
 
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\Rapr.exe"
