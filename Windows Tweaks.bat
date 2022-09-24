@@ -712,7 +712,7 @@ reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\B
 rem taskkill /im explorer.exe /f & explorer.exe
 
 rem ________________________________________________________________________________________
-rem Remove Network Icon from Navigation Panel
+rem Remove Network Icon from Navigation Panel / Right in Nav Panel
 rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
 reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
 
@@ -1553,7 +1553,7 @@ rem MsCtfMonitor Task (keylogger) is required to be able to type within Settings
 schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
-schtasks /DELETE /TN "ModifyLinkUpdate" /f
+schtasks /DELETE /TN "DUpdaterTask" /f
 schtasks /DELETE /TN "StartAUEP" /f
 schtasks /DELETE /TN "StartCN" /f
 schtasks /DELETE /TN "StartCNBM" /f
@@ -1703,6 +1703,15 @@ sc config "AMD Crash Defender Service" start= disabled
 rem AMD External Events Utility
 sc config "AMD External Events Utility" start= disabled
 
+rem AMD Link Controller Emulation
+sc config AMDXE start= disabled
+
+rem AMD PSP Driver
+sc config amdpsp start= disabled
+
+rem AMD Streaming Audio Driver
+sc config AMDSAFD start= disabled
+
 rem AMD User Experience Program Data Uploader
 sc config "AUEPLauncher" start= disabled
 
@@ -1753,6 +1762,9 @@ sc config "EaseUS UPDATE SERVICE" start= disabled
 
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
+
+rem FileSyncHelper
+sc config FileSyncHelper start= disabled
 
 rem Function Discovery Provider Host
 sc config fdPHost start= disabled
@@ -3150,7 +3162,7 @@ taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 
-winget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements
+winget upgrade --all --include-unknown
 timeout 5
 
 rem https://kalilinuxtutorials.com/webview2-cookie-stealer
@@ -3226,5 +3238,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/14S3YNrK
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/Ln692Rwn
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
