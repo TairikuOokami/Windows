@@ -84,8 +84,8 @@ rem Enabled #edge-visual-rejuv-show-settings
 rem Enabled #partitioned-cookies
 rem edge://flags
 
-rem Search engine used in the address bar - Set Brave (uncensored)
-start "" "https://swisscows.com"
+rem Search engine used in the address bar
+start "" "https://neeva.com"
 rem edge://settings/search
 
 pause
