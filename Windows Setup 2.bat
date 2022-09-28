@@ -69,13 +69,20 @@ start "" "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added C
 
 pause
 
+rem https://github.com/dreammjow/ChromiumHardening/blob/main/flags/chrome-command-line.md
+rem https://peter.sh/experiments/chromium-command-line-switches
+rem https://get.webgl.org / https://defo.ie/ech-check.php
+rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --disable-webgl --enable-features="EnableCsrssLockdown,EncryptedClientHello,GpuAppContainer,IsolateSandboxedIframes,RendererAppContainer" --no-pings
+
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem Disabled #edge-share-menu
 rem Disabled #edge-show-feature-recommendations
 rem Disabled #enable-quic
+rem Disabled #edge-prenav
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
+rem Enabled #dns-https-svcb
 rem Enabled #edge-automatic-https
 rem Enabled #edge-autoplay-user-setting-block-option
 rem Enabled #edge-overlay-scrollbars-win-style
