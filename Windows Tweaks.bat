@@ -63,7 +63,7 @@ rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
-rem Privacy Search Engines: Brave, MetaGerm, Searx, Swisscows - https://searchengine.party
+rem Privacy Search Engines: Brave, MetaGerm, Neeva.com, Searx, Swisscows - https://searchengine.party
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -88,7 +88,7 @@ rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dyna
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
 rem DNS ESNI Test - https://www.cloudflare.com/ssl/encrypted-sni/
-rem DNS ECH - Good-bye ESNI, hello ECH! - https://blog.cloudflare.com/encrypted-client-hello/
+rem DNS ECH - Good-bye ESNI, hello ECH! - https://blog.cloudflare.com/encrypted-client-hello / https://defo.ie/ech-check.php
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-4/
 
 rem Family Filtering (adult/proxy/search)
@@ -174,7 +174,7 @@ rem VoodooShield (US) - https://voodooshield.com
 rem Browser Extensions useful against (99% malware comes via an email or a browser)
 rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
 rem Coinhive, Malware and Popups (Chrome/Firefox/Opera) - https://add0n.com/popup-blocker.html
-rem Cookie Warnings (Chrome/Firefox/Opera) - https://www.i-dont-care-about-cookies.eu
+rem Cookie Warnings (Chrome/Edge/Firefox) - https://www.cookie-dialog-monster.com
 rem Filter Lists - https://filterlists.com - https://github.com/EnergizedProtection/block#packs
 rem Malware (Chrome/Firefox) - https://www.bitdefender.com/solutions/trafficlight.html
 rem Malware (Chrome/Edge/Firefox) - https://microsoftedge.microsoft.com/addons/detail/emsisoft-browser-security/jlpdpddffjddlfdbllimedpemaodbjgn
@@ -1075,7 +1075,8 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsof
 rem 1 - Specifies that Windows does not automatically encrypt eDrives
 reg add "HKLM\Software\Policies\Microsoft\Windows\EnhancedStorageDevices" /v "TCGSecurityActivationDisabled" /t REG_DWORD /d "1" /f
 
-rem Network Connection Status Indicator (NCSI/ping/test) - HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet
+rem Network Connection Status Indicator (NCSI/ping/test) - http://www.msftconnecttest.com/connecttest.txt
+rem https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/internet-explorer-edge-open-connect-corporate-public-network#ncsi-active-probes-and-the-network-status-alert
 reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet" /v "EnableActiveProbing" /t REG_DWORD /d "0" /f
 
