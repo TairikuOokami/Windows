@@ -3,6 +3,7 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 rem https://www.sordum.org/9480/defender-control-v2-1
 rem https://www.adaware.com/free-antivirus-download
 rem https://www.techpowerup.com/295877/windows-defender-can-significantly-impact-intel-cpu-performance-we-have-the-fix
+rem https://www.bleepingcomputer.com/news/security/lockbit-ransomware-abuses-windows-defender-to-load-cobalt-strike
 
 rem Disable Tamper and Real Protection in Defender
 rem Install any 3rd party AV that registers within Windows Security (like Adaware), update definitions, restart!
@@ -24,6 +25,7 @@ rem reg add "HKLM\System\CurrentControlSet\Services\SecurityHealthService" /v "S
 
 rem 1 - Disable Real-time protection
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "AllowFastServiceStartup" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiSpyware" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableAntiVirus" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "DisableSpecialRunningModes" /t REG_DWORD /d "1" /f
@@ -72,7 +74,7 @@ shutdown /r
 rem To stop restart type
 rem shutdown -a
 
-rem Last Tested on Windows 11 Home 22621.1 using Microsoft Defender Platform Version 4.18.2204.4 (29 March 2022)
-rem Running bat file TWICE with 3rd party AV running https://postimg.cc/D8wrGfHX / DONE https://postimg.cc/wRQXRwNZ
+rem Last Tested on Windows 11 Home 22621.607 using Microsoft Defender Platform Version 4.18.2207.7 (28 September 2022)
+rem Running bat file TWICE with 3rd party AV running https://postimg.cc/bdqhJvqf / DONE https://postimg.cc/wRQXRwNZ
 
 pause
