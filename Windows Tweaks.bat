@@ -62,6 +62,7 @@ rem Privacy Futile (Encryption) - https://www.bleepingcomputer.com/news/security
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
+rem Privacy Webpage Scan - https://themarkup.org/blacklight
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
 rem Privacy Search Engines: Brave, MetaGerm, Neeva.com, Searx, Swisscows - https://searchengine.party
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
@@ -223,6 +224,7 @@ rem Application Updates / Patch My PC - https://patchmypc.com/home-updater
 rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
 rem Application Updates / App Installer GUI (winget) - https://github.com/martinet101/WingetUI - https://winget.run
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
+rem Bandwidth Monitor / TrafficMonitor - https://github.com/zhongyang219/TrafficMonitor/blob/master/README_en-us.md
 rem Bootable USB / Rufus - https://apps.microsoft.com/store/detail/rufus/9PC3H3V7Q9CH?hl=en-us&gl=US
 rem Bootloader / EasyBCD - https://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
@@ -566,6 +568,9 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "EnableSmartScreen"
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControl" /t REG_SZ /d "Anywhere" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender\SmartScreen" /v "ConfigureAppInstallControlEnabled" /t "REG_DWORD" /d "0" /f
 
+rem 1 - Enable Microsoft Defender SmartScreen DNS requests
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SmartScreenDnsRequestsEnabled" /t REG_DWORD /d "0" /f
+
 rem Remove Smartscreen (to restore run "sfc /scannow")
 takeown /s %computername% /u %username% /f "%WinDir%\System32\smartscreen.exe"
 icacls "%WinDir%\System32\smartscreen.exe" /grant:r %username%:F
@@ -794,6 +799,7 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\Explorer" /v "NoUseStoreOpenWi
 rem ================================ Windows Optimizations =================================
 
 
+rem https://prod.support.services.microsoft.com/en-us/windows/options-to-optimize-gaming-performance-in-windows-11-a255f612-2949-4373-a566-ff6f3f474613
 rem https://channel9.msdn.com/Blogs/Seth-Juarez/Memory-Compression-in-Windows-10-RTM
 
 rem Determines whether user processes end automatically when the user either logs off or shuts down / 1 - Processes end automatically
@@ -1144,6 +1150,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DirectInvokeEnabled" /t REG_
 rem 1 - Disable taking screenshots
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DisableScreenshots" /t REG_DWORD /d "1" /f
 
+rem 1 - DNS interception checks enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DNSInterceptionChecksEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Microsoft Edge can automatically enhance images to show you sharper images with better color, lighting, and contrast
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d "0" /f
 
@@ -1191,6 +1200,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpeechRecognitionEnabled" /t
 
 rem 1 - Allow video capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - DNS-based WPAD optimization (Web Proxy Auto-Discovery)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WPADQuickCheckEnabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1401,9 +1413,6 @@ rem ____________________________________________________________________________
 rem Enable Microsoft Search in Bing suggestions in the address bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Allow sending URLs to Microsoft Bing to search for related recommendations
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeDiscoverEnabled" /t REG_DWORD /d "0" /f
-
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
 
@@ -1475,8 +1484,8 @@ rem ................................ System and performance ....................
 rem 1 - Continue running background apps when Microsoft Edge is closed
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0" /f
 
-rem Efficiency Mode / 0 - AlwaysActive / 1 - NeverActive / 2 - ActiveWhenUnplugged / 3 - ActiveWhenUnpluggedBatteryLow 
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyMode" /t REG_DWORD /d "1" /f
+rem Efficiency Mode / 1 - Enables efficiency mode
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyModeEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Use hardware acceleration when available
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "1" /f
@@ -1490,6 +1499,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_
 rem ________________________________________________________________________________________
 rem NetworkPrediction / 0 - Always / 1 - WifiOnly / 2 - Never
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkPredictionOptions" /t REG_DWORD /d "2" /f
+
+rem 1 - The performance detector detects tab performance issues and recommends actions to fix the performance issues
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1555,6 +1567,8 @@ schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
 schtasks /DELETE /TN "DUpdaterTask" /f
+schtasks /DELETE /TN "klcp_update" /f
+schtasks /DELETE /TN "ModifyLinkUpdate" /f
 schtasks /DELETE /TN "StartAUEP" /f
 schtasks /DELETE /TN "StartCN" /f
 schtasks /DELETE /TN "StartCNBM" /f
@@ -2176,6 +2190,7 @@ rem netsh dns add encryption server=185.228.169.11 dohtemplate=https://doh.clean
 rem Setup DNS over TLS (DoT)
 rem netsh dns add global dot=yes
 rem netsh dns add encryption server=9.9.9.9 dothost=: autoupgrade=yes
+rem netsh dns add encryption server=45.90.28.80 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes
 
 rem Restrict NTLM: Incoming NTLM traffic - Deny All
 reg add "HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0" /v "RestrictReceivingNTLMTraffic" /t REG_DWORD /d "2" /f
@@ -3185,10 +3200,14 @@ taskkill /im AMDRSServ.exe /f
 
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - edge://settings/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\PreferredApps" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager" /s /f /q
@@ -3198,6 +3217,8 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Visited Links" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\WebAssistDatabase" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\WebAssistDatabase-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q
@@ -3207,7 +3228,9 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Collections" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Continuous Migration" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\coupon_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeTravel" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
@@ -3217,14 +3240,18 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_model_and_features_store" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_model_metadata_store" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Pdf" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PDF Restore Data" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Platform Notifications" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Safe Browsing Network" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Session Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\WebrtcVideoStats" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\WebStorage" /s /q
 
 start "" "D:\OneDrive\Downloads\CD.bat"
 
