@@ -1,13 +1,12 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-rem https://www.sordum.org/9480/defender-control-v2-1
 rem https://www.adaware.com/free-antivirus-download
 rem https://www.techpowerup.com/295877/windows-defender-can-significantly-impact-intel-cpu-performance-we-have-the-fix
 rem https://www.bleepingcomputer.com/news/security/lockbit-ransomware-abuses-windows-defender-to-load-cobalt-strike
 
 rem Disable Tamper and Real Protection in Defender
 rem Install any 3rd party AV that registers within Windows Security (like Adaware), update definitions, restart!
-rem Run "MD Disable.bat" TWICE !!!!! (it will restart a computer within a minute to disable type "shutdown -a")
+rem Run "MD Disable.bat" TWICE !!!!!
 rem After restart, uninstall 3rd party AV (preferably using HiBit Uninstaller)
 rem Restart (HiBit Uninstaller will run to remove leftovers)
 start windowsdefender:
@@ -68,11 +67,6 @@ reg add "HKLM\System\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
-
-shutdown /r
-
-rem To stop restart type
-rem shutdown -a
 
 rem Last Tested on Windows 11 Home 22621.607 using Microsoft Defender Platform Version 4.18.2207.7 (28 September 2022)
 rem Running bat file TWICE with 3rd party AV running https://postimg.cc/bdqhJvqf / DONE https://postimg.cc/21RJjjQp
