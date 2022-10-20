@@ -80,6 +80,9 @@ rem Disabled #edge-share-menu
 rem Disabled #edge-show-feature-recommendations
 rem Disabled #enable-quic
 rem Disabled #edge-prenav
+rem Disabled #file-handling-api
+rem Disabled #storage-access-api
+rem Disabled #tab-hover-card-images
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
 rem Enabled #dns-https-svcb
@@ -95,6 +98,7 @@ rem edge://flags
 rem Search engine used in the address bar
 start "" "https://neeva.com"
 rem edge://settings/search
+rem https://neeva.com/search?q=%s
 
 pause
 
