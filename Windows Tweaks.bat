@@ -59,6 +59,7 @@ rem Privacy Cloud - https://www.nytimes.com/2022/08/21/technology/google-surveil
 rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-based-adblocking-support
 rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies / https://fpresearch.httpjames.space
 rem Privacy Futile (Encryption) - https://www.bleepingcomputer.com/news/security/an-encrypted-zip-file-can-have-two-correct-passwords-heres-why
+rem Privacy Futile (GAFAM) https://askleo.com/how-does-facebook-track-me-even-if-i-dont-have-an-account
 rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook-helped-fbi-hack-child-predator-buster-hernandez
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
@@ -199,6 +200,7 @@ rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 rem Sandbox software
 rem 360 Total Security Essential (CN) - https://www.360totalsecurity.com/en/features/360-total-security-essential
 rem Comodo Antivirus (US) - https://antivirus.comodo.com
+rem Sandboxie - https://github.com/sandboxie-plus/Sandboxie
 
 rem Security cleanup software (portable on-demand scanners, some still leave traces/drivers)
 rem Antivirus Rescue Disks - https://www.techradar.com/in/best/best-antivirus-rescue-disk
@@ -332,8 +334,7 @@ net user defaultuser1 /delete
 net user defaultuser100000 /delete
 
 rem Remove random files/folders - https://github.com/MoscaDotTo/Winapp2/blob/master/Winapp3/Winapp3.ini
-del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
-del "%LocalAppData%\Microsoft\Windows\ActionCenterCache" /s /f /q
+rem del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
 del "%SystemDrive%\AMFTrace.log" /s /f /q
 del "%WINDIR%\System32\sru\*" /s /f /q
 rd "C:\Users\Tairi\3D Objects" /s /q
@@ -3032,8 +3033,14 @@ rem reg add "HKCR\Directory\shell\runas\command" /v "IsolatedCommand" /t REG_SZ 
 rem Remove "Add to Favorites" Context Menu
 reg delete "HKCR\*\shell\pintohomefile" /f
 
+rem Remove "Copy as path" Context Menu
+reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\CopyAsPathMenu" /f
+
 rem Remove "Open in Windows Terminal" Context Menu
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{9F156763-7844-4DC4-B2B1-901F640F5155}" /t REG_SZ /d "" /f
+
+rem Remove "Copy as path" Context Menu
+reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\CopyAsPathMenu" /f
 
 rem Remove "Send To" Context Menu
 reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f
