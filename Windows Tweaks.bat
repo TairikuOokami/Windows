@@ -46,11 +46,6 @@ rem SeDebugPrivilege/SeTcbPrivilege - https://youtu.be/hZKLEw-Our4 - Self-elevat
 rem https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/act-as-part-of-the-operating-system
 rem https://unifiedguru.com/blackmatter-ransomware-analysis-the-dark-side-returns
 
-rem https://docs.microsoft.com/en-us/windows/deployment/update/waas-overview
-rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
-rem https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-security-baselines
-rem https://techcommunity.microsoft.com/t5/microsoft-security-baselines/bg-p/Microsoft-Security-Baselines
-
 rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefilters.org
 rem Browser Leaks - https://browserleaks.com / CanvasFingerprint / WebRTC
 rem Browser Tracking Test - https://panopticlick.eff.org
@@ -115,8 +110,7 @@ rem Windows ISO
 rem https://www.microsoft.com/en-us/software-download/windows11
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
-rem https://genuine-iso-verifier.weebly.com/
-rem Windows ReviOS - https://www.revi.cc/revios
+rem https://genuine-iso-verifier.weebly.com
 
 rem Check ISO Windows versions and build version
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
@@ -148,15 +142,6 @@ rem AVG/Avast Setup - Menu - Settings - Personal Privacy - uncheck all
 rem AVG/Avast Performance - Menu - Settings - Troubleshooting - uncheck hardware virtualization + LSA protection
 rem AVG/Avast Performance - Menu - Basic protection - Troubleshooting - uncheck hardware virtualization + LSA protection
 rem AVG/Avast Performance - Menu - Basic protection - Core Shield/Detection - Low sensitivty / uncheck CyberCapture + Anti-Rootkit + Generate report
-rem Kaspersky Security Cloud (RU) - https://www.kaspersky.com/downloads/try-free-cloud-antivirus - https://postimg.cc/Yvry2J40
-rem Kaspersky Security Cloud Setup - Accept Kaspersky Security Network and Decline Data Processing / Recommended uncheck All
-rem Kaspersky Security Cloud Setup - Uninstall Kaspersky Secure Connection (trial VPN)
-rem Kaspersky Security Cloud Setup - Settings - Interface - uncheck Receive informational messages + Show information about special offers
-rem Kaspersky Security Cloud Performance - Settings - Additional - uncheck Use hardware virtualization + Secure Keyboard + Show password strength + Warn about using the same password
-rem Kaspersky Security Cloud Performance - Settings - General - uncheck Use Advanced Disinfection
-rem Kaspersky Security Cloud Performance - Settings - Protection - Turn Off All, but File Anti-Virus / File Anti-Virus Advanced - set Security level Low
-rem Kaspersky Security Cloud Performance - Settings - Network settings - check Do not scan encrypted connections (to avoid MITM)
-rem Kaspersky Security Cloud Performance - Settings - Network settings - uncheck Inject script into web traffic + Monitor ports + Decrypt + Scan secure traffic
 rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/ZBsbb1xh
 
 rem AntiVirus software (Cloud only)
@@ -189,7 +174,6 @@ rem Wise Disk Cleaner - https://www.wisecleaner.com/wise-disk-cleaner.html
 rem Wise Registry Cleaner - https://www.wisecleaner.com/wise-registry-cleaner.html
 
 rem Firewall software
-rem FortKnox Firewall (SK) - http://fortknox-firewall.com
 rem Zone Alarm Firewall (IL) - https://www.zonealarm.com/software/free-firewall
 
 rem Firewall software using Windows Firewall
@@ -487,6 +471,7 @@ bcdedit /set bootstatuspolicy IgnoreAllFailures
 bcdedit /set bootux disabled
 bcdedit /set disabledynamictick yes
 bcdedit /set lastknowngood yes
+bcdedit /set nx AlwaysOff
 bcdedit /set recoveryenabled no
 bcdedit /set quietboot yes
 bcdedit /set useplatformtick yes
@@ -1985,6 +1970,12 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CDP" /v "RomeSdkChannelU
 
 rem ________________________________________________________________________________________
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CDP" /v "NearShareChannelUserAuthzPolicy" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppInstaller" /v "EnableAppInstaller" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppInstaller" /v "EnableDefaultSource" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppInstaller" /v "EnableExperimentalFeatures" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppInstaller" /v "EnableMicrosoftStoreSource" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppInstaller" /v "EnableMSAppInstallerProtocol" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppInstaller" /v "EnableSettings" /t REG_DWORD /d "1" /f
 
 rem Let apps run in the background / 0 - Enabled / 1 - Disabled
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\BackgroundAccessApplications" /v "GlobalUserDisabled" /t REG_DWORD /d "1" /f
@@ -2157,6 +2148,9 @@ reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWi
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "0" /f
 
+rem Disable Discovery of Designated Resolvers (DDR), a mechanism for DNS clients to use DNS records to discover a resolver's encrypted DNS configuration
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableDdr" /t REG_DWORD /d "0" /f
+
 rem Disable IDN (internationalized domain name)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableIdnMapping" /t REG_DWORD /d "0" /f
@@ -2310,11 +2304,18 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 rem Widgets / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
 
+rem 1 - Show flashing on taskbar apps
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarFlashing" /t REG_DWORD /d "0" /f
+
 rem Chat / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarMn" /t REG_DWORD /d "0" /f
 
+rem 1 - Share any Window from Taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSn" /t REG_DWORD /d "0" /f
+
 rem Search / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
+
 
 rem ________________________________________________________________________________________
 rem 1 - Always show all icons and notifications on the taskbar
@@ -2323,19 +2324,16 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAuto
 rem Size of Taskbar Icons / 0 - Small / 1 - Medium / 2 - Large
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSi" /t REG_DWORD /d "1" /f
 
+rem Disable Cortana
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\\Policies\Microsoft\Windows\Windows Search" /v "DisableSearch" /t REG_DWORD /d "1" /f
+
 rem Remove Search (Cortana/to restore run SFC scan)
 rem winget uninstall "cortana"
 takeown /s %computername% /u %username% /f "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe"
 icacls "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /inheritance:r /grant:r %username%:F
 taskkill /im SearchHost.exe /f
 del "%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe" /s /f /q
-
-rem Remove Widgets (News/to restore run SFC scan)
-rem winget uninstall "windows web experience pack"
-rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe"
-rem icacls "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /inheritance:r /grant:r %username%:F
-rem taskkill /im Widgets.exe /f
-rem del "%ProgramFiles%\WindowsApps\MicrosoftWindows.Client.WebExperience_421.20031.315.0_x64__cw5n1h2txyewy\Dashboard\Widgets.exe" /s /f /q
 
 
 rem =================================== Windows Settings ===================================
@@ -3038,9 +3036,6 @@ reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\CopyAsPathMenu
 
 rem Remove "Open in Windows Terminal" Context Menu
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{9F156763-7844-4DC4-B2B1-901F640F5155}" /t REG_SZ /d "" /f
-
-rem Remove "Copy as path" Context Menu
-reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\CopyAsPathMenu" /f
 
 rem Remove "Send To" Context Menu
 reg delete "HKCR\AllFilesystemObjects\shellex\ContextMenuHandlers\SendTo" /f
