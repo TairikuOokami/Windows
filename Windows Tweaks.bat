@@ -117,6 +117,7 @@ rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim /index:1
 rem dism /Get-WimInfo /WimFile:E:\sources\install.esd /index:1
 
+rem https://blogs.msmvps.com/brink
 rem https://www.elevenforum.com/t/create-shortcuts-to-open-pages-in-settings-in-windows-11.522
 rem https://www.elevenforum.com/t/keyboard-shortcuts-in-windows-11.2253
 rem https://www.elevenforum.com/t/list-of-uri-commands-to-open-microsoft-store-apps-in-windows-11.2683
@@ -345,6 +346,7 @@ rd "%ProgramData%\Microsoft\DiagnosticLogCSP" /s /q
 rd "%ProgramData%\Microsoft\Network" /s /q
 rd "%ProgramData%\Microsoft\Search" /s /q
 rd "%ProgramData%\Microsoft\SmsRouter" /s /q
+rd "%ProgramData%\Microsoft\Windows Defender\Definition Updates" /s /q
 rd "%ProgramFiles(x86)%\EaseUS\Todo Backup\bin\PEtools" /s /q
 rd "%ProgramFiles(x86)%\EaseUS\Todo Backup\BUILDPE" /s /q
 rd "%SystemDrive%\AMD" /s /q
@@ -471,7 +473,6 @@ bcdedit /set bootstatuspolicy IgnoreAllFailures
 bcdedit /set bootux disabled
 bcdedit /set disabledynamictick yes
 bcdedit /set lastknowngood yes
-bcdedit /set nx AlwaysOff
 bcdedit /set recoveryenabled no
 bcdedit /set quietboot yes
 bcdedit /set useplatformtick yes
@@ -720,7 +721,8 @@ rem Remove 3D Folders from This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f
 
 rem Remove Home (Quick access) from This PC
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
+reg add "HKLM\Software\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
 
 rem Remove Documents from This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f
@@ -2170,6 +2172,7 @@ rem netsh dns show global
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
 
 rem Setup DNS over HTTPS (DoH) Add Custom Servers
+rem netsh dns add global doh=yes ddr=yes
 rem HKLM\System\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers
 rem reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers\45.90.28.91" /v "Template" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx" /f
 rem reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers\45.90.30.91" /v "Template" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx" /f
@@ -2326,7 +2329,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 
 rem Disable Cortana
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\\Policies\Microsoft\Windows\Windows Search" /v "DisableSearch" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableSearch" /t REG_DWORD /d "1" /f
 
 rem Remove Search (Cortana/to restore run SFC scan)
 rem winget uninstall "cortana"
@@ -2574,6 +2577,17 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 
 rem Allow/Deny - Let apps access your notifications
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Allow" /f
+
+rem 1 - Enable and Prioritize Outlook extension notifications by not showing them in the notification center 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe!chrome-extension://kkpalkknhlklpbflpcpkepmmbnmfailf/" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe!chrome-extension://kkpalkknhlklpbflpcpkepmmbnmfailf/" /v "Rank" /t REG_DWORD /d "1" /f
+
+rem 1 - Enable and Prioritize Edge Notifications by not showing them in the notification center 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\MSEdge" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\MSEdge" /v "Rank" /t REG_DWORD /d "1" /f
+
+rem 1 - Startup App Notification
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp" /v "Enabled" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Settings ===================================
