@@ -128,7 +128,7 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Avira, Bitdefender, ESET, Norton, Panda, Sophos, ZoneAlarm are out of question)
+rem AntiVirus software (Avira, Bitdefender, ESET, Norton, Panda, Sophos are out of question)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
 rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
@@ -142,12 +142,16 @@ rem AVG/Avast Setup - Customize - Minimal Protection - File Shield only for max 
 rem AVG/Avast Setup - Menu - Settings - Personal Privacy - uncheck all
 rem AVG/Avast Performance - Menu - Settings - Troubleshooting - uncheck hardware virtualization + LSA protection
 rem AVG/Avast Performance - Menu - Basic protection - Troubleshooting - uncheck hardware virtualization + LSA protection
-rem AVG/Avast Performance - Menu - Basic protection - Core Shield/Detection - Low sensitivty / uncheck CyberCapture + Anti-Rootkit + Generate report
+rem AVG/Avast Performance - Menu - Basic protection - Core Shield/Detection - Low sensitivity / uncheck CyberCapture + Anti-Rootkit + Generate report
 rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/ZBsbb1xh
+rem Zone Alarm - https://www.zonealarm.com/software/free-antivirus - https://postimg.cc/3d23rVXp
 
 rem AntiVirus software (Cloud only)
 rem Immunet (US) - https://www.immunet.com/index - https://postimg.cc/TpjzQjM8
 rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus
+rem Panda Setup - Settings - General - Disable Panda News - https://postimg.cc/8JnjJQpS
+rem Panda Perfomance - Settings - Antivirus - Disable PUPs + Behavioral/Set Block files to 10 secs
+rem Panda Perfomance - Settings - Process Monitor/USB - Disable
 rem WiseVector StopX (CN) - https://www.wisevector.com/en - https://postimg.cc/HVjS8QY4
 
 rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
@@ -364,20 +368,20 @@ rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-w
 rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
 rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
-taskkill /im PowerShell.exe /f
-taskkill /im PowerShell_ISE.exe /f
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
-icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%ProgramFiles%\WindowsPowerShell" /s /q
-takeown /s %computername% /u %username% /f "%ProgramFiles(x86)%\WindowsPowerShell" /r /d y
-icacls "%ProgramFiles(x86)%\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%ProgramFiles(x86)%\WindowsPowerShell" /s /q
-takeown /s %computername% /u %username% /f "%WinDir%\System32\WindowsPowerShell" /r /d y
-icacls "%WinDir%\System32\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%WinDir%\System32\WindowsPowerShell" /s /q
-takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WindowsPowerShell" /r /d y
-icacls "%WinDir%\SysWOW64\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%WinDir%\SysWOW64\WindowsPowerShell" /s /q
+rem taskkill /im PowerShell.exe /f
+rem taskkill /im PowerShell_ISE.exe /f
+rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
+rem icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%ProgramFiles%\WindowsPowerShell" /s /q
+rem takeown /s %computername% /u %username% /f "%ProgramFiles(x86)%\WindowsPowerShell" /r /d y
+rem icacls "%ProgramFiles(x86)%\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%ProgramFiles(x86)%\WindowsPowerShell" /s /q
+rem takeown /s %computername% /u %username% /f "%WinDir%\System32\WindowsPowerShell" /r /d y
+rem icacls "%WinDir%\System32\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%WinDir%\System32\WindowsPowerShell" /s /q
+rem takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WindowsPowerShell" /r /d y
+rem icacls "%WinDir%\SysWOW64\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%WinDir%\SysWOW64\WindowsPowerShell" /s /q
 
 rem Remove Startup Folders
 takeown /s %computername% /u %username% /f "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Startup"
@@ -485,6 +489,7 @@ rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "PSUAMain" /t REG_SZ /d "%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAMain.exe /LaunchSysTray" /f
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "autocheck autochk *" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE" /t REG_MULTI_SZ /d "" /f
@@ -584,10 +589,10 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\DriverSearching" /v "Don
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\DriverSearching" /v "DriverUpdateWizardWuSearchEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Disable driver updates in Windows Update
-reg add "HKLM\Software\Microsoft\PolicyManager\current\device\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Microsoft\PolicyManager\default\device\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\Software\Microsoft\PolicyManager\current\device\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\Software\Microsoft\PolicyManager\default\device\Update" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate" /v "ExcludeWUDriversInQualityUpdate" /t REG_DWORD /d "1" /f
 
 rem Avoid the driver signing enforcement for EV cert / SHA256 Microsoft Windows signed drivers which is further enforced via Secure Boot
 rem reg add "HKLM\System\ControlSet001\Control\CI\Policy" /v "UpgradedSystem" /t REG_DWORD /d "1" /f
@@ -818,6 +823,9 @@ reg delete "HKCU\Control Panel\Mouse" /v "SmoothMouseYCurve" /f
 
 rem Mouse Hover Time in milliseconds before Pop-up Display
 reg add "HKCU\Control Panel\Mouse" /v "MouseHoverTime" /t REG_SZ /d "0" /f
+
+rem 1 - Disable Windows caching DLL in memory
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AlwaysUnloadDLL" /t REG_DWORD /d "1" /f
 
 rem How long in milliseconds you want to have for a startup delay time for desktop apps that run at startup to load
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize" /v "StartupDelayInMSec" /t REG_DWORD /d "0" /f
@@ -1189,6 +1197,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpeechRecognitionEnabled" /t
 rem 1 - Allow video capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_DWORD /d "0" /f
 
+rem 1 - Allow Microsoft Edge Workspaces
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - DNS-based WPAD optimization (Web Proxy Auto-Discovery)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WPADQuickCheckEnabled" /t REG_DWORD /d "0" /f
 
@@ -1209,6 +1220,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "FavoritesBarEnabled" /t REG_
 rem 1 - Show Math Solver button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MathSolverEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - The performance detector detects tab performance issues and recommends actions to fix the performance issues
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Show mini menu when selecting text
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickSearchShowMiniMenu" /t REG_DWORD /d "0" /f
 
@@ -1223,6 +1237,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VerticalTabsAllowed" /t REG_
 
 rem 1 - Show web capture button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebCaptureEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Show web select button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebSelectEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 rem 1 - Enables background updates to the list of available templates for Collections and other features that use templates
@@ -1373,7 +1390,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutomaticHttpsDefault" /t RE
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
 
-rem 1 - Enhance the security state in Microsoft Edge / 0 - Standard mode / 1 - Balanced mode / 2 - Strict mode
+rem Enhance the security state in Microsoft Edge / 0 - Standard mode / 1 - Balanced mode / 2 - Strict mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityMode" /t REG_DWORD /d "2" /f
 
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
@@ -1485,12 +1502,12 @@ rem 1 - Startup boost
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
+rem 1 - If ECH is enabled, Microsoft Edge might or might not use ECH depending on server support, the availability of the HTTPS DNS record
+rem Enable: DOH + #dns-https-svcb + #use-dns-https-svcb-alpn + the paramater: --enable-features="EncryptedClientHello" - https://defo.ie/ech-check.php
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EncryptedClientHelloEnabled" /t REG_DWORD /d "1" /f
+
 rem NetworkPrediction / 0 - Always / 1 - WifiOnly / 2 - Never
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkPredictionOptions" /t REG_DWORD /d "2" /f
-
-rem 1 - The performance detector detects tab performance issues and recommends actions to fix the performance issues
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
-
 
 rem =================================== Windows Policies ===================================
 rem --------------------------------- User Account Control ---------------------------------
@@ -3282,5 +3299,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/Ln692Rwn
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/FdVTkfVM
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
