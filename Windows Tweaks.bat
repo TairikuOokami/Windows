@@ -128,7 +128,7 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Avira, Bitdefender, ESET, Norton, Panda, Sophos are out of question)
+rem AntiVirus software (Avira, Bitdefender, ESET, Norton, Sophos are out of question)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
 rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
@@ -148,8 +148,8 @@ rem Zone Alarm - https://www.zonealarm.com/software/free-antivirus - https://pos
 
 rem AntiVirus software (Cloud only)
 rem Immunet (US) - https://www.immunet.com/index - https://postimg.cc/TpjzQjM8
-rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus
-rem Panda Setup - Settings - General - Disable Panda News - https://postimg.cc/8JnjJQpS
+rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://postimg.cc/8JnjJQpS
+rem Panda Setup - Settings - General - Disable Panda News
 rem Panda Perfomance - Settings - Antivirus - Disable PUPs + Behavioral/Set Block files to 10 secs
 rem Panda Perfomance - Settings - Process Monitor/USB - Disable
 rem WiseVector StopX (CN) - https://www.wisevector.com/en - https://postimg.cc/HVjS8QY4
@@ -368,20 +368,20 @@ rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-w
 rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
 rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
-rem taskkill /im PowerShell.exe /f
-rem taskkill /im PowerShell_ISE.exe /f
-rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
-rem icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%ProgramFiles%\WindowsPowerShell" /s /q
-rem takeown /s %computername% /u %username% /f "%ProgramFiles(x86)%\WindowsPowerShell" /r /d y
-rem icacls "%ProgramFiles(x86)%\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%ProgramFiles(x86)%\WindowsPowerShell" /s /q
-rem takeown /s %computername% /u %username% /f "%WinDir%\System32\WindowsPowerShell" /r /d y
-rem icacls "%WinDir%\System32\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%WinDir%\System32\WindowsPowerShell" /s /q
-rem takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WindowsPowerShell" /r /d y
-rem icacls "%WinDir%\SysWOW64\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%WinDir%\SysWOW64\WindowsPowerShell" /s /q
+taskkill /im PowerShell.exe /f
+taskkill /im PowerShell_ISE.exe /f
+takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
+icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%ProgramFiles%\WindowsPowerShell" /s /q
+takeown /s %computername% /u %username% /f "%ProgramFiles(x86)%\WindowsPowerShell" /r /d y
+icacls "%ProgramFiles(x86)%\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%ProgramFiles(x86)%\WindowsPowerShell" /s /q
+takeown /s %computername% /u %username% /f "%WinDir%\System32\WindowsPowerShell" /r /d y
+icacls "%WinDir%\System32\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%WinDir%\System32\WindowsPowerShell" /s /q
+takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WindowsPowerShell" /r /d y
+icacls "%WinDir%\SysWOW64\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rd "%WinDir%\SysWOW64\WindowsPowerShell" /s /q
 
 rem Remove Startup Folders
 takeown /s %computername% /u %username% /f "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Startup"
@@ -2469,7 +2469,7 @@ rem 1 - Tailored experiences
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem Send optional dianostgic data / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
+rem Send optional diagnostic data / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
 
 rem Feedback Frequency - Windows should ask for my feedback: 0 - Never / Removed - Automatically
