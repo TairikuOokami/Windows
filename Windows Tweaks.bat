@@ -362,7 +362,9 @@ rem Remove/Rebuild Font Cache
 del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/s /f /q
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
-rem Remove Windows Powershell (to restore run "sfc /scannow")
+rem Remove default Windows Powershell (to restore run "sfc /scannow")
+rem Restrict PS and install the latest version instead - pwsh
+rem winget install Microsoft.PowerShell
 rem https://www.bleepingcomputer.com/news/security/as-microsoft-blocks-office-macros-hackers-find-new-attack-vectors
 rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-windows-devices-with-powershell
 rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
@@ -3299,5 +3301,5 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/FdVTkfVM
+rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/FYLtfL6p
 rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
