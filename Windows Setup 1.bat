@@ -105,6 +105,7 @@ rem Enable Windows File Compression
 rem compact /compactos:query
 fsutil behavior set disablecompression 0
 compact /CompactOs:always
+compact /c /s:C:\ /i /Q
 
 rem Disable pagefile
 rem fsutil behavior set EncryptPagingFile 1
@@ -266,19 +267,30 @@ winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --acce
 
 rem 2fast – Two Factor Authenticator
 winget install --id 9P9D81GLH89Q --exact --source msstore --accept-package-agreements --accept-source-agreements
+
 rem AV1 Video Extension
 winget install --id 9MVZQVXJBQ9V --exact --source msstore --accept-package-agreements --accept-source-agreements
+
+rem EaseUS.TodoBackup
+winget install EaseUS.TodoBackup --accept-package-agreements --accept-source-agreements
+
 rem HEIF Image Extensions
 winget install --id 9PMMSR1CGPWG --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem OpenCL™ and OpenGL® Compatibility Pack
-winget install --id 9NQPSL29BFFF --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Web Media Extensions
-winget install --id 9N5TDP8VCMHS --exact --source msstore --accept-package-agreements --accept-source-agreements
-rem Webp Image Extensions
+
+rem Microsoft DirectX 9.0c End-User Runtime
+winget install Microsoft.DirectX --accept-package-agreements --accept-source-agreements
+
+rem Microsoft XNA Framework Redistributable Refresh
 winget install --id 9PG2DK419DRG --exact --source msstore --accept-package-agreements --accept-source-agreements
 
+rem OpenCL™ and OpenGL® Compatibility Pack
+winget install --id 9NQPSL29BFFF --exact --source msstore --accept-package-agreements --accept-source-agreements
 
-start "" /wait "https://apps.microsoft.com/store/detail/hevc-video-extensions/9NMZLZ57R3T7?hl=en-us&gl=us"
+rem Speedtest by Ookla
+winget install --id 9NBLGGH4Z1JC --exact --source msstore --accept-package-agreements --accept-source-agreements
+
+rem Web Media Extensions
+winget install --id 9N5TDP8VCMHS --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
