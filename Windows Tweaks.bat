@@ -182,7 +182,6 @@ rem Firewall software
 rem Zone Alarm Firewall (IL) - https://www.zonealarm.com/software/free-firewall
 
 rem Firewall software using Windows Firewall
-rem Glasswire (US) - https://www.glasswire.com
 rem simplewall (US) - https://www.henrypp.org/product/simplewall
 rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
@@ -296,6 +295,7 @@ rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
 rem VPN / WARP - https://cloudflarewarp.com
 rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/lively-wallpaper/9NTM2QC6QWS7?hl=en-us&gl=us
+rem Wallpaper / Rainmeter - https://www.rainmeter.net
 rem Wallpaper / Wallpaper Engine - https://store.steampowered.com/app/431960
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
 rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
@@ -486,7 +486,7 @@ bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "%ProgramFiles%\SystemInformer\SystemInformer.exe -hide" /f
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "%ProgramFiles%\SystemInformer\SystemInformer.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
@@ -918,6 +918,18 @@ rem https://docs.microsoft.com/en-us/windows/privacy/manage-connections-from-win
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/new-in-windows-mdm-enrollment-management#whatsnew10
 rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
 rem https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-security-baselines
+
+rem Account Lockout Threshold / 0 - Disabled
+net accounts /lockoutthreshold:5
+
+rem Account Lockout Duration / 0 - Locks out the account for good, till Administrator unlocks it
+net accounts /lockoutduration:1
+
+rem Reset Account Lockout Counter After Time
+net accounts /lockoutwindow:1
+
+rem Unlock Locked Out Account
+rem net user tairi /active:yes
 
 rem ________________________________________________________________________________________
 rem https://www.bleepingcomputer.com/news/security/microsoft-code-sign-check-bypassed-to-drop-zloader-malware
@@ -1433,7 +1445,7 @@ rem Choose whether users can receive customized background images and text, sugg
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecommendationsEnabled" /t REG_DWORD /d "0" /f
 
 rem Use secure DNS (DoH)
-rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClientEnabled" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClieDnsClientEnabled" /t REG_DWORD /d "1" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsMode" /t REG_SZ /d "secure" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx?" /f
 
@@ -1595,6 +1607,8 @@ schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /Disable
 schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable
 schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable
 schtasks /Change /TN "Microsoft\Windows\Defrag\ScheduledDefrag" /Disable
+schtasks /Change /TN "Microsoft\Windows\Device Information\Device" /Disable
+schtasks /Change /TN "Microsoft\Windows\Device Information\Device User" /Disable
 schtasks /Change /TN "Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /Disable
 schtasks /Change /TN "Microsoft\Windows\Diagnosis\Scheduled" /Disable
 schtasks /Change /TN "Microsoft\Windows\DiskCleanup\SilentCleanup" /Disable
@@ -1975,6 +1989,9 @@ rem ................................... Sing-in options ........................
 rem 1 - Automatically save my restartable apps when I sign out and restart them after I sign in
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "RestartApps" /t REG_DWORD /d "0" /f
 
+rem 2 - For improved security, only allow Windows Hello sign-in for Microsoft accounts on this device / 0 - Off
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\PasswordLess\Device" /v "DevicePasswordLessBuildVersion" /t REG_DWORD /d "2" /f
+
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------------- Apps ------------------------------------------
@@ -2132,7 +2149,7 @@ rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
@@ -2167,8 +2184,20 @@ reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWi
 reg add "HKLM\Software\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\WcmSvc\wifinetworkmanager\config" /v "AutoConnectAllowedOEM" /t REG_DWORD /d "0" /f
 
+rem 1 - Turn on Mapper I/O (LLTDIO) driver
+reg add "HKLM\Software\Policies\Microsoft\Windows\LLTD" /v "EnableLLTDIO" /t REG_DWORD /d "0" /f
+
+rem 1 - Turn on Responder (RSPNDR) driver
+reg add "HKLM\Software\Policies\Microsoft\Windows\LLTD" /v "EnableRspndr" /t REG_DWORD /d "0" /f
+
+rem 1 - Turn off Microsoft Peer-to-Peer Networking Services
+reg add "HKLM\Software\Policies\Microsoft\Windows\Peernet" /v "Disabled" /t REG_DWORD /d "1" /f
+
 rem Disable Discovery of Designated Resolvers (DDR), a mechanism for DNS clients to use DNS records to discover a resolver's encrypted DNS configuration
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableDdr" /t REG_DWORD /d "0" /f
+
+rem 0 - Require DoH / 1 - Allow DoH / 2 - Prohibit DoH
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DoHPolicy" /t REG_DWORD /d "0" /f
 
 rem Disable IDN (internationalized domain name)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
