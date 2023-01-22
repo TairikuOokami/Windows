@@ -13,7 +13,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "Misc
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
 
-rem Open Explorer - Choose the desired View - View - Options - View - Apply to Folders - OK - Close Explorer ASAP
+rem Open Explorer - Choose the desired View - View - Options - View - Apply to Folders - OK - Close/Restart Explorer ASAP
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f
 reg delete "HKCU\Software\Classes\Wow6432Node\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
@@ -38,6 +38,7 @@ rem https://s22.postimg.cc/lkkv0mkxd/capture_06272018_232206.jpg
 fsutil usn deletejournal /d /n c:
 chkdsk /scan
 ipconfig /flushdns
+winget source update
 
 taskkill /im msi.exe /f
 taskkill /im wuauclt.exe /f
@@ -65,11 +66,14 @@ del "%WINDIR%\winsxs\pending.xml" /s /f /q
 del "C:\$Recycle.bin" /s /f /q
 del "D:\$Recycle.bin" /s /f /q
 del "Z:\$Recycle.bin" /s /f /q
+
 del "%ALLUSERSPROFILE%\Application Data\Microsoft\Network\Downloader\qmgr*.dat" /s /f /q
 del "%ALLUSERSPROFILE%\Microsoft\Network\Downloader\qmgr*.dat" /s /f /q
 del "%LocalAppData%\Microsoft\Windows\WebCache" /s /f /q
 del "%LocalAppData%\Temp" /s /f /q
-del "%ProgramData%\USOPrivate\UpdateStore" /s /f /q
+rd "%ProgramData%\Applications" /s /q
+rd "%ProgramData%\Package Cache" /s /q
+rd "%ProgramData%\USOPrivate\UpdateStore" /s /f /q
 del "%ProgramData%\USOShared\Logs" /s /f /q
 rd "%SystemDrive%\$GetCurrent" /s /q
 rd "%SystemDrive%\$SysReset" /s /q
@@ -143,6 +147,8 @@ winget export -o D:\OneDrive\Setup\winget.txt
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
+compact /c /i /q /f /exe:lzx /s:C:\Windows
+
 taskkill /im brave.exe /f
 taskkill /im msedge.exe /f
 taskkill /im librewolf.exe /f
@@ -155,6 +161,12 @@ xcopy "Z:\Brave" "D:\OneDrive\Soft\Brave" /s /i /y
 xcopy "Z:\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
 xcopy "Z:\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
 
+xcopy "%AppData%\PotPlayerMini64\PotPlayerMini64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\PotPlayerMini64\PotPlayerMini64.ini" /y
+xcopy "%AppData%\PotPlayerMini64\PotPlayerMini64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
+xcopy "%AppData%\SystemInformer\settings.xml" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
+xcopy "%AppData%\Wise Disk Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Disk Cleaner\Config.ini" /y
+xcopy "%AppData%\Wise Registry Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Registry Cleaner\Config.ini" /y
+
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\Rapr.exe"
 start "" /wait "%ProgramFiles(x86)%\ADATA\SSD ToolBox\SSDToolBox.exe"
@@ -163,5 +175,3 @@ start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
 sc config "EaseUS Agent" start= demand
 net start "EaseUS Agent"
 start "" /wait "C:\Program Files (x86)\EaseUS\Todo Backup\bin\Loader.exe"
-
-start "" D:\OneDrive\Downloads\UnValidate.bat
