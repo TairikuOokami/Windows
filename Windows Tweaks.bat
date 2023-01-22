@@ -4,6 +4,11 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 rem Create a system backup to reverse any changes
 rem https://www.easeus.com/support/todo-backup/enable-disable-pre-os.html
 
+rem To be able to install Insider updates, you need to enable:
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
+rem bcdedit /set flightsigning on
+rem bcdedit /set {bootmgr} flightsigning on
+
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 
@@ -1217,6 +1222,10 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t RE
 rem 1 - DNS-based WPAD optimization (Web Proxy Auto-Discovery)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WPADQuickCheckEnabled" /t REG_DWORD /d "0" /f
 
+rem 0 - Prevent Desktop Shortcut creation upon install default
+reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcutDefault" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v " CreateDesktopShortcut{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1275,6 +1284,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AlwaysOpenPdfExternally" /t 
 
 rem Ads setting for sites with intrusive ads / 1 - Allow ads on all sites / 2 - Block ads on sites with intrusive ads. (Default value)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AdsSettingForIntrusiveAdsSites" /t REG_DWORD /d "1" /f
+
+rem Clipboard / 2 - BlockClipboard / 3 - AskClipboard
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultClipboardSetting" /t REG_DWORD /d "2" /f
 
 rem File Editing / 2 - BlockFileSystemRead / 3 - AskFileSystemRead
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultFileSystemReadGuardSetting" /t REG_DWORD /d "2" /f
@@ -1826,6 +1838,9 @@ sc config NPSMSvc start= disabled
 
 rem Optimize drives
 sc config defragsvc start= disabled
+
+rem Panda Devices Agent
+sc config PandaAgent start= disabled
 
 rem Payments and NFC/SE Manager
 sc config SEMgrSvc start= disabled
