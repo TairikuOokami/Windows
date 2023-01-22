@@ -108,7 +108,7 @@ rem compact /CompactOs:always
 compact /c /i /q /f /exe:lzx /s:C:\
 compact /u /i /q /f /s:Z:\
 compact /u /i /q /f /s:D:\Documents\
-compact /u /i /q /f /s:‪D:\OneDrive\Pictures\
+compact /u /i /q /f /s:D:\OneDrive\Pictures\
 
 rem Disable pagefile
 rem fsutil behavior set EncryptPagingFile 1
