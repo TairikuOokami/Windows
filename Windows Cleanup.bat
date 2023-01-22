@@ -147,7 +147,7 @@ winget export -o D:\OneDrive\Setup\winget.txt
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
-compact /c /i /q /f /exe:lzx /s:C:\Windows
+rem compact /c /i /q /f /exe:lzx /s:C:\Windows
 
 taskkill /im brave.exe /f
 taskkill /im msedge.exe /f
