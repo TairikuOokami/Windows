@@ -1224,7 +1224,8 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WPADQuickCheckEnabled" /t RE
 
 rem 0 - Prevent Desktop Shortcut creation upon install default
 reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcutDefault" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v " CreateDesktopShortcut{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcut{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "RemoveDesktopShortcutDefault" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Policies ===================================
