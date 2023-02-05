@@ -6,9 +6,10 @@ rem https://www.bleepingcomputer.com/news/security/lockbit-ransomware-abuses-win
 
 rem Disable Tamper and Real Protection in Defender
 rem Install any 3rd party AV that registers within Windows Security (like Adaware), update definitions, restart!
-rem Run "MD Disable.bat" TWICE !!!!!
-rem After restart, uninstall 3rd party AV (preferably using HiBit Uninstaller)
-rem Restart (HiBit Uninstaller will run to remove leftovers)
+rem Add downloads and temporary downloads folder to expceptions to prevent "MD Disable.bat" from being removed!
+rem Run "MD Disable.bat" TWICE !!!!! RESTART! Otherwise Defener will enable itself after uninstalling AV!
+rem After restart, uninstall 3rd party AV (preferably using HiBit Uninstaller).
+rem Restart (HiBit Uninstaller will run to remove leftovers).
 start windowsdefender:
 
 pause
@@ -68,7 +69,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
-rem Last Tested on Windows 11 Home 22621.607 using Microsoft Defender Platform Version 4.18.2207.7 (28 September 2022)
-rem Running bat file TWICE with 3rd party AV running https://postimg.cc/bdqhJvqf / DONE https://postimg.cc/21RJjjQp
+rem Last Tested on Windows 11 Home 22621.1194 using Microsoft Defender Platform Version 4.18.2211.5 (05 February 2023)
+rem Running bat file TWICE with 3rd party AV running https://postimg.cc/Hjb9fX09 / DONE https://postimg.cc/BL7bzhYn
 
 pause
