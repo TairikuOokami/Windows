@@ -73,7 +73,7 @@ rem https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Comman
 rem https://github.com/dreammjow/ChromiumHardening/blob/main/flags/chrome-command-line.md
 rem https://peter.sh/experiments/chromium-command-line-switches
 rem https://get.webgl.org / https://defo.ie/ech-check.php
-rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,GpuAppContainer,IsolatePrerenders,IsolateSandboxedIframes,RendererAppContainer,WinSboxDisableExtensionPoint" --no-pings
+rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,GpuAppContainer,IsolatePrerenders,IsolateSandboxedIframes,WinSboxDisableExtensionPoint" --site-per-process
 rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe --disable-breakpad --disable-crash-reporter
 
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
@@ -84,7 +84,6 @@ rem Disabled #enable-first-party-sets
 rem Disabled #enable-quic
 rem Disabled #edge-prenav
 rem Disabled #file-handling-api
-rem Disabled #sameparty-cookies-considered-first-party
 rem Disabled #storage-access-api
 rem Disabled #tab-hover-card-images
 rem Enabled #block-insecure-private-network-requests
@@ -94,7 +93,6 @@ rem Enabled #edge-automatic-https
 rem Enabled #edge-autoplay-user-setting-block-option
 rem Enabled #edge-overlay-scrollbars-win-style
 rem Enabled #edge-visual-rejuv-materials-menu
-rem Enabled #edge-visual-rejuv-show-settings
 rem Enabled #partitioned-cookies
 rem Enabled #strict-origin-isolation
 rem edge://flags
