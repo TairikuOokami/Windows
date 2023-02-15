@@ -26,7 +26,7 @@ pause
 
 start windowsdefender:
 rem Disable Tamper and Real Protection in Defender
-rem Install Panda
+rem Install Adaware
 
 pause
 
@@ -289,19 +289,14 @@ winget install --id 9PG2DK419DRG --exact --source msstore --accept-package-agree
 rem OpenCL™ and OpenGL® Compatibility Pack
 winget install --id 9NQPSL29BFFF --exact --source msstore --accept-package-agreements --accept-source-agreements
 
-rem Speedtest by Ookla
-winget install --id 9NBLGGH4Z1JC --exact --source msstore --accept-package-agreements --accept-source-agreements
-
 rem Web Media Extensions
 winget install --id 9N5TDP8VCMHS --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
-start "" /wait "D:\Software\directx_Jun2010_redist\DXSETUP.exe"
 start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
 start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
-start "" /wait "D:\OneDrive\Setup\Notepad3_5.21.1129.1_Setup.exe"
 start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
 start "" /wait "D:\OneDrive\Setup\tb_free_2208B.exe"
 
