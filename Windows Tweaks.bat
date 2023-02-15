@@ -16,6 +16,7 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
+rem Recent - https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication
 
 
 rem ________________________________________________________________________________________
@@ -159,7 +160,7 @@ rem Panda Perfomance - Settings - Antivirus - Disable PUPs + Behavioral/Set Bloc
 rem Panda Perfomance - Settings - Process Monitor/USB - Disable
 rem WiseVector StopX (CN) - https://www.wisevector.com/en - https://postimg.cc/HVjS8QY4
 
-rem AntiVirus software - additional protection (can be run alongisde of realtime AV)
+rem AntiVirus software - additional protection (can be run alongside of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
 rem Ghostpress (DE) - https://www.schiffer.tech/ghostpress.html
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
@@ -227,6 +228,7 @@ rem Browser / Brave - https://brave.com - Great for Google/Youtube only
 rem Browser / LibreWolf - https://librewolf.net - Great for privacy, like for Facebook
 rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy/security!
 rem Cloud Backup / IceDrive - https://icedrive.net/plans
+rem Cloud Backup / IDrive - https://www.idrive.com/pricing
 rem Cloud Backup / PolarBackup - https://www.polarbackup.com/#pricing
 rem Compact/Compress Files / Compact GUI - https://github.com/ImminentFate/CompactGUI
 rem Computer Management / NirLauncher - https://launcher.nirsoft.net
@@ -496,10 +498,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_S
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Run" /v "PSUAMain" /t REG_SZ /d "%ProgramFiles(x86)%\Panda Security\Panda Security Protection\PSUAMain.exe /LaunchSysTray" /f
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "BootExecute" /t REG_MULTI_SZ /d "autocheck autochk *" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE" /t REG_MULTI_SZ /d "" /f
+
 
 rem =================================== Software Setup =====================================
 
@@ -1168,6 +1170,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DisableScreenshots" /t REG_D
 rem 1 - DNS interception checks enabled
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DNSInterceptionChecksEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Drop lets users send messages or files to themselves
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEDropEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Microsoft Edge can automatically enhance images to show you sharper images with better color, lighting, and contrast
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t REG_DWORD /d "0" /f
 
@@ -1189,6 +1194,15 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HideRestoreDialogEnabled" /t
 rem 1 - Show Hubs Sidebar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Show Hubs Sidebar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable Grammar Tools feature within Immersive Reader
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderGrammarToolsEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable Picture Dictionary feature within Immersive Reader
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderPictureDictionaryEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Allow sites to be reloaded in Internet Explorer mode (IE mode)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationReloadInIEModeAllowed" /t REG_DWORD /d "0" /f
 
@@ -1203,6 +1217,12 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RelatedMatchesCloudServiceEn
 
 rem 1 - Allow remote debugging
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RemoteDebuggingAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Launches Renderer processes into an App Container for additional security benefits
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RendererAppContainerEnabled" /t REG_DWORD /d "1" /f
+
+rem 0 - Enable search in sidebar / 1 - DisableSearchInSidebarForKidsMode / 2 - DisableSearchInSidebar 
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchInSidebarEnabled" /t REG_DWORD /d "2" /f
 
 rem 1 - Allow screen capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG_DWORD /d "0" /f
@@ -1599,12 +1619,7 @@ schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
 schtasks /DELETE /TN "DUpdaterTask" /f
-schtasks /DELETE /TN "klcp_update" /f
 schtasks /DELETE /TN "ModifyLinkUpdate" /f
-schtasks /DELETE /TN "StartAUEP" /f
-schtasks /DELETE /TN "StartCN" /f
-schtasks /DELETE /TN "StartCNBM" /f
-schtasks /DELETE /TN "StartDVR" /f
 
 schtasks /Change /TN "CreateExplorerShellUnelevatedTask" /Enable
 
@@ -1839,9 +1854,6 @@ sc config NPSMSvc start= disabled
 
 rem Optimize drives
 sc config defragsvc start= disabled
-
-rem Panda Devices Agent
-sc config PandaAgent start= disabled
 
 rem Payments and NFC/SE Manager
 sc config SEMgrSvc start= disabled
@@ -3260,7 +3272,6 @@ winget upgrade --all --include-unknown
 timeout 5
 
 rem https://kalilinuxtutorials.com/webview2-cookie-stealer
-winget uninstall "Microsoft Edge WebView2 Runtime"
 fsutil usn deletejournal /d /n c:
 
 taskkill /im brave.exe /f
@@ -3275,6 +3286,12 @@ taskkill /im QtWebEngineProcess.exe /f
 taskkill /im RadeonSoftware.exe /f
 taskkill /im amdow.exe /f
 taskkill /im AMDRSServ.exe /f
+
+rem Run Wise Disk Cleaner
+start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a
+
+rem Run Wise Registry Cleaner
+start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - edge://settings/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
@@ -3333,16 +3350,11 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\WebStorage" /s /q
 
 start "" "D:\OneDrive\Downloads\CD.bat"
 
-rem Run Wise Disk Cleaner
-start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
-
-rem Run Wise Registry Cleaner
-start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
+timeout 5
 
 rem https://www.tenforums.com/general-support/95776-restart-fall-creators-update-reopens-apps-before.html#post1175516
 rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-update-restart-windows-10-a.html
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem Is that all? Is that ALL? Yes, that is all. That is all. https://postimg.cc/FYLtfL6p
-rem https://www.youtube.com/watch?v=MTjs5eo4BfI&feature=youtu.be&t=1m47s
+rem https://postimg.cc/m1bDhvPj - Windows Quiet Edition - 67 processes / 600 threads / 23090 handles / 1,7GB RAM (550MB used by ramdisk)
