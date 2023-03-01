@@ -71,7 +71,7 @@ rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
 rem https://www.programmifree.com/confronti
-rem https://checklab.pl/en/publications
+rem https://avlab.pl/en/recent-results
 rem https://www.av-comparatives.org/latest-tests
 rem https://www.av-test.org/en/antivirus/home-windows
 rem https://www.mrg-effitas.com/test-library/
@@ -340,6 +340,8 @@ rd "C:\Users\Tairi\Music" /s /q
 rd "C:\Users\Tairi\OneDrive" /s /q
 rd "C:\Users\Tairi\Searches" /s /q
 rd "D:\OneDriveTemp" /s /q
+rd "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\HiBitUninstaller\Uninstaller\Backup" /s /q
+rd "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\HiBitUninstaller\Uninstaller\Reports" /s /q
 rd "%AppData%\AMD" /s /q
 rd "%AppData%\ArtifexMundi\SparkPromo" /s /q
 rd "%LocalAppData%\Microsoft\Internet Explorer" /s /q
@@ -350,6 +352,7 @@ rd "%LocalAppData%\Microsoft\Windows\IECompatUaCache" /s /q
 rd "%LocalAppData%\Microsoft\Windows\INetCache" /s /q
 rd "%LocalAppData%\Microsoft\Windows\INetCookies" /s /q
 rd "%LocalAppData%\Microsoft\Windows\WebCache" /s /q
+rd "%LocalAppData%\SquirrelTemp" /s /q
 rd "%LocalAppData%\Steam\htmlcache" /s /q
 rd "%LocalAppData%\Temp" /s /q
 rd "%ProgramData%\Microsoft\Diagnosis" /s /q
@@ -2274,7 +2277,11 @@ rem Disable IPv6
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
+reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "6to4_State" /t REG_SZ /d "Disabled" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "ISATAP_State" /t REG_SZ /d "Disabled" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "Teredo_State" /t REG_SZ /d "Disabled" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "EnableICSIPv6" /t REG_DWORD /d "255" /f
 
 rem 1 - Disable Domain Name Devolution (DNS AutoCorrect) / 0 - Enabled (Default)
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "UseDomainNameDevolution" /t REG_DWORD /d "0" /f
@@ -2380,6 +2387,9 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 
 rem Widgets / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
+
+rem 0 - Disable Widgets
+reg add "HKCU\Software\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests" /v "value" /t REG_DWORD /d "0" /f
 
 rem 1 - Show flashing on taskbar apps
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarFlashing" /t REG_DWORD /d "0" /f
@@ -3357,4 +3367,4 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem https://postimg.cc/m1bDhvPj - Windows Quiet Edition - 67 processes / 600 threads / 23090 handles / 1,7GB RAM (550MB used by ramdisk)
+rem https://postimg.cc/Y4wY3832 - Windows Quiet Edition - 70 processes / 640 threads / 25000 handles / 1,8GB RAM (700MB used by ramdisk)
