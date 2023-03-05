@@ -162,10 +162,53 @@ Dism /Online /Disable-Feature /FeatureName:WCF-TCP-PortSharing45 /Quiet /NoResta
 Dism /Online /Disable-Feature /FeatureName:Windows-Defender-Default-Definitions /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:WorkFolders-Client /Quiet /NoRestart
 Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Quiet /NoRestart
-DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
-rem Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Source:E:\sources\sxs /LimitAccess
 
-rem start "" /wait "D:\OneDrive\Setup\dotNetFx35_WX_9_x86_x64.exe" /ai
+rem DISM /Online /Get-Capabilities
+rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
+DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:App.StepsRecorder~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:App.Support.QuickAssist~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.OCR~~~en-US~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.Handwriting~~~en-US~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.Speech~~~en-US~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.TextToSpeech~~~en-US~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:MathRecognizer~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Wallpapers.Extended~~~~
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Ethernet.Client.Intel.E1i68x64~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Ethernet.Client.Intel.E2f68~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Ethernet.Client.Vmware.Vmxnet3~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Notepad.System~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Broadcom.Bcmpciedhd63~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Broadcom.Bcmwl63al~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Broadcom.Bcmwl63a~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwbw02~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwew00~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwew01~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwlv64~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwns64~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwsw00~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw02~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw04~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw06~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw08~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw10~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Marvel.Mrvlpcie8897~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Qualcomm.Athwnx~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Qualcomm.Athwnx~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Qualcomm.Qcamain10x64~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Ralink.Netr28x~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtl8187se~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtl8192se~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtl819xp~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtwlane01~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtwlane13~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtwlane~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.WordPad~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Print.Fax.Scan~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Print.Management.Console~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:Windows.Client.ShellComponents~~~~0.0.1.0
 
 rem Activate Windows
 slmgr.vbs /ato
@@ -298,6 +341,7 @@ start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
 start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
 start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
+start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\tb_free_2208B.exe"
 
 start "" /wait "D:\Software"
