@@ -117,6 +117,7 @@ rem https://www.microsoft.com/en-us/software-download/windows11
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
 rem https://genuine-iso-verifier.weebly.com
+rem https://files.rg-adguard.net/category
 
 rem Check ISO Windows versions and build version
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
@@ -1059,6 +1060,7 @@ rem Disabling PowerShell script execution / Restricting PowerShell to Constraine
 rem https://teamt5.org/en/posts/a-deep-dive-into-powershell-s-constrained-language-mode
 rem https://www.thewindowsclub.com/how-to-disable-powershell-windows-10
 rem Set-ExecutionPolicy bypass - noprofile
+reg add "HKLM\Software\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
 reg add "HKLM\Software\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
 reg add "HKLM\Software\WOW6432Node\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\PowerShell" /v "EnableScripts" /t REG_DWORD /d "0" /f
@@ -2407,9 +2409,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTas
 rem ________________________________________________________________________________________
 rem 1 - Always show all icons and notifications on the taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAutoTray" /t REG_DWORD /d "0" /f
-
-rem Size of Taskbar Icons / 0 - Small / 1 - Medium / 2 - Large
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSi" /t REG_DWORD /d "1" /f
 
 rem Disable Cortana
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
