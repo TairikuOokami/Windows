@@ -16,7 +16,9 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
+
 rem Recent - https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication
+rem Recent - https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
 
 
 rem ________________________________________________________________________________________
@@ -91,7 +93,7 @@ rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dyna
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
 rem DNS ESNI Test - https://www.cloudflare.com/ssl/encrypted-sni/
-rem DNS ECH - Good-bye ESNI, hello ECH! - https://blog.cloudflare.com/encrypted-client-hello / https://defo.ie/ech-check.php
+rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-4/
 
 rem Family Filtering (adult/proxy/search)
