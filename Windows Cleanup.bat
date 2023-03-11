@@ -27,14 +27,6 @@ reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\B
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" /v "IconStreams" /f
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" /v "PastIconsStream" /f
 
-rem Defrag HDD - Boot Windows USB - Repair - Troubleshoot - CMD - type/enter
-rem c:
-rem cd windows
-rem cd system32
-rem defrag c: /u
-rem https://s22.postimg.cc/df2t2gh8v/capture_06272018_231341.jpg
-rem https://s22.postimg.cc/lkkv0mkxd/capture_06272018_232206.jpg
-
 fsutil usn deletejournal /d /n c:
 chkdsk /scan
 ipconfig /flushdns
@@ -141,10 +133,9 @@ rem Cleanup done, you can close this window!
 timeout -1
 
 rem https://www.bleepingcomputer.com/news/security/clever-phishing-method-bypasses-mfa-using-microsoft-webview2-apps
-winget uninstall "Microsoft Edge WebView2 Runtime"
 winget export -o D:\OneDrive\Setup\winget.txt
 
-start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -adv
+start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
 rem compact /c /i /q /f /exe:lzx /s:C:\Windows
@@ -162,7 +153,6 @@ xcopy "Z:\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
 xcopy "Z:\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
 
 xcopy "%AppData%\PotPlayerMini64\PotPlayerMini64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\PotPlayerMini64\PotPlayerMini64.ini" /y
-xcopy "%AppData%\PotPlayerMini64\PotPlayerMini64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
 xcopy "%AppData%\SystemInformer\settings.xml" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
 xcopy "%AppData%\Wise Disk Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Disk Cleaner\Config.ini" /y
 xcopy "%AppData%\Wise Registry Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Registry Cleaner\Config.ini" /y
