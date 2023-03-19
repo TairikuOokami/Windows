@@ -17,7 +17,7 @@ rem Removing Powershell can affect various apps, since more and more require som
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
-rem Recent - https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication
+rem Recent - https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 rem Recent - https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
 
 
@@ -1017,6 +1017,9 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "51" /t REG_SZ /d "wsl.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "52" /t REG_SZ /d "wslconfig.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "wslhost.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "findstr.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "pwsh.exe" /f
+
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
 reg add "HKLM\Software\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f
@@ -1201,9 +1204,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HideRestoreDialogEnabled" /t
 rem 1 - Show Hubs Sidebar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Show Hubs Sidebar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - Enable Grammar Tools feature within Immersive Reader
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderGrammarToolsEnabled" /t REG_DWORD /d "0" /f
 
@@ -1215,6 +1215,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationR
 
 rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Mouse Gesture Enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MouseGestureEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow QUIC protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
@@ -1236,6 +1239,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG
 
 rem 1 - Allow notifications to set Microsoft Edge as default PDF reader
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowPDFDefaultRecommendationsEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - The policy can be used to prevent users from opting out of the default behavior of isolating all sites
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SitePerProcess" /t REG_DWORD /d "1" /f
 
 rem 1 - Allow Speech Recognition
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpeechRecognitionEnabled" /t REG_DWORD /d "0" /f
@@ -1385,7 +1391,7 @@ rem ------------------------------------ Microsoft Edge ------------------------
 rem ...................................... Languages .......................................
 
 rem 1 - Enable spellcheck
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Offer to translate pages that aren't in a language I read
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TranslateEnabled" /t REG_DWORD /d "0" /f
@@ -1502,6 +1508,22 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Forces data synchronization in Microsoft Edge. This policy also prevents the user from turning sync off.
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ForceSync" /t REG_DWORD /d "1" /f
+
+rem If you enable this policy all the specified data types will be included for synchronization
+reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "1" /t REG_SZ /d "extensions" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "2" /t REG_SZ /d "favorites" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "3" /t REG_SZ /d "passwords" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "4" /t REG_SZ /d "settings" /f
+
+rem If you enable this policy all the specified data types will be excluded from synchronization
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "1" /t REG_SZ /d "addressesAndMore" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "2" /t REG_SZ /d "apps" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "3" /t REG_SZ /d "collections" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "4" /t REG_SZ /d "history" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "5" /t REG_SZ /d "openTabs" /f
 
 rem 1 - Suggest strong passwords
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordGeneratorEnabled" /t REG_DWORD /d "1" /f
@@ -2675,7 +2697,7 @@ rem 1 - Antivirus Disabled Notification
 reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
 
 rem 0 - Security and Maitenance Notification
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Startup App Notification
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp" /v "Enabled" /t REG_DWORD /d "1" /f
