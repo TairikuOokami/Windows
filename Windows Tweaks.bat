@@ -17,8 +17,10 @@ rem Removing Powershell can affect various apps, since more and more require som
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
-rem Recent - https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
-rem Recent - https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
+rem https://www.bleepingcomputer.com/news/microsoft/10-year-old-windows-bug-with-opt-in-fix-exploited-in-3cx-attack
+rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
+rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
+rem No 2FA is better than SMS 2FA - https://www.businessinsider.com/credit-card-phone-theft-sim-swap-identity-theft-investigation-2023-4
 
 
 rem ________________________________________________________________________________________
@@ -92,7 +94,6 @@ rem DNS Check / https://dnscheck.tools/#advanced
 rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dynamic-dns-domains
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
-rem DNS ESNI Test - https://www.cloudflare.com/ssl/encrypted-sni/
 rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-4/
 
@@ -192,7 +193,6 @@ rem Zone Alarm Firewall (IL) - https://www.zonealarm.com/software/free-firewall
 
 rem Firewall software using Windows Firewall
 rem simplewall (US) - https://www.henrypp.org/product/simplewall
-rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
 rem 360 Total Security Essential (CN) - https://www.360totalsecurity.com/en/features/360-total-security-essential
@@ -528,7 +528,7 @@ reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosX" /t REG_DWORD /d "4294
 reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosY" /t REG_DWORD /d "436" /f
 
 rem Regedit
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "View" /t REG_BINARY /d "2c0000000000000001000000fffffffffffffffffffffffffffffffff8ffffff0000000086070000ee0100002f01000027010000780000002502000003000000" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "View" /t REG_BINARY /d "2c0000000000000001000000fffffffffffffffffffffffffffffffff7ffffff50020000850700003e0400002f01000027010000780000002502000003000000" /f
 
 rem TruckersMP
 rem takeown /s %computername% /u %username% /f "%ProgramData%\TruckersMP" /r /d y
@@ -634,10 +634,24 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-rem netsh advfirewall firewall add rule name="MS Svchost DoH" dir=out action=allow protocol=TCP remoteip=9.9.9.9,149.112.112.112 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-rem netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.106.0-2.16.107.255,2.16.186.0-2.16.187.255,8.224.0.0-8.255.255.255,13.64.0.0-13.107.255.255,23.32.0.0-23.67.255.255,93.184.220.0-93.184.223.255,95.101.24.0-95.101.27.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,151.139.0.0-151.139.255.255,152.176.0.0-152.199.255.255,205.185.192.0-205.185.223.255 remoteport=80 program="%WINDIR%\System32\svchost.exe"
-rem netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.180.0.0-20.191.255.255,23.32.0.0-23.67.255.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,51.10.0.0-51.13.255.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.136.0.0-51.138.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,104.64.0.0-104.127.255.255,111.221.29.0-111.221.29.255,142.250.0.0-142.251.255.255,184.24.0.0-184.31.255.255,184.50.0.0-184.51.255.255,191.232.0.0-191.235.255.255,204.79.195.0-204.79.197.255 remoteport=443 program="%WINDIR%\System32\svchost.exe"
-rem netsh advfirewall firewall add rule name="Process Hacker VT TCP" dir=out action=allow protocol=TCP remoteip=74.125.34.46 remoteport=443 program="%ProgramFiles%\Process Hacker\ProcessHacker.exe"
+rem netsh advfirewall firewall add rule name="Genshin Impact TCP" dir=out action=allow protocol=TCP remoteport=80,443,8888,8999 program="D:\genshin impact\genshin impact game\genshinimpact.exe"
+rem netsh advfirewall firewall add rule name="Genshin Impact UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\genshin impact\genshin impact game\genshinimpact.exe"
+rem netsh advfirewall firewall add rule name="EaseUS Todo Backup Aliyunwrapexe TCP" dir=out action=allow protocol=TCP remoteip=47.250.0.0-47.254.255.255 remoteport=80 program="C:\program files (x86)\easeus\todo backup\bin\aliyunwrapexe.exe"
+rem netsh advfirewall firewall add rule name="EaseUS Todo Backup Application TCP" dir=out action=allow protocol=TCP remoteip=184.30.24.206 remoteport=443 program="C:\program files (x86)\easeus\todo backup\bin\tbconsoleui.exe"
+rem netsh advfirewall firewall add rule name="EaseUS Todo Backup Eudownload TCP" dir=out action=allow protocol=TCP remoteip=104.18.18.71,104.18.19.71,205.185.216.10,205.185.216.42 remoteport=443 program="C:\program files (x86)\easeus\todo backup\bin\eudownload.exe"
+rem netsh advfirewall firewall add rule name="MS Background Task Host TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255 remoteport=443 program="C:\windows\system32\backgroundtaskhost.exe"
+rem netsh advfirewall firewall add rule name="Brave TCP" dir=out action=allow protocol=TCP remoteport=443 program="C:\users\tairi\appdata\local\bravesoftware\brave-browser\application\brave.exe"
+rem netsh advfirewall firewall add rule name="Brave UDP" dir=out action=allow protocol=UDP remoteport=443 program="C:\users\tairi\appdata\local\bravesoftware\brave-browser\application\brave.exe"
+rem netsh advfirewall firewall add rule name="Brave Update TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="C:\users\tairi\appdata\local\bravesoftware\update\braveupdate.exe"
+rem netsh advfirewall firewall add rule name="MS Consent UI TCP" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,93.184.220.29,104.16.0.0-104.31.255.255,172.64.0.0-172.71.255.255,192.229.128.0-192.229.255.255 remoteport=80 program="C:\windows\system32\consent.exe"
+rem netsh advfirewall firewall add rule name="Creative TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\program files (x86)\creative\sound blaster command\creative.sbcommand.exe"
+rem netsh advfirewall firewall add rule name="eID TCP" dir=out action=allow protocol=TCP remoteip=213.0.0.0-213.255.255.255 remoteport=443 program="C:\program files (x86)\eid_klient\eid_client.exe"
+
+rem netsh advfirewall firewall add rule name= "Genshin Impact ICMP V4" protocol=icmpv4:any,any dir=out action=allow program="D:\genshin impact\genshin impact game\genshinimpact.exe"
+rem netsh advfirewall firewall add rule name="MS Svchost DoH 443" dir=out action=allow protocol=TCP remoteip=9.9.9.9,45.90.28.99,45.90.30.99 remoteport=443 program="C:\windows\system32\svchost.exe"
+rem netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,2.16.10.0-2.16.11.255,2.19.196.0-2.19.199.255,2.19.32.0-2.19.47.255,2.21.64.0-2.21.79.255,2.21.172.0-2.21.172.255,2.23.0.0-2.23.15.255,4.240.0.0-4.255.255.255,8.0.0.0-8.127.255.255,8.224.0.0-8.241.255.255,8.244.0.0-8.255.255.255,13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.192.0.0-20.255.255.255,23.0.0.0-23.15.255.255,23.32.0.0-23.67.255.255,23.72.0.0-23.79.255.255,23.192.0.0-23.223.255.255,34.192.0.0-34.255.255.255,45.90.28.0-45.90.31.255,52.0.0.0-52.79.255.255,52.145.0.0-52.191.255.255,67.24.0.0-67.31.255.255,68.232.32.0-68.232.47.255,81.171.68.0-81.171.69.255,87.245.215.0-87.245.215.95,84.53.161.0-84.53.161.255,92.123.0.0-92.123.15.255,93.184.220.0-93.184.223.255,94.46.144.0-94.46.159.255,95.100.144.0-95.100.159.255,100.20.0.0-100.31.255.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,152.176.0.0-152.199.255.255,168.61.0.0-168.63.255.255,172.64.0.0-172.71.255.255,178.79.226.0-178.79.227.255,184.24.0.0-184.31.255.255,192.229.221.95,209.197.0.0-209.197.31.255 remoteport=80 program="C:\windows\system32\svchost.exe"
+rem netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,2.16.30.0-2.16.31.255,2.17.96.0-2.17.115.255,2.18.16.0-2.18.31.255,2.18.32.0-2.18.47.255,2.18.160.0-2.18.175.255,2.19.194.0-2.19.195.255,2.20.20.0-2.20.23.255,2.20.128.0-2.20.131.255,2.20.132.0-2.20.132.255,2.20.142.0-2.20.143.255,2.20.180.0-2.20.180.255,2.23.0.0-2.23.15.255,2.23.96.0-2.23.111.255,4.224.0.0-4.239.255.255,13.64.0.0-13.107.255.255,18.32.0.0-18.255.255.255,20.0.0.0-20.31.255.255,20.33.0.0-20.128.255.255,20.150.0.0-20.153.255.255,20.160.0.0-20.175.255.255,20.180.0.0-20.191.255.255,20.192.0.0-20.255.255.255,23.0.0.0-23.15.255.255,23.32.0.0-23.67.255.255,23.72.0.0-23.79.255.255,23.192.0.0-23.223.255.255,37.203.32.0-37.203.33.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,40.126.128.0-40.127.255.255,51.10.0.0-51.13.255.255,51.15.0.0-51.15.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.132.0.0-51.132.255.255,52.96.0.0-52.115.255.255,52.116.0.0-52.118.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,69.192.0.0-69.192.255.255,72.246.0.0-72.247.255.255,79.142.76.0-79.142.77.255,84.53.164.0-84.53.167.255,87.245.212.0-87.245.212.127,89.238.68.128-89.238.68.255,92.122.104.0-92.122.107.255,92.122.212.0-92.122.219.255,92.122.252.0-92.122.255.255,92.123.32.0-92.123.47.255,95.100.64.0-95.100.79.255,95.100.80.0-95.100.95.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,140.82.112.0-140.82.127.255,184.50.0.0-184.51.255.255,148.251.120.96-148.251.120.127,152.176.0.0-152.199.255.255,162.158.0.0-162.159.255.255,172.64.0.0-172.71.255.255,184.24.0.0-184.31.255.255,184.84.0.0-184.87.255.255,185.34.26.0-185.34.27.255,185.161.175.0-185.161.175.255,185.199.108.0-185.199.111.255,192.229.128.0-192.229.255.255,204.68.96.0-204.68.127.255,204.79.195.0-204.79.197.255 remoteport=443 program="C:\windows\system32\svchost.exe"
+rem netsh advfirewall firewall add rule name="MS Svchost UDP 5050" dir=out action=allow protocol=TCP remoteip=239.255.255.250 remoteport=5050 program="C:\windows\system32\svchost.exe"
 
 
 rem ================================ Windows Error Reporting ===============================
@@ -1018,7 +1032,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "52" /t REG_SZ /d "wslconfig.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "wslhost.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "findstr.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "pwsh.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "55" /t REG_SZ /d "pwsh.exe" /f
 
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
@@ -2253,8 +2267,8 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\Peernet" /v "Disabled" /t REG_
 rem Disable Discovery of Designated Resolvers (DDR), a mechanism for DNS clients to use DNS records to discover a resolver's encrypted DNS configuration
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableDdr" /t REG_DWORD /d "0" /f
 
-rem 0 - Require DoH / 1 - Allow DoH / 2 - Prohibit DoH
-reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DoHPolicy" /t REG_DWORD /d "0" /f
+rem 3 - Require DoH / 2 - Allow DoH / 1 - Prohibit DoH
+reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DoHPolicy" /t REG_DWORD /d "3" /f
 
 rem Disable IDN (internationalized domain name)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
@@ -2695,6 +2709,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\M
 
 rem 1 - Antivirus Disabled Notification
 reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications " /t REG_DWORD /d "1" /f
 
 rem 0 - Security and Maitenance Notification
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -3109,10 +3124,19 @@ rem =================================== Windows Settings =======================
 rem ------------------------------------ Windows Update ------------------------------------
 rem ................................... Advanced options ...................................
 
+
+rem Adjust active hours / 0 - Manually / 1 - Automatically
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "SmartActiveHoursState" /t REG_DWORD /d "0" /f
+
 rem Active hours (18 hours) 6am to 0am - Windows Updates will not automatically restart your device during active hours
-reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursStart" /t REG_DWORD /d "6" /f
 reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursEnd" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "ActiveHoursStart" /t REG_DWORD /d "6" /f
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "UserChoiceActiveHoursEnd" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "UserChoiceActiveHoursStart" /t REG_DWORD /d "6" /f
 rem ________________________________________________________________________________________
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "AutoRebootLimitInDays" /t REG_DWORD /d "365" /f
+reg add "HKLM\Software\Microsoft\WindowsUpdate\UX\Settings" /v "SnoozeRebootHours" /t REG_DWORD /d "65535" /f
+
 rem 1 - Disable File History (Creating previous versions of files/Windows Backup)
 reg add "HKLM\Software\Policies\Microsoft\Windows\FileHistory" /v "Disabled" /t REG_DWORD /d "1" /f
 
@@ -3370,7 +3394,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsTopSites" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
+rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
