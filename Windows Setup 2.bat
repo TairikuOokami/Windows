@@ -73,13 +73,16 @@ rem https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Comman
 rem https://github.com/dreammjow/ChromiumHardening/blob/main/flags/chrome-command-line.md
 rem https://peter.sh/experiments/chromium-command-line-switches
 rem https://get.webgl.org / https://defo.ie/ech-check.php
-rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,GpuAppContainer,IsolatePrerenders,IsolateSandboxedIframes,WinSboxDisableExtensionPoint" --site-per-process
+rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,IsolatePrerenders,IsolateSandboxedIframes,RendererAppContainer,WinSboxDisableExtensionPoint" --disable-webgl --no-pings
 rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe --disable-breakpad --disable-crash-reporter
 
+rem Disabled #edge-haptics-api
+rem Disabled #edge-launch-timings
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem Disabled #edge-share-menu
 rem Disabled #edge-show-feature-recommendations
+rem Disabled #edge-toast-winrt
 rem Disabled #enable-first-party-sets
 rem Disabled #enable-quic
 rem Disabled #edge-prenav
@@ -91,9 +94,11 @@ rem Enabled #disallow-doc-written-script-loads
 rem Enabled #dns-https-svcb
 rem Enabled #edge-automatic-https
 rem Enabled #edge-autoplay-user-setting-block-option
+rem Enabled #edge-reduce-user-agent-minor-version
 rem Enabled #edge-overlay-scrollbars-win-style
 rem Enabled #edge-visual-rejuv-materials-menu
 rem Enabled #partitioned-cookies
+rem Enabled #post-quantum-cecpq2
 rem Enabled #strict-origin-isolation
 rem edge://flags
 
