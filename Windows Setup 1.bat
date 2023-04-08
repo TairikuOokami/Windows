@@ -122,9 +122,13 @@ wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","1
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
+reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "6to4_State" /t REG_SZ /d "Disabled" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "ISATAP_State" /t REG_SZ /d "Disabled" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "Teredo_State" /t REG_SZ /d "Disabled" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "EnableICSIPv6" /t REG_DWORD /d "255" /f
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.91","45.90.30.91")
+wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
 wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
@@ -136,6 +140,14 @@ rem https://github.com/adamhl8/batch-scripts/blob/main/win11-set-doh.cmd
 start ms-settings:network-ethernet
 explorer D:\OneDrive\Downloads
 regedit
+
+pause
+
+rem Activate Windows
+slmgr.vbs /ato
+
+rem Remove Windows product key from the registry
+slmgr /cpky
 
 pause
 
@@ -208,13 +220,8 @@ Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wor
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:Print.Fax.Scan~~~~0.0.1.0
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:Print.Management.Console~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:VBSCRIPT~~~~​
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:Windows.Client.ShellComponents~~~~0.0.1.0
-
-rem Activate Windows
-slmgr.vbs /ato
-
-rem Remove Windows product key from the registry
-slmgr /cpky
 
 pause
 
