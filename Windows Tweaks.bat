@@ -17,6 +17,7 @@ rem Removing Powershell can affect various apps, since more and more require som
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
+rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
 rem https://www.bleepingcomputer.com/news/microsoft/10-year-old-windows-bug-with-opt-in-fix-exploited-in-3cx-attack
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
@@ -193,6 +194,7 @@ rem Zone Alarm Firewall (IL) - https://www.zonealarm.com/software/free-firewall
 
 rem Firewall software using Windows Firewall
 rem simplewall (US) - https://www.henrypp.org/product/simplewall
+rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
 rem 360 Total Security Essential (CN) - https://www.360totalsecurity.com/en/features/360-total-security-essential
@@ -961,7 +963,7 @@ rem net user tairi /active:yes
 rem ________________________________________________________________________________________
 rem https://www.bleepingcomputer.com/news/security/microsoft-code-sign-check-bypassed-to-drop-zloader-malware
 reg add "HKLM\Software\Microsoft\Cryptography\Wintrust\Config" /v "EnableCertPaddingCheck" /t REG_SZ /d "1" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config" /t REG_SZ /d "1" /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config" /v "EnableCertPaddingCheck" /t REG_SZ /d "1" /f
 
 rem 1808 - Disable the warning The Publisher could not be verified
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "DefaultFileTypeRisk" /t REG_DWORD /d "1808" /f
@@ -1768,7 +1770,8 @@ rem Background Intelligent Transfer Service / required by Windows Updates / depe
 rem Base Filtering Engine / required by Windows Defender Firewall
 rem CNG Key Isolation / required to login to Windows Insider / Switch to Local Account / Set up PIN / Basically everything Credentials related
 rem Connected Devices Platform / required to open Settings - Windows Backup and to sync Edge with android
-rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app.
+rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app
+rem Cryptographic Services / required to update certificates for browsers, digital signatures (catroot2)
 rem Delivery Optimization / required by Windows Updates
 rem DevicesFlow / required to open Settings - Bluetooth and devices 
 rem Diagnostic Policy Service / required by Windows Diagnostic (Troubleshooting)
@@ -1784,6 +1787,7 @@ rem Network Store Interface Service / disabling disables Windows Firewall (when 
 rem Print Spooler / required by printers
 rem Radio Management Service / required to display WiFi networks
 rem Security Accounts Manager / when disabled, explorer.exe (Desktop) crashes constantly
+rem System Guard Runtime Monitor Broker / when disabled Windows might fail to boot - Critical Service Died
 rem Storage Service / required to update store apps
 rem Text Input Management Service (keeps ctfmon.exe running) / required to be able to login at all
 rem User Data services / required to be able to change PIN/password at lockscreen or to login via Microsoft Authenticator
@@ -1825,6 +1829,9 @@ sc config BthAvctpSvc start= disabled
 
 rem BitLocker Drive Encryption Service
 sc config BDESVC start= disabled
+
+rem Bluetooth Support Service
+sc config bthserv start= disabled
 
 rem Clipboard User Service
 sc config cbdhsvc start= disabled
@@ -1885,6 +1892,9 @@ sc config IKEEXT start= disabled
 
 rem IP Helper
 sc config iphlpsvc start= disabled
+
+rem IPsec Policy Agent
+sc config PolicyAgent start= disabled
 
 rem Microsoft (R) Diagnostics Hub Standard Collector Service
 sc config diagnosticshub.standardcollector.service start= disabled
@@ -2350,7 +2360,7 @@ rem Accent color / 0 - Manual / 1 - Automatic (from wallpaper)
 reg add "HKCU\Control Panel\Desktop" /v "AutoColorization" /t REG_SZ /d "1" /f
 
 rem 1 - Transparency Effects
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
 
 rem 1 - Show accent color on Start and taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "ColorPrevalence" /t REG_DWORD /d "1" /f
@@ -2430,6 +2440,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 
 rem 0 - Disable Widgets
 reg add "HKCU\Software\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests" /v "value" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d "0" /f
 
 rem 1 - Show flashing on taskbar apps
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarFlashing" /t REG_DWORD /d "0" /f
@@ -2449,7 +2460,9 @@ rem 1 - Always show all icons and notifications on the taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAutoTray" /t REG_DWORD /d "0" /f
 
 rem Disable Cortana
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\Windows Search" /v "DisableSearch" /t REG_DWORD /d "1" /f
 
 rem Remove Search (Cortana/to restore run SFC scan)
@@ -2910,7 +2923,7 @@ rem . . . . . . . . . . . . . . . . Advanced system settings . . . . . . . . . .
 rem Performance - Advanced - Processor Scheduling
 rem 0 - Foreground and background applications equally responsive / 1 - Foreground application more responsive than background / 2 - Best foreground application response time (Default)
 rem 38 - Adjust for best performance of Programs / 24 - Adjust for best performance of Background Services
-reg add "HKLM\System\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation " /t REG_DWORD /d "38" /f
+reg add "HKLM\System\CurrentControlSet\Control\PriorityControl" /v "Win32PrioritySeparation" /t REG_DWORD /d "0" /f
 
 rem Performance - Settings - Advanced - Virtual memory
 rem Disable pagefile
@@ -3226,8 +3239,8 @@ rem Windows Cleanup - https://drive.google.com/file/d/1AQLr94IQPBpZYEyKNi_CsI5WA
 rem Windows Drivers - https://www.catalog.update.microsoft.com
 rem Windows Forums - https://www.elevenforum.com/whats-new
 rem Windows Repair Install - https://www.elevenforum.com/t/repair-install-windows-11-with-an-in-place-upgrade.418
+rem Windows Update Reset - https://github.com/ManuelGil/Reset-Windows-Update-Tool/releases
 rem Windows Repair Toolbox - https://windows-repair-toolbox.com
-rem Windows Update Agent Reset - https://gallery.technet.microsoft.com/scriptcenter/reset-windows-update-agent-d824badc
 rem Windows Update Troubleshooter - https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-for-windows-10-19bc41ca-ad72-ae67-af3c-89ce169755dd
  
 rem Boot into safemode - https://www.elevenforum.com/t/boot-to-safe-mode-in-windows-11.538
@@ -3388,6 +3401,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\coupon_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeEDrop" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeTravel" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
