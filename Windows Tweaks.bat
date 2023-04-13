@@ -17,7 +17,7 @@ rem Removing Powershell can affect various apps, since more and more require som
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
-rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
+rem Some news - https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
 rem https://www.bleepingcomputer.com/news/microsoft/10-year-old-windows-bug-with-opt-in-fix-exploited-in-3cx-attack
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
@@ -163,7 +163,6 @@ rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - htt
 rem Panda Setup - Settings - General - Disable Panda News
 rem Panda Perfomance - Settings - Antivirus - Disable PUPs + Behavioral/Set Block files to 10 secs
 rem Panda Perfomance - Settings - Process Monitor/USB - Disable
-rem WiseVector StopX (CN) - https://www.wisevector.com/en - https://postimg.cc/HVjS8QY4
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
 rem Immunet (US) - https://www.immunet.com/index
@@ -1507,7 +1506,7 @@ rem Choose whether users can receive customized background images and text, sugg
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecommendationsEnabled" /t REG_DWORD /d "0" /f
 
 rem Use secure DNS (DoH)
-rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClieDnsClientEnabled" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClientEnabled" /t REG_DWORD /d "1" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsMode" /t REG_SZ /d "secure" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx?" /f
 
@@ -1585,7 +1584,7 @@ rem Efficiency Mode / 1 - Enables efficiency mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyModeEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Use hardware acceleration when available
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "1" /f
+
 
 rem 1 - Save resources with sleeping tabs
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SleepingTabsEnabled" /t REG_DWORD /d "0" /f
