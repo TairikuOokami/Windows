@@ -1549,9 +1549,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordManagerEnabled" /t R
 rem 1 - Show alerts when passwords are found in an online leak
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordMonitorAllowed" /t REG_DWORD /d "0" /f
 
-rem 1 - Show alerts when passwords are found in an online leak
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordMonitorAllowed" /t REG_DWORD /d "0" /f
-
 rem 1 - Show the "Reveal password" button in password fields
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordRevealEnabled" /t REG_DWORD /d "0" /f
 
@@ -1584,7 +1581,7 @@ rem Efficiency Mode / 1 - Enables efficiency mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyModeEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Use hardware acceleration when available
-
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Save resources with sleeping tabs
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SleepingTabsEnabled" /t REG_DWORD /d "0" /f
