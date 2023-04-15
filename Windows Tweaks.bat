@@ -1183,6 +1183,9 @@ rem ____________________________________________________________________________
 rem 1 - Allow users to access the games menu
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowGamesMenu" /t REG_DWORD /d "0" /f
 
+rem 1 - Enables CryptoWallet feature
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CryptoWalletEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - AllowJavaScriptJit / 2 - BlockJavaScriptJit (Do not allow any site to run JavaScript JIT)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultJavaScriptJitSetting" /t REG_DWORD /d "0" /f
 
@@ -1233,6 +1236,12 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotio
 
 rem 1 - Mouse Gesture Enabled
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MouseGestureEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Microsoft Edge built-in PDF reader powered by Adobe Acrobat enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewPDFReaderEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Hide the default top sites from the new tab page
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSites" /t REG_DWORD /d "1" /f
 
 rem 1 - Allow QUIC protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
