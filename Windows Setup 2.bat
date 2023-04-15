@@ -86,6 +86,8 @@ rem Disabled #edge-toast-winrt
 rem Disabled #enable-first-party-sets
 rem Disabled #enable-quic
 rem Disabled #edge-prenav
+rem Disabled #edge-rounded-containers
+rem Disabled #edge-visual-rejuv-rounded-tabs
 rem Disabled #file-handling-api
 rem Disabled #storage-access-api
 rem Disabled #tab-hover-card-images
@@ -94,11 +96,12 @@ rem Enabled #disallow-doc-written-script-loads
 rem Enabled #dns-https-svcb
 rem Enabled #edge-automatic-https
 rem Enabled #edge-autoplay-user-setting-block-option
+rem Enabled #edge-microsoft-root-store-enabled
 rem Enabled #edge-reduce-user-agent-minor-version
 rem Enabled #edge-overlay-scrollbars-win-style
-rem Enabled #edge-visual-rejuv-materials-menu
 rem Enabled #partitioned-cookies
 rem Enabled #post-quantum-cecpq2
+rem Enabled #storage-buckets
 rem Enabled #strict-origin-isolation
 rem edge://flags
 
@@ -113,6 +116,8 @@ reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "C:\Program File
 reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
 start "" /wait "D:\Steam\steam.exe"
 start "" /wait "D:\OneDrive\Setup\Install TruckersMP.exe"
+
+rem Steam Interface - Disable Everything
 
 pause
 
