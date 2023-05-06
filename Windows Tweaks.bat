@@ -71,7 +71,7 @@ rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-di
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://themarkup.org/blacklight
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
-rem Privacy Search Engines: Brave, MetaGerm, Neeva.com, Searx, Swisscows - https://searchengine.party
+rem Privacy Search Engines: MetaGerm, Neeva.com, Searx - https://searchengine.party
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -122,6 +122,7 @@ rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-wind
 rem https://tb.rg-adguard.net
 rem https://genuine-iso-verifier.weebly.com
 rem https://files.rg-adguard.net/category
+rem https://opendirectory.luzea.de/Enthousiast
 
 rem Check ISO Windows versions and build version
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
@@ -222,7 +223,7 @@ rem Software
 rem 2FA / 2fast - two factor authenticator supporting TOTP - https://apps.microsoft.com/store/detail/2fast-%E2%80%93-two-factor-authenticator-supporting-totp/9P9D81GLH89Q
 rem Application Updates / Patch My PC - https://patchmypc.com/home-updater
 rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
-rem Application Updates / App Installer GUI (winget) - https://github.com/martinet101/WingetUI - https://winget.run
+rem Application Updates / App Installer GUI (winget) - https://www.marticliment.com/wingetui - https://winget.run
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bandwidth Monitor / TrafficMonitor - https://github.com/zhongyang219/TrafficMonitor/blob/master/README_en-us.md
 rem Bootable USB / Rufus - https://apps.microsoft.com/store/detail/rufus/9PC3H3V7Q9CH?hl=en-us&gl=US
@@ -500,8 +501,11 @@ bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "%ProgramFiles%\SystemInformer\SystemInformer.exe -hide" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "%ProgramFiles%\SystemInformer\SystemInformer.exe -hide" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "TrafficMonitor" /t REG_SZ /d "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TrafficMonitor\TrafficMonitor.exe"
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiBolt" /t REG_SZ /d "\"%ProgramFiles%\Logi\LogiBolt\LogiBolt.exe\" --startup" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiOptions" /t REG_SZ /d "\"%ProgramFiles%\Logitech\LogiOptions\LogiOptions.exe\" /noui" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
@@ -1034,6 +1038,8 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "wslhost.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "findstr.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "55" /t REG_SZ /d "pwsh.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "56" /t REG_SZ /d "msedgewebview2.exe" /f
+
 
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
@@ -1245,6 +1251,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSite
 
 rem 1 - Allow QUIC protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable Read Aloud feature in Microsoft Edge
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ReadAloudEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Configure Related Matches in Find on Page, the results are processed in a cloud service
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RelatedMatchesCloudServiceEnabled" /t REG_DWORD /d "0" /f
@@ -1488,6 +1497,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG
 
 rem 1 - Turn on site safety services to get more info about the sites you visit
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SiteSafetyServicesEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Suggest group names when creating a new tab group
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TabServicesEnabled" /t REG_DWORD /d "0" /f
 
 rem Tracking prevention / 0 - Off / 1 - Basic / 2 - Balanced / 3 - Strict
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TrackingPrevention" /t REG_DWORD /d "0" /f
