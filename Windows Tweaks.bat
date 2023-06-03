@@ -96,7 +96,8 @@ rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dyna
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
 rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php
-rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-4/
+rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
+rem DNS List - https://adguard-dns.io/kb/general/dns-providers
 
 rem Family Filtering (adult/proxy/search)
 rem Adguard - https://adguard.com/en/adguard-dns/overview.html
@@ -387,6 +388,7 @@ rem https://threatpost.com/encrypted-fileless-malware-growth/175306
 rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
+taskkill /im pwsh.exe /f
 takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
 icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
 rd "%ProgramFiles%\WindowsPowerShell" /s /q
@@ -1213,6 +1215,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t
 rem 1 - Allows the Microsoft Edge browser to enable Follow service and apply it to users
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeFollowEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - If you enable this policy, users will be able to access the Microsoft Edge Workspaces feature
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Allow Google Cast to connect to Cast devices on all IP addresses (Multicast), Edge trying to connect to 239.255.255.250 via UDP port 1900
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DWORD /d "0" /f
 
@@ -1233,6 +1238,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderGrammarToolsE
 
 rem 1 - Enable Picture Dictionary feature within Immersive Reader
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderPictureDictionaryEnabled" /t REG_DWORD /d "0" /f
+
+rem 0 -InPrivate mode available / 1 - disabled / 2 - forced
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InPrivateModeAvailability" /t REG_DWORD /d "1" /f
 
 rem 1 - Allow sites to be reloaded in Internet Explorer mode (IE mode)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationReloadInIEModeAllowed" /t REG_DWORD /d "0" /f
@@ -1292,6 +1300,10 @@ rem 0 - Prevent Desktop Shortcut creation upon install default
 reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcutDefault" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcut{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "RemoveDesktopShortcutDefault" /t REG_DWORD /d "1" /f
+
+rem ________________________________________________________________________________________
+rem 1 - The Sidebar appears in a fixed position on the Microsoft Windows desktop, and is hidden from the browser application frame
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "StandaloneHubsSidebarEnabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1402,6 +1414,10 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /
 
 rem 1 - Open Office files in the browser
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickViewOfficeFilesEnabled" /t REG_DWORD /d "0" /f
+
+rem ________________________________________________________________________________________
+rem 1 - Always show the Downloads button on the toolbar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsToolbarButton" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1529,7 +1545,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecom
 rem Use secure DNS (DoH)
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClientEnabled" /t REG_DWORD /d "1" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsMode" /t REG_SZ /d "secure" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx?" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://security.cloudflare-dns.com/dns-query?" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -2241,8 +2257,8 @@ rem http://www.computerhope.com/wmic.htm
 rem To get adapter's index number use
 rem wmic nicconfig get caption,index,TcpipNetbiosOptions
 
-rem Setup DNS Servers on DHCP Enabled Network (Quad9)
-rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
+rem Setup DNS Servers on DHCP Enabled Network (Cloudflare Malware)
+rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("1.1.1.2","1.0.0.2")
 
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
