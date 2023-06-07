@@ -1328,6 +1328,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PerformanceDetectorEnabled" 
 rem 1 - Show mini menu when selecting text
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickSearchShowMiniMenu" /t REG_DWORD /d "0" /f
 
+rem 1 - Always show the Downloads button on the toolbar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsToolbarButton" /t REG_DWORD /d "1" /f
+
 rem 1 - Show home button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowHomeButton" /t REG_DWORD /d "0" /f
 
@@ -1414,10 +1417,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /
 
 rem 1 - Open Office files in the browser
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickViewOfficeFilesEnabled" /t REG_DWORD /d "0" /f
-
-rem ________________________________________________________________________________________
-rem 1 - Always show the Downloads button on the toolbar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsToolbarButton" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -3405,9 +3404,14 @@ start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.ex
 rem Clean caches and cookies (not covered by CookieAutodelete, since the browser is running) - edge://settings/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\DashTrackerDatabase" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q
@@ -3421,35 +3425,47 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\Shortcuts-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Visited Links" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Vpn Tokens" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\WebAssistDatabase" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\WebAssistDatabase-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Asset Store" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePushStorageWithConnectTokenAndKey" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\blob_storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\BudgetDatabase" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Collections" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\commerce_subscription_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Continuous Migration" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\coupon_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Download Service" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeEDrop" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeTravel" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EntityExtraction" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentWorkspacesV2" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsTopSites" /s /q
 rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_model_metadata_store" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Password_Diagnostics" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Pdf" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PDF Restore Data" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Platform Notifications" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Safe Browsing Network" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Segmentation Platform" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\SemanticEncoder.db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Session Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
