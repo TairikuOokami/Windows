@@ -76,7 +76,7 @@ rem https://get.webgl.org / https://defo.ie/ech-check.php
 rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,IsolatePrerenders,IsolateSandboxedIframes,RendererAppContainer,WinSboxDisableExtensionPoint" --disable-webgl --no-pings
 rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe --disable-breakpad --disable-crash-reporter
 
-
+rem Disabled #edge-auto-enter-immersive-reader
 rem Disabled #edge-automatic-profile-switching
 rem Disabled #edge-drop
 rem Disabled #edge-haptics-api
@@ -85,28 +85,25 @@ rem Disabled #edge-msb-all-dse
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
 rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem Disabled #edge-optin-experimentation
+rem Disabled #edge-reading-view
 rem Disabled #edge-share-menu
 rem Disabled #edge-show-feature-recommendations
 rem Disabled #edge-toast-winrt
 rem Disabled #edge-prenav
-rem Disabled #edge-rounded-containers
-rem Disabled #edge-visual-rejuv-rounded-tabs
-rem Disabled #edge-webapp-sidebar
 rem Disabled #enable-first-party-sets
 rem Disabled #enable-quic
 rem Disabled #enable-windows-gaming-input-data-fetcher
 rem Disabled #file-handling-api
 rem Disabled #storage-access-api
 rem Disabled #tab-hover-card-images
+rem Disabled #use-dns-https-svcb-alpn
 rem Enabled #block-insecure-private-network-requests
 rem Enabled #disallow-doc-written-script-loads
-rem Enabled #dns-https-svcb
 rem Enabled #edge-auth-manager-delay-load
 rem Enabled #edge-automatic-https
 rem Enabled #edge-autoplay-user-setting-block-option
 rem Enabled #edge-microsoft-root-store-enabled
 rem Enabled #edge-reduce-user-agent-minor-version
-rem Enabled #edge-overlay-scrollbars-win-style
 rem Enabled #partitioned-cookies
 rem Enabled #post-quantum-cecpq2
 rem Enabled #storage-buckets
@@ -114,7 +111,7 @@ rem Enabled #strict-origin-isolation
 rem edge://flags
 
 rem Search engine used in the address bar
-start "" "https://neeva.com"
+start "" "https://search.rhscz.eu"
 rem edge://settings/search
 
 pause
