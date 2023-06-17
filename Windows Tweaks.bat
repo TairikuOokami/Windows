@@ -22,6 +22,8 @@ rem https://www.bleepingcomputer.com/news/microsoft/10-year-old-windows-bug-with
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
 rem No 2FA is better than SMS 2FA - https://www.businessinsider.com/credit-card-phone-theft-sim-swap-identity-theft-investigation-2023-4
+rem Reddit's removal script - https://codepen.io/j0be/pen/WMBWOW - do not just remove the account, remove the content they can profit from!
+rem Bookmark it, open it on reddit, choose options and let it run, tab shows the number of removed comments - 285 - https://postimg.cc/xqbnygpf
 
 
 rem ________________________________________________________________________________________
@@ -117,7 +119,7 @@ rem https://www.safetydetectives.com/best-vpns
 rem https://www.msgsafe.io
 rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 
-rem Windows ISO
+rem Windows ISO - to create a local account use this email - no@thankyou.com
 rem https://www.microsoft.com/en-us/software-download/windows11
 rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
 rem https://tb.rg-adguard.net
@@ -3376,6 +3378,7 @@ taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 
+rem https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade
 winget upgrade --all --include-unknown
 timeout 5
 
