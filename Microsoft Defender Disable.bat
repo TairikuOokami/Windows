@@ -5,12 +5,10 @@ rem https://www.techpowerup.com/295877/windows-defender-can-significantly-impact
 rem https://www.bleepingcomputer.com/news/security/lockbit-ransomware-abuses-windows-defender-to-load-cobalt-strike
 
 rem Disable Tamper and Real Protection in Defender
-rem Install any 3rd party AV that registers within Windows Security (like Adaware), update definitions, restart!
-rem Add downloads and temporary downloads folder to expceptions to prevent "MD Disable.bat" from being removed!
-rem Run "MD Disable.bat" TWICE !!!!! RESTART! Otherwise Defener will enable itself after uninstalling AV!
-rem After restart, uninstall 3rd party AV (preferably using HiBit Uninstaller).
-rem Restart (HiBit Uninstaller will run to remove leftovers).
 start windowsdefender:
+rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
+rem Run "MD Disable.bat" RESTART!
+rem Run - msconfig - Generl - Normal Startup
 
 pause
 
@@ -24,10 +22,11 @@ rem Disable Windows Defender Security Center
 rem reg add "HKLM\System\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
 
 rem 1 - Antivirus Disabled Notification
-rem reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications " /t REG_DWORD /d "1" /f
 
 rem 0 - Security and Maitenance Notification
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.StartupApp" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Disable Real-time protection
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
