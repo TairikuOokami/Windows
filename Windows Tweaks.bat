@@ -1185,6 +1185,7 @@ rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
 rem rem https://admx.help/?Category=EdgeChromium
 rem edge://policy
+rem edge://policy
 
 rem reg delete "HKCU\Software\Policies\Microsoft\Edge" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Edge" /f
@@ -1192,6 +1193,12 @@ rem reg delete "HKLM\Software\Policies\Microsoft\Edge" /f
 rem ________________________________________________________________________________________
 rem 1 - Allow users to access the games menu
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowGamesMenu" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow the audio sandbox to run
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Compose is enabled for writing on the web
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ComposeInlineEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Enables CryptoWallet feature
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CryptoWalletEnabled" /t REG_DWORD /d "0" /f
@@ -1216,6 +1223,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEnhanceImagesEnabled" /t
 
 rem 1 - Allows the Microsoft Edge browser to enable Follow service and apply it to users
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeFollowEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Microsoft Edge will attempt to connect to the Microsoft Edge management service to download and apply policy assigned to the Azure AD account of the user
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeManagementEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - If you enable this policy, users will be able to access the Microsoft Edge Workspaces feature
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t REG_DWORD /d "0" /f
@@ -1277,6 +1287,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RendererAppContainerEnabled"
 rem 0 - Enable search in sidebar / 1 - DisableSearchInSidebarForKidsMode / 2 - DisableSearchInSidebar 
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchInSidebarEnabled" /t REG_DWORD /d "2" /f
 
+rem 1 - Search for image enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchForImageEnabled" /t REG_DWORD /d "2" /f
+
 rem 1 - Allow screen capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG_DWORD /d "0" /f
 
@@ -1294,6 +1307,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_
 
 rem 1 - Allow Microsoft Edge Workspaces
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Wallet Donation Enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WalletDonationEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - DNS-based WPAD optimization (Web Proxy Auto-Discovery)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WPADQuickCheckEnabled" /t REG_DWORD /d "0" /f
@@ -1504,7 +1520,7 @@ rem Enhance the security state in Microsoft Edge / 0 - Standard mode / 1 - Balan
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityMode" /t REG_DWORD /d "2" /f
 
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "bing" /f
 
 rem 1 - Use a web service to help resolve navigation errors
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
@@ -1529,7 +1545,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VisualSearchEnabled" /t REG_
 
 rem ________________________________________________________________________________________
 rem Enable Microsoft Search in Bing suggestions in the address bar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "1" /f
 
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
@@ -1560,7 +1576,7 @@ rem 1 - Save and fill payment info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Forces data synchronization in Microsoft Edge. This policy also prevents the user from turning sync off.
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ForceSync" /t REG_DWORD /d "1" /f
@@ -1594,7 +1610,7 @@ rem Sign in: / 0 - Automatically / 1 - With device password
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PrimaryPasswordSetting" /t REG_DWORD /d "1" /f
 
 rem 1 - Show Microsoft Rewards experience and notifications
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "1" /f
 
 rem ________________________________________________________________________________________
 rem 1 - Single sign-on for work or school sites using this profile enabled
