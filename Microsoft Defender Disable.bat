@@ -8,7 +8,7 @@ rem Disable Tamper and Real Protection in Defender
 start windowsdefender:
 rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
 rem Run "MD Disable.bat" RESTART!
-rem Run - msconfig - Generl - Normal Startup
+rem Run - msconfig - General - Normal Startup
 
 pause
 
@@ -74,7 +74,8 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
-rem Last Tested on Windows 11 Home 22621.1194 using Microsoft Defender Platform Version 4.18.2211.5 (05 February 2023)
-rem Running bat file TWICE with 3rd party AV running https://postimg.cc/Hjb9fX09 / DONE https://postimg.cc/BL7bzhYn
+rem Last Tested on Windows 11 Home 22631.2070
+rem Microsoft Defender Platform Version 4.18.23050.9-0 (01 August 2023)
+rem Before - https://postimg.cc/DSSqYZbW / After - https://postimg.cc/qtbHB1vD
 
 pause
