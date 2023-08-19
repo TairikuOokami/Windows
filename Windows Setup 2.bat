@@ -72,47 +72,51 @@ pause
 rem https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Command-Line-Flags-in-Brave-
 rem https://github.com/dreammjow/ChromiumHardening/blob/main/flags/chrome-command-line.md
 rem https://peter.sh/experiments/chromium-command-line-switches
-rem https://get.webgl.org / https://defo.ie/ech-check.php
+rem https://get.webgl.org / https://www.cloudflare.com/ssl/encrypted-sni
 rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,IsolatePrerenders,IsolateSandboxedIframes,RendererAppContainer,WinSboxDisableExtensionPoint" --disable-webgl --no-pings
 rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe --disable-breakpad --disable-crash-reporter
 
-rem Disabled #edge-auto-enter-immersive-reader
-rem Disabled #edge-automatic-profile-switching
-rem Disabled #edge-drop
-rem Disabled #edge-haptics-api
-rem Disabled #edge-launch-timings
-rem Disabled #edge-msb-all-dse
-rem Disabled #edge-omnibox-ui-hide-steady-state-url-scheme
-rem Disabled #edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
-rem Disabled #edge-optin-experimentation
-rem Disabled #edge-reading-view
-rem Disabled #edge-share-menu
-rem Disabled #edge-show-feature-recommendations
-rem Disabled #edge-toast-winrt
-rem Disabled #edge-prenav
-rem Disabled #enable-first-party-sets
-rem Disabled #enable-quic
-rem Disabled #enable-windows-gaming-input-data-fetcher
-rem Disabled #file-handling-api
-rem Disabled #storage-access-api
-rem Disabled #tab-hover-card-images
-rem Disabled #use-dns-https-svcb-alpn
-rem Enabled #block-insecure-private-network-requests
-rem Enabled #disallow-doc-written-script-loads
-rem Enabled #edge-auth-manager-delay-load
-rem Enabled #edge-automatic-https
-rem Enabled #edge-autoplay-user-setting-block-option
-rem Enabled #edge-microsoft-root-store-enabled
-rem Enabled #edge-reduce-user-agent-minor-version
-rem Enabled #partitioned-cookies
-rem Enabled #post-quantum-cecpq2
-rem Enabled #storage-buckets
-rem Enabled #strict-origin-isolation
-rem edge://flags
+rem Disabled
+rem edge://flags/#allow-all-sites-to-initiate-mirroring
+rem edge://flags/#cast-streaming-hardware-h264
+rem edge://flags/#cast-streaming-hardware-vp8
+rem edge://flags/#clipboard-unsanitized-content
+rem edge://flags/#disallow-doc-written-script-loads
+rem edge://flags/#edge-automatic-profile-switching
+rem edge://flags/#edge-drop
+rem edge://flags/#edge-haptics-api
+rem edge://flags/#edge-mouse-gesture
+rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-scheme
+rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
+rem edge://flags/#edge-optin-experimentation
+rem edge://flags/#edge-prenav
+rem edge://flags/#edge-reading-view
+rem edge://flags/#edge-share-menu
+rem edge://flags/#edge-show-feature-recommendations
+rem edge://flags/#edge-split-screen
+rem edge://flags/#edge-sound-content-setting
+rem edge://flags/#edge-toast-winrt
+rem edge://flags/#edge-webapp-widgets
+rem edge://flags/#edge-webxr-hand-input
+rem edge://flags/#enable-first-party-sets
+rem edge://flags/#enable-quic
+rem edge://flags/#enable-windows-gaming-input-data-fetcher
+rem edge://flags/#media-router-cast-allow-all-ips
+rem edge://flags/#storage-access-api
+rem edge://flags/#tab-hover-card-images
 
-rem Search engine used in the address bar
-start "" "https://search.rhscz.eu"
-rem edge://settings/search
+rem Enabled
+rem edge://flags/#block-insecure-private-network-requests
+rem edge://flags/#edge-auth-manager-delay-load
+rem edge://flags/#edge-auto-enter-immersive-reader
+rem edge://flags/#edge-automatic-https
+rem edge://flags/#edge-autoplay-user-setting-block-option
+rem edge://flags/#edge-reduce-user-agent-minor-version
+rem edge://flags/#enable-webrtc-hide-local-ips-with-mdns
+rem edge://flags/#partitioned-cookies
+rem edge://flags/#storage-buckets
+rem edge://flags/#strict-origin-isolation
+rem edge://flags/#use-dns-https-svcb-alpn
 
 pause
 
