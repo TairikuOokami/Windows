@@ -2,6 +2,13 @@ rem Select to Save files locally then Unlink OneDrive to change the location!
 
 pause
 
+start windowsdefender:
+rem Disable Tamper and Real Protection in Defender
+rem msconfig - Safe Boot - Minimal - Restart
+rem Disable Defender - msconfig - uncheck Safe Boot - Normal Startup - Restart
+
+pause
+
 rem Disable Hibernation and thus also Fast Startup
 powercfg -h off
 
@@ -20,13 +27,13 @@ reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" 
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
 
 start "" "D:\Software"
-rem Install Chipset Drivers and GPU Drivers and RESTART!
+rem Install Chipset Drivers and RESTART!
+rem Install GPU Drivers and RESTART!
 
 pause
 
-start windowsdefender:
-rem Disable Tamper and Real Protection in Defender
-rem Install Adaware
+rem Disable Indexing C:
+explorer
 
 pause
 
@@ -104,11 +111,11 @@ cipher /d /s:C:\
 rem Enable Windows File Compression
 rem compact /compactos:query
 fsutil behavior set disablecompression 0
-rem compact /CompactOs:always
-compact /c /i /q /f /exe:lzx /s:C:\
-compact /u /i /q /f /s:Z:\
-compact /u /i /q /f /s:D:\Documents\
-compact /u /i /q /f /s:D:\OneDrive\Pictures\
+compact /CompactOs:always
+compact /c /i /q /f /s:C:\
+rem compact /u /i /q /f /s:Z:\
+rem compact /u /i /q /f /s:D:\Documents\
+rem compact /u /i /q /f /s:D:\OneDrive\Pictures\
 
 rem Disable pagefile
 rem fsutil behavior set EncryptPagingFile 1
@@ -118,7 +125,7 @@ wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
 
 rem Setup Network (NetBIOS might be required for aDSL/LAN)
 rem Disable IPv6/LMHOSTS lookup/NetBIOS and Set DNS Servers
-wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
+wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("1.1.1.2","1.0.0.2")
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
@@ -149,10 +156,10 @@ slmgr.vbs /ato
 rem Remove Windows product key from the registry
 slmgr /cpky
 
-pause
+rem pause
 
 rem Uninstall all apps except MS store
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name -notlike '*store*'} | Remove-AppxPackage"
+rem start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name -notlike '*store*'} | Remove-AppxPackage"
 
 pause
 
@@ -178,50 +185,7 @@ Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Quiet /NoRestart
 rem DISM /Online /Get-Capabilities
 rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
 DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:App.StepsRecorder~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:App.Support.QuickAssist~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.OCR~~~en-US~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.Handwriting~~~en-US~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.Speech~~~en-US~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Language.TextToSpeech~~~en-US~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:MathRecognizer~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Wallpapers.Extended~~~~
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Ethernet.Client.Intel.E1i68x64~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Ethernet.Client.Intel.E2f68~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Ethernet.Client.Vmware.Vmxnet3~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Notepad.System~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.PowerShell.ISE~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Broadcom.Bcmpciedhd63~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Broadcom.Bcmwl63al~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Broadcom.Bcmwl63a~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwbw02~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwew00~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwew01~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwlv64~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwns64~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwsw00~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw02~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw04~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw06~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw08~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Intel.Netwtw10~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Marvel.Mrvlpcie8897~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Qualcomm.Athwnx~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Qualcomm.Athwnx~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Qualcomm.Qcamain10x64~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Ralink.Netr28x~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtl8187se~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtl8192se~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtl819xp~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtwlane01~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtwlane13~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.Wifi.Client.Realtek.Rtwlane~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Microsoft.Windows.WordPad~~~~0.0.1.0
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Print.Fax.Scan~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Print.Management.Console~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:VBSCRIPT~~~~​
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:Windows.Client.ShellComponents~~~~0.0.1.0
 
 pause
 
@@ -333,9 +297,6 @@ winget install --id 9PMMSR1CGPWG --exact --source msstore --accept-package-agree
 rem Microsoft DirectX 9.0c End-User Runtime
 winget install Microsoft.DirectX --accept-package-agreements --accept-source-agreements
 
-rem Microsoft XNA Framework Redistributable Refresh
-winget install --id 9PG2DK419DRG --exact --source msstore --accept-package-agreements --accept-source-agreements
-
 rem OpenCL™ and OpenGL® Compatibility Pack
 winget install --id 9NQPSL29BFFF --exact --source msstore --accept-package-agreements --accept-source-agreements
 
@@ -352,6 +313,11 @@ start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\tb_free_2208B.exe"
 
 start "" /wait "D:\Software"
+
+pause
+
+rem Uninstall Store Apps
+start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\HiBitUninstaller-Portable.exe"
 
 rem Restart in ...
 
