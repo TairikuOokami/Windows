@@ -3,11 +3,6 @@ start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-f
 
 pause
 
-rem Disable Indexing C:/Z:
-explorer
-
-pause
-
 start "" /wait "D:\OneDrive\Setup\SBZSeriesDriverInstaller.exe"
 
 pause
@@ -78,6 +73,7 @@ rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.e
 
 rem Disabled
 rem edge://flags/#allow-all-sites-to-initiate-mirroring
+rem edge://flags/#edge-auto-enter-immersive-reader
 rem edge://flags/#cast-streaming-hardware-h264
 rem edge://flags/#cast-streaming-hardware-vp8
 rem edge://flags/#clipboard-unsanitized-content
@@ -100,6 +96,7 @@ rem edge://flags/#edge-webapp-widgets
 rem edge://flags/#edge-webxr-hand-input
 rem edge://flags/#enable-first-party-sets
 rem edge://flags/#enable-quic
+rem edge://flags/#enable-webrtc-hide-local-ips-with-mdns
 rem edge://flags/#enable-windows-gaming-input-data-fetcher
 rem edge://flags/#media-router-cast-allow-all-ips
 rem edge://flags/#storage-access-api
@@ -108,11 +105,9 @@ rem edge://flags/#tab-hover-card-images
 rem Enabled
 rem edge://flags/#block-insecure-private-network-requests
 rem edge://flags/#edge-auth-manager-delay-load
-rem edge://flags/#edge-auto-enter-immersive-reader
 rem edge://flags/#edge-automatic-https
 rem edge://flags/#edge-autoplay-user-setting-block-option
 rem edge://flags/#edge-reduce-user-agent-minor-version
-rem edge://flags/#enable-webrtc-hide-local-ips-with-mdns
 rem edge://flags/#partitioned-cookies
 rem edge://flags/#storage-buckets
 rem edge://flags/#strict-origin-isolation
@@ -123,7 +118,7 @@ pause
 reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "C:\Program Files\TruckersMP Launcher" /f
 reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
 start "" /wait "D:\Steam\steam.exe"
-start "" /wait "D:\OneDrive\Setup\Install TruckersMP.exe"
+start "" /wait "D:\OneDrive\Setup\TruckersMP-Setup.exe"
 
 rem Steam Interface - Disable Everything
 
