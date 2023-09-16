@@ -120,12 +120,8 @@ rem https://www.msgsafe.io
 rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 
 rem Windows ISO - to create a local account use this email - no@thankyou.com
-rem https://www.microsoft.com/en-us/software-download/windows11
-rem https://www.heidoc.net/joomla/technology-science/microsoft/67-microsoft-windows-and-office-iso-download-tool
-rem https://tb.rg-adguard.net
+rem https://os.click
 rem https://genuine-iso-verifier.weebly.com
-rem https://files.rg-adguard.net/category
-rem https://opendirectory.luzea.de/Enthousiast
 
 rem Check ISO Windows versions and build version
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
@@ -148,9 +144,7 @@ rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg
 rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
 rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
 rem 360 Total Security Setup - uncheck Join 360 User Experience Improvement Program
-rem Adaware (MT) - https://www.adaware.com/free-antivirus-download (Bitdefender's signatures + install/uninstall without restart) - https://postimg.cc/30CN1yFK
-rem Adaware Silent - App Managment - Enable Gaming Mode / Disable Threat Alliance for a better privacy
-rem Adaware Silent - Scan Computer - Disable Automated Scan
+rem Adaware (MT) - https://www.adaware.com/ (Bitdefender's signatures)
 rem AVG (CZ) - https://www.avg.com - https://postimg.cc/N95JB34V
 rem Avast (CZ) - https://www.avast.com - https://postimg.cc/CZHBd5vn
 rem AVG/Avast Setup - Customize - Minimal Protection - File Shield only for max perfomance (DNS can replace web shield avoiding MITM)
@@ -162,14 +156,12 @@ rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/ZBsbb1x
 rem Zone Alarm - https://www.zonealarm.com/software/free-antivirus - https://postimg.cc/3d23rVXp
 
 rem AntiVirus software (Cloud only)
-rem Immunet (US) - https://www.immunet.com/index - https://postimg.cc/TpjzQjM8
 rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://postimg.cc/8JnjJQpS
 rem Panda Setup - Settings - General - Disable Panda News
 rem Panda Perfomance - Settings - Antivirus - Disable PUPs + Behavioral/Set Block files to 10 secs
 rem Panda Perfomance - Settings - Process Monitor/USB - Disable
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
-rem Immunet (US) - https://www.immunet.com/index
 rem Ghostpress (DE) - https://www.schiffer.tech/ghostpress.html
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
@@ -383,11 +375,9 @@ del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 rem Remove default Windows Powershell (to restore run "sfc /scannow")
 rem Restrict PS and install the latest version instead - pwsh
 rem winget install Microsoft.PowerShell
+rem https://thehackernews.com/2023/09/cybercriminals-using-powershell-to.html?m=1
 rem https://www.bleepingcomputer.com/news/security/as-microsoft-blocks-office-macros-hackers-find-new-attack-vectors
 rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-windows-devices-with-powershell
-rem https://thehackernews.com/2021/12/new-exploit-lets-malware-attackers.html
-rem https://threatpost.com/encrypted-fileless-malware-growth/175306
-rem https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods
 taskkill /im PowerShell.exe /f
 taskkill /im PowerShell_ISE.exe /f
 taskkill /im pwsh.exe /f
@@ -493,7 +483,7 @@ bcdedit /set {bootmgr} displaybootmenu no
 bcdedit /set {bootmgr} flightsigning off
 bcdedit /set advancedoptions false
 bcdedit /set bootems no
-bcdedit /set bootmenupolicy legacy
+bcdedit /set bootmenupolicy standard
 bcdedit /set bootstatuspolicy IgnoreAllFailures
 bcdedit /set bootux disabled
 bcdedit /set disabledynamictick yes
@@ -507,7 +497,6 @@ bcdedit /set vm no
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "%ProgramFiles%\SystemInformer\SystemInformer.exe -hide" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "TrafficMonitor" /t REG_SZ /d "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TrafficMonitor\TrafficMonitor.exe"
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiBolt" /t REG_SZ /d "\"%ProgramFiles%\Logi\LogiBolt\LogiBolt.exe\" --startup" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiOptions" /t REG_SZ /d "\"%ProgramFiles%\Logitech\LogiOptions\LogiOptions.exe\" /noui" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
@@ -1093,7 +1082,10 @@ rem Set-ExecutionPolicy bypass - noprofile
 reg add "HKLM\Software\Microsoft\PowerShell\1\ShellIds\Microsoft.PowerShell" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
 reg add "HKLM\Software\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
 reg add "HKLM\Software\WOW6432Node\Microsoft\PowerShell\1\ShellIds\ScriptedDiagnostics" /v "ExecutionPolicy" /t REG_SZ /d "Restricted" /f
+reg add "HKLM\Software\Policies\Microsoft\PowerShellCore" /v "EnableScripts" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\PowerShell" /v "EnableScripts" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\WOW6432Node\Policies\Microsoft\PowerShellCore" /v "EnableScripts" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\WOW6432Node\Policies\Microsoft\Windows\PowerShell" /v "EnableScripts" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v "__PSLockDownPolicy" /t REG_SZ /d "4" /f
 
 rem 1 - The device does not store the user's credentials for automatic sign-in after a Windows Update restart. The users' lock screen apps are not restarted after the system restarts.
@@ -1184,7 +1176,6 @@ rem https://docs.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-ch
 rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
 rem rem https://admx.help/?Category=EdgeChromium
-rem edge://policy
 rem edge://policy
 
 rem reg delete "HKCU\Software\Policies\Microsoft\Edge" /f
@@ -1288,7 +1279,7 @@ rem 0 - Enable search in sidebar / 1 - DisableSearchInSidebarForKidsMode / 2 - D
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchInSidebarEnabled" /t REG_DWORD /d "2" /f
 
 rem 1 - Search for image enabled
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchForImageEnabled" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchForImageEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow screen capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG_DWORD /d "0" /f
@@ -1343,6 +1334,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MathSolverEnabled" /t REG_DW
 rem 1 - The performance detector detects tab performance issues and recommends actions to fix the performance issues
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Pin browser essentials toolbar button
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PinBrowserEssentialsToolbarButton" /t REG_DWORD /d "0" /f
+
 rem 1 - Show mini menu when selecting text
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickSearchShowMiniMenu" /t REG_DWORD /d "0" /f
 
@@ -1361,18 +1355,15 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VerticalTabsAllowed" /t REG_
 rem 1 - Show web capture button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebCaptureEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Show web select button
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebSelectEnabled" /t REG_DWORD /d "0" /f
-
 rem ________________________________________________________________________________________
 rem 1 - Enables background updates to the list of available templates for Collections and other features that use templates
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundTemplateListUpdatesEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Allow the Edge bar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebWidgetAllowed" /t REG_DWORD /d "0" /f
+rem 1 - Enable the Search bar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchbarAllowed" /t REG_DWORD /d "0" /f
 
-rem 1 - Allow the Edge bar at Windows startup
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebWidgetIsEnabledOnStartup" /t REG_DWORD /d "0" /f
+rem 1 - Allow the Search bar at Windows startup
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchbarIsEnabledOnStartup" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1647,6 +1638,9 @@ rem ____________________________________________________________________________
 rem 1 - If ECH is enabled, Microsoft Edge might or might not use ECH depending on server support, the availability of the HTTPS DNS record
 rem Enable: DOH + #dns-https-svcb + #use-dns-https-svcb-alpn + the paramater: --enable-features="EncryptedClientHello" - https://defo.ie/ech-check.php
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EncryptedClientHelloEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Enable Gamer Mode
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "GamerModeEnabled" /t REG_DWORD /d "0" /f
 
 rem NetworkPrediction / 0 - Always / 1 - WifiOnly / 2 - Never
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkPredictionOptions" /t REG_DWORD /d "2" /f
