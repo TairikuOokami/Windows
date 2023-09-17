@@ -1,9 +1,5 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-rem https://www.adaware.com/free-antivirus-download
-rem https://www.techpowerup.com/295877/windows-defender-can-significantly-impact-intel-cpu-performance-we-have-the-fix
-rem https://www.bleepingcomputer.com/news/security/lockbit-ransomware-abuses-windows-defender-to-load-cobalt-strike
-
 rem Disable Tamper and Real Protection in Defender
 start windowsdefender:
 rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
