@@ -1636,7 +1636,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_
 
 rem ________________________________________________________________________________________
 rem 1 - If ECH is enabled, Microsoft Edge might or might not use ECH depending on server support, the availability of the HTTPS DNS record
-rem Enable: DOH + #dns-https-svcb + #use-dns-https-svcb-alpn + the paramater: --enable-features="EncryptedClientHello" - https://defo.ie/ech-check.php
+rem Enable: DOH + #use-dns-https-svcb-alpn + the paramater: --enable-features="EncryptedClientHello" - https://www.cloudflare.com/ssl/encrypted-sni
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EncryptedClientHelloEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Enable Gamer Mode
@@ -1705,6 +1705,7 @@ rem UAC Bypass - https://enigma0x3.net/2016/07/22/bypassing-uac-on-windows-10-us
 rem MsCtfMonitor Task (keylogger) is required to be able to type within Settings and etc
 
 schtasks /DELETE /TN "AMDInstallLauncher" /f
+schtasks /DELETE /TN "AMDInstallUEP" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
 schtasks /DELETE /TN "DUpdaterTask" /f
@@ -1718,7 +1719,7 @@ schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.
 schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 Critical" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\PcaPatchDbTask" /Disable
-schtasks /Change /TN "Microsoft\Windows\Application Experience\ProgramDataUpdater" /Disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\SdbinstMergeDbTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /Disable
 schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable
@@ -1764,6 +1765,7 @@ schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
 schtasks /Change /TN "Microsoft\Windows\Printing\EduPrintProv" /Disable
 schtasks /Change /TN "Microsoft\Windows\Printing\PrinterCleanupTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Printing\PrintJobCleanupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\PushToInstall\Registration" /Disable
 schtasks /Change /TN "Microsoft\Windows\Ras\MobilityManager" /Disable
 schtasks /Change /TN "Microsoft\Windows\RecoveryEnvironment\VerifyWinRE" /Disable
@@ -1773,6 +1775,10 @@ schtasks /Change /TN "Microsoft\Windows\Servicing\StartComponentCleanup" /Disabl
 schtasks /Change /TN "Microsoft\Windows\SettingSync\NetworkStateChangeTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Setup\SetupCleanupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Setup\SnapshotCleanupTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyMonitor" /Disable
+schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyRefreshTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Shell\ThemesSyncedImageDownload" /Disable
+schtasks /Change /TN "Microsoft\Windows\Shell\UpdateUserPictureTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceAgentTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceManagerTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /Disable
@@ -1786,6 +1792,7 @@ schtasks /Change /TN "Microsoft\Windows\Time Synchronization\SynchronizeTime" /D
 schtasks /Change /TN "Microsoft\Windows\Time Zone\SynchronizeTimeZone" /Disable
 schtasks /Change /TN "Microsoft\Windows\TPM\Tpm-HASCertRetr" /Disable
 schtasks /Change /TN "Microsoft\Windows\TPM\Tpm-Maintenance" /Disable
+schtasks /Change /TN "Microsoft\Windows\UPnP\UPnPHostConfig" /Disable
 schtasks /Change /TN "Microsoft\Windows\UPnP\UPnPHostConfig" /Disable
 schtasks /Change /TN "Microsoft\Windows\User Profile Service\HiveUploadTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\WCM\WiFiTask" /Disable
@@ -1975,6 +1982,9 @@ sc config TermService start= disabled
 
 rem Retail Demo
 sc config RetailDemo start=disabled
+
+rem Quality Windows Audio Video Experience
+sc config QWAVE start=disabled
 
 rem Secure Socket Tunneling Protocol Service
 sc config SstpSvc start=disabled
@@ -3496,4 +3506,4 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem https://postimg.cc/Y4wY3832 - Windows Quiet Edition - 70 processes / 640 threads / 25000 handles / 1,8GB RAM (700MB used by ramdisk)
+rem https://postimg.cc/Bjh9th21 - Windows Quiet Edition - 65 processes / 600 threads / 23000 handles / 1,8GB RAM (1GB used by ramdisk)
