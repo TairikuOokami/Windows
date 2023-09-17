@@ -7,7 +7,7 @@ rem https://www.bleepingcomputer.com/news/security/lockbit-ransomware-abuses-win
 rem Disable Tamper and Real Protection in Defender
 start windowsdefender:
 rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
-rem Run "MD Disable.bat" RESTART!
+rem Run "MD Disable.bat" TWICE - RESTART!
 rem Run - msconfig - General - Normal Startup
 
 pause
@@ -74,8 +74,8 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
-rem Last Tested on Windows 11 Home 22631.2070
-rem Microsoft Defender Platform Version 4.18.23050.9-0 (01 August 2023)
-rem Before - https://postimg.cc/DSSqYZbW / After - https://postimg.cc/qtbHB1vD
+rem Last Tested on Windows 11 Home 22621.2283
+rem Microsoft Defender Platform Version 4.18.23050.2006 (01 August 2023)
+rem Before - https://postimg.cc/DSSqYZbW / After - https://postimg.cc/McMvPsV2
 
 pause
