@@ -1,5 +1,10 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
+rem NOTE: It is highly recommended to install Platform Updates sometimes (monthly) because they affect Windows protection as well, like System Guard!
+rem https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
+rem https://forums.mydigitallife.net/threads/microsoft-defender-anti-malware-platform-update-kit-for-windows-11-updated-september-13th-2023.83758
+rem Enable Defender - update - restart - disable Defender - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Enable.bat
+
 rem Disable Tamper and Real Protection in Defender
 start windowsdefender:
 rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
@@ -71,7 +76,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
 rem Last Tested on Windows 11 Home 22621.2283
-rem Microsoft Defender Platform Version 4.18.23050.2006 (01 August 2023)
+rem Microsoft Defender Platform Version 4.18.23090.2006 (18 September 2023)
 rem Before - https://postimg.cc/DSSqYZbW / After - https://postimg.cc/McMvPsV2
 
 pause
