@@ -22,8 +22,6 @@ rem https://www.bleepingcomputer.com/news/microsoft/10-year-old-windows-bug-with
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
 rem No 2FA is better than SMS 2FA - https://www.businessinsider.com/credit-card-phone-theft-sim-swap-identity-theft-investigation-2023-4
-rem Reddit's removal script - https://codepen.io/j0be/pen/WMBWOW - do not just remove the account, remove the content they can profit from!
-rem Bookmark it, open it on reddit, choose options and let it run, tab shows the number of removed comments - 285 - https://postimg.cc/xqbnygpf
 
 
 rem ________________________________________________________________________________________
@@ -122,6 +120,7 @@ rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 rem Windows ISO - to create a local account use this email - no@thankyou.com
 rem https://os.click
 rem https://genuine-iso-verifier.weebly.com
+rem https://massgrave.dev/genuine-installation-media.html
 
 rem Check ISO Windows versions and build version
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
@@ -739,6 +738,9 @@ rem ____________________________________________________________________________
 rem Remove Network Icon from Navigation Panel / Right in Nav Panel
 rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
 reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
+
+rem Remove Gallery from Navigation Pane in File Explorer
+reg add "HKCU\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d "0" /f
 
 rem Add Desktop under This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /v "HideIfEnabled" /f
@@ -1511,7 +1513,7 @@ rem Enhance the security state in Microsoft Edge / 0 - Standard mode / 1 - Balan
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityMode" /t REG_DWORD /d "2" /f
 
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "bing" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
 
 rem 1 - Use a web service to help resolve navigation errors
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
@@ -1536,7 +1538,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VisualSearchEnabled" /t REG_
 
 rem ________________________________________________________________________________________
 rem Enable Microsoft Search in Bing suggestions in the address bar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
 
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
@@ -1601,7 +1603,7 @@ rem Sign in: / 0 - Automatically / 1 - With device password
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PrimaryPasswordSetting" /t REG_DWORD /d "1" /f
 
 rem 1 - Show Microsoft Rewards experience and notifications
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowMicrosoftRewards" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 rem 1 - Single sign-on for work or school sites using this profile enabled
@@ -2483,6 +2485,10 @@ rem =================================== Windows Settings =======================
 rem ----------------------------------- Personalization ------------------------------------
 rem ....................................... Taskbar ........................................
 
+
+rem Copilot / 0 - Off / 1 - On
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowCopilotButton" /t REG_DWORD /d "0" /f
+
 rem Task view / 0 - Off / 1 - On
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
 
@@ -2495,6 +2501,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 rem 0 - Disable Widgets
 reg add "HKCU\Software\Microsoft\PolicyManager\default\NewsAndInterests\AllowNewsAndInterests" /v "value" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d "0" /f
+
+rem 1 - Disable Copilot
+reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f
 
 rem 1 - Show flashing on taskbar apps
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarFlashing" /t REG_DWORD /d "0" /f
