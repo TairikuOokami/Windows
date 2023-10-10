@@ -76,7 +76,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
 rem Last Tested on Windows 11 Home 22621.2283
-rem Microsoft Defender Platform Version 4.18.23090.2006 (18 September 2023)
-rem Before - https://postimg.cc/DSSqYZbW / After - https://postimg.cc/McMvPsV2
+rem Microsoft Defender Platform Version 4.18.23090.2008 (10 October 2023)
+rem Before - https://postimg.cc/DSSqYZbW / After - https://postimg.cc/K1jW7fQ5
 
 pause
