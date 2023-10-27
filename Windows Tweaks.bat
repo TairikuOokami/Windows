@@ -498,7 +498,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_S
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "%ProgramFiles%\SystemInformer\SystemInformer.exe -hide" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiBolt" /t REG_SZ /d "\"%ProgramFiles%\Logi\LogiBolt\LogiBolt.exe\" --startup" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiOptions" /t REG_SZ /d "\"%ProgramFiles%\Logitech\LogiOptions\LogiOptions.exe\" /noui" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfc.exe"\" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe"\" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
@@ -1569,7 +1569,7 @@ rem 1 - Save and fill payment info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Forces data synchronization in Microsoft Edge. This policy also prevents the user from turning sync off.
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ForceSync" /t REG_DWORD /d "1" /f
@@ -2339,6 +2339,9 @@ reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DoHPolicy" /
 rem Disable IDN (internationalized domain name)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableIdnMapping" /t REG_DWORD /d "0" /f
+
+rem 1 - Discovery of Network-designated Resolvers DNS over TLS (DoT), DNS over HTTPS (DoH), DNS over QUIC (DoQ)
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableDnr" /t REG_DWORD /d "0" /f
 
 rem Disable smart multi-homed name resolution
 rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd197552(v=ws.10)
@@ -3385,6 +3388,14 @@ rem net user Administrator *
 rem net user NewGuy * /add
 rem net localgroup Administrators NewGuy /add
 
+rem Access CMD with SYSTEM rights at logon (Win+U)
+takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
+icacls "%WINDIR%\System32\utilman.exe" /grant:r %username%:F
+copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\utilman.exe
+takeown /s %computername% /u %username% /f "%WINDIR%\System32\sethc.exe"
+icacls "%WINDIR%\System32\sethc.exe" /grant:r %username%:F
+copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\sethc.exe
+
 rem To restart explorer
 rem taskkill /im explorer.exe /f & explorer.exe
 
@@ -3409,7 +3420,7 @@ taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 
 rem https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade
-winget upgrade --all --include-unknown
+winget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements
 timeout 5
 
 rem https://kalilinuxtutorials.com/webview2-cookie-stealer
@@ -3429,7 +3440,7 @@ taskkill /im amdow.exe /f
 taskkill /im AMDRSServ.exe /f
 
 rem Run Wise Disk Cleaner
-start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a
+start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -all
 
 rem Run Wise Registry Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
