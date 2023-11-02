@@ -3,6 +3,8 @@ rem Select to Save files locally then Unlink OneDrive to change the location!
 pause
 
 start windowsdefender:
+rem Update Windows, Defender, Restart
+rem Disable Stupid Smart App Control
 rem Disable Tamper and Real Protection in Defender
 rem msconfig - Safe Boot - Minimal - Restart
 rem Disable Defender - msconfig - uncheck Safe Boot - Normal Startup - Restart
@@ -113,9 +115,9 @@ rem compact /compactos:query
 fsutil behavior set disablecompression 0
 compact /CompactOs:always
 compact /c /i /q /f /s:C:\
-rem compact /u /i /q /f /s:Z:\
-rem compact /u /i /q /f /s:D:\Documents\
-rem compact /u /i /q /f /s:D:\OneDrive\Pictures\
+compact /u /i /q /f /s:Z:\
+compact /u /i /q /f /s:D:\Documents\
+compact /u /i /q /f /s:D:\OneDrive\Pictures\
 
 rem Disable pagefile
 rem fsutil behavior set EncryptPagingFile 1
@@ -186,6 +188,7 @@ rem DISM /Online /Get-Capabilities
 rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
 DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:VBSCRIPT~~~~​
 
 pause
 
