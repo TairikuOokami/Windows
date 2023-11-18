@@ -493,12 +493,11 @@ bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "\"%ProgramFiles%\Microsoft OneDrive\OneDrive.exe\" /background" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiBolt" /t REG_SZ /d "C:\Program Files\Logi\LogiBolt\LogiBolt.exe --startup" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "%ProgramFiles%\SystemInformer\SystemInformer.exe -hide" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiBolt" /t REG_SZ /d "\"%ProgramFiles%\Logi\LogiBolt\LogiBolt.exe\" --startup" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "LogiOptions" /t REG_SZ /d "\"%ProgramFiles%\Logitech\LogiOptions\LogiOptions.exe\" /noui" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "\"%ProgramFiles%\Malwarebytes\Windows Firewall Control\wfcUI.exe"\" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
@@ -742,14 +741,14 @@ reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attr
 rem Remove Gallery from Navigation Pane in File Explorer
 reg add "HKCU\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d "0" /f
 
-rem Add Desktop under This PC
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /v "HideIfEnabled" /f
+rem Remove Desktop under This PC
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /v "HideIfEnabled" /f
 
 rem Add Downloads under This PC
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /v "HideIfEnabled" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /v "HideIfEnabled" /f
 
 rem Add Pictures under This PC
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /v "HideIfEnabled" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /v "HideIfEnabled" /f
 
 rem Remove 3D Folders from This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f
@@ -1712,6 +1711,8 @@ schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
 schtasks /DELETE /TN "DUpdaterTask" /f
 schtasks /DELETE /TN "ModifyLinkUpdate" /f
+schtasks /DELETE /TN "StartCN" /f
+schtasks /DELETE /TN "StartDVR" /f
 
 schtasks /Change /TN "CreateExplorerShellUnelevatedTask" /Enable
 
@@ -2779,9 +2780,9 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 rem Allow/Deny - Let apps access your notifications
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Allow" /f
 
-rem 1 - Enable and Prioritize Outlook extension notifications by not showing them in the notification center 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe!chrome-extension://kkpalkknhlklpbflpcpkepmmbnmfailf/" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.MicrosoftEdge.Stable_8wekyb3d8bbwe!chrome-extension://kkpalkknhlklpbflpcpkepmmbnmfailf/" /v "Rank" /t REG_DWORD /d "1" /f
+rem 1 - Enable and Prioritize BlueMail notifications by not showing them in the notification center 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\BlueMail.BlueMailEmail_t08282y3j4hc4!BlueMail.BlueMailEmail" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\BlueMail.BlueMailEmail_t08282y3j4hc4!BlueMail.BlueMailEmail" /v "Rank" /t REG_DWORD /d "1" /f
 
 rem 1 - Enable and Prioritize Edge Notifications by not showing them in the notification center 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\MSEdge" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
