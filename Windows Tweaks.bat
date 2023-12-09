@@ -17,7 +17,8 @@ rem Removing Powershell can affect various apps, since more and more require som
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
-rem Some news - https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
+rem Some news - https://www.askvg.com/tip-disable-3p-search-telemetry-feature-in-microsoft-edge-120-and-later
+rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
 rem https://www.bleepingcomputer.com/news/microsoft/10-year-old-windows-bug-with-opt-in-fix-exploited-in-3cx-attack
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
@@ -1218,6 +1219,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeFollowEnabled" /t REG_DW
 
 rem 1 - Microsoft Edge will attempt to connect to the Microsoft Edge management service to download and apply policy assigned to the Azure AD account of the user
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeManagementEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Captures the searches user does on third party search providers
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Edge3PSerpTelemetryEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - If you enable this policy, users will be able to access the Microsoft Edge Workspaces feature
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t REG_DWORD /d "0" /f
