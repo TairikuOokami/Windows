@@ -17,6 +17,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "Start" 
 
 sc config Dhcp start= auto
 sc config DPS start= auto
+sc config DusmSvc start= auto
 sc config lmhosts start= auto
 sc config NlaSvc start= auto
 sc config nsi start= auto
