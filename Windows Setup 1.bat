@@ -2,12 +2,14 @@ rem Select to Save files locally then Unlink OneDrive to change the location!
 
 pause
 
+rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++
+reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
+
 start windowsdefender:
 rem Update Windows, Defender, Restart
-rem Disable Stupid Smart App Control
 rem Disable Tamper and Real Protection in Defender
 rem msconfig - Safe Boot - Minimal - Restart
-rem Disable Defender - msconfig - uncheck Safe Boot - Normal Startup - Restart
+rem Disable Defender's services - msconfig - uncheck Safe Boot - Normal Startup - Restart
 
 pause
 
