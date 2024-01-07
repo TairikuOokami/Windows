@@ -57,7 +57,7 @@ pause
 
 start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 start "" /wait "edge://settings/searchEngines"
-rem https://search.brave.com/search?q=%s
+rem https://duckduckgo.com/?q=%s
 
 pause
 
@@ -83,6 +83,7 @@ rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem edge://flags/#edge-optin-experimentation
 rem edge://flags/#edge-prenav
 rem edge://flags/#edge-reading-view
+rem edge://flags/#edge-screenshot
 rem edge://flags/#edge-share-menu
 rem edge://flags/#edge-show-feature-recommendations
 rem edge://flags/#edge-split-screen
@@ -95,11 +96,15 @@ rem edge://flags/#block-insecure-private-network-requests
 rem edge://flags/#disallow-doc-written-script-loads
 rem edge://flags/#edge-auth-manager-delay-load
 rem edge://flags/#edge-autoplay-user-setting-block-option
+rem edge://flags/#edge-digsig-enabled-pdf
+rem edge://flags/#edge-minimal-toolbar
 rem edge://flags/#edge-reduce-user-agent-minor-version
 rem edge://flags/#enable-first-party-sets
+rem edge://flags/#fill-on-account-select
+rem edge://flags/#origin-agent-cluster-default
+rem edge://flags/#origin-keyed-processes-by-default
 rem edge://flags/#partitioned-cookies
 rem edge://flags/#strict-origin-isolation
-rem edge://flags/#edge-toast-winrt
 rem edge://flags/#use-dns-https-svcb-alpn
 
 
