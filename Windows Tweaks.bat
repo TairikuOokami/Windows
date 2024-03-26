@@ -162,7 +162,6 @@ rem Panda Perfomance - Settings - Antivirus - Disable PUPs + Behavioral/Set Bloc
 rem Panda Perfomance - Settings - Process Monitor/USB - Disable
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
-rem Ghostpress (DE) - https://www.schiffer.tech/ghostpress.html
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
 rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
@@ -1035,9 +1034,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "wslhost.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "findstr.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "55" /t REG_SZ /d "pwsh.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "56" /t REG_SZ /d "msedgewebview2.exe" /f
-
-
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
 reg add "HKLM\Software\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f
@@ -1302,6 +1298,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SuperDragDropEnabled" /t REG
 
 rem 1 - URL reporting in Edge diagnostic data enabled
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UrlDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Edge User Data Profile Location
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UserDataDir" /t REG_SZ /d "Z:\Edge\User Data" /f
 
 rem 1 - Allow video capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_DWORD /d "0" /f
@@ -2411,7 +2410,7 @@ rem ----------------------------------- Personalization ------------------------
 rem ..................................... Background .......................................
 
 rem Choose your picture (use PNG to display 100% quality of the original image)
-reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "D:\OneDrive\Pictures\MLP\Wallpaper.png" /f
+reg add "HKCU\Control Panel\Desktop" /v "Wallpaper" /t REG_SZ /d "D:\OneDrive\Pictures\Wallpaper.png" /f
 
 rem Choose a fit / 10 - Fill / 6 - Fit / 2 - Stretch / 0 - Tile/Center
 reg add "HKCU\Control Panel\Desktop" /v "WallpaperStyle" /t REG_SZ /d "2" /f
@@ -2796,6 +2795,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\B
 rem 1 - Enable and Prioritize Edge Notifications by not showing them in the notification center 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\MSEdge" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\MSEdge" /v "Rank" /t REG_DWORD /d "1" /f
+
+rem 1 - Enable and Prioritize Outlook notifications by not showing them in the notification center 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows" /v "Rank" /t REG_DWORD /d "1" /f
 
 rem 1 - Antivirus Disabled Notification
 reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
@@ -3412,9 +3415,9 @@ rem taskkill /im explorer.exe /f & explorer.exe
 rem User Accounts - netplwiz
 
 rem Windows Updates Block
-rem https://www.tenforums.com/tutorials/8013-enable-disable-windows-update-automatic-updates-windows-10-a.html
-rem https://www.sordum.org/9470/windows-update-blocker-v1-7
-rem Block svchost.exe in the firewall or create a nonexistent symlink
+rem 1. https://www.sordum.org/9470/windows-update-blocker-v1-8
+rem 2. Block svchost.exe in the firewall, ports 80/443 to avoid blocking DHCP/DNS, still it will block updating certificates needed by browsers! So use temporarily.
+rem 3. Create a nonexistent symlink, but it will probably block MS store updates as well!
 rem rd "%WINDIR%\SoftwareDistribution\Download" /s /q
 rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
 
