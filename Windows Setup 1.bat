@@ -17,6 +17,7 @@ rem Disable Hibernation and thus also Fast Startup
 powercfg -h off
 
 rem Disable Windows Recovery Partition
+rem reagentc /info
 reagentc /disable
 
 rem Disable Reserved Storage (7GB)
