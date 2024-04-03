@@ -15,6 +15,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
+rem EnableFullTrustStartupTasks and EnableUwpStartupTasks have to be enabled to be able to autostart MSIX store apps like New Teams and TranslucentTB
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
 rem Some news - https://www.askvg.com/tip-disable-3p-search-telemetry-feature-in-microsoft-edge-120-and-later
@@ -176,6 +177,7 @@ rem Filter Lists - https://filterlists.com - https://github.com/EnergizedProtect
 rem Malware (Chrome/Firefox) - https://www.bitdefender.com/solutions/trafficlight.html
 rem Malware (Chrome/Edge/Firefox) - https://microsoftedge.microsoft.com/addons/detail/emsisoft-browser-security/jlpdpddffjddlfdbllimedpemaodbjgn
 rem Phishing (Chrome/Edge/Firefox/Opera) - https://www.netcraft.com/apps/browser
+rem Phishing (Chrome/Edge/Firefox/Opera) - SafeToOpen - https://safetoopen.com
 
 rem Cleanup software
 rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
@@ -1186,7 +1188,7 @@ rem 1 - Allow users to access the games menu
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowGamesMenu" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow the audio sandbox to run
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Compose is enabled for writing on the web
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ComposeInlineEnabled" /t REG_DWORD /d "0" /f
@@ -3433,7 +3435,7 @@ taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 
 rem https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade
-winget upgrade --all --include-unknown --accept-package-agreements --accept-source-agreements
+winget upgrade --all -h --include-unknown --accept-package-agreements --accept-source-agreements
 timeout 5
 
 rem https://kalilinuxtutorials.com/webview2-cookie-stealer
