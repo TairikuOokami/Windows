@@ -15,10 +15,10 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
-rem EnableFullTrustStartupTasks and EnableUwpStartupTasks have to be enabled to be able to autostart MSIX store apps like New Teams and TranslucentTB
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
-rem Some news - https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
+rem Some news - Finally stable and digitally signed - https://systeminformer.sourceforge.io/downloads.php
+rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
 rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
@@ -290,7 +290,7 @@ rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/d
 rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / EaseUS Todo Backup Free - https://www.softpedia.com/get/System/Back-Up-and-Recovery/EASEUS-Todo-Backup.shtml
 rem System Restore / Reboot Restore Rx - https://horizondatasys.com/reboot-restore-rx-freeware
-rem Task Manager / System Informer - https://systeminformer.sourceforge.io/nightly.php
+rem Task Manager / System Informer - https://systeminformer.sourceforge.io
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
 rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
@@ -1672,7 +1672,7 @@ rem 0 - Automatically deny elevation requests / 1 - Prompt for credentials on th
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ConsentPromptBehaviorUser" /t REG_DWORD /d "0" /f
 
 rem 2 (Default)
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableFullTrustStartupTasks" /t REG_DWORD /d "0" /f
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableFullTrustStartupTasks" /t REG_DWORD /d "0" /f
 
 rem Detect application installations and prompt for elevation / 1 - Enabled (default for home) / 0 - Disabled (default for enterprise)
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableInstallerDetection" /t REG_DWORD /d "1" /f
@@ -1684,7 +1684,7 @@ rem Only elevate UIAccess applications that are installed in secure locations / 
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableSecureUIAPaths" /t REG_DWORD /d "1" /f
 
 rem 0 (Default) = Disabled / 1 - Enabled
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableUwpStartupTasks" /t REG_DWORD /d "0" /f
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableUwpStartupTasks" /t REG_DWORD /d "0" /f
 
 rem Allow UIAccess applications to prompt for elevation without using the secure desktop / 0 (Default) = Disabled / 1 - Enabled
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableUIADesktopToggle" /t REG_DWORD /d "0" /f
