@@ -78,6 +78,6 @@ reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWO
 
 rem Last Tested on Windows 11 Home 22631.3527
 rem Microsoft Defender Platform Version 4.18.24030.9 (28 Apr 2024)
-rem Before - https://postimg.cc/t7rKpWLF / After - https://postimg.cc/jLLG5Cbm
+rem Before - https://postimg.cc/9wGFrLm7 / After - https://postimg.cc/JtJh6zNz
 
 pause
