@@ -16,6 +16,7 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
+rem r/techsupport still hates me because I am me?! Spread the love, not hate!
 
 rem Some news - Finally stable and digitally signed - https://systeminformer.sourceforge.io/downloads.php
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
@@ -2712,10 +2713,13 @@ rem ---------------------------------- Privacy & security ----------------------
 rem ...................................... File System .....................................
 
 rem Allow/Deny - File system access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Allow" /f
 
 rem Allow/Deny - Let apps access your file system
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Deny" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess" /v "Value" /t REG_SZ /d "Allow" /f
+
+rem Allow/Deny - 2fast - two factor authenticator supporting TOTP
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\broadFileSystemAccess\38343JanPhilippWeber.2fastTwoFactorAuthenticatorSu_nxr4mypqfqb9c" /v "Value" /t REG_SZ /d "Allow" /f
 
 
 rem =================================== Windows Settings ===================================
