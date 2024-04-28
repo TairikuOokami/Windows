@@ -70,13 +70,14 @@ reg delete "HKCR\Drive\shellex\ContextMenuHandlers\EPP" /f
 
 rem Disable services (it will stop WdFilter.sys as well, better not to disable the driver by itself)
 rem reg add "HKLM\System\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d "4" /f
+reg add "HKLM\System\CurrentControlSet\Services\MDCoreSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
-rem Last Tested on Windows 11 Home 22631.3296
-rem Microsoft Defender Platform Version 4.18.24030.4 (14 Mar 2024)
+rem Last Tested on Windows 11 Home 22631.3527
+rem Microsoft Defender Platform Version 4.18.24030.9 (28 Apr 2024)
 rem Before - https://postimg.cc/t7rKpWLF / After - https://postimg.cc/jLLG5Cbm
 
 pause
