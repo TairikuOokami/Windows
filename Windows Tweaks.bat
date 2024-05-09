@@ -140,27 +140,11 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Avira, Bitdefender, ESET, Norton, Sophos are out of question)
-rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/G42c6gjw
-rem 360 Total Security Setup - disable 360 AD Blocker right clicking in systray
-rem 360 Total Security Setup - quit and check do not launch again Desktop Organizer
-rem 360 Total Security Setup - uncheck Join 360 User Experience Improvement Program
-rem Adaware (MT) - https://www.adaware.com/ (Bitdefender's signatures)
-rem AVG (CZ) - https://www.avg.com - https://postimg.cc/N95JB34V
-rem Avast (CZ) - https://www.avast.com - https://postimg.cc/CZHBd5vn
-rem AVG/Avast Setup - Customize - Minimal Protection - File Shield only for max perfomance (DNS can replace web shield avoiding MITM)
-rem AVG/Avast Setup - Menu - Settings - Personal Privacy - uncheck all
-rem AVG/Avast Performance - Menu - Settings - Troubleshooting - uncheck hardware virtualization + LSA protection
-rem AVG/Avast Performance - Menu - Basic protection - Troubleshooting - uncheck hardware virtualization + LSA protection
-rem AVG/Avast Performance - Menu - Basic protection - Core Shield/Detection - Low sensitivity / uncheck CyberCapture + Anti-Rootkit + Generate report
-rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/ZBsbb1xh
-rem Zone Alarm - https://www.zonealarm.com/software/free-antivirus - https://postimg.cc/3d23rVXp
-
-rem AntiVirus software (Cloud only)
-rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://postimg.cc/8JnjJQpS
-rem Panda Setup - Settings - General - Disable Panda News
-rem Panda Perfomance - Settings - Antivirus - Disable PUPs + Behavioral/Set Block files to 10 secs
-rem Panda Perfomance - Settings - Process Monitor/USB - Disable
+rem AntiVirus software
+rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/8jNQ3gxy
+rem AVG (CZ) - https://www.avg.com - https://postimg.cc/4mPkRFgX
+rem Kaspersky - https://usa.kaspersky.com/downloads/free-antivirus - https://postimg.cc/CRKyhHhk
+rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/187kfnXT
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
@@ -212,7 +196,7 @@ rem ESET Online Scanner (SK) - https://www.eset.com/us/home/online-scanner
 rem F-Secure Online Scanner (US) - https://www.f-secure.com/en/home/free-tools/online-scanner
 rem Norton Power Eraser (US) - https://support.norton.com/sp/static/external/tools/npe.html
 rem Panda Cloud Cleaner (ES) - https://www.pandasecurity.com/en-us/homeusers/solutions/cloud-cleaner
-rem Sophos Scan & Clean alas HitmanPro (UK) - https://www.sophos.com/en-us/products/free-tools/virus-removal-tool
+rem Sophos Scan & Clean alas HitmanPro (UK) - https://www.sophos.com/en-us/free-tools/virus-removal-tool
 rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/products/housecall.html
 
 rem Software
@@ -1556,7 +1540,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "32" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "33" /t REG_SZ /d "[*.]vk.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "34" /t REG_SZ /d "[*.]wilderssecurity.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "35" /t REG_SZ /d "[*.]goodreads.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "36" /t REG_SZ /d "[*.]heso-com.sk" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "36" /t REG_SZ /d "[*.]fastshare.cz" /f
 
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
@@ -1642,6 +1626,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "4" /t 
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "5" /t REG_SZ /d "history" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "6" /t REG_SZ /d "openTabs" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "7" /t REG_SZ /d "passwords" /f
+
+rem 1 - Disable Share Microsoft Edge Browsing Data with other Windows Features
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "LocalBrowserDataShareEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Suggest strong passwords
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordGeneratorEnabled" /t REG_DWORD /d "0" /f
