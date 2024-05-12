@@ -1,3 +1,4 @@
+rem Minimum Partition Size 53248 MB (52GB)
 rem Select to Save files locally then Unlink OneDrive to change the location!
 
 pause
