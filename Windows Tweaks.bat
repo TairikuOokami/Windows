@@ -18,12 +18,11 @@ rem Removing Powershell can affect various apps, since more and more require som
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem r/techsupport still hates me because I am me?! Spread the love, not hate!
 
-rem Some news - Finally stable and digitally signed - https://systeminformer.sourceforge.io/downloads.php
+rem Some news
+rem https://techcrunch.com/2024/05/08/encrypted-services-apple-proton-and-wire-helped-spanish-police-identify-activist
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
 rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
-rem https://www.bleepingcomputer.com/news/security/blacklotus-bootkit-bypasses-uefi-secure-boot-on-patched-windows-11
-rem No 2FA is better than SMS 2FA - https://www.businessinsider.com/credit-card-phone-theft-sim-swap-identity-theft-investigation-2023-4
 
 
 rem ________________________________________________________________________________________
@@ -73,7 +72,6 @@ rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-di
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://themarkup.org/blacklight
 rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
-rem Privacy Search Engines: MetaGerm, Neeva.com, Searx - https://searchengine.party
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -109,7 +107,6 @@ rem DNS Family - https://dnsforfamily.com/#DNS_Servers
 rem Enforce Safe Search (=Adult Filter) - https://chrome.google.com/webstore/detail/enforce-safe-search-adult/fiopkogmohpinncfhneadmpkcikmgkgc
 rem NextDNS - https://www.nextdns.io / https://test.nextdns.io / https://ping.nextdns.io / https://github.com/scafroglia93/nextdns-setting/commit/21aba1d2f7442e1017be000ef3fbe5d03b4f4837
 rem OpenDNS - https://www.opendns.com/setupguide/#familyshield
-rem UltraDNS - https://www.publicdns.neustar
 
 rem VPN Comparison / Anonymity
 rem Don't use VPN services - https://gist.github.com/joepie91/5a9909939e6ce7d09e29
@@ -143,15 +140,14 @@ rem =============================== Software recommendations ===================
 rem AntiVirus software
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/8jNQ3gxy
 rem AVG (CZ) - https://www.avg.com - https://postimg.cc/4mPkRFgX
-rem Kaspersky - https://usa.kaspersky.com/downloads/free-antivirus - https://postimg.cc/CRKyhHhk
-rem Microsoft Defender - https://www.defenderui.com - https://postimg.cc/187kfnXT
+rem Kaspersky (RU) - https://usa.kaspersky.com/downloads/free-antivirus - https://postimg.cc/CRKyhHhk
+rem Microsoft Defender (US) - https://www.defenderui.com - https://postimg.cc/187kfnXT
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
+rem CatchPulse Lite (SG) - https://www.secureage.com/products/home-malware-protection
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
 rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
-rem SecureAPlus Freemium (SG) - https://www.secureage.com/products/home-malware-protection
-rem VoodooShield (US) - https://voodooshield.com
 
 rem Browser Extensions useful against (99% malware comes via an email or a browser)
 rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
@@ -169,16 +165,13 @@ rem HiBit Uninstaller - https://hibitsoft.ir
 rem Wise Disk Cleaner - https://www.wisecleaner.com/wise-disk-cleaner.html
 rem Wise Registry Cleaner - https://www.wisecleaner.com/wise-registry-cleaner.html
 
-rem Firewall software
-rem Zone Alarm Firewall (IL) - https://www.zonealarm.com/software/free-firewall
-
 rem Firewall software using Windows Firewall
 rem simplewall (US) - https://www.henrypp.org/product/simplewall
 rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
 rem 360 Total Security Essential (CN) - https://www.360totalsecurity.com/en/features/360-total-security-essential
-rem Comodo Antivirus (US) - https://antivirus.comodo.com
+rem Comodo Antivirus (US) - https://antivirus.comodo.com/free-antivirus.php
 rem Sandboxie - https://github.com/sandboxie-plus/Sandboxie
 
 rem Security cleanup software (portable on-demand scanners, some still leave traces/drivers)
@@ -494,12 +487,6 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE
 
 
 rem =================================== Software Setup =====================================
-
-
-rem Audials
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsApps\AudialsAG.AudialsPlay_2022.0.23400.0_x86__3eby6px24ctcy\Audials\WebView2" /r /d y
-icacls "%ProgramFiles%\WindowsApps\AudialsAG.AudialsPlay_2022.0.23400.0_x86__3eby6px24ctcy\Audials\WebView2" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%ProgramFiles%\WindowsApps\AudialsAG.AudialsPlay_2022.0.23400.0_x86__3eby6px24ctcy\Audials\WebView2" /s /q
 
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
@@ -865,6 +852,7 @@ rem fsutil 8dot3name scan c:\
 fsutil behavior set disable8dot3 1
 
 rem 1 - Disable Bitlocker and Encrypting File System (EFS)
+rem manage-bde -status
 reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d "1" /f
 fsutil behavior set disableencryption 1
 
@@ -1223,6 +1211,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HideRestoreDialogEnabled" /t
 rem 1 - Show Hubs Sidebar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Enable the Designer for Image Editor feature
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImageEditorServiceEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Enable Grammar Tools feature within Immersive Reader
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderGrammarToolsEnabled" /t REG_DWORD /d "0" /f
 
@@ -1246,6 +1237,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewPDFReaderEnabled" /t REG_
 
 rem 1 - Hide the default top sites from the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSites" /t REG_DWORD /d "1" /f
+
+rem 1 - Enable QR Code Generator
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QRCodeGeneratorEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow QUIC protocol
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d "0" /f
@@ -1303,10 +1297,6 @@ reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcutD
 reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "CreateDesktopShortcut{56EB18F8-B008-4CBD-B6D2-8C97FE7E9062}" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\EdgeUpdate" /v "RemoveDesktopShortcutDefault" /t REG_DWORD /d "1" /f
 
-rem ________________________________________________________________________________________
-rem 1 - The Sidebar appears in a fixed position on the Microsoft Windows desktop, and is hidden from the browser application frame
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "StandaloneHubsSidebarEnabled" /t REG_DWORD /d "0" /f
-
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1354,9 +1344,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundTemplateListUpdate
 
 rem 1 - Enable the Search bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchbarAllowed" /t REG_DWORD /d "0" /f
-
-rem 1 - Allow the Search bar at Windows startup
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchbarIsEnabledOnStartup" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -1512,7 +1499,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "4" /t REG_
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "5" /t REG_SZ /d "[*.]discord.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]duckduckgo.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "7" /t REG_SZ /d "[*.]elevenforum.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "8" /t REG_SZ /d "[*.]fastshare.cloud" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "8" /t REG_SZ /d "[*.]tesco.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "9" /t REG_SZ /d "[*.]fio.sk" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "10" /t REG_SZ /d "[*.]forums.mydigitallife.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "11" /t REG_SZ /d "[*.]github.com" /f
@@ -1540,7 +1527,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "32" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "33" /t REG_SZ /d "[*.]vk.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "34" /t REG_SZ /d "[*.]wilderssecurity.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "35" /t REG_SZ /d "[*.]goodreads.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "36" /t REG_SZ /d "[*.]fastshare.cz" /f
 
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
@@ -1578,6 +1564,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInB
 
 rem 1 - Allow users to bypass Enhanced Security Mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityModeAllowUserBypass" /t REG_DWORD /d "0" /f
+
+rem Force the default Search engine and Prevent adding custom search engines
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"DuckDuckGo\",\"keyword\":\"duckduckgo.com\",\"search_url\":\"https://duckduckgo.com/?q={searchTerms}\",\"suggest_url\":\"https://www.duckduckgo.com/qbox?query={searchTerms}\",\"image_search_url\":\"https://www.duckduckgo.com/images/detail/search?iss=sbiupload\"}]" /f
 
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
