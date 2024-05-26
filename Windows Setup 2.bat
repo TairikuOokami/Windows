@@ -3,15 +3,11 @@ start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-f
 
 pause
 
-start "" /wait "D:\OneDrive\Setup\SBZSeriesDriverInstaller.exe"
-
-pause
-
 "C:\Program Files (x86)\Creative\Sound Blaster Command\Creative.SBCommand.exe"
 
 pause
 
-rem Set 75 Hz
+rem Set 165 Hz
 rem Disable Sound Devices
 rem Network Connection - all adapters - Uncheck all but IPv4
 
@@ -56,13 +52,10 @@ rd "C:\Setup" /s /q
 pause
 
 start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-start "" /wait "edge://settings/searchEngines"
-rem https://duckduckgo.com/?q=%s
 
 pause
 
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\NanaZip.lnk"
-start "" "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\2fast - two factor authenticator supporting TOTP.lnk"
 
 pause
 
