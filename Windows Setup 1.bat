@@ -32,7 +32,7 @@ reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "Co
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
 
-start "" "D:\Software"
+start "" "D:\OneDrive\Setup"
 rem Install Chipset Drivers and RESTART!
 rem Install GPU Drivers and RESTART!
 
@@ -192,7 +192,6 @@ rem DISM /Online /Get-Capabilities
 rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
 DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:VBSCRIPT~~~~​
 
 pause
 
@@ -281,13 +280,16 @@ rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folde
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{35286A68-3C57-41A1-BBB1-0EAE73D76C95}" /t REG_EXPAND_SZ /d "D:\Movies" /f
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "My Video" /t REG_EXPAND_SZ /d "D:\Movies" /f
 
-rem Temp Folders to RAMDisk
-reg add "HKCU\Environment" /v "TEMP" /t REG_EXPAND_SZ /d "Z:\TEMP" /f
-reg add "HKCU\Environment" /v "TMP" /t REG_SZ /d "Z:\TEMP" /f
-
 pause
 
 winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --accept-source-agreements
+
+winget install EaseUS.TodoBackup  --accept-package-agreements --accept-source-agreements
+winget install Microsoft.DirectX  --accept-package-agreements --accept-source-agreements
+winget install MPC-BE.MPC-BE  --accept-package-agreements --accept-source-agreements
+winget install SumatraPDF.SumatraPDF --accept-package-agreements --accept-source-agreements
+winget install TheDocumentFoundation.LibreOffice --accept-package-agreements --accept-source-agreements
+winget install XnSoft.XnView.Classic --accept-package-agreements --accept-source-agreements
 
 rem 2fast – Two Factor Authenticator
 winget install --id 9P9D81GLH89Q --exact --source msstore --accept-package-agreements --accept-source-agreements
@@ -295,35 +297,32 @@ winget install --id 9P9D81GLH89Q --exact --source msstore --accept-package-agree
 rem AV1 Video Extension
 winget install --id 9MVZQVXJBQ9V --exact --source msstore --accept-package-agreements --accept-source-agreements
 
-rem EaseUS.TodoBackup
-winget install EaseUS.TodoBackup --accept-package-agreements --accept-source-agreements
-
-rem HEIF Image Extensions
-winget install --id 9PMMSR1CGPWG --exact --source msstore --accept-package-agreements --accept-source-agreements
-
-rem Microsoft DirectX 9.0c End-User Runtime
-winget install Microsoft.DirectX --accept-package-agreements --accept-source-agreements
-
 rem OpenCL™ and OpenGL® Compatibility Pack
 winget install --id 9NQPSL29BFFF --exact --source msstore --accept-package-agreements --accept-source-agreements
 
-rem Web Media Extensions
-winget install --id 9N5TDP8VCMHS --exact --source msstore --accept-package-agreements --accept-source-agreements
+rem Wise Disk Cleaner
+winget install --id XP9CW3GPQQS852 --exact --source msstore --accept-package-agreements --accept-source-agreements
+
+rem Wise Registry Cleaner
+winget install --id XPDLS1XBTXVPP4 --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
 start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup.exe"
-start "" /wait "D:\OneDrive\Setup\SBZMasterInstaller_3.4.98.00.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
 start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
 start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
-start "" /wait "D:\OneDrive\Setup\tb_free_2208B.exe"
+start "" /wait "D:\OneDrive\Setup\D:\OneDrive\Setup\wfc6setup.exe"
+start "" /wait "D:\OneDrive\Setup\SBZSeriesDriverInstaller.exe"
+start "" /wait "D:\OneDrive\Setup\D:\OneDrive\Setup\CreativeSBCommandSetup_3.5.10.00.exe"
 
-start "" /wait "D:\Software"
+rem System Informer
+
+start "" /wait "D:\OneDrive\Setup"
 
 pause
 
-rem Uninstall Store Apps
+rem Uninstall Store Apps, Intall HEVC, Update apps
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\HiBitUninstaller-Portable.exe"
 
 rem Restart in ...
