@@ -2,7 +2,7 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes
-rem https://www.easeus.com/support/todo-backup/enable-disable-pre-os.html
+rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
 rem To be able to install Insider updates, you need to enable:
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
@@ -16,9 +16,9 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
-rem r/techsupport still hates me because I am me?! Spread the love, not hate!
 
 rem Some news
+rem AI Imposter - https://youtu.be/WT8NJk1onC8 / Deep Fake - https://youtu.be/rGIz3Z-QjMQ
 rem https://techcrunch.com/2024/05/08/encrypted-services-apple-proton-and-wire-helped-spanish-police-identify-activist
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
 rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
@@ -105,7 +105,7 @@ rem Cloudflare - https://developers.cloudflare.com/1.1.1.1/1.1.1.1-for-families/
 rem CleanBrowsing - https://cleanbrowsing.org/ip-address - https://categorify.org/recategorize
 rem DNS Family - https://dnsforfamily.com/#DNS_Servers
 rem Enforce Safe Search (=Adult Filter) - https://chrome.google.com/webstore/detail/enforce-safe-search-adult/fiopkogmohpinncfhneadmpkcikmgkgc
-rem NextDNS - https://www.nextdns.io / https://test.nextdns.io / https://ping.nextdns.io / https://github.com/scafroglia93/nextdns-setting/commit/21aba1d2f7442e1017be000ef3fbe5d03b4f4837
+rem NextDNS - https://www.nextdns.io / https://test.nextdns.io / https://ping.nextdns.io
 rem OpenDNS - https://www.opendns.com/setupguide/#familyshield
 
 rem VPN Comparison / Anonymity
@@ -233,7 +233,7 @@ rem Hardware Information / HWiNFO - https://www.hwinfo.com/download.php
 rem Hardware Monitor / HWMonitor - https://www.cpuid.com/softwares/hwmonitor.html
 rem HEVC Video Extensions from Device Manufacturer - https://apps.microsoft.com/store/detail/hevc-video-extensions-from-device-manufacturer/9N4WGH0Z6VHQ?hl=en-us&gl=us
 rem Image Viewer / XnView - https://www.xnview.com/en/xnview/#downloads
-rem Media Player / PotPlayer - https://daumpotplayer.com
+rem Media Player / MPC-BE - https://sourceforge.net/projects/mpcbe
 rem Monitor Test / https://www.testufo.com
 rem NET 3.5 Feature Installer for Windows 10 x86/x64 - https://github.com/abbodi1406/dotNetFx35W10/releases
 rem Network Optimization / TCP Optimizer - https://www.speedguide.net/downloads.php
@@ -266,7 +266,7 @@ rem Search / UltraSearch - https://www.jam-software.com/ultrasearch_free
 rem Settings / ControlUWP - https://github.com/builtbybel/control-uwp/releases
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / XSplit - https://www.xsplit.com
-rem System Imaging / EaseUS Todo Backup Free - https://www.softpedia.com/get/System/Back-Up-and-Recovery/EASEUS-Todo-Backup.shtml
+rem System Imaging / Hasleo Backup Suite - https://www.easyuefi.com/backup-software/backup-suite-free.html
 rem System Restore / Reboot Restore Rx - https://horizondatasys.com/reboot-restore-rx-freeware
 rem Task Manager / System Informer - https://systeminformer.sourceforge.io
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
@@ -339,8 +339,6 @@ rd "%ProgramData%\Microsoft\Network" /s /q
 rd "%ProgramData%\Microsoft\Search" /s /q
 rd "%ProgramData%\Microsoft\SmsRouter" /s /q
 rd "%ProgramData%\Microsoft\Windows Defender\Definition Updates" /s /q
-rd "%ProgramFiles(x86)%\EaseUS\Todo Backup\bin\PEtools" /s /q
-rd "%ProgramFiles(x86)%\EaseUS\Todo Backup\BUILDPE" /s /q
 rd "%SystemDrive%\AMD" /s /q
 rd "%SystemDrive%\OneDriveTemp" /s /q
 rd "%SystemDrive%\PerfLogs" /s /q
@@ -607,9 +605,6 @@ rem Windows Firewall Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
 rem netsh advfirewall firewall add rule name="Genshin Impact TCP" dir=out action=allow protocol=TCP remoteport=80,443,8888,8999 program="D:\genshin impact\genshin impact game\genshinimpact.exe"
 rem netsh advfirewall firewall add rule name="Genshin Impact UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\genshin impact\genshin impact game\genshinimpact.exe"
-rem netsh advfirewall firewall add rule name="EaseUS Todo Backup Aliyunwrapexe TCP" dir=out action=allow protocol=TCP remoteip=47.250.0.0-47.254.255.255 remoteport=80 program="C:\program files (x86)\easeus\todo backup\bin\aliyunwrapexe.exe"
-rem netsh advfirewall firewall add rule name="EaseUS Todo Backup Application TCP" dir=out action=allow protocol=TCP remoteip=184.30.24.206 remoteport=443 program="C:\program files (x86)\easeus\todo backup\bin\tbconsoleui.exe"
-rem netsh advfirewall firewall add rule name="EaseUS Todo Backup Eudownload TCP" dir=out action=allow protocol=TCP remoteip=104.18.18.71,104.18.19.71,205.185.216.10,205.185.216.42 remoteport=443 program="C:\program files (x86)\easeus\todo backup\bin\eudownload.exe"
 rem netsh advfirewall firewall add rule name="MS Background Task Host TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255 remoteport=443 program="C:\windows\system32\backgroundtaskhost.exe"
 rem netsh advfirewall firewall add rule name="Brave TCP" dir=out action=allow protocol=TCP remoteport=443 program="C:\users\tairi\appdata\local\bravesoftware\brave-browser\application\brave.exe"
 rem netsh advfirewall firewall add rule name="Brave UDP" dir=out action=allow protocol=UDP remoteport=443 program="C:\users\tairi\appdata\local\bravesoftware\brave-browser\application\brave.exe"
@@ -716,21 +711,25 @@ reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attr
 rem Remove Gallery from Navigation Pane in File Explorer
 reg add "HKCU\Software\Classes\CLSID\{e88865ea-0e1c-4e20-9aa6-edcd0212c87c}" /v "System.IsPinnedToNameSpaceTree" /t REG_DWORD /d "0" /f
 
-rem Remove Desktop under This PC
+rem Add Desktop under This PC
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /v "HideIfEnabled" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{B4BFCC3A-DB2C-424C-B029-7FE99A87C641}" /v "HiddenByDefault" /f
 
 rem Add Downloads under This PC
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /v "HideIfEnabled" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{088e3905-0323-4b02-9826-5d99428e115f}" /v "HiddenByDefault" /f
 
 rem Add Pictures under This PC
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /v "HideIfEnabled" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{24ad3ad4-a569-4530-98e1-ab02f9417aa8}" /v "HiddenByDefault" /f
 
 rem Remove 3D Folders from This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f
 
 rem Remove Home (Quick access) from This PC
 reg add "HKLM\Software\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace_36354489\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
+reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
 
 rem Remove Documents from This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{d3162b92-9365-467a-956b-92703aca08af}" /f
@@ -1494,7 +1493,7 @@ rem edge://settings/siteData
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "1" /t REG_SZ /d "[*.]account.samsung.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_SZ /d "[*.]alza.sk" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "[*.]deepl.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "[*.]adnxs.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "4" /t REG_SZ /d "[*.]deviantart.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "5" /t REG_SZ /d "[*.]discord.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]duckduckgo.com" /f
@@ -1513,7 +1512,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "18" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "19" /t REG_SZ /d "[*.]mlpforums.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "20" /t REG_SZ /d "[*.]myanimelist.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "21" /t REG_SZ /d "[*.]nextdns.io" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG_SZ /d "[*.]online.mbank.sk" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG_SZ /d "[*.]mbank.sk" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "[*.]pcforum.sk" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "24" /t REG_SZ /d "[*.]poniverse.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "25" /t REG_SZ /d "[*.]primevtc.com" /f
@@ -1527,6 +1526,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "32" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "33" /t REG_SZ /d "[*.]vk.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "34" /t REG_SZ /d "[*.]wilderssecurity.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "35" /t REG_SZ /d "[*.]goodreads.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "36" /t REG_SZ /d "[*.]ce-tescoassets.com" /f
 
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
@@ -1591,10 +1591,10 @@ rem ------------------------------------ Microsoft Edge ------------------------
 rem ...................................... Profiles ........................................
 
 rem 1 - Save and fill personal info
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Save and fill payment info
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
@@ -1953,12 +1953,6 @@ sc config TrkWks start= disabled
 rem dLauncherLoopback
 sc config dLauncherLoopback start= demand
 
-rem EaseUS Agent Service
-sc config "EaseUS Agent" start= disabled
-
-rem EaseUS UPDATE SERVICE
-sc config "EaseUS UPDATE SERVICE" start= disabled
-
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
 
@@ -1973,6 +1967,9 @@ sc config FDResPub start= disabled
 
 rem Geolocation Service
 sc config lfsvc start= disabled
+
+rem Hasleo Backup Suite Service
+sc config "HasleoBackupSuiteService" start= disabled
 
 rem IKE and AuthIP IPsec Keying Modules
 sc config IKEEXT start= disabled
@@ -2543,6 +2540,10 @@ reg add "HKLM\Software\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG
 
 rem 1 - Disable Copilot
 reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f
+reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot" /v "CopilotDisabledReason" /t REG_SZ /d "FeatureIsDisabled" /f
+reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot" /v "IsCopilotAvailable" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f
 
 rem 1 - Show flashing on taskbar apps
@@ -2554,7 +2555,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "T
 rem 1 - Share any Window from Taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarSn" /t REG_DWORD /d "0" /f
 
-rem Search / 0 - Off / 1 - On
+rem Search / 0 - Hide Search on Taskbar / 1 - Show Search Icon Only on Taskbar / 2 - Show Search Box on Taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 
 
@@ -3592,4 +3593,4 @@ rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-up
 rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem https://postimg.cc/Bjh9th21 - Windows Quiet Edition - 65 processes / 600 threads / 23000 handles / 1,8GB RAM (1GB used by ramdisk)
+rem https://postimg.cc/Mn5gsqH4 - Windows 11 Home 24H2 Quiet Edition - 70 processes / 700 threads / 24300 handles / 2,9GB RAM (1GB used by ramdisk)
