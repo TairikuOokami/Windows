@@ -144,6 +144,7 @@ rem Kaspersky (RU) - https://usa.kaspersky.com/downloads/free-antivirus - https:
 rem Microsoft Defender (US) - https://www.defenderui.com - https://postimg.cc/187kfnXT
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
+rem AppCheck (KR) - https://www.checkmal.com/product/appcheck
 rem CatchPulse Lite (SG) - https://www.secureage.com/products/home-malware-protection
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
@@ -1213,9 +1214,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_D
 rem 1 - Enable the Designer for Image Editor feature
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImageEditorServiceEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Enable Grammar Tools feature within Immersive Reader
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderGrammarToolsEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - Enable Picture Dictionary feature within Immersive Reader
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderPictureDictionaryEnabled" /t REG_DWORD /d "0" /f
 
@@ -1310,9 +1308,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeCollectionsEnabled" /t R
 rem 1 - Show favorites bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "FavoritesBarEnabled" /t REG_DWORD /d "1" /f
 
-rem 1 - Show Math Solver button
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MathSolverEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - The performance detector detects tab performance issues and recommends actions to fix the performance issues
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
 
@@ -1327,6 +1322,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsToolbarButton" 
 
 rem 1 - Show home button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowHomeButton" /t REG_DWORD /d "0" /f
+
+rem 1 - nable split screen feature
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SplitScreenEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Show feedback button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UserFeedbackAllowed" /t REG_DWORD /d "0" /f
@@ -2253,7 +2251,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AppCaptureE
 rem 1 - Capture audio when recording a game
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "AudioCaptureEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Capture mosue cursor when recording a game
+rem 1 - Capture mouse cursor when recording a game
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\GameDVR" /v "CursorCaptureEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
@@ -2619,6 +2617,15 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 rem ________________________________________________________________________________________
 rem Allow/Deny - Allow access to account info on this device
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Deny" /f
+
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------- Privacy & security ----------------------------------
+rem ................................... Activity history ...................................
+
+rem 1 - Store my activity history on this device
+reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
