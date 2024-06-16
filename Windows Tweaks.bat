@@ -474,6 +474,7 @@ bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "%LocalAppData%\Microsoft\OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
@@ -1942,9 +1943,6 @@ sc config Dhcp start= disabled
 rem Display Enhancement Service
 sc config DisplayEnhancementService start= disabled
 
-rem Display Policy Service
-sc config DispBrokerDesktopSvc start= disabled
-
 rem Distributed Link Tracking Client
 sc config TrkWks start= disabled
 
@@ -2623,7 +2621,7 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ................................... Activity history ...................................
 
-rem 1 - Store my activity history on this device
+rem 1 - Store my activity history on this device (not really working on 24H2)
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /t REG_DWORD /d "0" /f
 
