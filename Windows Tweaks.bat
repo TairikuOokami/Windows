@@ -18,6 +18,7 @@ rem Removing Powershell can affect various apps, since more and more require som
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 
 rem Some news
+rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
 rem AI Imposter - https://youtu.be/WT8NJk1onC8 / Deep Fake - https://youtu.be/rGIz3Z-QjMQ
 rem https://techcrunch.com/2024/05/08/encrypted-services-apple-proton-and-wire-helped-spanish-police-identify-activist
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
@@ -220,7 +221,6 @@ rem Disk Scan / HDDScan - https://hddscan.com
 rem Disk Space Usage / WizTree - https://wiztreefree.com
 rem Disk Speed Test / CCSIO Benchmark - https://ccsiobench.com
 rem Disk Surface Test / Macrorit Disk Scanner - https://macrorit.com/disk-surface-test/disk-surface-test.html
-rem Driver Updates / Driver Easy - https://www.drivereasy.com
 rem DVD to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
 rem eMail / SimpleLogin - https://simplelogin.io/pricing
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
@@ -474,7 +474,7 @@ bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "%LocalAppData%\Microsoft\OneDrive\OneDrive.exe /background" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Users\Tairi\AppData\Local\Microsoft\OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
@@ -1492,7 +1492,7 @@ rem edge://settings/siteData
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "1" /t REG_SZ /d "[*.]account.samsung.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_SZ /d "[*.]alza.sk" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "[*.]adnxs.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "4" /t REG_SZ /d "[*.]deviantart.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "5" /t REG_SZ /d "[*.]discord.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]duckduckgo.com" /f
@@ -1862,6 +1862,7 @@ rem Delivery Optimization / required by Windows Updates
 rem DevicesFlow / required to open Settings - Bluetooth and devices 
 rem Diagnostic Policy Service / required by Windows Diagnostic (Troubleshooting)
 rem DHCP Client / sometimes required by Windows Updates (0x80240022)
+rem Display Policy Service / to keep display's settings like a refresh rate
 rem Distributed Link Tracking Client / sometimes required to open shortcuts and System apps - "Windows cannot access the specified device, path, or file. You may not have the appropriate permission to access the item"
 rem Geolocation Service / required by some Windows Store apps, it can not be enabled when Connected User Experiences and Telemetry is disabled
 rem Microsoft Account Sign-in Assistant / required to login to Microsoft Account
@@ -1963,6 +1964,9 @@ sc config FDResPub start= disabled
 
 rem Geolocation Service
 sc config lfsvc start= disabled
+
+rem Hasleo Backup Suite Image Mount Service
+sc config "HasleoImageMountService" start= disabled
 
 rem Hasleo Backup Suite Service
 sc config "HasleoBackupSuiteService" start= disabled
@@ -2335,12 +2339,12 @@ rem Disable WinInetCacheServer (WinINet Caching/V01.log/WebCacheV01.dat)
 rem %LocalAppData%\Microsoft\Windows\WebCache
 rem Take Ownership of the Registry key - https://www.youtube.com/watch?v=M1l5ifYKefg
 rem CacheTask is required to be able to change PIN/password at lockscreen via Microsoft WWA Host (wwahost.exe) upon TPM reset after BIOS update
-reg delete "HKCR\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
-reg delete "HKCR\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
-reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
-reg delete "HKCR\Wow6432Node\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
-reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
-reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
+rem reg delete "HKCR\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
+rem reg delete "HKCR\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
+rem reg delete "HKCR\Wow6432Node\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
+rem reg delete "HKCR\Wow6432Node\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
+rem reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\AppID\{3eb3c877-1f16-487c-9050-104dbcd66683}" /f
+rem reg delete "HKLM\SOFTWARE\Wow6432Node\Classes\CLSID\{0358b920-0ac7-461f-98f4-58e32cd89148}" /v "AppID" /f
 rem schtasks /Change /TN "Microsoft\Windows\Wininet\CacheTask" /Disable
 
 rem 0 - Disable WiFi Sense (shares your WiFi network login with other people)
@@ -3076,6 +3080,9 @@ rem ____________________________________________________________________________
 rem Encrypt the Pagefile
 rem fsutil behavior set EncryptPagingFile 1
 
+rem Disable Display Mode Change Animation
+reg add "HKLM\Software\Microsoft\Windows\Dwm" /v "ForceDisableModeChangeAnimation" /t REG_DWORD /d "1" /f
+
 rem Disable Remote Assistance
 sc config RemoteRegistry start= disabled
 reg add "HKLM\Software\Policies\Microsoft\Windows\WinRM\Service\WinRS" /v "AllowRemoteShellAccess" /t REG_DWORD /d "0" /f
@@ -3429,7 +3436,7 @@ rem Repair bad sectors
 rem chkdsk %SystemDrive% /r
 
 rem Reset digital certificates used by Windows and browsers
-rem https://www.thewindowsclub.com/catroot-catroot2-folder-reset-windows
+https://www.howtoedge.com/purge-the-catroot2-folder
 
 rem Reset password/gain admin access/enable local admin account
 rem https://www.technibble.com/bypass-windows-logons-utilman/
