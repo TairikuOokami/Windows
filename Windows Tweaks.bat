@@ -20,6 +20,7 @@ rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem Some news
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
 rem AI Imposter - https://youtu.be/WT8NJk1onC8 / Deep Fake - https://youtu.be/rGIz3Z-QjMQ
+rem https://www.pandasecurity.com/en/mediacenter/how-the-eu-is-about-to-violate-your-privacy
 rem https://techcrunch.com/2024/05/08/encrypted-services-apple-proton-and-wire-helped-spanish-police-identify-activist
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
 rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
@@ -1185,9 +1186,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DNSInterceptionChecksEnabled
 rem 1 - Drop lets users send messages or files to themselves
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEDropEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Allows the Microsoft Edge browser to enable Follow service and apply it to users
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeFollowEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - Microsoft Edge will attempt to connect to the Microsoft Edge management service to download and apply policy assigned to the Azure AD account of the user
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeManagementEnabled" /t REG_DWORD /d "0" /f
 
@@ -1753,6 +1751,7 @@ schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.
 schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64 Critical" /Disable
 schtasks /Change /TN "Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 Critical" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" /Disable
+schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser Exp" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\PcaPatchDbTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\SdbinstMergeDbTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable
@@ -3424,6 +3423,7 @@ rem https://www.wicar.org/test-malware.html
 
 rem Malware URL Check
 rem https://urlscan.io
+rem https://www.malware-traffic-analysis.net
 rem https://www.virustotal.com/gui/home/url
 rem https://www.urlvoid.com
 
@@ -3436,7 +3436,7 @@ rem Repair bad sectors
 rem chkdsk %SystemDrive% /r
 
 rem Reset digital certificates used by Windows and browsers
-https://www.howtoedge.com/purge-the-catroot2-folder
+rem https://www.howtoedge.com/purge-the-catroot2-folder
 
 rem Reset password/gain admin access/enable local admin account
 rem https://www.technibble.com/bypass-windows-logons-utilman/
