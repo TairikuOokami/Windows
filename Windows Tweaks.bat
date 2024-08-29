@@ -93,7 +93,7 @@ rem https://blog.emsisoft.com/2015/01/17/has-the-antivirus-industry-gone-mad
 rem https://www.makeuseof.com/tag/antivirus-tracking-youd-surprised-sends/
 
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
-rem DNS Check / https://dnscheck.tools/#advanced
+rem DNS Check / https://dnscheck.tools
 rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dynamic-dns-domains
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
@@ -128,7 +128,6 @@ rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
 rem dism /Get-WimInfo /WimFile:E:\sources\install.wim /index:1
 rem dism /Get-WimInfo /WimFile:E:\sources\install.esd /index:1
 
-rem https://blogs.msmvps.com/brink
 rem https://www.elevenforum.com/t/create-shortcuts-to-open-pages-in-settings-in-windows-11.522
 rem https://www.elevenforum.com/t/keyboard-shortcuts-in-windows-11.2253
 rem https://www.elevenforum.com/t/list-of-uri-commands-to-open-microsoft-store-apps-in-windows-11.2683
@@ -142,7 +141,7 @@ rem =============================== Software recommendations ===================
 rem AntiVirus software
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/8jNQ3gxy
 rem AVG (CZ) - https://www.avg.com - https://postimg.cc/4mPkRFgX
-rem Kaspersky (RU) - https://usa.kaspersky.com/downloads/free-antivirus - https://postimg.cc/CRKyhHhk
+rem Kaspersky (RU) - https://www.kaspersky.com/downloads/free-antivirus - https://postimg.cc/CRKyhHhk
 rem Microsoft Defender (US) - https://www.defenderui.com - https://postimg.cc/187kfnXT
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
@@ -475,7 +474,6 @@ bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Users\Tairi\AppData\Local\Microsoft\OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
@@ -1317,7 +1315,7 @@ rem 1 - Show mini menu when selecting text
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickSearchShowMiniMenu" /t REG_DWORD /d "0" /f
 
 rem 1 - Always show the Downloads button on the toolbar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsToolbarButton" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsToolbarButton" /t REG_DWORD /d "0" /f
 
 rem 1 - Show home button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowHomeButton" /t REG_DWORD /d "0" /f
@@ -1418,6 +1416,9 @@ rem ____________________________________________________________________________
 rem 1 - Blocks external extensions from being installed
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BlockExternalExtensions" /t REG_DWORD /d "1" /f
 
+rem 1 - EnabledForBrowser (Prevent the browser process from creating dynamic code) / 0 - Default
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExtensionDeveloperModeSettings" /t REG_DWORD /d "1" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1490,7 +1491,7 @@ rem edge://settings/siteData
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "1" /t REG_SZ /d "[*.]account.samsung.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_SZ /d "[*.]alza.sk" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "[*.]netflix.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "4" /t REG_SZ /d "[*.]deviantart.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "5" /t REG_SZ /d "[*.]discord.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]duckduckgo.com" /f
@@ -1846,8 +1847,9 @@ schtasks /Change /TN "Microsoft\Windows\WwanSvc\OobeDiscovery" /Disable
 rem ================================== Windows Services ====================================
 
 
-rem https://docs.microsoft.com/en-us/windows/application-management/per-user-services-in-windows
-rem https://docs.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server
+rem https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services
+rem https://learn.microsoft.com/en-us/windows/application-management/per-user-services-in-windows
+rem https://learn.microsoft.com/en-us/windows-server/security/windows-services/security-guidelines-for-disabling-system-services-in-windows-server
 
 rem Application Information / required by UAC
 rem AppX Deployment Service (AppXSVC) / required by Store
@@ -2315,9 +2317,9 @@ rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("1.1.1.2
 
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
-wmic nicconfig where macaddress="00:D8:61:6E:E8:C5" call SetGateways ("192.168.9.1")
+wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
+wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
+wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
 rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
 
@@ -2530,7 +2532,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "S
 rem Taskbar Alignment / 0 - Left / 1 - Center
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarAl" /t REG_DWORD /d "0" /f
 
-rem Widgets / 0 - Off / 1 - On
+rem Widgets / 0 - Off / 1 - On (blocked in 24H2/1586)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarDa" /t REG_DWORD /d "0" /f
 
 rem 0 - Disable Widgets
@@ -2982,10 +2984,10 @@ rem --------------------------------------- System -----------------------------
 rem ........................................ About .........................................
 
 rem Rename this PC: LianLiPC-7NB (Computer name should not be longer than 15 characters, no spaces either)
-reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
-reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "LianLiPC-7NB" /f
-reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
-reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "LianLiPC-7NB" /f
+reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" /v "ComputerName" /t REG_SZ /d "FDDefine7Mini" /f
+reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "FDDefine7Mini" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "FDDefine7Mini" /f
+reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "FDDefine7Mini" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2996,13 +2998,13 @@ rem . . . . . . . . . . . . . . . . . . . System info . . . . . . . . . . . . . 
 rem ________________________________________________________________________________________
 rem Support
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Manufacturer" /t REG_SZ /d "TairikuOkami" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "MSI Radeon RX 580 ARMOR 8G OC" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Model" /t REG_SZ /d "Asrock AMD Radeon RX 6600 Challenger D 8GB" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportHours" /t REG_SZ /d "Within 24-48 hours" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportPhone" /t REG_SZ /d "TairikuOkami@pm.me" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "SupportURL" /t REG_SZ /d "https://www.elevenforum.com/members/tairikuokami.78" /f
 
 rem Computer Description
-reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "400/40 MBps" /f
+reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "500/100 MBps" /f
 
 rem System info (Logo - 120x120.bmp)
 rem shell:::{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}
