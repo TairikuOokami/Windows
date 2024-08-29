@@ -1,7 +1,7 @@
 rem Delete Windows Recovery Partition / Extend Windows Partition
-start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-free-portable\x64\dm.exe"
+rem start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-free-portable\x64\dm.exe"
 
-pause
+rem pause
 
 "C:\Program Files (x86)\Creative\Sound Blaster Command\Creative.SBCommand.exe"
 
@@ -113,14 +113,14 @@ pause
 rem Update Drivers!
 rem Enable - Disk Drives - XPG Policies
 rem Enable - Hidden devices
-rem Disable Audio Inputs - All not used
+
+rem Disable Display Adapters - AMD Radeon 760M
 rem Disable IDE ATA - All not used
-rem Disable Network Adapters - All not used
-rem Disable Ports - All not used
+rem Disable Neural Processors - NPU
 rem Disable Security Devices - AMD PSP
 rem Disable Software Devices - All not used
-rem Disable Sound - AMD HDAD, AMD Streaming
-rem Disable System Devices - AMD Crash Defender, AMD Link, AMD SMBus, Composite Bus Enumerator, MS Hyper-V, NDIS Virtual, Remote Desktop, System Speaker, UMBus
+rem Disable Sound - All not used
+rem Disable System Devices - AMD Controller, AMD Crash Defender, MS Hyper-V, NDIS Virtual, Remote Desktop, System Speaker
 devmgmt.msc
 
 pause
