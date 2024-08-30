@@ -1756,6 +1756,7 @@ schtasks /Change /TN "Microsoft\Windows\Application Experience\Microsoft Compati
 schtasks /Change /TN "Microsoft\Windows\Application Experience\PcaPatchDbTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\SdbinstMergeDbTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable
 schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /Disable
 schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable
 schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable
@@ -2040,6 +2041,9 @@ sc config OneSyncSvc start= disabled
 
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
+
+rem UserChoice Protection Driver (UCPD) - required to change reg values for ShellFeedsTaskbarViewMode/IsFeedsAvailable/TaskbarDa/DeviceRegion
+sc config ucpd start= disabled
 
 rem WebClient
 sc config WebClient start= disabled
