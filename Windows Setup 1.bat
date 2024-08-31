@@ -192,6 +192,7 @@ Dism /Online /Disable-Feature /FeatureName:Printing-Foundation-Features /Quiet /
 Dism /Online /Disable-Feature /FeatureName:Printing-Foundation-InternetPrinting-Client /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Printing-PrintToPDFServices-Features /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Printing-XPSServices-Features /Quiet /NoRestart
+Dism /Online /Disable-Feature /FeatureName:Recall /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:SMB1Protocol /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:SearchEngine-Client-Package /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:WCF-TCP-PortSharing45 /Quiet /NoRestart
