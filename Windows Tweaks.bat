@@ -1,6 +1,9 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
+rem rtech.support still hates LGBT :(
+
+
 rem Create a system backup to reverse any changes
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
@@ -2042,7 +2045,7 @@ sc config OneSyncSvc start= disabled
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
 
-rem UserChoice Protection Driver (UCPD) - required to change reg values for ShellFeedsTaskbarViewMode/IsFeedsAvailable/TaskbarDa/DeviceRegion
+rem UserChoice Protection Driver (UCPD) - disable to be able to change reg values for ShellFeedsTaskbarViewMode/IsFeedsAvailable/TaskbarDa/DeviceRegion
 sc config ucpd start= disabled
 
 rem WebClient
