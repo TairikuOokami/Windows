@@ -1,5 +1,7 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
+rem rtech.support still hates LGBT :(
+
 rem NOTE: It is highly recommended to install Platform Updates sometimes (monthly) because they affect Windows protection as well, like System Guard!
 rem https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
 rem Search a version number to update Defender manually, like: https://www.catalog.update.microsoft.com/Search.aspx?q=4.18.23110.3
