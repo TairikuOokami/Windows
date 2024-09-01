@@ -1,9 +1,6 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem rtech.support still hates LGBT :(
-
-
 rem Create a system backup to reverse any changes
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
@@ -1779,11 +1776,14 @@ schtasks /Change /TN "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload
 schtasks /Change /TN "Microsoft\Windows\FileHistory\File History (maintenance mode)" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeatures" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushing" /Disable
+schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataReceiver" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\OneSettings\RefreshCache" /Disable
+schtasks /Change /TN "Microsoft\Windows\Input\InputSettingsRestoreDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\LocalUserSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\MouseSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\PenSyncDataAvailable" /Disable
+schtasks /Change /TN "Microsoft\Windows\Input\syncpensettings" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\TouchpadSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\International\Synchronize Language Settings" /Disable
 schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\Installation" /Disable
@@ -1791,6 +1791,7 @@ schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\ReconcileLan
 schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\Uninstallation" /Disable
 schtasks /Change /TN "Microsoft\Windows\License Manager\TempSignedLicenseExchange" /Disable
 schtasks /Change /TN "Microsoft\Windows\License Manager\TempSignedLicenseExchange" /Disable
+schtasks /Change /TN "Microsoft\Windows\Location\WindowsActionDialog" /Disable
 schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Cellular" /Disable
 schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Logon" /Disable
 schtasks /Change /TN "Microsoft\Windows\Maintenance\WinSAT" /Disable
@@ -1800,6 +1801,7 @@ schtasks /Change /TN "Microsoft\Windows\MUI\LPRemove" /Disable
 schtasks /Change /TN "Microsoft\Windows\Multimedia\SystemSoundsService" /Disable
 schtasks /Change /TN "Microsoft\Windows\NlaSvc\WiFiTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable
+schtasks /Change /TN "Microsoft\Windows\Network Connectivity Status Indicator\NcsiIdentifyUserProxies" /Disable
 schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
 schtasks /Change /TN "Microsoft\Windows\Printing\EduPrintProv" /Disable
@@ -1817,11 +1819,12 @@ schtasks /Change /TN "Microsoft\Windows\Setup\SnapshotCleanupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyMonitor" /Disable
 schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyRefreshTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Shell\ThemesSyncedImageDownload" /Disable
-schtasks /Change /TN "Microsoft\Windows\Shell\UpdateUserPictureTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceAgentTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceManagerTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Storage Tiers Management\Storage Tiers Management Initialization" /Disable
+schtasks /Change /TN "Microsoft\Windows\Sustainability\PowerGridForecastTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Sustainability\SustainabilityTelemetry" /Disable
 schtasks /Change /TN "Microsoft\Windows\Sysmain\ResPriStaticDbSync" /Disable
 schtasks /Change /TN "Microsoft\Windows\Sysmain\WsSwapAssessmentTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Task Manager\Interactive" /Disable
@@ -1957,9 +1960,6 @@ sc config dLauncherLoopback start= demand
 
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
-
-rem FileSyncHelper
-sc config FileSyncHelper start= disabled
 
 rem Function Discovery Provider Host
 sc config fdPHost start= disabled
