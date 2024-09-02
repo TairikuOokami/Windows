@@ -474,6 +474,7 @@ bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "BlueMail" /t REG_SZ /d "C:\WINDOWS\explorer.exe me.blueone.win:noopt:hidden" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
@@ -498,7 +499,7 @@ reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosX" /t REG_DWORD /d "4294
 reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosY" /t REG_DWORD /d "436" /f
 
 rem Regedit
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "View" /t REG_BINARY /d "2c0000000000000001000000fffffffffffffffffffffffffffffffff7ffffff50020000850700003e0400002f01000027010000780000002502000003000000" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Applets\Regedit" /v "View" /t REG_BINARY /d "2c0000000000000001000000fffffffffffffffffffffffffffffffff7ffffff1c020000850700003e0400002f01000027010000780000002502000003000000" /f
 
 rem TruckersMP
 rem takeown /s %computername% /u %username% /f "%ProgramData%\TruckersMP" /r /d y
@@ -863,12 +864,19 @@ fsutil behavior set disablelastaccess 3
 rem 2 - Raise the limit of paged pool memory / 1 - Default
 fsutil behavior set memoryusage 2
 
-rem 0 - Default / 1 - On / 2 - Off
+rem System Guard / 0 - Default / 1 - On / 2 - Off
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "ConfigureSystemGuardLaunch" /t REG_DWORD /d "2" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "Locked" /t REG_DWORD /d "0" /f
 
 rem 1 - Enable virtualization-based security / run msinfo32 to check
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f
+
+rem Platform Security Level / 1 - Turns on VBS with Secure Boot / 3 - Turns on VBS with Secure Boot and DMA
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d "1" /f
+
+rem Credential Guard / 1 - Disabled (Default) / 2 - Enabled / 3 - 	Enabled without making it persist to the UEFI
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "LsaCfgFlags" /t REG_DWORD /d "0" /f
 
 rem 1 - Require UEFI Memory Attributes Table
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HVCIMATRequired" /t REG_DWORD /d "0" /f
@@ -1802,6 +1810,7 @@ schtasks /Change /TN "Microsoft\Windows\Multimedia\SystemSoundsService" /Disable
 schtasks /Change /TN "Microsoft\Windows\NlaSvc\WiFiTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable
 schtasks /Change /TN "Microsoft\Windows\Network Connectivity Status Indicator\NcsiIdentifyUserProxies" /Disable
+schtasks /Change /TN "Microsoft\Windows\PerformanceTrace\RequestTrace" /Disable
 schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
 schtasks /Change /TN "Microsoft\Windows\Printing\EduPrintProv" /Disable
@@ -1842,6 +1851,7 @@ schtasks /Change /TN "Microsoft\Windows\WDI\ResolutionHost" /Disable
 schtasks /Change /TN "Microsoft\Windows\Windows Filtering Platform\BfeOnServiceStartTypeChange" /Disable
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Scheduled Start" /Disable
 schtasks /Change /TN "Microsoft\Windows\WlanSvc\CDSSync" /Disable
+schtasks /Change /TN "Microsoft\Windows\WlanSvc\MoProfileManagement" /Disable
 schtasks /Change /TN "Microsoft\Windows\WOF\WIM-Hash-Management" /Disable
 schtasks /Change /TN "Microsoft\Windows\WOF\WIM-Hash-Validation" /Disable
 schtasks /Change /TN "Microsoft\Windows\Work Folders\Work Folders Logon Synchronization" /Disable
