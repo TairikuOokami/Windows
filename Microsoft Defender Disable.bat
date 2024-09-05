@@ -1,6 +1,5 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-rem rtech.support still hates LGBT :(
 
 rem NOTE: It is highly recommended to install Platform Updates sometimes (monthly) because they affect Windows protection as well, like System Guard!
 rem https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
@@ -79,7 +78,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
 rem Last Tested on Windows 11 Home 26100.994
-rem Microsoft Defender Platform Version 4.18.24060.5 (22-Jun-2024)
-rem Before - https://postimg.cc/9wGFrLm7 / After - https://postimg.cc/ZvFw5TFR
+rem Microsoft Defender Platform Version 4.18.24070.5 (05-Sep-2024)
+rem Before - https://postimg.cc/GBNGqVBp / After - https://postimg.cc/n9KmVL3s
 
 pause
