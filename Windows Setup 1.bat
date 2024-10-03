@@ -1,9 +1,10 @@
 rem Minimum Partition Size 53248 MB (52GB)
 rem Select to Save files locally then Unlink OneDrive to change the location!
+rem Unlock Personal Vault afterwards to install OneDrive in a proper location!
 
 pause
 
-rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++
+rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9
 reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
 start windowsdefender:
@@ -22,6 +23,7 @@ rem reagentc /info
 rem reagentc /disable
 
 rem Disable Reserved Storage (7GB)
+rem fsutil storagereserve query C:
 Dism /Online /Set-ReservedStorageState /State:Disabled /Quiet /NoRestart
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "MiscPolicyInfo" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
@@ -54,10 +56,10 @@ icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D: /grant "System":(OI)(CI)RX /t /l /q /c
 icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
 
-takeown /s %computername% /u %username% /f D: /r /d y
+takeown /s %computername% /u %username% /f E: /r /d y
 icacls E: /inheritance:r
 icacls E: /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls E: /grant "System":(OI)(CI)RX /t /l /q /c
+icacls E: /grant "System":(OI)(CI)F /t /l /q /c
 icacls E: /grant "Users":(OI)(CI)RX /t /l /q /c
 
 rem Remove the user from D:\
@@ -65,17 +67,11 @@ explorer
 
 pause
 
-takeown /s %computername% /u %username% /f "D:\Backups" /r /d y
-icacls "D:\Backups" /inheritance:r
-icacls "D:\Backups" /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls "D:\Backups" /grant:r "System":(OI)(CI)F /t /l /q /c
-icacls "D:\Backups" /grant "Users":(OI)(CI)RX /t /l /q /c
-
-takeown /s %computername% /u %username% /f D:\RamDisk /r /d y
-icacls D:\RamDisk /inheritance:r
-icacls D:\RamDisk /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\RamDisk /grant:r "System":(OI)(CI)F /t /l /q /c
-icacls D:\RamDisk /grant "Users":(OI)(CI)RX /t /l /q /c
+takeown /s %computername% /u %username% /f D:\OneDrive /r /d y
+icacls D:\OneDrive /inheritance:r
+icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\OneDrive /grant "System":(OI)(CI)RX /t /l /q /c
+icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\Steam /r /d y
 icacls D:\Steam /inheritance:r
@@ -125,14 +121,16 @@ manage-bde -off C:
 manage-bde -off D:
 cipher /d /s:C:\
 
-rem Enable Windows File Compression
+rem Windows File Compression
 rem compact /compactos:query
-fsutil behavior set disablecompression 0
-compact /CompactOs:always
-compact /c /i /q /f /s:C:\
-compact /u /i /q /f /s:Z:\
-compact /u /i /q /f /s:D:\Documents\
-compact /u /i /q /f /s:D:\OneDrive\Pictures\
+fsutil behavior set disablecompression 1
+compact /compactos:never
+rem compact /CompactOs:always
+rem compact /c /i /q /f /s:C:\
+rem compact /u /i /q /f /s:C:\
+rem compact /u /i /q /f /s:Z:\
+rem compact /u /i /q /f /s:D:\Documents\
+rem compact /u /i /q /f /s:D:\OneDrive\Pictures\
 
 rem Disable pagefile
 rem fsutil behavior set EncryptPagingFile 1
@@ -154,10 +152,15 @@ reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "EnableICS
 wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
 wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
 wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
 wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
+
+rem Enable DoT
+netsh dns set global doh=no
+netsh dns add global dot=yes
+netsh dns add encryption server=1.1.1.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
+netsh dns add encryption server=1.0.0.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
 
 rem Setup DoH and then Change Adapter's ID in Unvalidate
 rem https://github.com/adamhl8/batch-scripts/blob/main/win11-set-doh.cmd
