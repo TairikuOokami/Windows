@@ -16,6 +16,7 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
+rem DoH disabled / DoT enabled - netsh dns show global
 
 rem Some news
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
@@ -124,9 +125,9 @@ rem https://genuine-iso-verifier.weebly.com
 rem https://massgrave.dev/genuine-installation-media.html
 
 rem Check ISO Windows versions and build version
-rem dism /Get-WimInfo /WimFile:E:\sources\install.wim
-rem dism /Get-WimInfo /WimFile:E:\sources\install.wim /index:1
-rem dism /Get-WimInfo /WimFile:E:\sources\install.esd /index:1
+rem dism /Get-WimInfo /WimFile:F:\sources\install.wim
+rem dism /Get-WimInfo /WimFile:F:\sources\install.wim /index:1
+rem dism /Get-WimInfo /WimFile:F:\sources\install.esd /index:1
 
 rem https://www.elevenforum.com/t/create-shortcuts-to-open-pages-in-settings-in-windows-11.522
 rem https://www.elevenforum.com/t/keyboard-shortcuts-in-windows-11.2253
@@ -605,21 +606,7 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-rem netsh advfirewall firewall add rule name="Genshin Impact TCP" dir=out action=allow protocol=TCP remoteport=80,443,8888,8999 program="D:\genshin impact\genshin impact game\genshinimpact.exe"
-rem netsh advfirewall firewall add rule name="Genshin Impact UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\genshin impact\genshin impact game\genshinimpact.exe"
-rem netsh advfirewall firewall add rule name="MS Background Task Host TCP" dir=out action=allow protocol=TCP remoteip=20.33.0.0-20.128.255.255 remoteport=443 program="C:\windows\system32\backgroundtaskhost.exe"
-rem netsh advfirewall firewall add rule name="Brave TCP" dir=out action=allow protocol=TCP remoteport=443 program="C:\users\tairi\appdata\local\bravesoftware\brave-browser\application\brave.exe"
-rem netsh advfirewall firewall add rule name="Brave UDP" dir=out action=allow protocol=UDP remoteport=443 program="C:\users\tairi\appdata\local\bravesoftware\brave-browser\application\brave.exe"
-rem netsh advfirewall firewall add rule name="Brave Update TCP" dir=out action=allow protocol=TCP remoteport=80,443 program="C:\users\tairi\appdata\local\bravesoftware\update\braveupdate.exe"
 rem netsh advfirewall firewall add rule name="MS Consent UI TCP" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,93.184.220.29,104.16.0.0-104.31.255.255,172.64.0.0-172.71.255.255,192.229.128.0-192.229.255.255 remoteport=80 program="C:\windows\system32\consent.exe"
-rem netsh advfirewall firewall add rule name="Creative TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\program files (x86)\creative\sound blaster command\creative.sbcommand.exe"
-rem netsh advfirewall firewall add rule name="eID TCP" dir=out action=allow protocol=TCP remoteip=213.0.0.0-213.255.255.255 remoteport=443 program="C:\program files (x86)\eid_klient\eid_client.exe"
-
-rem netsh advfirewall firewall add rule name= "Genshin Impact ICMP V4" protocol=icmpv4:any,any dir=out action=allow program="D:\genshin impact\genshin impact game\genshinimpact.exe"
-rem netsh advfirewall firewall add rule name="MS Svchost DoH 443" dir=out action=allow protocol=TCP remoteip=9.9.9.9,45.90.28.99,45.90.30.99 remoteport=443 program="C:\windows\system32\svchost.exe"
-rem netsh advfirewall firewall add rule name="MS Svchost TCP 80" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,2.16.10.0-2.16.11.255,2.19.196.0-2.19.199.255,2.19.32.0-2.19.47.255,2.21.64.0-2.21.79.255,2.21.172.0-2.21.172.255,2.23.0.0-2.23.15.255,4.240.0.0-4.255.255.255,8.0.0.0-8.127.255.255,8.224.0.0-8.241.255.255,8.244.0.0-8.255.255.255,13.64.0.0-13.107.255.255,20.33.0.0-20.128.255.255,20.192.0.0-20.255.255.255,23.0.0.0-23.15.255.255,23.32.0.0-23.67.255.255,23.72.0.0-23.79.255.255,23.192.0.0-23.223.255.255,34.192.0.0-34.255.255.255,45.90.28.0-45.90.31.255,52.0.0.0-52.79.255.255,52.145.0.0-52.191.255.255,67.24.0.0-67.31.255.255,68.232.32.0-68.232.47.255,81.171.68.0-81.171.69.255,87.245.215.0-87.245.215.95,84.53.161.0-84.53.161.255,92.123.0.0-92.123.15.255,93.184.220.0-93.184.223.255,94.46.144.0-94.46.159.255,95.100.144.0-95.100.159.255,100.20.0.0-100.31.255.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,152.176.0.0-152.199.255.255,168.61.0.0-168.63.255.255,172.64.0.0-172.71.255.255,178.79.226.0-178.79.227.255,184.24.0.0-184.31.255.255,192.229.221.95,209.197.0.0-209.197.31.255 remoteport=80 program="C:\windows\system32\svchost.exe"
-rem netsh advfirewall firewall add rule name="MS Svchost TCP 443" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,2.16.30.0-2.16.31.255,2.17.96.0-2.17.115.255,2.18.16.0-2.18.31.255,2.18.32.0-2.18.47.255,2.18.160.0-2.18.175.255,2.19.194.0-2.19.195.255,2.20.20.0-2.20.23.255,2.20.128.0-2.20.131.255,2.20.132.0-2.20.132.255,2.20.142.0-2.20.143.255,2.20.180.0-2.20.180.255,2.23.0.0-2.23.15.255,2.23.96.0-2.23.111.255,4.224.0.0-4.239.255.255,13.64.0.0-13.107.255.255,18.32.0.0-18.255.255.255,20.0.0.0-20.31.255.255,20.33.0.0-20.128.255.255,20.150.0.0-20.153.255.255,20.160.0.0-20.175.255.255,20.180.0.0-20.191.255.255,20.192.0.0-20.255.255.255,23.0.0.0-23.15.255.255,23.32.0.0-23.67.255.255,23.72.0.0-23.79.255.255,23.192.0.0-23.223.255.255,37.203.32.0-37.203.33.255,40.64.0.0-40.71.255.255,40.74.0.0-40.125.127.255,40.126.0.0-40.126.63.255,40.126.128.0-40.127.255.255,51.10.0.0-51.13.255.255,51.15.0.0-51.15.63.255,51.103.0.0-51.105.255.255,51.124.0.0-51.124.255.255,51.132.0.0-51.132.255.255,52.96.0.0-52.115.255.255,52.116.0.0-52.118.255.255,52.132.0.0-52.143.255.255,52.145.0.0-52.191.255.255,52.224.0.0-52.255.255.255,69.192.0.0-69.192.255.255,72.246.0.0-72.247.255.255,79.142.76.0-79.142.77.255,84.53.164.0-84.53.167.255,87.245.212.0-87.245.212.127,89.238.68.128-89.238.68.255,92.122.104.0-92.122.107.255,92.122.212.0-92.122.219.255,92.122.252.0-92.122.255.255,92.123.32.0-92.123.47.255,95.100.64.0-95.100.79.255,95.100.80.0-95.100.95.255,104.16.0.0-104.31.255.255,104.64.0.0-104.127.255.255,140.82.112.0-140.82.127.255,184.50.0.0-184.51.255.255,148.251.120.96-148.251.120.127,152.176.0.0-152.199.255.255,162.158.0.0-162.159.255.255,172.64.0.0-172.71.255.255,184.24.0.0-184.31.255.255,184.84.0.0-184.87.255.255,185.34.26.0-185.34.27.255,185.161.175.0-185.161.175.255,185.199.108.0-185.199.111.255,192.229.128.0-192.229.255.255,204.68.96.0-204.68.127.255,204.79.195.0-204.79.197.255 remoteport=443 program="C:\windows\system32\svchost.exe"
-rem netsh advfirewall firewall add rule name="MS Svchost UDP 5050" dir=out action=allow protocol=TCP remoteip=239.255.255.250 remoteport=5050 program="C:\windows\system32\svchost.exe"
 
 
 rem ================================ Windows Error Reporting ===============================
@@ -1109,11 +1096,16 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\EnhancedStorageDevices" /v "TC
 
 rem Network Connection Status Indicator (NCSI/ping/test) - http://www.msftconnecttest.com/connecttest.txt
 rem https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/internet-explorer-edge-open-connect-corporate-public-network#ncsi-active-probes-and-the-network-status-alert
+reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "DisablePassivePolling" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet" /v "EnableActiveProbing" /t REG_DWORD /d "0" /f
 
 rem Disable PerfTrack (tracking of responsiveness events)
 reg add "HKLM\Software\Policies\Microsoft\Windows\WDI\{9c5a40da-b965-4fc3-8781-88dd50a6299d}" /v "ScenarioExecutionEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Disable Recall Snapshots
+reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d "1" /f
 
 rem 1000000000000 - Block untrusted fonts and log events / 2000000000000 - Do not block untrusted fonts / 3000000000000 - Log events without blocking untrusted fonts
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\MitigationOptions" /v "MitigationOptions_FontBocking" /t REG_SZ /d "1000000000000" /f
@@ -1173,9 +1165,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_
 
 rem 1 - Compose is enabled for writing on the web
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ComposeInlineEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Enables CryptoWallet feature
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CryptoWalletEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - AllowJavaScriptJit / 2 - BlockJavaScriptJit (Do not allow any site to run JavaScript JIT)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultJavaScriptJitSetting" /t REG_DWORD /d "0" /f
@@ -1409,6 +1398,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /
 rem 1 - Open Office files in the browser
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuickViewOfficeFilesEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Enable insecure download warnings
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowDownloadsInsecureWarningsEnabled" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
@@ -1601,6 +1593,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t R
 
 rem 1 - Save and fill payment info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "0" /f
+
+rem Browser sign-in settings / 0 - Disable / 1 - Enable / 2 - Force users to sign-in to use the browser (all profiles)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserSignin" /t REG_DWORD /d "2" /f
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
@@ -2337,8 +2332,6 @@ rem http://www.subnet-calculator.com/subnet.php?net_class=A
 wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
 wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
 wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
-rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\9.9.9.9" /v "DohFlags" /t REG_QWORD /d "1" /f
-rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\InterfaceSpecificParameters\{da9e43ac-0335-4747-a5d1-f645dd7d3a39}\DohInterfaceSettings\Doh\149.112.112.112" /v "DohFlags" /t REG_QWORD /d "1" /f
 
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
@@ -2383,7 +2376,7 @@ rem Disable Discovery of Designated Resolvers (DDR), a mechanism for DNS clients
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableDdr" /t REG_DWORD /d "0" /f
 
 rem 3 - Require DoH / 2 - Allow DoH / 1 - Prohibit DoH
-reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DoHPolicy" /t REG_DWORD /d "3" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DoHPolicy" /t REG_DWORD /d "3" /f
 
 rem Disable IDN (internationalized domain name)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableIdnEncoding" /t REG_DWORD /d "1" /f
@@ -2404,26 +2397,22 @@ reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "EnableMultic
 rem Setup DNS over HTTPS (DoH)
 rem netsh dns show encryption
 rem netsh dns show global
-reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "0" /f
 
 rem Setup DNS over HTTPS (DoH) Add Custom Servers
 rem netsh dns add global doh=yes ddr=yes
 rem HKLM\System\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers
-rem reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers\45.90.28.91" /v "Template" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx" /f
-rem reg add "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers\45.90.30.91" /v "Template" /t REG_SZ /d "https://dns.nextdns.io/xxxxxx" /f
-rem netsh dns add encryption server=1.0.0.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=1.1.1.1 dohtemplate=https://cloudflare-dns.com/dns-query autoupgrade=yes udpfallback=no
 rem netsh dns add encryption server=9.9.9.9 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
 rem netsh dns add encryption server=149.112.112.112 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=94.140.14.15 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=94.140.15.16 dohtemplate=https://dns-family.adguard.com/dns-query autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=185.228.168.10 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=185.228.169.11 dohtemplate=https://doh.cleanbrowsing.org/doh/adult-filter autoupgrade=yes udpfallback=no
 
 rem Setup DNS over TLS (DoT)
-rem netsh dns add global dot=yes
-rem netsh dns add encryption server=9.9.9.9 dothost=: autoupgrade=yes
-rem netsh dns add encryption server=45.90.28.80 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes
+netsh dns set global doh=no
+netsh dns add global dot=yes
+
+rem netsh dns add encryption server=1.1.1.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=1.0.0.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=45.90.28.99 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=45.90.30.99 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes udpfallback=no
 
 rem Restrict NTLM: Incoming NTLM traffic - Deny All
 reg add "HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0" /v "RestrictReceivingNTLMTraffic" /t REG_DWORD /d "2" /f
@@ -3000,7 +2989,7 @@ rem =================================== Windows Settings =======================
 rem --------------------------------------- System -----------------------------------------
 rem ........................................ About .........................................
 
-rem Rename this PC: LianLiPC-7NB (Computer name should not be longer than 15 characters, no spaces either)
+rem Rename this PC: FDDefine7Mini (Computer name should not be longer than 15 characters, no spaces either)
 reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" /v "ComputerName" /t REG_SZ /d "FDDefine7Mini" /f
 reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "FDDefine7Mini" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "FDDefine7Mini" /f
@@ -3024,7 +3013,7 @@ rem Computer Description
 reg add "HKLM\System\CurrentControlSet\services\LanmanServer\Parameters" /v "srvcomment" /t REG_SZ /d "500/100 MBps" /f
 
 rem System info (Logo - 120x120.bmp)
-rem shell:::{BB06C0E4-D293-4f75-8A90-CB05B6477EEE}
+rem winver
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\OEMInformation" /v "Logo" /t REG_SZ /d "D:\OneDrive\Pictures\Logo.bmp" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOrganization" /t REG_SZ /d "(-_-)" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion" /v "RegisteredOwner" /t REG_SZ /d "Brony" /f
@@ -3042,6 +3031,7 @@ vssadmin Resize ShadowStorage /For=C: /On=C: /Maxsize=320MB
 
 rem ________________________________________________________________________________________
 rem System Protection - Enable System restore and Set the size
+rem vssadmin list shadowstorage
 rem reg delete "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableConfig" /f
 rem reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\SPP\Clients" /v "{09F7EDC5-294E-4180-AF6A-FB0E6A0E9513}" /t REG_MULTI_SZ /d "1" /f
