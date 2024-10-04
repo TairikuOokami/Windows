@@ -20,10 +20,10 @@ rem DoH disabled / DoT enabled - netsh dns show global
 
 rem Some news
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
+rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-september-2024
 rem AI Imposter - https://youtu.be/WT8NJk1onC8 / Deep Fake - https://youtu.be/rGIz3Z-QjMQ
 rem https://www.pandasecurity.com/en/mediacenter/how-the-eu-is-about-to-violate-your-privacy
 rem https://techcrunch.com/2024/05/08/encrypted-services-apple-proton-and-wire-helped-spanish-police-identify-activist
-rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-2024
 rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
 rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 
@@ -74,7 +74,7 @@ rem Privacy Futile (TOR+Tails) - https://www.vice.com/en/article/v7gd9b/facebook
 rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-disables-floc
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://themarkup.org/blacklight
-rem Privacy Webpage Scan - https://webbkoll.dataskydd.net
+rem Privacy Webpage Scan - https://webbkoll.5july.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
@@ -116,7 +116,6 @@ rem Don't use VPN services - https://gist.github.com/joepie91/5a9909939e6ce7d09e
 rem https://arstechnica.com/tech-policy/2017/03/senate-votes-to-let-isps-sell-your-web-browsing-history-to-advertisers
 rem https://sec.hpi.de/ilc/search
 rem https://www.safetydetectives.com/best-vpns
-rem https://www.msgsafe.io
 rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
 
 rem Windows ISO - to create a local account use this email - no@thankyou.com
@@ -154,9 +153,9 @@ rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-tabl
 
 rem Browser Extensions useful against (99% malware comes via an email or a browser)
 rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
-rem Coinhive, Malware and Popups (Chrome/Firefox/Opera) - https://add0n.com/popup-blocker.html
 rem Cookie Warnings (Chrome/Edge/Firefox) - https://www.cookie-dialog-monster.com
-rem Filter Lists - https://filterlists.com - https://github.com/EnergizedProtection/block#packs
+rem Cookie Warnings (Chrome/Edge/Firefox) - https://www.i-dont-care-about-cookies.eu
+rem Filter Lists - https://filterlists.com
 rem Malware (Chrome/Firefox) - https://www.bitdefender.com/solutions/trafficlight.html
 rem Malware (Chrome/Edge/Firefox) - https://microsoftedge.microsoft.com/addons/detail/emsisoft-browser-security/jlpdpddffjddlfdbllimedpemaodbjgn
 rem Phishing (Chrome/Edge/Firefox/Opera) - https://www.netcraft.com/apps/browser
@@ -181,9 +180,8 @@ rem Security cleanup software (portable on-demand scanners, some still leave tra
 rem Antivirus Rescue Disks - https://www.techradar.com/in/best/best-antivirus-rescue-disk
 rem AdwCleaner (US) - https://www.malwarebytes.com/adwcleaner/
 rem Dr.Web CureIt (RU) - https://free.drweb.com/download+cureit+free
-rem Emsisoft Emergency Kit (NZ) - https://www.emsisoft.com/en/home/emergencykit
-rem Kaspersky TDSSKiller (RU) - https://usa.kaspersky.com/downloads/tdsskiller
-rem Kaspersky Virus Removal Tool (RU) - https://www.kaspersky.com/downloads/thank-you/free-virus-removal-tool
+rem Emsisoft Emergency Kit (NZ) - https://www.emsisoft.com/en/home/emergency-kit
+rem Kaspersky Virus Removal Tool (RU) - https://www.kaspersky.com/downloads/free-virus-removal-tool
 rem MWAV (IN) - https://escanav.com/en/mwav-tools/download-free-antivirus-toolkit.asp
 rem RKill (BleepingComputer) - https://www.bleepingcomputer.com/download/rkill/
 
@@ -191,19 +189,17 @@ rem Security cleanup software (online/updatable on-demand scanners)
 rem ESET Online Scanner (SK) - https://www.eset.com/us/home/online-scanner
 rem F-Secure Online Scanner (US) - https://www.f-secure.com/en/home/free-tools/online-scanner
 rem Norton Power Eraser (US) - https://support.norton.com/sp/static/external/tools/npe.html
-rem Panda Cloud Cleaner (ES) - https://www.pandasecurity.com/en-us/homeusers/solutions/cloud-cleaner
+rem Panda Cloud Cleaner (ES) - https://www.pandasecurity.com/en/homeusers/cloud-cleaner
 rem Sophos Scan & Clean alas HitmanPro (UK) - https://www.sophos.com/en-us/free-tools/virus-removal-tool
 rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/products/housecall.html
 
 rem Software
 rem 2FA / 2fast - two factor authenticator supporting TOTP - https://apps.microsoft.com/store/detail/2fast-%E2%80%93-two-factor-authenticator-supporting-totp/9P9D81GLH89Q
-rem Application Updates / Patch My PC - https://patchmypc.com/home-updater
 rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
 rem Application Updates / App Installer GUI (winget) - https://www.marticliment.com/wingetui - https://winget.run
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bandwidth Monitor / TrafficMonitor - https://github.com/zhongyang219/TrafficMonitor/blob/master/README_en-us.md
 rem Bootable USB / Rufus - https://apps.microsoft.com/store/detail/rufus/9PC3H3V7Q9CH?hl=en-us&gl=US
-rem Bootloader / EasyBCD - https://www.softpedia.com/get/System/OS-Enhancements/EasyBCD.shtml
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
 rem Browser / Brave - https://brave.com - Great for Google/Youtube only
 rem Browser / LibreWolf - https://librewolf.net - Great for privacy, like for Facebook
@@ -220,20 +216,17 @@ rem Directx 9.0 Runtimes / DirectX Redistributable June 2010 - https://www.softp
 rem Disk Info / CrystalDiskInfo - https://crystalmark.info/en/software/crystaldiskinfo
 rem Disk Scan / HDDScan - https://hddscan.com
 rem Disk Space Usage / WizTree - https://wiztreefree.com
-rem Disk Speed Test / CCSIO Benchmark - https://ccsiobench.com
 rem Disk Surface Test / Macrorit Disk Scanner - https://macrorit.com/disk-surface-test/disk-surface-test.html
 rem DVD to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
 rem eMail / SimpleLogin - https://simplelogin.io/pricing
+rem eMail Client / BlueMail - https://bluemail.me
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
-rem eMail Client Browser Extension / Checker Plus for Gmail - https://chrome.google.com/webstore/detail/checker-plus-for-gmail/oeopbcgkkoapgobdbedcemjljbihmemj
-rem eMail Client Browser Extension / Microsoft Outlook - https://microsoftedge.microsoft.com/addons/detail/microsoft-outlook/kkpalkknhlklpbflpcpkepmmbnmfailf
 rem File Archiver / NanaZip - https://www.microsoft.com/en-us/p/nanazip/9n8g7tscl18r?activetab=pivot:overviewtab
 rem Folder View Globally Set / WinSetView - https://github.com/LesFerch/WinSetView
 rem GPU Info / GPU-Z - https://www.techpowerup.com/gpuz
 rem GPU Test / Furmark - https://geeks3d.com/furmark
 rem Hardware Information / HWiNFO - https://www.hwinfo.com/download.php
 rem Hardware Monitor / HWMonitor - https://www.cpuid.com/softwares/hwmonitor.html
-rem HEVC Video Extensions from Device Manufacturer - https://apps.microsoft.com/store/detail/hevc-video-extensions-from-device-manufacturer/9N4WGH0Z6VHQ?hl=en-us&gl=us
 rem Image Viewer / XnView - https://www.xnview.com/en/xnview/#downloads
 rem Media Player / MPC-BE - https://sourceforge.net/projects/mpcbe
 rem Monitor Test / https://www.testufo.com
@@ -258,33 +251,28 @@ rem Process Monitor / Process Monitor - https://docs.microsoft.com/en-us/sysinte
 rem Radio / Audials Play - https://apps.microsoft.com/store/detail/audials-play-radio-music-tv-podcasts/9PGFN1FJM5TL?hl=en-us&gl=us
 rem RAM Fix / Intelligent standby list cleaner (+Timer Resolution) - https://www.wagnardsoft.com/content/intelligent-standby-list-cleaner-v1000-released
 rem RAM Free (Memory Leak) / Mem Reduct - https://www.henrypp.org/product/memreduct
-rem RAM Free (Memory Leak) / Reduce Memory - https://www.sordum.org/9197/reduce-memory-v1-6
+rem RAM Free (Memory Leak) / Wise Memory Optimizer - https://www.wisecleaner.com/wise-memory-optimizer.html
 rem RAM Disk / ImDisk Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/imdisk-toolkit
 rem RAM Test / Memtest (run one process per each 2GB) - https://hcidesign.com/memtest
 rem Remote Support / TeamViewer - https://www.teamviewer.com/en/download/windows
 rem Remove Locked File/Folder / ThisIsMyFile - https://www.softwareok.com/?seite=Freeware/ThisIsMyFile
-rem Screen Recorder / FlashBack Express - https://www.flashbackrecorder.com/express
 rem Search / UltraSearch - https://www.jam-software.com/ultrasearch_free
-rem Settings / ControlUWP - https://github.com/builtbybel/control-uwp/releases
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / Hasleo Backup Suite - https://www.easyuefi.com/backup-software/backup-suite-free.html
 rem System Restore / Reboot Restore Rx - https://horizondatasys.com/reboot-restore-rx-freeware
-rem Task Manager / System Informer - https://systeminformer.sourceforge.io
+rem Task Manager / System Informer - https://www.systeminformer.com/canary
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
-rem Taskbar Rounded / RoundedTB -  https://www.microsoft.com/en-us/p/roundedtb/9mtftxsj9m7f#activetab=pivot:overviewtab
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
-rem Undervolting / ThrottleStop - https://www.techpowerup.com/download/techpowerup-throttlestop
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
 rem Visual C++ / AIO Repack - https://github.com/abbodi1406/vcredist/releases
 rem Visual C++ / Latest Visual C++ Downloads - https://support.microsoft.com/en-au/help/2977003/the-latest-supported-visual-c-downloads
 rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
-rem VPN / WARP - https://cloudflarewarp.com
 rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/lively-wallpaper/9NTM2QC6QWS7?hl=en-us&gl=us
 rem Wallpaper / Rainmeter - https://www.rainmeter.net
 rem Wallpaper / Wallpaper Engine - https://store.steampowered.com/app/431960
-rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-4-windows-10
+rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-5-for-windows-11
 rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
 
 
@@ -309,7 +297,7 @@ rem Remove default user
 net user defaultuser1 /delete
 net user defaultuser100000 /delete
 
-rem Remove random files/folders - https://github.com/MoscaDotTo/Winapp2/blob/master/Winapp3/Winapp3.ini
+rem Remove random files/folders
 rem del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
 del "%SystemDrive%\AMFTrace.log" /s /f /q
 del "%WINDIR%\System32\sru\*" /s /f /q
@@ -452,7 +440,6 @@ rem =========================== Restore essential startup entries ==============
 rem Run bcdedit command to check for the current status / Yes = True / No = False
 rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
 rem https://docs.google.com/document/d/1c2-lUJq74wuYK1WrA_bIvgb89dUN0sj8-hO3vqmrau4/edit
-rem To get the latest Insider updates enable flightsigning - https://aka.ms/WIPSettingsFix
 bcdedit /deletevalue safeboot
 bcdedit /deletevalue safebootalternateshell
 bcdedit /deletevalue removememory
@@ -589,7 +576,7 @@ rem =========================== Windows Defender Security Center ===============
 rem ---------------------------- Firewall & network protection -----------------------------
 
 rem Enable Windows Firewall / AllProfiles / CurrentProfile / DomainProfile / PrivateProfile / PublicProfile
-rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771920(v=ws.10)?
+rem https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771920(v=ws.10)
 rem netsh advfirewall set allprofiles state on
 
 rem Block all inbound network traffic and all outbound except allowed apps
@@ -612,7 +599,7 @@ rem netsh advfirewall firewall add rule name="MS Consent UI TCP" dir=out action=
 rem ================================ Windows Error Reporting ===============================
 
 
-rem https://docs.microsoft.com/en-us/windows/win32/wer/wer-settings
+rem https://learn.microsoft.com/en-us/windows/win32/wer/wer-settings
 
 rem Disable Microsoft Support Diagnostic Tool MSDT
 reg add "HKLM\Software\Policies\Microsoft\Windows\ScriptedDiagnosticsProvider\Policy" /v "DisableQueryRemoteServer" /t REG_DWORD /d "0" /f
@@ -784,7 +771,7 @@ rem ================================ Windows Optimizations =====================
 
 
 rem https://prod.support.services.microsoft.com/en-us/windows/options-to-optimize-gaming-performance-in-windows-11-a255f612-2949-4373-a566-ff6f3f474613
-rem https://channel9.msdn.com/Blogs/Seth-Juarez/Memory-Compression-in-Windows-10-RTM
+rem https://learn.microsoft.com/en-us/shows/seth-juarez/memory-compression-in-windows-10-rtm
 
 rem Determines whether user processes end automatically when the user either logs off or shuts down / 1 - Processes end automatically
 reg add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f
@@ -897,7 +884,7 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Power" /v "Hiberb
 rem Disable Fast Startup (Hybrid Boot) and Disable Hibernation
 powercfg -h off
 
-rem https://docs.microsoft.com/en-us/windows/win32/etw/configuring-and-starting-an-autologger-session
+rem https://learn.microsoft.com/en-us/windows/win32/etw/configuring-and-starting-an-autologger-session
 rem DiagLog is required by Diagnostic Policy Service (Troubleshooting)
 rem EventLog-System/EventLog-Application are required by Windows Events Log Service
 rem perfmon
@@ -911,10 +898,10 @@ rem =================================== Windows Policies =======================
 
 
 rem rem https://admx.help/?Category=Windows_11_2022
-rem https://docs.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
-rem https://docs.microsoft.com/en-us/windows/client-management/mdm/new-in-windows-mdm-enrollment-management#whatsnew10
-rem https://docs.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
-rem https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-security-baselines
+rem https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
+rem https://learn.microsoft.com/en-us/windows/client-management/new-in-windows-mdm-enrollment-management#whatsnew11
+rem https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
+rem https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines
 
 rem Account Lockout Threshold / 0 - Disabled
 net accounts /lockoutthreshold:5
@@ -946,7 +933,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "N
 rem 1 - Don't run specified exe
 rem https://lolbas-project.github.io
 rem https://blog.talosintelligence.com/2019/11/hunting-for-lolbins.html
-rem https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-defender-application-control/microsoft-recommended-block-rules
+rem https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/design/applications-that-can-bypass-appcontrol
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "DisallowRun" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "1" /t REG_SZ /d "addinprocess.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "2" /t REG_SZ /d "addinprocess32.exe" /f
@@ -1125,7 +1112,7 @@ reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v "DisableRestrictedAdminOu
 rem 1 - Network access: Let Everyone permissions apply to anonymous users
 reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v "everyoneincludeanonymous" /t REG_DWORD /d "0" /f
 
-rem https://docs.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection
+rem https://learn.microsoft.com/en-us/windows-server/security/credentials-protection-and-management/configuring-additional-lsa-protection
 reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v "RunAsPPL" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Control\Lsa" /v "RunAsPPLBoot" /t REG_DWORD /d "2" /f
 
@@ -1147,8 +1134,8 @@ reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "SMB
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 
-rem https://docs.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel
-rem https://docs.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
+rem https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel
+rem https://learn.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
 rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
 rem rem https://admx.help/?Category=EdgeChromium
 rem edge://policy
@@ -1683,8 +1670,8 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkPredictionOptions" /t
 rem =================================== Windows Policies ===================================
 rem --------------------------------- User Account Control ---------------------------------
 
-rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd835564(v=ws.10)
-rem Reason to set UAC to Always Notify - https://docs.microsoft.com/en-us/previous-versions/technet-magazine/dd822916(v=msdn.10)?
+rem https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd835564(v=ws.10)
+rem Reason to set UAC to Always Notify - https://learn.microsoft.com/en-us/previous-versions/technet-magazine/dd822916(v=msdn.10)
 rem https://daniels-it-blog.blogspot.com/2020/07/uac-bypass-via-dll-hijacking-and-mock.html
 rem https://www.bleepingcomputer.com/news/security/bypassing-windows-10-uac-with-mock-folders-and-dll-hijacking/
 rem There are really only two effectively distinct settings for the UAC slider - https://devblogs.microsoft.com/oldnewthing/20160816-00/?p=94105
@@ -1713,7 +1700,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v 
 rem Allow UIAccess applications to prompt for elevation without using the secure desktop / 0 (Default) = Disabled / 1 - Enabled
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableUIADesktopToggle" /t REG_DWORD /d "0" /f
 
-rem https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-gpsb/932a34b5-48e7-44c0-b6d2-a57aadef1799
+rem https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gpsb/932a34b5-48e7-44c0-b6d2-a57aadef1799
 rem 0 - Disabled / 1 - Enabled (Default)
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "EnableVirtualization" /t REG_DWORD /d "0" /f
 
@@ -2325,7 +2312,7 @@ rem To get adapter's index number use
 rem wmic nicconfig get caption,index,TcpipNetbiosOptions
 
 rem Setup DNS Servers on DHCP Enabled Network (Cloudflare Malware)
-rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("1.1.1.2","1.0.0.2")
+rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
 
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
@@ -2344,7 +2331,7 @@ rem NetBIOS / 0 - Disabled / 1 - Allowed / 2 - Disabled on public networks / 3 -
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableNetbios" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem https://docs.microsoft.com/en-us/windows/win32/wininet/caching?
+rem https://learn.microsoft.com/en-us/windows/win32/wininet/caching
 rem https://www.codeproject.com/articles/1158641/windows-continuous-disk-write-plus-webcachev-dat-p
 rem Disable WinInetCacheServer (WinINet Caching/V01.log/WebCacheV01.dat)
 rem %LocalAppData%\Microsoft\Windows\WebCache
@@ -2386,7 +2373,7 @@ rem 1 - Discovery of Network-designated Resolvers DNS over TLS (DoT), DNS over H
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableDnr" /t REG_DWORD /d "0" /f
 
 rem Disable smart multi-homed name resolution
-rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd197552(v=ws.10)
+rem https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd197552(v=ws.10)
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\DNSClient" /v "DisableSmartNameResolution" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "DisableParallelAandAAAA" /t REG_DWORD /d "1" /f
 
@@ -2409,8 +2396,9 @@ rem Setup DNS over TLS (DoT)
 netsh dns set global doh=no
 netsh dns add global dot=yes
 
-rem netsh dns add encryption server=1.1.1.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=1.0.0.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=9.9.9.9 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=149.112.112.112 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
+
 rem netsh dns add encryption server=45.90.28.99 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes udpfallback=no
 rem netsh dns add encryption server=45.90.30.99 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes udpfallback=no
 
@@ -3311,8 +3299,8 @@ rem Take Ownership
 rem Files/Folders - https://www.youtube.com/watch?v=x7gjZMvQHu4
 rem Registry - https://www.youtube.com/watch?v=M1l5ifYKefg
 rem https://ss64.com/nt/icacls.html
-rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753024(v=ws.11)?
-rem https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753525(v=ws.11)?
+rem https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753024(v=ws.11)
+rem https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/cc753525(v=ws.11)
 
 rem Add "Take Ownership" Option in Files and Folders Context Menu in Windows
 rem reg add "HKCR\*\shell\runas" /ve /t REG_SZ /d "Take ownership" /f
@@ -3386,7 +3374,7 @@ rem %WinDir%\explorer.exe ms-settings:apps-volume
 rem Create shortcut to Store Apps
 rem shell:AppsFolder
 
-rem DISM Commands - https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/deployment-image-servicing-and-management--dism--command-line-options
+rem DISM Commands - https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/deployment-image-servicing-and-management--dism--command-line-options?view=windows-11
 rem DISM /Cleanup-Wim
 rem DISM /Get-WimInfo /WimFile:E:\sources\install.esd /index:1
 rem DISM /Get-WimInfo /WimFile:E:\sources\install.wim
@@ -3609,9 +3597,6 @@ start "" "D:\OneDrive\Downloads\CD.bat"
 
 timeout 5
 
-rem https://www.tenforums.com/general-support/95776-restart-fall-creators-update-reopens-apps-before.html#post1175516
-rem https://www.tenforums.com/tutorials/49963-use-sign-info-auto-finish-after-update-restart-windows-10-a.html
-rem https://www.tenforums.com/tutorials/138685-turn-off-automatically-restart-apps-after-sign-windows-10-a.html
 shutdown /s /f /t 0
 
-rem https://postimg.cc/1VNwyZZ6 - Windows 11 Home 24H2 Quiet Edition - 70 processes / 825 threads / 30000 handles / 3,5GB RAM (1GB used by ramdisk)
+rem https://ibb.co/rZ7NL89 - Windows 11 Home 24H2 (26100.1882) Quiet Edition - 70 processes / 870 threads / 30000 handles / 2,6GB RAM (1.1GB used by ramdisk)
