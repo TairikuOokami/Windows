@@ -3501,7 +3501,7 @@ start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" 
 rem Run Wise Registry Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
-rem Clean some Edges - edge://settings/siteData
+rem Trim some Edges - edge://settings/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
@@ -3513,15 +3513,18 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\InterestGroups" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaDeviceSalts" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaDeviceSalts-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\PreferredApps" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\PrivateAggregation" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager" /s /f /q
@@ -3539,7 +3542,6 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\WebAssistDatabase-journal" 
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Asset Store" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePushStorageWithConnectTokenAndKey" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\blob_storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\BudgetDatabase" /s /q
@@ -3549,14 +3551,19 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Collections" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\commerce_subscription_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Continuous Migration" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnGraphiteCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnWebGPUCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\discounts_db" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DNR Extension Rules" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Download Service" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DualEngine" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeEDrop" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeHubAppUsage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePushStorageWithConnectTokenAndKey" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePushStorageWithWinRt" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeTravel" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeWallet" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EntityExtraction" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
@@ -3599,4 +3606,4 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem https://ibb.co/rZ7NL89 - Windows 11 Home 24H2 (26100.1882) Quiet Edition - 70 processes / 870 threads / 30000 handles / 2,6GB RAM (1.1GB used by ramdisk)
+rem https://ibb.co/rZ7NL89 - Windows 11 Home 24H2 (26100.1882) Quiet Edition - 69 processes / 867 threads / 29889 handles / 2,6GB RAM (1,1GB used by ramdisk) 
