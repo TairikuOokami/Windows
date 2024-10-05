@@ -1,4 +1,3 @@
-rem Minimum Partition Size 53248 MB (52GB)
 rem Select to Save files locally then Unlink OneDrive to change the location!
 rem Unlock Personal Vault afterwards to install OneDrive in a proper location!
 
@@ -140,7 +139,7 @@ wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
 
 rem Setup Network (NetBIOS might be required for aDSL/LAN)
 rem Disable IPv6/LMHOSTS lookup/NetBIOS and Set DNS Servers
-wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("1.1.1.2","1.0.0.2")
+wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
@@ -159,8 +158,8 @@ wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 rem Enable DoT
 netsh dns set global doh=no
 netsh dns add global dot=yes
-netsh dns add encryption server=1.1.1.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
-netsh dns add encryption server=1.0.0.2 dothost=security.cloudflare-dns.com:853 autoupgrade=yes udpfallback=no
+netsh dns add encryption server=9.9.9.9 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
+netsh dns add encryption server=149.112.112.112 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
 
 rem Setup DoH and then Change Adapter's ID in Unvalidate
 rem https://github.com/adamhl8/batch-scripts/blob/main/win11-set-doh.cmd
@@ -185,6 +184,7 @@ pause
 
 rem https://msdn.microsoft.com/en-us/windows/hardware/commercialize/manufacture/desktop/enable-or-disable-windows-features-using-dism
 rem DISM /Online /Get-Features /Format:Table
+rem Dism /Online /Get-Packages /Format:Table
 rem DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
 Dism /Online /Disable-Feature /FeatureName:MediaPlayback /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Microsoft-Windows-Subsystem-Linux /Quiet /NoRestart
