@@ -16,7 +16,7 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
-rem DoH disabled / DoT enabled - netsh dns show global
+rem DoH disabled / DoT enabled - netsh dns show global - ipconfig /all
 
 rem Some news
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
@@ -168,7 +168,8 @@ rem Wise Disk Cleaner - https://www.wisecleaner.com/wise-disk-cleaner.html
 rem Wise Registry Cleaner - https://www.wisecleaner.com/wise-registry-cleaner.html
 
 rem Firewall software using Windows Firewall
-rem simplewall (US) - https://www.henrypp.org/product/simplewall
+rem Fort Firewall (US) - https://github.com/tnodir/fort
+rem Simplewall (US) - https://www.henrypp.org/product/simplewall
 rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
@@ -1929,6 +1930,9 @@ sc config DiagTrack start= disabled
 rem Contact Data
 reg add "HKLM\System\CurrentControlSet\Services\PimIndexMaintenanceSvc" /v "Start" /t REG_DWORD /d "4" /f
 
+rem Data Sharing Service
+sc config DsSvc start= disabled
+
 rem Data Usage
 sc config DusmSvc start= disabled
 
@@ -1952,6 +1956,9 @@ sc config dLauncherLoopback start= demand
 
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
+
+rem FileSyncHelper
+sc config FileSyncHelper start= disabled
 
 rem Function Discovery Provider Host
 sc config fdPHost start= disabled
@@ -3606,4 +3613,4 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem https://ibb.co/rZ7NL89 - Windows 11 Home 24H2 (26100.1882) Quiet Edition - 69 processes / 867 threads / 29889 handles / 2,6GB RAM (1,1GB used by ramdisk) 
+rem https://ibb.co/gb1wty7 - Windows 11 Home 24H2 (26100.1882) Quiet Edition - 68 processes / 743 threads / 27209 handles / 2,5GB RAM (1GB used by ramdisk) 
