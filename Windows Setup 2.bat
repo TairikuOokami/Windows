@@ -69,34 +69,29 @@ rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.e
 rem Disabled
 rem edge://flags/#allow-all-sites-to-initiate-mirroring
 rem edge://flags/#edge-compose
-rem edge://flags/#edge-drop
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-scheme
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem edge://flags/#edge-optin-experimentation
 rem edge://flags/#edge-rounded-containers
-rem edge://flags/#edge-screenshot
-rem edge://flags/#edge-split-screen
+rem edge://flags/#edge-visual-rejuv-mica
 rem edge://flags/#edge-visual-rejuv-rounded-tabs
 rem edge://flags/#enable-force-dark
 rem edge://flags/#enable-quic
 rem edge://flags/#enable-touch-drag-drop
+rem edge://flags/#enable-webrtc-hide-local-ips-with-mdns
 rem edge://flags/#enable-windows-gaming-input-data-fetcher
-rem edge://flags/#media-route-dial-provider
 rem edge://flags/#media-router-cast-allow-all-ips
 rem edge://flags/#tab-hover-card-images
 
 rem Enabled
 rem edge://flags/#block-insecure-private-network-requests
 rem edge://flags/#disallow-doc-written-script-loads
-rem edge://flags/#edge-autoplay-user-setting-block-option
 rem edge://flags/#edge-digsig-enabled-pdf
-rem edge://flags/#edge-post-quantum-kyber
 rem edge://flags/#enable-tls13-early-data
 rem edge://flags/#enable-tls13-kyber
 rem edge://flags/#origin-agent-cluster-default
 rem edge://flags/#origin-keyed-processes-by-default
 rem edge://flags/#strict-origin-isolation
-rem edge://flags/#test-third-party-cookie-phaseout
 
 
 pause
