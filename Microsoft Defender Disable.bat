@@ -77,6 +77,35 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
+rem ======================================= OPTIONAL =======================================
+
+rem OWeb Threat Defense Service (Phishing protection)
+rem sc config webthreatdefsvc start= disabled
+
+rem Web Threat Defense User Service (Phishing protection)
+rem sc config webthreatdefusersvc start= disabled
+
+rem Off - Disable Windows SmartScreen / On - Enable Windows SmartScreen 
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
+
+rem 0 - Disable SmartScreen Filter in Microsoft Edge / 1 - Enable
+rem reg add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /ve /t REG_DWORD /d "0" /f
+
+rem 0 - Disable SmartScreen PUA in Microsoft Edge / 1 - Enable
+rem reg add "HKCU\Software\Microsoft\Edge\SmartScreenPuaEnabled" /ve /t REG_DWORD /d "0" /f
+
+rem 0 - Disable Windows SmartScreen for Windows Store Apps / 1 - Enable
+rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t "REG_DWORD" /d "0" /f
+
+rem Remove Smartscreen (to restore run "sfc /scannow")
+rem takeown /s %computername% /u %username% /f "%WinDir%\System32\smartscreen.exe"
+rem icacls "%WinDir%\System32\smartscreen.exe" /grant:r %username%:F
+rem taskkill /im smartscreen.exe /f
+rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
+
+rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN BE ENABLED!
+rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
+
 rem Last Tested on Windows 11 Home 24H2 26100.1882
 rem Microsoft Defender Platform Version 4.18.24090.6 (04-Oct-2024)
 rem Before - https://ibb.co/09cFDwD / After - https://ibb.co/dmwRzXj
