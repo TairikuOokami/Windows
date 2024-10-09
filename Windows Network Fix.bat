@@ -4,9 +4,10 @@ rem https://support.microsoft.com/en-us/windows/fix-wi-fi-connection-issues-in-w
 rem Complete Internet Repair  - https://www.rizonesoft.com/downloads/complete-internet-repair
 rem Windows Repair Toolbox - https://windows-repair-toolbox.com
 rem TCP Optimizer - www.speedguide.net/downloads.php
-rem www.tenforums.com/network-sharing/2806-slow-network-throughput-windows-10-a.html#post553305
 
-rem Network Connection Status Indicator (NCSI) - HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet
+rem Network Connection Status Indicator (NCSI/ping/test) - http://www.msftconnecttest.com/connecttest.txt - needed by DoT to avoid no internet connection
+rem https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/internet-explorer-edge-open-connect-corporate-public-network#ncsi-active-probes-and-the-network-status-alert
+reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "DisablePassivePolling" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet" /v "EnableActiveProbing" /t REG_DWORD /d "1" /f
 
