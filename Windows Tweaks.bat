@@ -266,7 +266,7 @@ rem Task Manager / System Informer - https://www.systeminformer.com/canary
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
-rem Visual C++ / AIO Repack - https://github.com/abbodi1406/vcredist/releases
+rem Visual C++ / Visual C++ All-in-One - https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one
 rem Visual C++ / Latest Visual C++ Downloads - https://support.microsoft.com/en-au/help/2977003/the-latest-supported-visual-c-downloads
 rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
@@ -342,27 +342,27 @@ rem Remove/Rebuild Font Cache
 del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/s /f /q
 del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 
-rem Remove default Windows Powershell (to restore run "sfc /scannow")
+rem Remove default Windows Powershell (to restore run "sfc /scannow") - Removing PS will prevent a complete uninstall of store/UWP apps
 rem Restrict PS and install the latest version instead - pwsh
 rem winget install Microsoft.PowerShell
 rem https://thehackernews.com/2023/09/cybercriminals-using-powershell-to.html?m=1
 rem https://www.bleepingcomputer.com/news/security/as-microsoft-blocks-office-macros-hackers-find-new-attack-vectors
 rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-windows-devices-with-powershell
-taskkill /im PowerShell.exe /f
-taskkill /im PowerShell_ISE.exe /f
-taskkill /im pwsh.exe /f
-takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
-icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%ProgramFiles%\WindowsPowerShell" /s /q
-takeown /s %computername% /u %username% /f "%ProgramFiles(x86)%\WindowsPowerShell" /r /d y
-icacls "%ProgramFiles(x86)%\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%ProgramFiles(x86)%\WindowsPowerShell" /s /q
-takeown /s %computername% /u %username% /f "%WinDir%\System32\WindowsPowerShell" /r /d y
-icacls "%WinDir%\System32\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%WinDir%\System32\WindowsPowerShell" /s /q
-takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WindowsPowerShell" /r /d y
-icacls "%WinDir%\SysWOW64\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%WinDir%\SysWOW64\WindowsPowerShell" /s /q
+rem taskkill /im PowerShell.exe /f
+rem taskkill /im PowerShell_ISE.exe /f
+rem taskkill /im pwsh.exe /f
+rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
+rem icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%ProgramFiles%\WindowsPowerShell" /s /q
+rem takeown /s %computername% /u %username% /f "%ProgramFiles(x86)%\WindowsPowerShell" /r /d y
+rem icacls "%ProgramFiles(x86)%\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%ProgramFiles(x86)%\WindowsPowerShell" /s /q
+rem takeown /s %computername% /u %username% /f "%WinDir%\System32\WindowsPowerShell" /r /d y
+rem icacls "%WinDir%\System32\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%WinDir%\System32\WindowsPowerShell" /s /q
+rem takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WindowsPowerShell" /r /d y
+rem icacls "%WinDir%\SysWOW64\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
+rem rd "%WinDir%\SysWOW64\WindowsPowerShell" /s /q
 
 rem Remove Startup Folders
 takeown /s %computername% /u %username% /f "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Startup"
@@ -967,10 +967,10 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "29" /t REG_SZ /d "nc64.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "30" /t REG_SZ /d "ntkd.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "31" /t REG_SZ /d "ntsd.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "32" /t REG_SZ /d "powershell.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "33" /t REG_SZ /d "powershell_ise.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "34" /t REG_SZ /d "powershellcustomhost.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "35" /t REG_SZ /d "psexec.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "32" /t REG_SZ /d "powershell_ise.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "33" /t REG_SZ /d "powershellcustomhost.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "34" /t REG_SZ /d "psexec.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "35" /t REG_SZ /d "pwsh.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "36" /t REG_SZ /d "rcsi.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "37" /t REG_SZ /d "regsvr32.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "38" /t REG_SZ /d "rundll32.exe" /f
@@ -990,7 +990,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "52" /t REG_SZ /d "wslconfig.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "wslhost.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "findstr.exe" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "55" /t REG_SZ /d "pwsh.exe" /f
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
 reg add "HKLM\Software\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f
@@ -1082,11 +1081,11 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\WINEVT\Channels\Microsof
 rem 1 - Specifies that Windows does not automatically encrypt eDrives
 reg add "HKLM\Software\Policies\Microsoft\Windows\EnhancedStorageDevices" /v "TCGSecurityActivationDisabled" /t REG_DWORD /d "1" /f
 
-rem Network Connection Status Indicator (NCSI/ping/test) - http://www.msftconnecttest.com/connecttest.txt
+rem Network Connection Status Indicator (NCSI/ping/test) - http://www.msftconnecttest.com/connecttest.txt - needed by DoT to avoid no internet connection
 rem https://learn.microsoft.com/en-us/troubleshoot/windows-client/networking/internet-explorer-edge-open-connect-corporate-public-network#ncsi-active-probes-and-the-network-status-alert
-reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "DisablePassivePolling" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "1" /f
-reg add "HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet" /v "EnableActiveProbing" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "DisablePassivePolling" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator" /v "NoActiveProbe" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Services\NlaSvc\Parameters\Internet" /v "EnableActiveProbing" /t REG_DWORD /d "1" /f
 
 rem Disable PerfTrack (tracking of responsiveness events)
 reg add "HKLM\Software\Policies\Microsoft\Windows\WDI\{9c5a40da-b965-4fc3-8781-88dd50a6299d}" /v "ScenarioExecutionEnabled" /t REG_DWORD /d "0" /f
@@ -1958,7 +1957,7 @@ rem Encrypting File System (EFS)
 sc config EFS start= disabled
 
 rem FileSyncHelper
-sc config FileSyncHelper start= disabled
+sc config FileSyncHelper start= demand
 
 rem Function Discovery Provider Host
 sc config fdPHost start= disabled
@@ -2050,7 +2049,7 @@ sc config ucpd start= disabled
 rem WebClient
 sc config WebClient start= disabled
 
-rem Web Threat Defense Service (Phishing protection_
+rem Web Threat Defense Service (Phishing protection)
 sc config webthreatdefsvc start= disabled
 
 rem Web Threat Defense User Service (Phishing protection)
