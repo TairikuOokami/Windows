@@ -9,8 +9,7 @@ reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputab
 start windowsdefender:
 rem Update Windows, Defender, Restart
 rem Disable Tamper and Real Protection in Defender
-rem msconfig - Safe Boot - Minimal - Restart
-rem Disable Defender's services - msconfig - uncheck Safe Boot - Normal Startup - Restart
+rem Run "MD Disable.bat" TWICE - RESTART!
 
 pause
 
@@ -161,18 +160,9 @@ netsh dns add global dot=yes
 netsh dns add encryption server=9.9.9.9 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
 netsh dns add encryption server=149.112.112.112 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
 
+start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
+
 start ms-settings:network-ethernet
-
-
-
-
-
-
-
-
-
-
-
 
 pause
 
@@ -349,18 +339,17 @@ start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
 start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
 
+rem Enable PreOS and Create a Backup
 
+start "" /wait "C:\Program Files\Hasleo\Hasleo Backup Suite\bin\BackupMainUI.exe"
 
-HASLEOOOOOOOOOOOO
-
-
-rem BlueMail/System Informer
+rem System Informer
 
 start "" /wait "D:\OneDrive\Setup"
 
 pause
 
-rem Uninstall Store Apps, Intall HEVC, Update apps
+rem Install paid HEVC and BlueMail, Update apps
 
 rem Restart in ...
 
