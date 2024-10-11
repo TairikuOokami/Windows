@@ -161,11 +161,18 @@ netsh dns add global dot=yes
 netsh dns add encryption server=9.9.9.9 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
 netsh dns add encryption server=149.112.112.112 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
 
-rem Setup DoH and then Change Adapter's ID in Unvalidate
-rem https://github.com/adamhl8/batch-scripts/blob/main/win11-set-doh.cmd
 start ms-settings:network-ethernet
-explorer D:\OneDrive\Downloads
-regedit
+
+
+
+
+
+
+
+
+
+
+
 
 pause
 
@@ -179,6 +186,46 @@ rem pause
 
 rem Uninstall all apps except MS store
 rem start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name -notlike '*store*'} | Remove-AppxPackage"
+
+rem Get-AppxPackage -AllUsers -PackageTypeFilter Bundle  | Where-Object {$_.NonRemovable -eq $False} | Select-Object Name, PackageFullName
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Clipchamp.Clipchamp" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingNews" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingSearch" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingWeather" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.GamingApp" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.GetHelp" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.HEVCVideoExtension" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftStickyNotes" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.PowerAutomateDesktop" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.ScreenSketch" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Todos" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WidgetsPlatformRuntime"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.DevHome" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.Photos" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsAlarms" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsCamera" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsTerminal" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.YourPhone" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.ZuneMusic" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Xbox.TCUI" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.XboxGamingOverlay" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.XboxIdentityProvider" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.MicrosoftFamily" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.QuickAssist" | Remove-AppxPackage -AllUsers"
+
+pause
+
+winget uninstall "Outlook for Windows"
+winget uninstall "Widgets Platform Runtime"
+winget uninstall Microsoft.Copilot_8wekyb3d8bbwe
+winget uninstall Microsoft.Teams
+
+rem Uninstall Remote Desktop Connection and check for new bloatware
 
 pause
 
@@ -266,13 +313,13 @@ md "Z:\Desktop"
 mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
 
 rem Move Documents
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\Documents" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{F42EE2D3-909F-4907-8871-4C22FC0BF756}" /t REG_EXPAND_SZ /d "D:\Documents" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Personal" /t REG_EXPAND_SZ /d "D:\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\OneDrive\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{F42EE2D3-909F-4907-8871-4C22FC0BF756}" /t REG_EXPAND_SZ /d "D:\OneDrive\Documents" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Personal" /t REG_EXPAND_SZ /d "D:\OneDrive\Documents" /f
 takeown /s %computername% /u %username% /f "%USERPROFILE%\Documents" /r /d y
 icacls "%USERPROFILE%\Documents" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
 rd "%USERPROFILE%\Documents" /s /q
-mklink /d "%USERPROFILE%\Documents" "D:\Documents"
+mklink /d "%USERPROFILE%\Documents" "D:\OneDrive\Documents"
 
 rem Move Downloads
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "{374DE290-123F-4565-9164-39C4925E467B}" /t REG_SZ /d "D:\OneDrive\Downloads" /f
@@ -294,46 +341,18 @@ rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell 
 pause
 
 winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --accept-source-agreements
-
-winget install Microsoft.AppInstaller --accept-package-agreements --accept-source-agreements
-winget install BiniSoft.WindowsFirewallControl --accept-package-agreements --accept-source-agreements
-winget install CreativeTechnology.SoundBlasterCommand --accept-package-agreements --accept-source-agreements
-winget install Kingston.SSDManager --accept-package-agreements --accept-source-agreements
-winget install Logitech.UnifyingSoftware --accept-package-agreements --accept-source-agreements
-winget install M2Team.NanaZip --accept-package-agreements --accept-source-agreements
 winget install Microsoft.DirectX --accept-package-agreements --accept-source-agreements
-winget install Microsoft.DotNet.DesktopRuntime.6 --accept-package-agreements --accept-source-agreements
-winget install Microsoft.DotNet.DesktopRuntime.8 --accept-package-agreements --accept-source-agreements
-winget install Microsoft.OneDrive --accept-package-agreements --accept-source-agreements
-winget install MPC-BE.MPC-BE --accept-package-agreements --accept-source-agreements
-winget install Rizonesoft.Notepad3 --accept-package-agreements --accept-source-agreements
-winget install SumatraPDF.SumatraPDF --accept-package-agreements --accept-source-agreements
-winget install TheDocumentFoundation.LibreOffice --accept-package-agreements --accept-source-agreements
-winget install XnSoft.XnView.Classic --accept-package-agreements --accept-source-agreements
-
-rem 2fast – Two Factor Authenticator
-winget install --id 9P9D81GLH89Q --exact --source msstore --accept-package-agreements --accept-source-agreements
-
-rem AV1 Video Extension
-winget install --id 9MVZQVXJBQ9V --exact --source msstore --accept-package-agreements --accept-source-agreements
-
-rem OpenCL™ and OpenGL® Compatibility Pack
-winget install --id 9NQPSL29BFFF --exact --source msstore --accept-package-agreements --accept-source-agreements
-
-rem Wise Disk Cleaner
-winget install --id XP9CW3GPQQS852 --exact --source msstore --accept-package-agreements --accept-source-agreements
-
-rem Wise Registry Cleaner
-winget install --id XPDLS1XBTXVPP4 --exact --source msstore --accept-package-agreements --accept-source-agreements
 
 pause
 
-start "" /wait "D:\OneDrive\Setup\ADATA_SSDToolBoxSetup_v6.2.1.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
-start "" /wait "D:\OneDrive\Setup\VisualCppRedist_AIO_x86_x64.exe" /ai
 start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
-start "" /wait "D:\OneDrive\Setup\Hasleo_Backup_Suite_Free.exe"
+
+
+
+HASLEOOOOOOOOOOOO
+
 
 rem BlueMail/System Informer
 
