@@ -8,6 +8,9 @@ rem Enable Defender - update - restart - disable Defender - https://github.com/T
 
 rem Disable Tamper and Real Protection in Defender
 start windowsdefender:
+rem Run "MD Disable.bat" TWICE - RESTART!
+
+rem Alternatively run in Safe Mode
 rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
 rem Run "MD Disable.bat" TWICE - RESTART!
 rem Run - msconfig - General - Normal Startup
@@ -106,7 +109,7 @@ rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 24H2 26100.1882
+rem Last Tested on Windows 11 Home 24H2 26100.2033
 rem Microsoft Defender Platform Version 4.18.24090.6 (04-Oct-2024)
 rem Before - https://ibb.co/09cFDwD / After - https://ibb.co/dmwRzXj
 
