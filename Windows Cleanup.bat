@@ -1,31 +1,17 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-rem Driver Easy - https://www.drivereasy.com
 rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
 rem HiBit Uninstaller - http://hibitsoft.ir
 rem Wise Disk Cleaner - http://www.wisecleaner.com/wise-disk-cleaner.html
 rem Wise Registry Cleaner - http://www.wisecleaner.com/wise-registry-cleaner.html
-rem Windows Drivers - http://www.catalog.update.microsoft.com
+rem Windows Drivers - https://www.catalog.update.microsoft.com/Home.aspx
+rem Windows Repair Toolbox - https://windows-repair-toolbox.com
 
 rem Disable Reserved Storage (7GB)
 Dism /Online /Set-ReservedStorageState /State:Disabled /Quiet /NoRestart
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "MiscPolicyInfo" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "PassedPolicy" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\ReserveManager" /v "ShippedWithReserves" /t REG_DWORD /d "0" /f
-
-rem Open Explorer - Choose the desired View - View - Options - View - Apply to Folders - OK - Close/Restart Explorer ASAP
-reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
-reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f
-reg delete "HKCU\Software\Classes\Wow6432Node\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
-reg delete "HKCU\Software\Classes\Wow6432Node\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f
-reg delete "HKCU\Software\Microsoft\Windows\Shell\Bags" /f
-reg delete "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f
-reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f
-reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f
-reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" /v "FolderType" /t REG_SZ /d "NotSpecified" /f
-
-reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" /v "IconStreams" /f
-reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" /v "PastIconsStream" /f
 
 fsutil usn deletejournal /d /n c:
 chkdsk /scan
@@ -57,6 +43,7 @@ del "%WINDIR%\winsxs\pending.xml" /s /f /q
 
 del "C:\$Recycle.bin" /s /f /q
 del "D:\$Recycle.bin" /s /f /q
+del "E:\$Recycle.bin" /s /f /q
 del "Z:\$Recycle.bin" /s /f /q
 
 del "%ALLUSERSPROFILE%\Application Data\Microsoft\Network\Downloader\qmgr*.dat" /s /f /q
@@ -86,13 +73,29 @@ del "%WINDIR%\WinSxS\Backup" /s /f /q
 vssadmin delete shadows /for=c: /all /quiet
 
 rem https://forums.mydigitallife.net/threads/windows-10-hotfix-repository.57050/page-622#post-1655591
+rem https://forums.mydigitallife.net/threads/which-windows-10-services-you-guys-disable.75202/page-6#post-1742386
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v DisableRemovePayload /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v DisableWerReporting /t REG_DWORD /d "1" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v EnableDpxLog /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v LCUReoffer /t REG_DWORD /d "0" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v ResetManifestCache /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "CBSLogCompress" /t "REG_DWORD" /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "CompressBackups" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "CompressMutables" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "DisableComponentBackups" /t "REG_DWORD" /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "DisableResetbase" /t "REG_DWORD" /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "LCUReoffer" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "NTFSCompressPayload" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "NumCBSPersistLogs" /t "REG_DWORD" /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "PreserveFileCompressionState" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "ReofferUpdate" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "SupersededActions" /t "REG_DWORD" /d "3" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "TransientManifestCache" /t "REG_DWORD" /d "1" /f
 
+rem Dism /Online /Cleanup-Image /AnalyzeComponentStore
+rem fsutil storagereserve query C:
+rem vssadmin list shadowstorage
 Dism /get-mountedwiminfo
 Dism /cleanup-mountpoints
 Dism /cleanup-wim
@@ -132,17 +135,38 @@ cleanmgr /sagerun:6553
 rem Cleanup done, you can close this window!
 timeout -1
 
-rem https://www.bleepingcomputer.com/news/security/clever-phishing-method-bypasses-mfa-using-microsoft-webview2-apps
-winget export -o D:\OneDrive\Setup\winget.txt
+rem ======================================= OPTIONAL =======================================
 
-start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a
-start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
-
+pause
+rem Perform a Single Time Ultra Compress, it has to be redone regularly (it can cause lagging in Windows)
 rem compact /c /i /q /f /exe:lzx /s:C:\Windows
 
+rem Open Explorer - Choose the desired View - View - Options - View - Apply to Folders - OK - Close/Restart Explorer ASAP
+reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
+reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f
+reg delete "HKCU\Software\Classes\Wow6432Node\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
+reg delete "HKCU\Software\Classes\Wow6432Node\Local Settings\Software\Microsoft\Windows\Shell\BagMRU" /f
+reg delete "HKCU\Software\Microsoft\Windows\Shell\Bags" /f
+reg delete "HKCU\Software\Microsoft\Windows\Shell\BagMRU" /f
+reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\Bags" /f
+reg delete "HKCU\Software\Microsoft\Windows\ShellNoRoam\BagMRU" /f
+reg add "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags\AllFolders\Shell" /v "FolderType" /t REG_SZ /d "NotSpecified" /f
+
+reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" /v "IconStreams" /f
+reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\CurrentVersion\TrayNotify" /v "PastIconsStream" /f
+
+rem Backup Apps
+winget export -o D:\OneDrive\Setup\winget.txt
+
+start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -all
+start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
+
+rem Backup Browsers (Flags/Settings)
 taskkill /im brave.exe /f
-taskkill /im msedge.exe /f
+taskkill /im firefox.exe /f
 taskkill /im librewolf.exe /f
+taskkill /im msedge.exe /f
+taskkill /im tor.exe /f
 
 rd "D:\OneDrive\Soft\Brave" /s /q
 rd "D:\OneDrive\Soft\Edge" /s /q
@@ -152,16 +176,26 @@ xcopy "Z:\Brave" "D:\OneDrive\Soft\Brave" /s /i /y
 xcopy "Z:\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
 xcopy "Z:\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
 
-xcopy "%AppData%\PotPlayerMini64\PotPlayerMini64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\PotPlayerMini64\PotPlayerMini64.ini" /y
+rem Backup Custom Settings
 xcopy "%AppData%\SystemInformer\settings.xml" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
 xcopy "%AppData%\Wise Disk Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Disk Cleaner\Config.ini" /y
 xcopy "%AppData%\Wise Registry Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Registry Cleaner\Config.ini" /y
 
+rem Remove Old Drivers
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\Rapr.exe"
-start "" /wait "%ProgramFiles(x86)%\ADATA\SSD ToolBox\SSDToolBox.exe"
 
+rem Trim
+start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe"
+start "" /wait "%ProgramFiles%\Kingston_SSD_Manager\KSM_Gen15.exe"
+
+rem Reinstall WFC broken after cleanup
 start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
-sc config "EaseUS Agent" start= demand
-net start "EaseUS Agent"
-start "" /wait "C:\Program Files (x86)\EaseUS\Todo Backup\bin\Loader.exe"
+start "" "C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
+
+rem Create System Backup
+sc config "HasleoBackupSuiteService" start= demand
+sc config "HasleoImageMountService" start= demand
+net start "HasleoBackupSuiteService"
+net start "HasleoImageMountService"
+start "" /wait "C:\Program Files\Hasleo\Hasleo Backup Suite\bin\BackupMainUI.exe"
