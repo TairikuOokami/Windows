@@ -38,11 +38,6 @@ rem Install GPU Drivers and RESTART!
 
 pause
 
-rem DISM /Online /Get-Capabilities
-rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
-DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
-
 rem Disable Indexing C:
 explorer
 
@@ -174,9 +169,6 @@ slmgr /cpky
 
 rem pause
 
-rem Uninstall all apps except MS store
-rem start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppXPackage | where-object {$_.name -notlike '*store*'} | Remove-AppxPackage"
-
 rem Get-AppxPackage -AllUsers -PackageTypeFilter Bundle  | Where-Object {$_.NonRemovable -eq $False} | Select-Object Name, PackageFullName
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Clipchamp.Clipchamp" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingNews" | Remove-AppxPackage -AllUsers"
@@ -207,6 +199,8 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.MicrosoftFamily" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.QuickAssist" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftWindows.Client.WebExperience" | Remove-AppxPackage -AllUsers"
+
 
 pause
 
@@ -219,7 +213,12 @@ rem Uninstall Remote Desktop Connection and check for new bloatware
 
 pause
 
-rem https://msdn.microsoft.com/en-us/windows/hardware/commercialize/manufacture/desktop/enable-or-disable-windows-features-using-dism
+rem DISM /Online /Get-Capabilities
+rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
+DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
+
+rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/enable-or-disable-windows-features-using-dism?view=windows-11
 rem DISM /Online /Get-Features /Format:Table
 rem Dism /Online /Get-Packages /Format:Table
 rem DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
@@ -349,7 +348,11 @@ start "" /wait "D:\OneDrive\Setup"
 
 pause
 
-rem Install paid HEVC and BlueMail, Update apps
+rem Install BlueMail nad paid HEVC
+
+ms-windows-store:
+
+pause
 
 rem Restart in ...
 
