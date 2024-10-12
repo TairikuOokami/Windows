@@ -189,6 +189,8 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsAlarms" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsCamera" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsNotepad" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WidgetsPlatformRuntime" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsTerminal" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.YourPhone" | Remove-AppxPackage -AllUsers"
@@ -199,13 +201,10 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.MicrosoftFamily" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.QuickAssist" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftWindows.Client.WebExperience" | Remove-AppxPackage -AllUsers"
-
 
 pause
 
 winget uninstall "Outlook for Windows"
-winget uninstall "Widgets Platform Runtime"
 winget uninstall Microsoft.Copilot_8wekyb3d8bbwe
 winget uninstall Microsoft.Teams
 
@@ -221,6 +220,7 @@ Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0
 
 rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/enable-or-disable-windows-features-using-dism?view=windows-11
 rem DISM /Online /Get-Features /Format:Table
+rem DISM /Online /Get-FeatureInfo /FeatureName:Recall
 rem Dism /Online /Get-Packages /Format:Table
 rem DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
 Dism /Online /Disable-Feature /FeatureName:MediaPlayback /Quiet /NoRestart
