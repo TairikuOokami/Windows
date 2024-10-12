@@ -16,7 +16,7 @@ rem Radio Management Service (RmSvc) is required to be able to see and to connec
 rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
-rem DoH disabled / DoT enabled - netsh dns show global - ipconfig /all
+rem DoH disabled / DoT enabled - To Disable DoT run - netsh dns add global dot=no
 
 rem Some news
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
@@ -266,7 +266,7 @@ rem Task Manager / System Informer - https://www.systeminformer.com/canary
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
-rem Visual C++ / Visual C++ All-in-One - https://www.techpowerup.com/download/visual-c-redistributable-runtime-package-all-in-one
+rem Visual C++ / AIO Repack - https://github.com/abbodi1406/vcredist/releases
 rem Visual C++ / Latest Visual C++ Downloads - https://support.microsoft.com/en-au/help/2977003/the-latest-supported-visual-c-downloads
 rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
@@ -1902,6 +1902,9 @@ sc config "AMD External Events Utility" start= disabled
 rem AMD Link Controller Emulation
 sc config AMDXE start= disabled
 
+rem AMD Provisioning Packages Service
+sc config AmdPpkgSvc start= disabled
+
 rem AMD PSP Driver
 sc config amdpsp start= disabled
 
@@ -1956,7 +1959,7 @@ sc config dLauncherLoopback start= demand
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
 
-rem FileSyncHelper
+rem FileSyncHelper (required to open Personal Vault in OneDrive)
 sc config FileSyncHelper start= demand
 
 rem Function Discovery Provider Host
@@ -1973,6 +1976,9 @@ sc config "HasleoImageMountService" start= disabled
 
 rem Hasleo Backup Suite Service
 sc config "HasleoBackupSuiteService" start= disabled
+
+rem HV Host Service
+sc config HvHost start= disabled
 
 rem IKE and AuthIP IPsec Keying Modules
 sc config IKEEXT start= disabled
@@ -2054,6 +2060,9 @@ sc config webthreatdefsvc start= disabled
 
 rem Web Threat Defense User Service (Phishing protection)
 sc config webthreatdefusersvc start= disabled
+
+rem Windows Biometric Service
+sc config WbioSrvc start= disabled
 
 rem Windows Connection Manager
 sc config Wcmsvc start= disabled
