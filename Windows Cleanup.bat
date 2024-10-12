@@ -70,8 +70,6 @@ del "%WINDIR%\System32\winevt\Logs" /s /f /q
 del "%WINDIR%\Temp" /s /f /q
 del "%WINDIR%\WinSxS\Backup" /s /f /q
 
-vssadmin delete shadows /for=c: /all /quiet
-
 rem https://forums.mydigitallife.net/threads/windows-10-hotfix-repository.57050/page-622#post-1655591
 rem https://forums.mydigitallife.net/threads/which-windows-10-services-you-guys-disable.75202/page-6#post-1742386
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Component Based Servicing" /v DisableRemovePayload /t REG_DWORD /d "0" /f
@@ -83,23 +81,26 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "CompressBackups" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "CompressMutables" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "DisableComponentBackups" /t "REG_DWORD" /d "1" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "DisableResetbase" /t "REG_DWORD" /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "DisableResetbase" /t "REG_DWORD" /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "DisableWerReporting" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "LCUReoffer" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "NTFSCompressPayload" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "NumCBSPersistLogs" /t "REG_DWORD" /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "PreserveFileCompressionState" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "ReofferUpdate" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "SupersededActions" /t "REG_DWORD" /d "3" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "SupersededActions" /t "REG_DWORD" /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "TransientManifestCache" /t "REG_DWORD" /d "1" /f
 
-rem Dism /Online /Cleanup-Image /AnalyzeComponentStore
+rem DISM /Online /Cleanup-Image /AnalyzeComponentStore
+rem DISM /Online /Cleanup-Image /RestoreHealth
+rem SFC /SCANNOW
 rem fsutil storagereserve query C:
 rem vssadmin list shadowstorage
-Dism /get-mountedwiminfo
-Dism /cleanup-mountpoints
-Dism /cleanup-wim
-Dism /Online /Cleanup-Image /StartComponentCleanup
+vssadmin delete shadows /for=c: /all /quiet
+DISM /Get-mountedwiminfo
+DISM /Cleanup-mountpoints
+DISM /Cleanup-wim
+DISM /Online /Cleanup-Image /StartComponentCleanup /ResetBase
 
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Active Setup Temp Folders" /v "StateFlags6553" /t REG_DWORD /d "2" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Content Indexer Cleaner" /v "StateFlags6553" /t REG_DWORD /d "2" /f
