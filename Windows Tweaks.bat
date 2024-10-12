@@ -1983,6 +1983,9 @@ sc config HvHost start= disabled
 rem IKE and AuthIP IPsec Keying Modules
 sc config IKEEXT start= disabled
 
+rem Inventory and Compatibility Appraisal service
+sc config InventorySvc start= disabled
+
 rem IP Helper
 sc config iphlpsvc start= disabled
 
@@ -3621,4 +3624,4 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem https://ibb.co/gb1wty7 - Windows 11 Home 24H2 (26100.1882) Quiet Edition - 68 processes / 743 threads / 27209 handles / 2,5GB RAM (1GB used by ramdisk) 
+rem https://ibb.co/dc2nt65 - Windows 11 Home 24H2 (26100.2152) Quiet Edition - 70 processes / 747 threads / 28129 handles / 4,1GB RAM (1,1GB used by ramdisk) 
