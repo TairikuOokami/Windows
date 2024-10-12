@@ -155,8 +155,8 @@ netsh dns add global dot=yes
 netsh dns add encryption server=9.9.9.9 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
 netsh dns add encryption server=149.112.112.112 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
 
+rem Enable NextDNS DoT - 45.90.28.99/45.90.30.99
 start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
-
 start ms-settings:network-ethernet
 
 pause
@@ -183,7 +183,7 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.PowerAutomateDesktop" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.ScreenSketch" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Todos" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WidgetsPlatformRuntime"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WidgetsPlatformRuntime" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.DevHome" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.Photos" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsAlarms" | Remove-AppxPackage -AllUsers"
@@ -210,6 +210,7 @@ winget uninstall Microsoft.Copilot_8wekyb3d8bbwe
 winget uninstall Microsoft.Teams
 
 rem Uninstall Remote Desktop Connection and check for new bloatware
+start ms-settings:installed-apps
 
 pause
 
@@ -350,7 +351,7 @@ pause
 
 rem Install BlueMail nad paid HEVC
 
-ms-windows-store:
+start ms-windows-store:
 
 pause
 
