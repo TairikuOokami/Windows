@@ -92,8 +92,6 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\SideBySide\Configuration" /v "TransientManifestCache" /t "REG_DWORD" /d "1" /f
 
 rem DISM /Online /Cleanup-Image /AnalyzeComponentStore
-rem DISM /Online /Cleanup-Image /RestoreHealth
-rem SFC /SCANNOW
 rem fsutil storagereserve query C:
 rem vssadmin list shadowstorage
 vssadmin delete shadows /for=c: /all /quiet
@@ -138,9 +136,15 @@ timeout -1
 
 rem ======================================= OPTIONAL =======================================
 
-pause
 rem Perform a Single Time Ultra Compress, it has to be redone regularly (it can cause lagging in Windows)
 rem compact /c /i /q /f /exe:lzx /s:C:\Windows
+
+rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image?view=windows-11
+rem https://support.microsoft.com/en-us/topic/use-the-system-file-checker-tool-to-repair-missing-or-corrupted-system-files-79aa86cb-ca52-166a-92a3-966e85d4094e
+DISM /Online /Cleanup-Image /RestoreHealth
+SFC /SCANNOW
+
+pause
 
 rem Open Explorer - Choose the desired View - View - Options - View - Apply to Folders - OK - Close/Restart Explorer ASAP
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
