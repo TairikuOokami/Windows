@@ -1,6 +1,8 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
+rem https://learn.microsoft.com/en-us/windows/release-health
+
 rem Create a system backup to reverse any changes
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
@@ -11,10 +13,7 @@ rem bcdedit /set {bootmgr} flightsigning on
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
-
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
-rem Removing Powershell can affect various apps, since more and more require some PS scripts, but then again PS usage by malware is on the rise
-
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem DoH disabled / DoT enabled - To Disable DoT run - netsh dns add global dot=no
 
@@ -848,9 +847,9 @@ reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualiza
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f
 
 rem Platform Security Level / 1 - Turns on VBS with Secure Boot / 3 - Turns on VBS with Secure Boot and DMA
-reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d "0" /f
 
-rem Credential Guard / 1 - Disabled (Default) / 2 - Enabled / 3 - 	Enabled without making it persist to the UEFI
+rem Credential Guard / 0 - Disabled (Default) / 1 - Enabled with UEFI lock / 2 - Enabled without lock
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "LsaCfgFlags" /t REG_DWORD /d "0" /f
 
 rem 1 - Require UEFI Memory Attributes Table
@@ -905,7 +904,7 @@ rem https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-confi
 rem https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines
 
 rem Account Lockout Threshold / 0 - Disabled
-net accounts /lockoutthreshold:5
+net accounts /lockoutthreshold:25
 
 rem Account Lockout Duration / 0 - Locks out the account for good, till Administrator unlocks it
 net accounts /lockoutduration:1
@@ -3624,4 +3623,4 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem https://ibb.co/dc2nt65 - Windows 11 Home 24H2 (26100.2152) Quiet Edition - 70 processes / 747 threads / 28129 handles / 4,1GB RAM (1,1GB used by ramdisk) 
+rem https://ibb.co/3sTTyGm - Windows 11 Home 24H2 (26100.2152) Quiet Edition - 70 processes / 708 threads / 30062 handles / 3,5GB RAM (1GB used by ramdisk) 
