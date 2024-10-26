@@ -14,8 +14,10 @@ rem bcdedit /set {bootmgr} flightsigning on
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
+
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
-rem DoH disabled / DoT enabled - To Disable DoT run - netsh dns add global dot=no
+rem DNS/TCP/UDP are blocked - netsh advfirewall firewall delete rule name=all
+rem DoH disabled/DoT enabled - To Disable DoT run - netsh dns add global dot=no
 
 rem Some news
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
@@ -168,7 +170,7 @@ rem Wise Registry Cleaner - https://www.wisecleaner.com/wise-registry-cleaner.ht
 
 rem Firewall software using Windows Firewall
 rem Fort Firewall (US) - https://github.com/tnodir/fort
-rem Simplewall (US) - https://www.henrypp.org/product/simplewall
+rem Simplewall (US) - https://github.com/henrypp/simplewall
 rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
@@ -466,7 +468,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "BlueMail" /t RE
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "Malwarebytes Windows Firewall Control" /t REG_SZ /d "C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
 reg add "HKLM\Software\Wow6432Node\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
@@ -577,12 +578,12 @@ rem ---------------------------- Firewall & network protection -----------------
 
 rem Enable Windows Firewall / AllProfiles / CurrentProfile / DomainProfile / PrivateProfile / PublicProfile
 rem https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc771920(v=ws.10)
-rem netsh advfirewall set allprofiles state on
+netsh advfirewall set allprofiles state on
 
 rem Block all inbound network traffic and all outbound except allowed apps
-rem netsh advfirewall set DomainProfile firewallpolicy blockinboundalways,blockoutbound
-rem netsh advfirewall set PrivateProfile firewallpolicy blockinboundalways,blockoutbound
-rem netsh advfirewall set PublicProfile firewallpolicy blockinboundalways,blockoutbound
+netsh advfirewall set DomainProfile firewallpolicy blockinboundalways,blockoutbound
+netsh advfirewall set PrivateProfile firewallpolicy blockinboundalways,blockoutbound
+netsh advfirewall set PublicProfile firewallpolicy blockinboundalways,allowoutbound
 
 rem Remove All Windows Firewall Rules
 rem netsh advfirewall firewall delete rule name=all
@@ -591,9 +592,20 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedInterfaces" /f
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices" /f
 
-rem Windows Firewall Rules
+rem Windows Firewall Block Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
 rem netsh advfirewall firewall add rule name="MS Consent UI TCP" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,93.184.220.29,104.16.0.0-104.31.255.255,172.64.0.0-172.71.255.255,192.229.128.0-192.229.255.255 remoteport=80 program="C:\windows\system32\consent.exe"
+netsh advfirewall firewall delete rule name=all
+netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-79,81-442,444-852,854-1024
+netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-1024
+netsh advfirewall firewall add rule name="Brave TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Edge TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="Edge UDP" dir=out action=block protocol=UDP remoteport=443 program="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="LibreWolf TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Program Files\LibreWolf\librewolf.exe"
+netsh advfirewall firewall add rule name="LibreWolf UDP" dir=out action=block protocol=UDP remoteport=443 program="C:\Program Files\LibreWolf\librewolf.exe"
+netsh advfirewall firewall add rule name="OneDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Program Files\Microsoft OneDrive\OneDrive.exe"
+netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Users\Tairi\AppData\Local\Temp\IcedrivePortable\Icedrive.exe"
+
 
 
 rem ================================ Windows Error Reporting ===============================
@@ -3371,8 +3383,6 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManage
 rem =================================== Windows Support ====================================
 
 
-rem Do not run ResetBase! It breaks Windows Updates (0x800f081f) and it can not be repaired!
-
 rem Apps - FixWin - http://www.thewindowsclub.com/fixwin-for-windows-10
 rem Windows Cleanup - https://drive.google.com/file/d/1AQLr94IQPBpZYEyKNi_CsI5WAOC4BCKp/view
 rem Windows Drivers - https://www.catalog.update.microsoft.com
@@ -3381,6 +3391,9 @@ rem Windows Repair Install - https://www.elevenforum.com/t/repair-install-window
 rem Windows Update Reset - https://github.com/ManuelGil/Reset-Windows-Update-Tool/releases
 rem Windows Repair Toolbox - https://windows-repair-toolbox.com
 rem Windows Update Troubleshooter - https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-for-windows-10-19bc41ca-ad72-ae67-af3c-89ce169755dd
+ 
+rem Boot into Recovery Mode 
+rem Shutdown /f /r /o /t 0
  
 rem Boot into safemode - https://www.elevenforum.com/t/boot-to-safe-mode-in-windows-11.538
 rem bcdedit /set {identifier} safeboot minimal
@@ -3518,7 +3531,7 @@ start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" 
 rem Run Wise Registry Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
-rem Trim some Edges - edge://settings/siteData
+rem Trim some Edges - edge://settings/content/cookies/siteData
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
