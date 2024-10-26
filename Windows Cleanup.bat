@@ -131,6 +131,8 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\VolumeCaches\Wi
 rem cleanmgr /sageset:6553
 cleanmgr /sagerun:6553
 
+start ms-settings:storagepolicies
+
 rem Cleanup done, you can close this window!
 timeout -1
 
@@ -141,10 +143,16 @@ rem compact /c /i /q /f /exe:lzx /s:C:\Windows
 
 rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/repair-a-windows-image?view=windows-11
 rem https://support.microsoft.com/en-us/topic/use-the-system-file-checker-tool-to-repair-missing-or-corrupted-system-files-79aa86cb-ca52-166a-92a3-966e85d4094e
+rem DISM /Online /Cleanup-Image /ScanHealth
+rem DISM /Online /Cleanup-Image /CheckHealth
 DISM /Online /Cleanup-Image /RestoreHealth
 SFC /SCANNOW
 
 pause
+
+rem Uninstall reinstalled MS Apps
+rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle  | Where-Object {$_.NonRemovable -eq $False} | Select-Object Name, PackageFullName"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftWindows.Client.WebExperience" | Remove-AppxPackage -AllUsers"
 
 rem Open Explorer - Choose the desired View - View - Options - View - Apply to Folders - OK - Close/Restart Explorer ASAP
 reg delete "HKCU\Software\Classes\Local Settings\Software\Microsoft\Windows\Shell\Bags" /f
