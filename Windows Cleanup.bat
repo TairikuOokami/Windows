@@ -202,10 +202,6 @@ rem Trim
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe"
 start "" /wait "%ProgramFiles%\Kingston_SSD_Manager\KSM_Gen15.exe"
 
-rem Reinstall WFC broken after cleanup
-start "" /wait "D:\OneDrive\Setup\wfc6setup.exe"
-start "" "C:\Program Files\Malwarebytes\Windows Firewall Control\wfcUI.exe"
-
 rem Create System Backup
 sc config "HasleoBackupSuiteService" start= demand
 sc config "HasleoImageMountService" start= demand
