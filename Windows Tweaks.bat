@@ -586,7 +586,7 @@ netsh advfirewall set PrivateProfile firewallpolicy blockinboundalways,blockoutb
 netsh advfirewall set PublicProfile firewallpolicy blockinboundalways,allowoutbound
 
 rem Remove All Windows Firewall Rules
-rem netsh advfirewall firewall delete rule name=all
+netsh advfirewall firewall delete rule name=all
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Defaults\FirewallPolicy\FirewallRules" /f
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\FirewallRules" /f
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedInterfaces" /f
@@ -594,18 +594,41 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Block Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-rem netsh advfirewall firewall add rule name="MS Consent UI TCP" dir=out action=allow protocol=TCP remoteip=2.16.2.0-2.16.3.255,23.32.0.0-23.67.255.255,23.192.0.0-23.223.255.255,93.184.220.29,104.16.0.0-104.31.255.255,172.64.0.0-172.71.255.255,192.229.128.0-192.229.255.255 remoteport=80 program="C:\windows\system32\consent.exe"
-netsh advfirewall firewall delete rule name=all
-netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-79,81-442,444-852,854-1024
-netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-1024
-netsh advfirewall firewall add rule name="Brave TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe"
-netsh advfirewall firewall add rule name="Edge TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-netsh advfirewall firewall add rule name="Edge UDP" dir=out action=block protocol=UDP remoteport=443 program="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
-netsh advfirewall firewall add rule name="LibreWolf TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Program Files\LibreWolf\librewolf.exe"
-netsh advfirewall firewall add rule name="LibreWolf UDP" dir=out action=block protocol=UDP remoteport=443 program="C:\Program Files\LibreWolf\librewolf.exe"
-netsh advfirewall firewall add rule name="OneDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Program Files\Microsoft OneDrive\OneDrive.exe"
-netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="C:\Users\Tairi\AppData\Local\Temp\IcedrivePortable\Icedrive.exe"
+netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-852,854-1024
+netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-122,124-442,444-1024
+netsh advfirewall firewall add rule name="Brave TCP" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Brave UDP" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Edge TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="Edge UDP" dir=out action=block protocol=UDP program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="LibreWolf TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\LibreWolf\librewolf.exe"
+netsh advfirewall firewall add rule name="LibreWolf UDP" dir=out action=block protocol=UDP program="%ProgramFiles%\LibreWolf\librewolf.exe"
+netsh advfirewall firewall add rule name="OneDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
+netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Temp\IcedrivePortable\Icedrive.exe"
 
+rem Windows Firewall Allow Rules
+rem netsh advfirewall firewall add rule name="COD MW3 TCP" dir=out action=allow protocol=TCP remoteport=3074,27014-27050 program="D:\steam\steamapps\common\call of duty modern warfare 3\iw5sp.exe"
+rem netsh advfirewall firewall add rule name="COD MW3 UDP" dir=out action=allow protocol=UDP remoteport=3074,27000-27060 program="D:\steam\steamapps\common\call of duty modern warfare 3\iw5sp.exe"
+rem netsh advfirewall firewall add rule name="Consent TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\consent.exe"
+rem netsh advfirewall firewall add rule name="Creative.sbcommand TCP" dir=out action=allow protocol=TCP remoteport=80 program="%ProgramFiles(x86)%\creative\sound blaster command\creative.sbcommand.exe"
+rem netsh advfirewall firewall add rule name="Edge TCP Router" dir=out action=allow protocol=TCP remoteip=192.168.9.1 remoteport=80 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+rem netsh advfirewall firewall add rule name="Genshin Impact TCP" dir=out action=allow protocol=TCP remoteport=80 program="D:\hoyoplay\games\genshin impact game\genshinimpact.exe"
+rem netsh advfirewall firewall add rule name="Genshin Impact UDP" dir=out action=allow protocol=UDP remoteport=22101-22102 program="D:\hoyoplay\games\genshin impact game\genshinimpact.exe"
+rem netsh advfirewall firewall add rule name="Hasleo TCP" dir=out action=allow protocol=TCP remoteport=80 program="%ProgramFiles%\hasleo\hasleo backup suite\bin\backupmainui.exe"
+rem netsh advfirewall firewall add rule name="IPNetInfo TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\onedrive\soft\windows repair toolbox\downloads\nirlauncher\nirsoft\ipnetinfo.exe"
+rem netsh advfirewall firewall add rule name="Lsass TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\lsass.exe"
+rem netsh advfirewall firewall add rule name="RadeonSoftware TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\program files\amd\cnext\cnext\radeonsoftware.exe"
+rem netsh advfirewall firewall add rule name="RuntimeBroker TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\runtimebroker.exe"
+rem netsh advfirewall firewall add rule name="Steam TCP" dir=out action=allow protocol=TCP remoteport=27019 program="D:\steam\steam.exe"
+rem netsh advfirewall firewall add rule name="Steam UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\steam\steam.exe"
+rem netsh advfirewall firewall add rule name="Svchost TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\svchost.exe"
+rem netsh advfirewall firewall add rule name="Svchost TCP DoT" dir=out action=allow protocol=TCP remoteip=9.9.9.9,45.90.28.99,45.90.30.99,149.112.112.112 remoteport=853 program="C:\windows\system32\svchost.exe"
+rem netsh advfirewall firewall add rule name="Svchost UDP CDP Sync" dir=out action=allow protocol=UDP remoteport=5050 remoteip=239.255.255.250 program="C:\windows\system32\svchost.exe"
+rem netsh advfirewall firewall add rule name="UpdateTime UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\OneDrive\Soft\Windows Repair Toolbox\downloads\custom tools\added custom tools\updatetime_x64.exe"
+rem netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80 program="D:\OneDrive\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
+rem netsh advfirewall firewall add rule name="Xsplit.core TCP" dir=out action=allow protocol=TCP remoteport=80,1935 program="%ProgramFiles%\xsplit\broadcaster\xsplit.core.exe"
+rem netsh advfirewall firewall add rule name="Xsplit.core UDP" dir=out action=allow protocol=UDP remoteport=123,5353 program="%ProgramFiles%\xsplit\broadcaster\xsplit.core.exe"
+rem netsh advfirewall firewall add rule name="Xsplit.xbcbp TCP" dir=out action=allow protocol=TCP remoteport=80 program="%ProgramFiles%\xsplit\broadcaster\cef3_5060\xsplit.xbcbp.exe"
+rem netsh advfirewall firewall add rule name="Xsplit.xbcbp UDP" dir=out action=allow protocol=UDP remoteport=123 program="%ProgramFiles%\xsplit\broadcaster\cef3_5060\xsplit.xbcbp.exe"
 
 
 rem ================================ Windows Error Reporting ===============================
