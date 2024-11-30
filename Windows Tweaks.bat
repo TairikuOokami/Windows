@@ -1,15 +1,8 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem https://learn.microsoft.com/en-us/windows/release-health
-
 rem Create a system backup to reverse any changes
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
-
-rem To be able to install Insider updates, you need to enable:
-rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
-rem bcdedit /set flightsigning on
-rem bcdedit /set {bootmgr} flightsigning on
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
@@ -19,7 +12,12 @@ rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem DNS/TCP/UDP are blocked - netsh advfirewall firewall delete rule name=all
 rem DoH disabled/DoT enabled - To Disable DoT run - netsh dns add global dot=no
 
-rem Some news
+rem To be able to install Insider updates, you need to enable:
+rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
+rem bcdedit /set flightsigning on
+rem bcdedit /set {bootmgr} flightsigning on
+
+rem News - https://learn.microsoft.com/en-us/windows/release-health
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-september-2024
 rem AI Imposter - https://youtu.be/WT8NJk1onC8 / Deep Fake - https://youtu.be/rGIz3Z-QjMQ
@@ -184,7 +182,7 @@ rem AdwCleaner (US) - https://www.malwarebytes.com/adwcleaner/
 rem Dr.Web CureIt (RU) - https://free.drweb.com/download+cureit+free
 rem Emsisoft Emergency Kit (NZ) - https://www.emsisoft.com/en/home/emergency-kit
 rem Kaspersky Virus Removal Tool (RU) - https://www.kaspersky.com/downloads/free-virus-removal-tool
-rem MWAV (IN) - https://escanav.com/en/mwav-tools/download-free-antivirus-toolkit.asp
+rem Microsoft Safety Scanner (US) - https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download
 rem RKill (BleepingComputer) - https://www.bleepingcomputer.com/download/rkill/
 
 rem Security cleanup software (online/updatable on-demand scanners)
@@ -221,7 +219,8 @@ rem Disk Space Usage / WizTree - https://wiztreefree.com
 rem Disk Surface Test / Macrorit Disk Scanner - https://macrorit.com/disk-surface-test/disk-surface-test.html
 rem DVD to MKV / MakeMKV Beta - https://www.makemkv.com/download / Key - https://www.makemkv.com/forum2/viewtopic.php?f=5&t=1053
 rem eMail / SimpleLogin - https://simplelogin.io/pricing
-rem eMail Client / BlueMail - https://bluemail.me
+rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
+rem eMail Client / Mailbird - https://www.getmailbird.com
 rem eMail Client / POP Peeper - https://www.esumsoft.com/products/pop-peeper
 rem File Archiver / NanaZip - https://www.microsoft.com/en-us/p/nanazip/9n8g7tscl18r?activetab=pivot:overviewtab
 rem Folder View Globally Set / WinSetView - https://github.com/LesFerch/WinSetView
@@ -464,7 +463,7 @@ bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "BlueMail" /t REG_SZ /d "C:\WINDOWS\explorer.exe me.blueone.win:noopt:hidden" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Mailbird" /t REG_SZ /d "C:\Program Files\Mailbird\Mailbird.exe startup" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
@@ -594,8 +593,9 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Block Rules
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-852,854-1024
+netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-586,588-852,854-992,994-1024
 netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-122,124-442,444-1024
+
 netsh advfirewall firewall add rule name="Brave TCP" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Brave UDP" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Edge TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
@@ -1508,7 +1508,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearBrowsingDataOnExit" /t 
 rem 1 - Clear cached images and files when Microsoft Edge closes
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearCachedImagesAndFilesOnExit" /t REG_DWORD /d "1" /f
 
-rem edge://settings/siteData
+rem edge://settings/content/cookies/siteData
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "1" /t REG_SZ /d "[*.]account.samsung.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_SZ /d "[*.]alza.sk" /f
@@ -2875,17 +2875,9 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 rem Allow/Deny - Let apps access your notifications
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Allow" /f
 
-rem 1 - Enable and Prioritize BlueMail notifications by not showing them in the notification center 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\BlueMail.BlueMailEmail_t08282y3j4hc4!BlueMail.BlueMailEmail" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\BlueMail.BlueMailEmail_t08282y3j4hc4!BlueMail.BlueMailEmail" /v "Rank" /t REG_DWORD /d "1" /f
-
 rem 1 - Enable and Prioritize Edge Notifications by not showing them in the notification center 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\MSEdge" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\MSEdge" /v "Rank" /t REG_DWORD /d "1" /f
-
-rem 1 - Enable and Prioritize Outlook notifications by not showing them in the notification center 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows" /v "ShowInActionCenter" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Microsoft.OutlookForWindows_8wekyb3d8bbwe!Microsoft.OutlookforWindows" /v "Rank" /t REG_DWORD /d "1" /f
 
 rem 1 - Antivirus Disabled Notification
 reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
@@ -3523,10 +3515,14 @@ rem ==================================== Windows Waypoint ======================
 
 timeout 5
 
+taskkill /im brave.exe /f
 taskkill /im dllhost.exe /f
+taskkill /im firefox.exe /f
+taskkill /im librewolf.exe /f
 taskkill /im msedge.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
+taskkill /im tor.exe /f
 
 rem https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade
 winget upgrade --all -h --include-unknown --accept-package-agreements --accept-source-agreements
@@ -3534,13 +3530,6 @@ timeout 5
 
 rem https://kalilinuxtutorials.com/webview2-cookie-stealer
 fsutil usn deletejournal /d /n c:
-
-taskkill /im brave.exe /f
-taskkill /im dllhost.exe /f
-taskkill /im librewolf.exe /f
-taskkill /im msedge.exe /f
-taskkill /im rundll32.exe /f
-taskkill /im steam.exe /f
 
 taskkill /im cncmd.exe /f
 taskkill /im QtWebEngineProcess.exe /f
@@ -3659,4 +3648,4 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem https://ibb.co/3sTTyGm - Windows 11 Home 24H2 (26100.2152) Quiet Edition - 70 processes / 708 threads / 30062 handles / 3,5GB RAM (1GB used by ramdisk) 
+rem https://ibb.co/4sXX0mL - Windows 11 Home 24H2 (26100.2161) Quiet Edition - 67 processes / 665 threads / 27530 handles / 3,5GB RAM (1GB used by ramdisk) 
