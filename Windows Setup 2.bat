@@ -84,6 +84,8 @@ rem edge://flags/#media-router-cast-allow-all-ips
 rem edge://flags/#tab-hover-card-images
 
 rem Enabled
+rem edge://flags/#bind-cookies-to-port
+rem edge://flags/#bind-cookies-to-scheme
 rem edge://flags/#block-insecure-private-network-requests
 rem edge://flags/#disallow-doc-written-script-loads
 rem edge://flags/#edge-digsig-enabled-pdf
@@ -149,6 +151,7 @@ rem Windows Defender Disable - https://github.com/TairikuOokami/Windows/blob/mai
 rem Windows Tweaks - https://github.com/TairikuOokami/Windows/blob/main/Windows%20Tweaks.bat
 
 rem Make Sure Secure Boot is ON after BIOS Update !!!!!
+rem Disable CPU Performance Killers Modes: NX, PSS, SMT
 
 rem Take Ownership of the Registry key and give permissions to Admin - https://www.youtube.com/watch?v=M1l5ifYKefg
 rem To remove Network from Explorer/allow cleaning WebCache
