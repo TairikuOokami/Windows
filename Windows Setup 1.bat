@@ -1,5 +1,4 @@
-rem Select to Save files locally then Unlink OneDrive to change the location!
-rem Unlock Personal Vault afterwards to install OneDrive in a proper location!
+rem Unlink OneDrive!
 
 pause
 
@@ -31,6 +30,11 @@ reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ActiveComputerName" 
 reg add "HKLM\System\CurrentControlSet\Control\ComputerName\ComputerName" /v "ComputerName" /t REG_SZ /d "FDDefine7Mini" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "Hostname" /t REG_SZ /d "FDDefine7Mini" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostname" /t REG_SZ /d "FDDefine7Mini" /f
+
+rem DISM /Online /Get-Capabilities
+rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
+DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
+Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
 
 start "" "D:\OneDrive\Setup"
 rem Install Chipset Drivers and RESTART!
@@ -65,6 +69,12 @@ icacls D:\OneDrive /inheritance:r
 icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\OneDrive /grant "System":(OI)(CI)RX /t /l /q /c
 icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f D:\RamDisk /r /d y
+icacls D:\RamDisk /inheritance:r
+icacls D:\RamDisk /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\RamDisk /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls D:\RamDisk /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\Steam /r /d y
 icacls D:\Steam /inheritance:r
@@ -169,8 +179,9 @@ slmgr /cpky
 
 rem pause
 
-rem Get-AppxPackage -AllUsers -PackageTypeFilter Bundle  | Where-Object {$_.NonRemovable -eq $False} | Select-Object Name, PackageFullName
+rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle  | Where-Object {$_.NonRemovable -eq $False} | Select-Object Name, PackageFullName"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Clipchamp.Clipchamp" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftWindows.Client.WebExperience" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingNews" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingSearch" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingWeather" | Remove-AppxPackage -AllUsers"
@@ -190,7 +201,6 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsCamera" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsNotepad" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WidgetsPlatformRuntime" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsTerminal" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.YourPhone" | Remove-AppxPackage -AllUsers"
@@ -201,6 +211,7 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.XboxSpeechToTextOverlay" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.MicrosoftFamily" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftCorporationII.QuickAssist" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftWindows.Client.WebExperience" | Remove-AppxPackage -AllUsers"
 
 pause
 
@@ -212,11 +223,6 @@ rem Uninstall Remote Desktop Connection and check for new bloatware
 start ms-settings:installed-apps
 
 pause
-
-rem DISM /Online /Get-Capabilities
-rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
-DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
-Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
 
 rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/enable-or-disable-windows-features-using-dism?view=windows-11
 rem DISM /Online /Get-Features /Format:Table
@@ -330,8 +336,44 @@ rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell 
 
 pause
 
-winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --accept-source-agreements
+rem Select to Save files locally then Link OneDrive to change the location!
+rem Unlock Personal Vault afterwards to install OneDrive in a proper location!
+
+pause
+
+winget install Microsoft.AppInstaller --accept-package-agreements --accept-source-agreements
 winget install Microsoft.DirectX --accept-package-agreements --accept-source-agreements
+
+winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --accept-source-agreements
+
+winget install Brave.Brave --accept-package-agreements --accept-source-agreements
+winget install CreativeTechnology.SoundBlasterCommand --accept-package-agreements --accept-source-agreements
+winget install Kingston.SSDManager --accept-package-agreements --accept-source-agreements
+winget install LibreWolf.LibreWolf --accept-package-agreements --accept-source-agreements
+winget install Logitech.UnifyingSoftware --accept-package-agreements --accept-source-agreements
+winget install Rizonesoft.Notepad3 --accept-package-agreements --accept-source-agreements
+winget install M2Team.NanaZip --accept-package-agreements --accept-source-agreements
+winget install Microsoft.OneDrive --accept-package-agreements --accept-source-agreements
+winget install MPC-BE.MPC-BE --accept-package-agreements --accept-source-agreements
+winget install SumatraPDF.SumatraPDF --accept-package-agreements --accept-source-agreements
+winget install TheDocumentFoundation.LibreOffice --accept-package-agreements --accept-source-agreements
+winget install WinsiderSS.SystemInformer.Canary --accept-package-agreements --accept-source-agreements
+winget install XnSoft.XnView.Classic --accept-package-agreements --accept-source-agreements
+winget install XSplit.Broadcaster --accept-package-agreements --accept-source-agreements
+
+pause
+
+rem Audials Radio
+winget install XPDM0S9P0J5LT4 --accept-package-agreements --accept-source-agreements
+
+rem MailBird
+winget install XP9KHKVP3JKR39 --accept-package-agreements --accept-source-agreements
+
+rem Wise Disk Cleaner
+winget install XP9CW3GPQQS852 --accept-package-agreements --accept-source-agreements
+
+rem Wise Registry Cleaner
+winget install XPDLS1XBTXVPP4 --accept-package-agreements --accept-source-agreements
 
 pause
 
@@ -339,19 +381,17 @@ start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
 start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
 
-rem Enable PreOS and Create a Backup
+pause
 
-start "" /wait "C:\Program Files\Hasleo\Hasleo Backup Suite\bin\BackupMainUI.exe"
+rem Install paid HEVC and Netflix
 
-rem System Informer
-
-start "" /wait "D:\OneDrive\Setup"
+start ms-windows-store:
 
 pause
 
-rem Install BlueMail nad paid HEVC
+rem Enable PreOS and Create a Backup
 
-start ms-windows-store:
+start "" /wait "C:\Program Files\Hasleo\Hasleo Backup Suite\bin\BackupMainUI.exe"
 
 pause
 
