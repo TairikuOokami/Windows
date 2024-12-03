@@ -1,4 +1,5 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
+rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes
@@ -137,11 +138,10 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software
-rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://postimg.cc/8jNQ3gxy
-rem AVG (CZ) - https://www.avg.com - https://postimg.cc/4mPkRFgX
-rem Kaspersky (RU) - https://www.kaspersky.com/downloads/free-antivirus - https://postimg.cc/CRKyhHhk
+rem AntiVirus software (Avoid junk like Avira, Bitdefender, Kaspersky, Tencent)
+rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://ibb.co/2Mk623n
 rem Microsoft Defender (US) - https://www.defenderui.com - https://postimg.cc/187kfnXT
+rem Panda  (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://ibb.co/dPJw4zp
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
 rem AppCheck (KR) - https://www.checkmal.com/product/appcheck
@@ -3236,6 +3236,10 @@ rem ..................................... Date & time ..........................
 rem Time Zone - Central Europe Standard Time
 tzutil /s "Central Europe Standard Time"
 
+rem 1 - Show Shortened Time and Date on Taskbar
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowShortenedDateTime" /t REG_DWORD /d "0" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowShortenedDateTimeRevision" /t REG_DWORD /d "0" /f
+
 
 rem =================================== Windows Settings ===================================
 rem ----------------------------------- Time & language -------------------------------------
@@ -3643,6 +3647,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\WebStorage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Workspaces" /s /q
 
 start "" "D:\OneDrive\Downloads\CD.bat"
+start "" "D:\OneDrive\Downloads\Microsoft Defender Disable.bat"
 
 timeout 5
 
