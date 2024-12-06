@@ -1,5 +1,4 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
-rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes
@@ -94,7 +93,7 @@ rem https://blog.emsisoft.com/2015/01/17/has-the-antivirus-industry-gone-mad
 rem https://www.makeuseof.com/tag/antivirus-tracking-youd-surprised-sends/
 
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
-rem DNS Check / https://dnscheck.tools
+rem DNS Check / https://dnscheck.tools / https://www.dnsperf.com
 rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dynamic-dns-domains
 rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
@@ -1766,7 +1765,9 @@ schtasks /DELETE /TN "AMDLinkUpdate" /f
 schtasks /DELETE /TN "AMDRyzenMasterSDKTask" /f
 schtasks /DELETE /TN "DUpdaterTask" /f
 schtasks /DELETE /TN "ModifyLinkUpdate" /f
+schtasks /DELETE /TN "StartAUEP" /f
 schtasks /DELETE /TN "StartCN" /f
+schtasks /DELETE /TN "StartCNBM" /f
 schtasks /DELETE /TN "StartDVR" /f
 
 schtasks /Change /TN "CreateExplorerShellUnelevatedTask" /Enable
@@ -3653,4 +3654,4 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem https://ibb.co/4sXX0mL - Windows 11 Home 24H2 (26100.2161) Quiet Edition - 67 processes / 665 threads / 27530 handles / 3,5GB RAM (1GB used by ramdisk) 
+rem https://ibb.co/bP9w8tw - Windows 11 Home 24H2 (26100.2454) Quiet Edition - 68 processes / 675 threads / 28205 handles / 3,6GB RAM (1.1GB used by ramdisk) 
