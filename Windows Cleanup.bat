@@ -190,9 +190,13 @@ xcopy "Z:\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
 xcopy "Z:\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
 
 rem Backup Custom Settings
+xcopy "%LocalAppData%\Mailbird\Mailbird.config" "D:\OneDrive\Setup\Users\Tairi\AppData\Local\Mailbird\Mailbird.config" /y
+xcopy "%AppData%\MPC-BE\mpc-be64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\MPC-BE\mpc-be64.ini" /y
+xcopy "%AppData%\Rizonesoft\Notepad3\Notepad3.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Rizonesoft\Notepad3\Notepad3.ini" /y
 xcopy "%AppData%\SystemInformer\settings.xml" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
 xcopy "%AppData%\Wise Disk Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Disk Cleaner\Config.ini" /y
 xcopy "%AppData%\Wise Registry Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Registry Cleaner\Config.ini" /y
+xcopy "%AppData%\XnView\xnview.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\XnView\xnview.ini" /y
 
 rem Remove Old Drivers
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
@@ -208,3 +212,16 @@ sc config "HasleoImageMountService" start= demand
 net start "HasleoBackupSuiteService"
 net start "HasleoImageMountService"
 start "" /wait "C:\Program Files\Hasleo\Hasleo Backup Suite\bin\BackupMainUI.exe"
+
+pause
+
+rem Disable Windows ransomware
+sc config "BDESVC" start= demand
+net start BDESVC
+
+fsutil behavior set disableencryption 1
+manage-bde -off C:
+manage-bde -off D:
+manage-bde -off E:
+
+pause
