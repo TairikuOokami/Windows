@@ -139,7 +139,7 @@ rem =============================== Software recommendations ===================
 
 rem AntiVirus software (Avoid junk like Avira, Bitdefender, Kaspersky, Tencent)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://ibb.co/2Mk623n
-rem Microsoft Defender (US) - https://www.defenderui.com - https://postimg.cc/187kfnXT
+rem Microsoft Defender (US) - https://www.defenderui.com - https://ibb.co/zr8hL1n
 rem Panda  (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://ibb.co/dPJw4zp
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
@@ -475,6 +475,10 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "SETUPEXECUTE
 
 rem =================================== Software Setup =====================================
 
+rem Audials
+taskkill /im AudialsNotifier.exe /f
+del "%ProgramFiles%\Audials\Audials 2025\AudialsNotifier.exe" /s /f /q
+
 rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z:/TEMP/Gihosoft/temp" /f
@@ -737,7 +741,7 @@ rem Remove 3D Folders from This PC
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A}" /f
 
 rem Remove Home (Quick access) from This PC
-reg add "HKLM\Software\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f
 reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
 reg delete "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\Desktop\NameSpace\{f874310e-b6b7-47dc-bc84-b9e6b38f5903}" /f
 
@@ -1589,9 +1593,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
 
-rem Enable full-tab promotional content
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromotionalTabsEnabled" /t REG_DWORD /d "0" /f
-
 rem Allow recommendations and promotional notifications from Microsoft Edge
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d "0" /f
 
@@ -1691,7 +1692,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "StartupBoostEnabled" /t REG_
 
 rem ________________________________________________________________________________________
 rem 1 - If ECH is enabled, Microsoft Edge might or might not use ECH depending on server support, the availability of the HTTPS DNS record
-rem Enable: DOH + #use-dns-https-svcb-alpn + the paramater: --enable-features="EncryptedClientHello" - https://www.cloudflare.com/ssl/encrypted-sni
+rem Enable: DOH + the paramater: --enable-features="EncryptedClientHello" - https://www.cloudflare.com/ssl/encrypted-sni
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EncryptedClientHelloEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Enable Gamer Mode
@@ -1889,6 +1890,7 @@ rem Application Information / required by UAC
 rem AppX Deployment Service (AppXSVC) / required by Store
 rem Background Intelligent Transfer Service / required by Windows Updates / depends on Network List Service (starts even when disabled)
 rem Base Filtering Engine / required by Windows Defender Firewall
+rem BitLocker Drive Encryption Service / required to be able to access encryption settings and to disable Bitlocker and device encryption
 rem CNG Key Isolation / required to login to Windows Insider / Switch to Local Account / Set up PIN / Basically everything Credentials related
 rem Connected Devices Platform / required to open Settings - Windows Backup and to sync Edge with android
 rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app
@@ -3483,7 +3485,7 @@ rem Repair bad sectors
 rem chkdsk %SystemDrive% /r
 
 rem Reset digital certificates used by Windows and browsers
-rem https://www.howtoedge.com/purge-the-catroot2-folder
+rem https://howtoedge.com/purge-the-catroot2-folder
 
 rem Reset password/gain admin access/enable local admin account
 rem https://www.technibble.com/bypass-windows-logons-utilman/
@@ -3654,4 +3656,7 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem https://ibb.co/bP9w8tw - Windows 11 Home 24H2 (26100.2454) Quiet Edition - 68 processes / 675 threads / 28205 handles / 3,6GB RAM (1.1GB used by ramdisk) 
+rem My security: NextDNS Free with Cache Boost ON acting as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB) and Windows
+rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/QHTH33P / https://ibb.co/cvdKxTX
+
+rem https://ibb.co/bP9w8tw - Windows 11 Home 24H2 (26100.2454) Quiet Edition - 68 processes / 675 threads / 28205 handles / 3,6GB RAM (1.1GB used by ramdisk)
