@@ -1202,14 +1202,17 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DisableScreenshots" /t REG_D
 rem 1 - DNS interception checks enabled
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DNSInterceptionChecksEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Captures the searches user does on third party search providers
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Edge3PSerpTelemetryEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Machine learning powered autofill suggestions
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeAutofillMlEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Drop lets users send messages or files to themselves
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEDropEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Microsoft Edge will attempt to connect to the Microsoft Edge management service to download and apply policy assigned to the Azure AD account of the user
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeManagementEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Captures the searches user does on third party search providers
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Edge3PSerpTelemetryEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - If you enable this policy, users will be able to access the Microsoft Edge Workspaces feature
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t REG_DWORD /d "0" /f
@@ -1229,17 +1232,14 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HideRestoreDialogEnabled" /t
 rem 1 - Show Hubs Sidebar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HubsSidebarEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Enable the Designer for Image Editor feature
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImageEditorServiceEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Enable Picture Dictionary feature within Immersive Reader
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ImmersiveReaderPictureDictionaryEnabled" /t REG_DWORD /d "0" /f
-
 rem 0 -InPrivate mode available / 1 - disabled / 2 - forced
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InPrivateModeAvailability" /t REG_DWORD /d "1" /f
 
 rem 1 - Allow sites to be reloaded in Internet Explorer mode (IE mode)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationReloadInIEModeAllowed" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable IPv6 reachability check override
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "IPv6ReachabilityOverrideEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
@@ -1249,6 +1249,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MouseGestureEnabled" /t REG_
 
 rem 1 - Microsoft Edge built-in PDF reader powered by Adobe Acrobat enabled
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewPDFReaderEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - The network service process will run sandboxed, but it will block all cookies, you will be logged out instantly, till you disable it
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkServiceSandboxEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Hide the default top sites from the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSites" /t REG_DWORD /d "1" /f
@@ -1564,9 +1567,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWe
 
 rem 1 - Show me search and site suggestions using my typed characters
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Turn on site safety services to get more info about the sites you visit
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SiteSafetyServicesEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Suggest group names when creating a new tab group
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TabServicesEnabled" /t REG_DWORD /d "0" /f
