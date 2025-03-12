@@ -1565,6 +1565,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_
 rem 1 - Use a web service to help resolve navigation errors
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWebService" /t REG_DWORD /d "0" /f
 
+rem 1 - Scareware blocker
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScarewareBlockerProtectionEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Show me search and site suggestions using my typed characters
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
 
@@ -1581,9 +1584,6 @@ rem 1 - Visual search (sending what you are looking at to MS)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VisualSearchEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
-rem Enable Microsoft Search in Bing suggestions in the address bar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarMicrosoftSearchInBingProviderEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - Allow users to bypass Enhanced Security Mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityModeAllowUserBypass" /t REG_DWORD /d "0" /f
 
