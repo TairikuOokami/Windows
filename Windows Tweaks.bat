@@ -1816,7 +1816,6 @@ schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\Installation
 schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\ReconcileLanguageResources" /Disable
 schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\Uninstallation" /Disable
 schtasks /Change /TN "Microsoft\Windows\License Manager\TempSignedLicenseExchange" /Disable
-schtasks /Change /TN "Microsoft\Windows\License Manager\TempSignedLicenseExchange" /Disable
 schtasks /Change /TN "Microsoft\Windows\Location\WindowsActionDialog" /Disable
 schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Cellular" /Disable
 schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Logon" /Disable
