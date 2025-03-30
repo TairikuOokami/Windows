@@ -17,7 +17,8 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem News - https://adguard.com/en/blog/mv2-extensions-no-longer-alternatives.html
+rem https://www.neowin.net/news/forget-bypassnro-a-new-internetaccount-bypass-during-windows-11-installs-already-exists
+rem https://www.neowin.net/news/microsoft-makes-it-harder-to-install-windows-11-without-internet-but-it-is-still-possible
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-september-2024
 rem AI Imposter - https://youtu.be/WT8NJk1onC8 / Deep Fake - https://youtu.be/rGIz3Z-QjMQ
@@ -147,7 +148,6 @@ rem AppCheck (KR) - https://www.checkmal.com/product/appcheck
 rem CatchPulse Lite (SG) - https://www.secureage.com/products/home-malware-protection
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
-rem NeuShield Data Sentinel (US) - https://www.neushield.com/products/#prod-table
 
 rem Browser Extensions useful against (99% malware comes via an email or a browser)
 rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
@@ -1326,6 +1326,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ConfigureShare" /t REG_DWORD
 rem 1 - Show Collections button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeCollectionsEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Extensions Performance Detector enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExtensionsPerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Show favorites bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "FavoritesBarEnabled" /t REG_DWORD /d "1" /f
 
@@ -1538,7 +1541,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "19" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "20" /t REG_SZ /d "[*.]myanimelist.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "21" /t REG_SZ /d "[*.]nextdns.io" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG_SZ /d "[*.]mbank.sk" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "[*.]pcforum.sk" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "24" /t REG_SZ /d "[*.]poniverse.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "25" /t REG_SZ /d "[*.]primevtc.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "26" /t REG_SZ /d "[*.]roextended.ro" /f
@@ -1758,8 +1761,10 @@ rem =============================== Windows Scheduled Tasks ====================
 
 
 rem UAC Bypass - https://enigma0x3.net/2016/07/22/bypassing-uac-on-windows-10-using-disk-cleanup
-rem MsCtfMonitor Task (keylogger) is required to be able to type within Settings and etc
+rem MsCtfMonitor Task (keylogger) is required to be able to type within Settings, login with PIN
 
+schtasks /DELETE /TN "AMD Install Manager - Check For Updates" /f
+schtasks /DELETE /TN "AMD Install Manager - Install Updates" /f
 schtasks /DELETE /TN "AMDInstallLauncher" /f
 schtasks /DELETE /TN "AMDInstallUEP" /f
 schtasks /DELETE /TN "AMDLinkUpdate" /f
