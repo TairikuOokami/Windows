@@ -17,6 +17,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
+rem https://www.windowscentral.com/software-apps/windows-11/an-even-better-microsoft-account-bypass-for-windows-11-has-already-been-discovered
 rem https://www.neowin.net/news/forget-bypassnro-a-new-internetaccount-bypass-during-windows-11-installs-already-exists
 rem https://www.neowin.net/news/microsoft-makes-it-harder-to-install-windows-11-without-internet-but-it-is-still-possible
 rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
@@ -1456,6 +1457,9 @@ rem ...................................... Languages ...........................
 
 rem 1 - Enable spellcheck
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpellcheckEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Use text prediction
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TextPredictionEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Offer to translate pages that aren't in a language I read
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TranslateEnabled" /t REG_DWORD /d "0" /f
