@@ -1545,7 +1545,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "19" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "20" /t REG_SZ /d "[*.]myanimelist.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "21" /t REG_SZ /d "[*.]nextdns.io" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG_SZ /d "[*.]mbank.sk" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "[*.]modland.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "24" /t REG_SZ /d "[*.]poniverse.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "25" /t REG_SZ /d "[*.]primevtc.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "26" /t REG_SZ /d "[*.]roextended.ro" /f
@@ -3559,6 +3559,7 @@ rem Run Wise Registry Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
 rem Trim some Edges - edge://settings/content/cookies/siteData
+rem Extensions Settings are removed to improve security, I use only Cookie Dialog Monster
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
@@ -3567,6 +3568,11 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\DashTrackerDatabase-journal
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\default_cloud_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Cookies" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityComp" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityComp-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons-journal" /s /f /q
@@ -3582,6 +3588,7 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor-jo
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Persistent State" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\PreferredApps" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\PrivateAggregation" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\PrivateAggregation-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Reporting and NEL-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\QuotaManager" /s /f /q
@@ -3600,9 +3607,11 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Asset Store" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AutofillStrikeDatabase" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\blob_storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\BudgetDatabase" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Cache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\ClientCertificates" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Code Cache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Collections" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\commerce_subscription_db" /s /q
@@ -3622,6 +3631,10 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePushStorageWithWinRt" /s
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeTravel" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeWallet" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EntityExtraction" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Rules" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Scripts" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension State" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Extension Settings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\File System" /s /q
@@ -3630,6 +3643,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentWorkspacesV2" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsTopSites" /s /q
 rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Managed Extension Settings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
@@ -3651,6 +3665,9 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Shared Dictionary" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Sync App Settings" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Sync Data" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Sync Extension Settings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\VideoDecodeStats" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\WebrtcVideoStats" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Applications" /s /q
