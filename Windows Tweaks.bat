@@ -901,10 +901,10 @@ rem 5 - 5 secs / Delay Chkdsk startup time at OS Boot
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "AutoChkTimeout" /t REG_DWORD /d "5" /f
 
 rem 1 - https://github.com/AlchemyTweaks/Officially-Verified/tree/main/Serialize%20Timer%20Expiration
-reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "SerializeTimerExpiration" /t REG_DWORD /d "1" /f
+rem reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "SerializeTimerExpiration" /t REG_DWORD /d "1" /f
 
 rem 1 - https://github.com/AlchemyTweaks/Verified-Tweaks/tree/main/Kernel/SplitLargeCaches
-rem reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "SplitLargeCaches" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "SplitLargeCaches" /t REG_DWORD /d "1" /f
 
 rem 0 - Drivers and the kernel can be paged to disk as needed / 1 - Drivers and the kernel must remain in physical memory
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f
