@@ -439,6 +439,7 @@ rem =========================== Restore essential startup entries ==============
 
 
 rem Run bcdedit command to check for the current status / Yes = True / No = False
+rem https://github.com/dubbyOW/BCDEditTweaks
 rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
 rem https://docs.google.com/document/d/1c2-lUJq74wuYK1WrA_bIvgb89dUN0sj8-hO3vqmrau4/edit
 bcdedit /deletevalue safeboot
@@ -459,6 +460,8 @@ bcdedit /set disabledynamictick yes
 bcdedit /set lastknowngood yes
 bcdedit /set recoveryenabled no
 bcdedit /set quietboot yes
+bcdedit /set uselegacyapicmode no
+bcdedit /set usephysicaldestination no
 bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 bcdedit /set vm no
@@ -896,6 +899,12 @@ reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HVCIMATRequired"
 
 rem 5 - 5 secs / Delay Chkdsk startup time at OS Boot
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager" /v "AutoChkTimeout" /t REG_DWORD /d "5" /f
+
+rem 1 - https://github.com/AlchemyTweaks/Officially-Verified/tree/main/Serialize%20Timer%20Expiration
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "SerializeTimerExpiration" /t REG_DWORD /d "1" /f
+
+rem 1 - https://github.com/AlchemyTweaks/Verified-Tweaks/tree/main/Kernel/SplitLargeCaches
+rem reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "SplitLargeCaches" /t REG_DWORD /d "1" /f
 
 rem 0 - Drivers and the kernel can be paged to disk as needed / 1 - Drivers and the kernel must remain in physical memory
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f
@@ -3535,6 +3544,7 @@ taskkill /im dllhost.exe /f
 taskkill /im firefox.exe /f
 taskkill /im librewolf.exe /f
 taskkill /im msedge.exe /f
+taskkill /im msedgewebview2.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 taskkill /im tor.exe /f
@@ -3634,7 +3644,6 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EntityExtraction" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Rules" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Scripts" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension State" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Extension Settings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\File System" /s /q
@@ -3642,6 +3651,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentWorkspacesV2" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsTopSites" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Extension Settings" /s /q
 rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Managed Extension Settings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
