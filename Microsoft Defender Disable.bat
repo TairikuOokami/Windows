@@ -1,8 +1,9 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem NOTE: It is highly recommended to install Platform Updates sometimes (monthly) because they affect Windows protection as well, like System Guard!
-rem https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
+rem NOTE: It is highly recommended to install MS Defender Platform Updates sometimes (monthly) because they affect Windows protection as well, like System Guard!
+rem MS Defender Platform/Signatures Updates - https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
+rem Windows Security Platform Updates automatically - https://support.microsoft.com/en-us/topic/windows-security-update-a6ac7d2e-b1bf-44c0-a028-41720a242da3
 rem Search a version number to update Defender manually, like: https://www.catalog.update.microsoft.com/Search.aspx?q=4.18.23110.3
 rem Enable Defender - update - restart - disable Defender - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Enable.bat
 
@@ -107,11 +108,11 @@ rem icacls "%WinDir%\System32\smartscreen.exe" /grant:r %username%:F
 rem taskkill /im smartscreen.exe /f
 rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 
-rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN BE ENABLED!
+rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN NOT BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 24H2 26100.3323
-rem Microsoft Defender Platform Version 4.18.25020.1008 (05-Mar-2025)
+rem Last Tested on Windows 11 Home 24H2 26100.3775
+rem Microsoft Defender Platform Version 4.18.25040.1 (18-Apr-2025)
 rem Before - https://ibb.co/fz75xQXL / After - https://ibb.co/4nRRN8Pq
 
 pause
