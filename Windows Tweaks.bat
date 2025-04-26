@@ -17,6 +17,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
+rem https://www.deskmodder.de/blog/2025/04/24/windows-11-27842-iso-esd-deutsch-english
 rem https://www.windowscentral.com/software-apps/windows-11/an-even-better-microsoft-account-bypass-for-windows-11-has-already-been-discovered
 rem https://www.neowin.net/news/forget-bypassnro-a-new-internetaccount-bypass-during-windows-11-installs-already-exists
 rem https://www.neowin.net/news/microsoft-makes-it-harder-to-install-windows-11-without-internet-but-it-is-still-possible
@@ -102,6 +103,7 @@ rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org 
 rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
 rem DNS List - https://adguard-dns.io/kb/general/dns-providers
+rem DNS Test - https://ping.nextdns.io / https://test.nextdns.io
 
 rem Family Filtering (adult/proxy/search)
 rem Adguard - https://adguard.com/en/adguard-dns/overview.html
@@ -155,6 +157,7 @@ rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
 rem Cookie Warnings (Chrome/Edge/Firefox) - https://www.cookie-dialog-monster.com
 rem Cookie Warnings (Chrome/Edge/Firefox) - https://www.i-dont-care-about-cookies.eu
 rem Filter Lists - https://filterlists.com
+rem Malware (Chrome/Edge) - https://github.com/Foulest/Osprey
 rem Malware (Chrome/Firefox) - https://www.bitdefender.com/solutions/trafficlight.html
 rem Malware (Chrome/Edge/Firefox) - https://microsoftedge.microsoft.com/addons/detail/emsisoft-browser-security/jlpdpddffjddlfdbllimedpemaodbjgn
 rem Phishing (Chrome/Edge/Firefox/Opera) - https://www.netcraft.com/apps/browser
@@ -287,9 +290,6 @@ icacls "%SystemDrive%\Users\Public\Desktop" /inheritance:e /grant:r %username%:(
 takeown /s %computername% /u %username% /f "%USERPROFILE%\Desktop" /r /d y
 icacls "%USERPROFILE%\Desktop" /inheritance:r
 icacls "%USERPROFILE%\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
-takeown /s %computername% /u %username% /f "Z:\Desktop" /r /d y
-icacls "Z:\Desktop" /inheritance:r
-icacls "Z:\Desktop" /inheritance:e /grant:r %username%:(OI)(CI)F /t /l /q /c
 
 rem Flush DNS Cache
 ipconfig /flushdns
@@ -442,15 +442,15 @@ rem Run bcdedit command to check for the current status / Yes = True / No = Fals
 rem https://github.com/dubbyOW/BCDEditTweaks
 rem https://docs.microsoft.com/en-us/windows-hardware/drivers/devtest/bcdedit--set
 rem https://docs.google.com/document/d/1c2-lUJq74wuYK1WrA_bIvgb89dUN0sj8-hO3vqmrau4/edit
+rem bcdedit /set flightsigning off
+rem bcdedit /set {bootmgr} displaybootmenu no
+rem bcdedit /set {bootmgr} flightsigning off
 bcdedit /deletevalue safeboot
 bcdedit /deletevalue safebootalternateshell
 bcdedit /deletevalue removememory
 bcdedit /deletevalue truncatememory
 bcdedit /deletevalue useplatformclock
 bcdedit /set hypervisorlaunchtype off
-bcdedit /set flightsigning off
-bcdedit /set {bootmgr} displaybootmenu no
-bcdedit /set {bootmgr} flightsigning off
 bcdedit /set advancedoptions false
 bcdedit /set bootems no
 bcdedit /set bootmenupolicy standard
@@ -464,7 +464,6 @@ bcdedit /set uselegacyapicmode no
 bcdedit /set usephysicaldestination no
 bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
-bcdedit /set vm no
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Mailbird" /t REG_SZ /d "C:\Program Files\Mailbird\Mailbird.exe startup" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
@@ -484,7 +483,7 @@ taskkill /im AudialsNotifier.exe /f
 del "%ProgramFiles%\Audials\Audials 2025\AudialsNotifier.exe" /s /f /q
 
 rem Gihosoft TubeGet
-reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Desktop" /f
+reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Temp" /f
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z:/TEMP/Gihosoft/temp" /f
 
 rem Notepad
@@ -505,10 +504,10 @@ reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Ste
 rem XnView
 reg add "HKCU\Software\XnView" /v "UseRegistry" /t "REG_DWORD" /d "1" /f
 reg add "HKCU\Software\XnView\Browser" /v "ShowToolTips" /t "REG_DWORD" /d "0" /f
-reg add "HKCU\Software\XnView\Browser" /v "StartupDirectory" /t "REG_SZ" /d "Z:\Desktop" /f
+reg add "HKCU\Software\XnView\Browser" /v "StartupDirectory" /t "REG_SZ" /d "%USERPROFILE%\Desktop" /f
 reg add "HKCU\Software\XnView\Browser" /v "StartupIn" /t "REG_DWORD" /d "2" /f
 reg add "HKCU\Software\XnView\Capture" /v "Delay" /t "REG_DWORD" /d "2" /f
-reg add "HKCU\Software\XnView\Capture" /v "Directory" /t "REG_SZ" /d "Z:\Desktop" /f
+reg add "HKCU\Software\XnView\Capture" /v "Directory" /t "REG_SZ" /d "%USERPROFILE%\Desktop" /f
 reg add "HKCU\Software\XnView\Capture" /v "HotKey" /t "REG_DWORD" /d "9" /f
 reg add "HKCU\Software\XnView\Capture" /v "IncludeCursor" /t "REG_DWORD" /d "0" /f
 reg add "HKCU\Software\XnView\Capture" /v "Method" /t "REG_DWORD" /d "0" /f
@@ -1430,7 +1429,7 @@ rem ------------------------------------ Microsoft Edge ------------------------
 rem ...................................... Downloads .......................................
 
 rem Set download directory
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadDirectory" /t REG_SZ /d "Z:\Desktop" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadDirectory" /t REG_SZ /d "Z:\Temp" /f
 
 rem 1 - Ask me what to do with each download (Ignored when download directory is set)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /t REG_DWORD /d "1" /f
@@ -1828,6 +1827,9 @@ schtasks /Change /TN "Microsoft\Windows\Input\LocalUserSyncDataAvailable" /Disab
 schtasks /Change /TN "Microsoft\Windows\Input\MouseSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\PenSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\syncpensettings" /Disable
+schtasks /Change /TN "Microsoft\Windows\Input\RemoteMouseSyncDataAvailable" /Disable
+schtasks /Change /TN "Microsoft\Windows\Input\RemotePenSyncDataAvailable" /Disable
+schtasks /Change /TN "Microsoft\Windows\Input\RemoteTouchpadSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\TouchpadSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\International\Synchronize Language Settings" /Disable
 schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\Installation" /Disable
@@ -1835,6 +1837,7 @@ schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\ReconcileLan
 schtasks /Change /TN "Microsoft\Windows\LanguageComponentsInstaller\Uninstallation" /Disable
 schtasks /Change /TN "Microsoft\Windows\License Manager\TempSignedLicenseExchange" /Disable
 schtasks /Change /TN "Microsoft\Windows\Location\WindowsActionDialog" /Disable
+schtasks /Change /TN "Microsoft\Windows\Management\Connectivity\ESIMPM" /Disable
 schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Cellular" /Disable
 schtasks /Change /TN "Microsoft\Windows\Management\Provisioning\Logon" /Disable
 schtasks /Change /TN "Microsoft\Windows\Maintenance\WinSAT" /Disable
@@ -1845,6 +1848,7 @@ schtasks /Change /TN "Microsoft\Windows\Multimedia\SystemSoundsService" /Disable
 schtasks /Change /TN "Microsoft\Windows\NlaSvc\WiFiTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable
 schtasks /Change /TN "Microsoft\Windows\Network Connectivity Status Indicator\NcsiIdentifyUserProxies" /Disable
+schtasks /Change /TN "Microsoft\Windows\NetworkExperimentation" /Disable
 schtasks /Change /TN "Microsoft\Windows\PerformanceTrace\RequestTrace" /Disable
 schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
@@ -2144,6 +2148,9 @@ reg add "HKLM\System\CurrentControlSet\Services\WinHttpAutoProxySvc" /v "Start" 
 
 rem Workstation
 sc config LanmanWorkstation start= disabled
+
+rem WSAIFabricSvc
+sc config WSAIFabricSvc start= disabled
 
 
 rem =================================== Windows Settings ===================================
@@ -3695,4 +3702,4 @@ rem My security: NextDNS Free with Cache Boost ON acting as AV, using separate p
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem https://ibb.co/bP9w8tw - Windows 11 Home 24H2 (26100.2454) Quiet Edition - 68 processes / 675 threads / 28205 handles / 3,6GB RAM (1.1GB used by ramdisk)
+rem https://ibb.co/Q7K1MM8D - Windows 11 Home (27842.1000) Quiet Edition - 69 processes / 677 threads / 27650 handles / 3,2GB RAM (900MB used by ramdisk)
