@@ -234,7 +234,6 @@ rem Hardware Monitor / HWMonitor - https://www.cpuid.com/softwares/hwmonitor.htm
 rem Image Viewer / XnView - https://www.xnview.com/en/xnview/#downloads
 rem Media Player / MPC-BE - https://sourceforge.net/projects/mpcbe
 rem Monitor Test / https://www.testufo.com
-rem NET 3.5 Feature Installer for Windows 10 x86/x64 - https://github.com/abbodi1406/dotNetFx35W10/releases
 rem Network Optimization / TCP Optimizer - https://www.speedguide.net/downloads.php
 rem Network Settings Manager / NetSetMan - https://www.netsetman.com/en/freeware
 rem Notepad / Notepad3 - https://www.rizonesoft.com/downloads/notepad3
@@ -269,8 +268,6 @@ rem Task Manager / System Informer - https://www.systeminformer.com/canary
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
 rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
-rem Visual C++ / AIO Repack - https://github.com/abbodi1406/vcredist/releases
-rem Visual C++ / Latest Visual C++ Downloads - https://support.microsoft.com/en-au/help/2977003/the-latest-supported-visual-c-downloads
 rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
 rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/lively-wallpaper/9NTM2QC6QWS7?hl=en-us&gl=us
@@ -2523,11 +2520,17 @@ rem ....................................... Colors .............................
 rem Accent color / 0 - Manual / 1 - Automatic (from wallpaper)
 reg add "HKCU\Control Panel\Desktop" /v "AutoColorization" /t REG_SZ /d "1" /f
 
+rem 1 - Apps Dark Mode
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d "0" /f
+
 rem 1 - Transparency Effects
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f
 
 rem 1 - Show accent color on Start and taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "ColorPrevalence" /t REG_DWORD /d "1" /f
+
+rem 1 - Windows Dark Mode
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d "0" /f
 
 rem 1 - Show accent color on the title bars and windows borders
 reg add "HKCU\Software\Microsoft\Windows\DWM" /v "ColorPrevalence" /t REG_DWORD /d "1" /f
@@ -2774,7 +2777,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExp
 
 rem ________________________________________________________________________________________
 rem Send optional diagnostic data / 0 - Security (Not aplicable on Home/Pro, it resets to Basic) / 1 - Basic / 2 - Enhanced (Hidden) / 3 - Full
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
 
 rem Feedback Frequency - Windows should ask for my feedback: 0 - Never / Removed - Automatically
 reg add "HKCU\Software\Microsoft\Siuf\Rules" /v "NumberOfSIUFInPeriod" /t REG_DWORD /d "0" /f
