@@ -12,6 +12,18 @@ rem Run "MD Disable.bat" TWICE - RESTART!
 
 pause
 
+rem Change D/E after removing pagefile
+rem Remove the user from D:\
+rem Take Ownership of D/E
+explorer
+
+pause
+
+rem Select to Save files locally then Link OneDrive to change the location!
+rem Unlock Personal Vault afterwards to install OneDrive in a proper location!
+
+pause
+
 rem Disable Hibernation and thus also Fast Startup
 powercfg -h off
 
@@ -58,9 +70,6 @@ icacls E: /inheritance:r
 icacls E: /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls E: /grant "System":(OI)(CI)F /t /l /q /c
 icacls E: /grant "Users":(OI)(CI)RX /t /l /q /c
-
-rem Remove the user from D:\
-explorer
 
 pause
 
@@ -122,6 +131,7 @@ reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncry
 fsutil behavior set disableencryption 1
 manage-bde -off C:
 manage-bde -off D:
+manage-bde -off E:
 cipher /d /s:C:\
 
 rem Windows File Compression
@@ -181,7 +191,6 @@ rem pause
 
 rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle  | Where-Object {$_.NonRemovable -eq $False} | Select-Object Name, PackageFullName"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Clipchamp.Clipchamp" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "MicrosoftWindows.Client.WebExperience" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingNews" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingSearch" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingWeather" | Remove-AppxPackage -AllUsers"
@@ -216,6 +225,7 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 pause
 
 winget uninstall "Outlook for Windows"
+winget uninstall "Start Experiences App"
 winget uninstall Microsoft.Copilot_8wekyb3d8bbwe
 winget uninstall Microsoft.Teams
 
@@ -244,7 +254,8 @@ Dism /Online /Disable-Feature /FeatureName:SearchEngine-Client-Package /Quiet /N
 Dism /Online /Disable-Feature /FeatureName:WCF-TCP-PortSharing45 /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Windows-Defender-Default-Definitions /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:WorkFolders-Client /Quiet /NoRestart
-Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Quiet /NoRestart
+rem Dism /Online /Enable-Feature /FeatureName:NetFx3 /All /Quiet /NoRestart
+start "" /wait "D:\OneDrive\Setup\dotNetFx35_WX_9_x86_x64.exe" /ai
 
 pause
 
@@ -253,6 +264,7 @@ start "" /wait "D:\OneDrive\Setup\install.bat"
 pause
 
 start "" /wait "%ProgramFiles%\ImDisk\RamDiskUI.exe"
+start "" /wait "%ProgramFiles%\ImDisk\config.exe"
 
 pause
 
@@ -299,14 +311,14 @@ rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer
 rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 
 rem Move Desktop
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "Z:\Desktop" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{754AC886-DF64-4CBA-86B5-F7FBF4FBCEF5}" /t REG_EXPAND_SZ /d "Z:\Desktop" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "Z:\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "%USERPROFILE%\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{754AC886-DF64-4CBA-86B5-F7FBF4FBCEF5}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
 takeown /s %computername% /u %username% /f "%USERPROFILE%\Desktop" /r /d y
 icacls "%USERPROFILE%\Desktop" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%USERPROFILE%\Desktop" /s /q
-md "Z:\Desktop"
-mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
+rem rd "%USERPROFILE%\Desktop" /s /q
+rem md "Z:\Desktop"
+rem mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
 
 rem Move Documents
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\OneDrive\Documents" /f
@@ -336,11 +348,6 @@ rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell 
 
 pause
 
-rem Select to Save files locally then Link OneDrive to change the location!
-rem Unlock Personal Vault afterwards to install OneDrive in a proper location!
-
-pause
-
 winget install Microsoft.AppInstaller --accept-package-agreements --accept-source-agreements
 winget install Microsoft.DirectX --accept-package-agreements --accept-source-agreements
 
@@ -363,8 +370,14 @@ winget install XSplit.Broadcaster --accept-package-agreements --accept-source-ag
 
 pause
 
+rem 2fast – Two Factor Authenticator\
+winget install 9P9D81GLH89Q --accept-package-agreements --accept-source-agreements
+
 rem Audials Radio
 winget install XPDM0S9P0J5LT4 --accept-package-agreements --accept-source-agreements
+
+rem Bitwarden
+winget install 9PJSDV0VPK04 --accept-package-agreements --accept-source-agreements
 
 rem MailBird
 winget install XP9KHKVP3JKR39 --accept-package-agreements --accept-source-agreements
@@ -377,6 +390,7 @@ winget install XPDLS1XBTXVPP4 --accept-package-agreements --accept-source-agreem
 
 pause
 
+‪start "" /wait "D:\OneDrive\Setup\GIHO_TubeGet_Pro.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
 start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
