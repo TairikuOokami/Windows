@@ -2520,7 +2520,7 @@ rem ....................................... Colors .............................
 rem Accent color / 0 - Manual / 1 - Automatic (from wallpaper)
 reg add "HKCU\Control Panel\Desktop" /v "AutoColorization" /t REG_SZ /d "1" /f
 
-rem 1 - Apps Dark Mode
+rem 0 - Apps Dark Mode
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "AppsUseLightTheme" /t REG_DWORD /d "0" /f
 
 rem 1 - Transparency Effects
@@ -2529,7 +2529,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "
 rem 1 - Show accent color on Start and taskbar
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "ColorPrevalence" /t REG_DWORD /d "1" /f
 
-rem 1 - Windows Dark Mode
+rem 0 - Windows Dark Mode
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "SystemUsesLightTheme" /t REG_DWORD /d "0" /f
 
 rem 1 - Show accent color on the title bars and windows borders
@@ -3579,7 +3579,6 @@ rem Run Wise Registry Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
 rem Trim some Edges - edge://settings/content/cookies/siteData
-rem Extensions Settings are removed to improve security, I use only Cookie Dialog Monster
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
@@ -3588,7 +3587,7 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\DashTrackerDatabase-journal
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\default_cloud_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS-journal" /s /f /q
-del "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Cookies" /s /f /q
+rem del "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Cookies" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityComp" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityComp-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge" /s /f /q
@@ -3661,7 +3660,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentWorkspacesV2" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsTopSites" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Extension Settings" /s /q
+rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Extension Settings" /s /q
 rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Managed Extension Settings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
