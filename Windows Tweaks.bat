@@ -1517,9 +1517,6 @@ rem ............................ Privacy, search, and services .................
 rem 1 - Suggest similar sites when a website can't be found
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AlternateErrorPagesEnabled" /t REG_DWORD /d "0" /f
 
-rem Automatically switch to more secure connections with Automatic HTTPS / 0 - Disabled / 1 - Switch to supported domains / 2 - Always
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutomaticHttpsDefault" /t REG_DWORD /d "2" /f
-
 rem 1 - Clear browsing data when Microsoft Edge closes
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearBrowsingDataOnExit" /t REG_DWORD /d "1" /f
 
@@ -1571,6 +1568,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD
 rem Enhance the security state in Microsoft Edge / 0 - Standard mode / 1 - Balanced mode / 2 - Strict mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityMode" /t REG_DWORD /d "2" /f
 
+rem 0 - Disabled / 1 - Enable automatic HTTPS upgrades
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HttpsUpgradesEnabled" /t REG_DWORD /d "1" /f
+
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
 
@@ -1604,6 +1604,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG
 
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
+
+rem Enable Microsoft Bing trending suggestions in the address bar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarTrendingSuggestEnabled" /t REG_DWORD /d "0" /f
 
 rem Allow recommendations and promotional notifications from Microsoft Edge
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowRecommendationsEnabled" /t REG_DWORD /d "0" /f
@@ -1646,9 +1649,10 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "1" /t 
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "2" /t REG_SZ /d "apps" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "3" /t REG_SZ /d "collections" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "4" /t REG_SZ /d "edgeWallet" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "5" /t REG_SZ /d "history" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "6" /t REG_SZ /d "openTabs" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "7" /t REG_SZ /d "passwords" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "5" /t REG_SZ /d "edgeFeatureUsage" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "6" /t REG_SZ /d "history" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "7" /t REG_SZ /d "openTabs" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "8" /t REG_SZ /d "passwords" /f
 
 rem 1 - Disable Share Microsoft Edge Browsing Data with other Windows Features
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "LocalBrowserDataShareEnabled" /t REG_DWORD /d "0" /f
