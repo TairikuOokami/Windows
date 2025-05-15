@@ -15,7 +15,7 @@ control
 
 pause
 
-rem Uninstall all but WMIC
+rem Uninstall all but VBScript required by AMD Chipset Software
 start ms-settings:optionalfeatures
 
 pause
@@ -46,7 +46,7 @@ pause
 start "" /wait "D:\OneDrive\Setup\Setup.exe"
 start "" /wait "D:\OneDrive\Setup\0.reg"
 taskkill /im explorer.exe /f & explorer.exe
-xcopy "C:\Setup" "Z:\Desktop" /s /i /y
+xcopy "C:\Setup" "%USERPROFILE%\Desktop" /s /i /y
 rd "C:\Setup" /s /q
 
 pause
@@ -69,32 +69,28 @@ rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.e
 rem Disabled
 rem edge://flags/#allow-all-sites-to-initiate-mirroring
 rem edge://flags/#edge-compose
+rem edge://flags/#edge-copilot-vision
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-scheme
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem edge://flags/#edge-optin-experimentation
 rem edge://flags/#edge-rounded-containers
 rem edge://flags/#edge-visual-rejuv-mica
-rem edge://flags/#edge-visual-rejuv-rounded-tabs
 rem edge://flags/#enable-force-dark
 rem edge://flags/#enable-quic
 rem edge://flags/#enable-touch-drag-drop
 rem edge://flags/#enable-webrtc-hide-local-ips-with-mdns
 rem edge://flags/#enable-windows-gaming-input-data-fetcher
 rem edge://flags/#media-router-cast-allow-all-ips
-rem edge://flags/#tab-hover-card-images
 
 rem Enabled
 rem edge://flags/#bind-cookies-to-port
 rem edge://flags/#bind-cookies-to-scheme
-rem edge://flags/#block-insecure-private-network-requests
 rem edge://flags/#disallow-doc-written-script-loads
 rem edge://flags/#edge-digsig-enabled-pdf
 rem edge://flags/#enable-tls13-early-data
 rem edge://flags/#enable-tls13-kyber
-rem edge://flags/#origin-agent-cluster-default
 rem edge://flags/#origin-keyed-processes-by-default
 rem edge://flags/#strict-origin-isolation
-
 
 pause
 
