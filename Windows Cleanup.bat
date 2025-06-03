@@ -1,5 +1,8 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
+perfmon.exe /rel
+pause
+
 rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
 rem HiBit Uninstaller - http://hibitsoft.ir
 rem Wise Disk Cleaner - http://www.wisecleaner.com/wise-disk-cleaner.html
@@ -215,7 +218,7 @@ start "" /wait "C:\Program Files\Hasleo\Hasleo Backup Suite\bin\BackupMainUI.exe
 
 pause
 
-rem Disable Windows ransomware
+rem Disable Bitlocker/Windows ransomware
 sc config "BDESVC" start= demand
 net start BDESVC
 
@@ -225,3 +228,5 @@ manage-bde -off D:
 manage-bde -off E:
 
 pause
+
+start "" "D:\OneDrive\Downloads\Windows Backup.lnk"
