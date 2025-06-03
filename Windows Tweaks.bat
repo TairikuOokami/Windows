@@ -501,10 +501,10 @@ reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Ste
 rem XnView
 reg add "HKCU\Software\XnView" /v "UseRegistry" /t "REG_DWORD" /d "1" /f
 reg add "HKCU\Software\XnView\Browser" /v "ShowToolTips" /t "REG_DWORD" /d "0" /f
-reg add "HKCU\Software\XnView\Browser" /v "StartupDirectory" /t "REG_SZ" /d "%USERPROFILE%\Desktop" /f
+reg add "HKCU\Software\XnView\Browser" /v "StartupDirectory" /t "REG_SZ" /d "Z:\Temp" /f
 reg add "HKCU\Software\XnView\Browser" /v "StartupIn" /t "REG_DWORD" /d "2" /f
 reg add "HKCU\Software\XnView\Capture" /v "Delay" /t "REG_DWORD" /d "2" /f
-reg add "HKCU\Software\XnView\Capture" /v "Directory" /t "REG_SZ" /d "%USERPROFILE%\Desktop" /f
+reg add "HKCU\Software\XnView\Capture" /v "Directory" /t "REG_SZ" /d "Z:\Temp" /f
 reg add "HKCU\Software\XnView\Capture" /v "HotKey" /t "REG_DWORD" /d "9" /f
 reg add "HKCU\Software\XnView\Capture" /v "IncludeCursor" /t "REG_DWORD" /d "0" /f
 reg add "HKCU\Software\XnView\Capture" /v "Method" /t "REG_DWORD" /d "0" /f
@@ -1033,6 +1033,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "52" /t REG_SZ /d "wslconfig.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "53" /t REG_SZ /d "wslhost.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "54" /t REG_SZ /d "findstr.exe" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "55" /t REG_SZ /d "powershell.exe" /f
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
 reg add "HKLM\Software\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f
@@ -1554,7 +1555,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "26" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "27" /t REG_SZ /d "[*.]softpedia.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "28" /t REG_SZ /d "[*.]steamcommunity.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "29" /t REG_SZ /d "[*.]steampowered.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "30" /t REG_SZ /d "" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "30" /t REG_SZ /d "[*.]hianimez.to" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "31" /t REG_SZ /d "[*.]truckersmp.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "32" /t REG_SZ /d "[*.]twitch.tv" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "33" /t REG_SZ /d "[*.]vk.com" /f
@@ -3557,8 +3558,10 @@ taskkill /im brave.exe /f
 taskkill /im dllhost.exe /f
 taskkill /im firefox.exe /f
 taskkill /im librewolf.exe /f
+taskkill /im mailbird.exe /f
 taskkill /im msedge.exe /f
 taskkill /im msedgewebview2.exe /f
+taskkill /im onedrive.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 taskkill /im tor.exe /f
@@ -3570,11 +3573,11 @@ timeout 5
 rem https://kalilinuxtutorials.com/webview2-cookie-stealer
 fsutil usn deletejournal /d /n c:
 
-taskkill /im cncmd.exe /f
-taskkill /im QtWebEngineProcess.exe /f
-taskkill /im RadeonSoftware.exe /f
 taskkill /im amdow.exe /f
 taskkill /im AMDRSServ.exe /f
+taskkill /im cncmd.exe /f
+taskkill /im RadeonSoftware.exe /f
+taskkill /im QtWebEngineProcess.exe /f
 
 rem Run Wise Disk Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" -a -all
@@ -3582,7 +3585,8 @@ start "" /wait "%ProgramFiles(x86)%\Wise\Wise Disk Cleaner\WiseDiskCleaner.exe" 
 rem Run Wise Registry Cleaner
 start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.exe" -a -all
 
-rem Trim some Edges - edge://settings/content/cookies/siteData
+rem Trim Some Edges - edge://settings/content/cookies/siteData
+rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate\Download" /s /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
@@ -3708,4 +3712,4 @@ rem My security: NextDNS Free with Cache Boost ON acting as AV, using separate p
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem https://ibb.co/Q7K1MM8D - Windows 11 Home (27842.1000) Quiet Edition - 69 processes / 677 threads / 27650 handles / 3,2GB RAM (900MB used by ramdisk)
+rem https://ibb.co/Q7K1MM8D - Windows 11 Home (27842.1000) Quiet Edition - 69 processes / 677 threads / 27650 handles / 2,3GB RAM (+900MB used by ramdisk)
