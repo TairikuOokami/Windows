@@ -15,6 +15,12 @@ control
 
 pause
 
+rem reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
+
+regedit
+
+pause
+
 rem Uninstall all but VBScript required by AMD Chipset Software
 start ms-settings:optionalfeatures
 
