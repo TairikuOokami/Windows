@@ -1,7 +1,7 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem Create a system backup to reverse any changes
+rem Create a system backup to reverse any changes or suffer the consequences
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
@@ -17,17 +17,13 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/04/24/windows-11-27842-iso-esd-deutsch-english
-rem https://www.windowscentral.com/software-apps/windows-11/an-even-better-microsoft-account-bypass-for-windows-11-has-already-been-discovered
-rem https://www.neowin.net/news/forget-bypassnro-a-new-internetaccount-bypass-during-windows-11-installs-already-exists
-rem https://www.neowin.net/news/microsoft-makes-it-harder-to-install-windows-11-without-internet-but-it-is-still-possible
-rem DNS Poison enforced by the government (pick your poison/DNS) - https://torrentfreak.com/google-cloudflare-cisco-will-poison-dns-to-stop-piracy-block-circumvention-240613
-rem https://techblog.nexxwave.eu/public-dns-malware-filters-tested-in-september-2024
-rem AI Imposter - https://youtu.be/WT8NJk1onC8 / Deep Fake - https://youtu.be/rGIz3Z-QjMQ
+rem https://www.deskmodder.de/blog/2025/06/05/windows-11-27871-iso-esd-deutsch-english
+rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
+rem https://techpp.com/2025/03/25/what-is-powered-off-finding
+rem https://torrentfreak.com/court-expands-google-and-cloudflare-dns-blocking-to-combat-piracy-241125/
 rem https://www.pandasecurity.com/en/mediacenter/how-the-eu-is-about-to-violate-your-privacy
+rem https://www.upguard.com/blog/how-hackers-can-bypass-mfa - https://youtu.be/V-lSqR_rj78
 rem https://techcrunch.com/2024/05/08/encrypted-services-apple-proton-and-wire-helped-spanish-police-identify-activist
-rem https://www.91mobiles.com/hub/exclusive-google-find-my-device-feature-phone-off
-rem https://securuscomms.co.uk/how-hackers-bypass-two-factor-authentication - https://youtu.be/V-lSqR_rj78
 
 
 rem ________________________________________________________________________________________
@@ -60,15 +56,13 @@ rem ================================= Basic informations =======================
 
 
 rem SeDebugPrivilege/SeTcbPrivilege - https://youtu.be/hZKLEw-Our4 - Self-elevation to System (even on SUA) used by ransomware (NotPetya/WannaCry)
-rem https://docs.microsoft.com/en-us/windows/security/threat-protection/security-policy-settings/act-as-part-of-the-operating-system
+rem https://learn.microsoft.com/en-us/previous-versions/windows/it-pro/windows-10/security/threat-protection/security-policy-settings/act-as-part-of-the-operating-system
 rem https://unifiedguru.com/blackmatter-ransomware-analysis-the-dark-side-returns
 
 rem Adblock Detection - https://www.detectadblock.com / https://blockads.fivefilters.org
 rem Browser Leaks - https://browserleaks.com / CanvasFingerprint / WebRTC
 rem Browser Tracking Test - https://panopticlick.eff.org
 rem Privacy Cloud - https://www.technologyreview.com/2022/07/15/1056042/chinese-novel-censored-before-shared
-rem Privacy Cloud - https://www.nytimes.com/2022/08/21/technology/google-surveillance-toddler-photo.html
-rem Privacy CNAME - https://www.ghacks.net/2020/11/17/brave-browser-gets-cname-based-adblocking-support
 rem Privacy Etags - https://lucb1e.com/randomprojects/cookielesscookies / https://fpresearch.httpjames.space
 rem Privacy Futile (Encryption) - https://www.bleepingcomputer.com/news/security/an-encrypted-zip-file-can-have-two-correct-passwords-heres-why
 rem Privacy Futile (GAFAM) https://askleo.com/how-does-facebook-track-me-even-if-i-dont-have-an-account
@@ -80,7 +74,6 @@ rem Privacy Webpage Scan - https://webbkoll.5july.net
 rem SSL/TLS Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
-rem https://www.programmifree.com/confronti
 rem https://avlab.pl/en/recent-results
 rem https://www.av-comparatives.org/latest-tests
 rem https://www.av-test.org/en/antivirus/home-windows
@@ -97,29 +90,11 @@ rem https://www.makeuseof.com/tag/antivirus-tracking-youd-surprised-sends/
 
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
 rem DNS Check / https://dnscheck.tools / https://www.dnsperf.com
-rem DNS Domains / https://umbrella.cisco.com/blog/on-the-trail-of-malicious-dynamic-dns-domains
-rem DNS Hijack / https://sockpuppet.org/blog/2015/01/15/against-dnssec / https://recdnsfp.github.io
-rem DNS Encryption (setup DNS server as 127.0.0.1) - https://simplednscrypt.org + https://github.com/DNSCrypt/dnscrypt-proxy
+rem DNS Encryption (setup DNS server as 127.0.0.1) - https://www.yogadns.com / https://github.com/DNSCrypt/dnscrypt-proxy
 rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
 rem DNS List - https://adguard-dns.io/kb/general/dns-providers
-rem DNS Test - https://ping.nextdns.io / https://test.nextdns.io
-
-rem Family Filtering (adult/proxy/search)
-rem Adguard - https://adguard.com/en/adguard-dns/overview.html
-rem Cloudflare - https://developers.cloudflare.com/1.1.1.1/1.1.1.1-for-families/setup-instructions/windows/
-rem CleanBrowsing - https://cleanbrowsing.org/ip-address - https://categorify.org/recategorize
-rem DNS Family - https://dnsforfamily.com/#DNS_Servers
-rem Enforce Safe Search (=Adult Filter) - https://chrome.google.com/webstore/detail/enforce-safe-search-adult/fiopkogmohpinncfhneadmpkcikmgkgc
-rem NextDNS - https://www.nextdns.io / https://test.nextdns.io / https://ping.nextdns.io
-rem OpenDNS - https://www.opendns.com/setupguide/#familyshield
-
-rem VPN Comparison / Anonymity
-rem Don't use VPN services - https://gist.github.com/joepie91/5a9909939e6ce7d09e29
-rem https://arstechnica.com/tech-policy/2017/03/senate-votes-to-let-isps-sell-your-web-browsing-history-to-advertisers
-rem https://sec.hpi.de/ilc/search
-rem https://www.safetydetectives.com/best-vpns
-rem https://www.av-comparatives.org/tests/vpn-report-2020-35-services/
+rem NextDNS Test - https://ping.nextdns.io / https://test.nextdns.io
 
 rem Windows ISO - to create a local account use this email - no@thankyou.com
 rem https://os.click
@@ -181,7 +156,6 @@ rem Sandboxie - https://github.com/sandboxie-plus/Sandboxie
 
 rem Security cleanup software (portable on-demand scanners, some still leave traces/drivers)
 rem Antivirus Rescue Disks - https://www.techradar.com/in/best/best-antivirus-rescue-disk
-rem AdwCleaner (US) - https://www.malwarebytes.com/adwcleaner/
 rem Dr.Web CureIt (RU) - https://free.drweb.com/download+cureit+free
 rem Emsisoft Emergency Kit (NZ) - https://www.emsisoft.com/en/home/emergency-kit
 rem Kaspersky Virus Removal Tool (RU) - https://www.kaspersky.com/downloads/free-virus-removal-tool
@@ -274,7 +248,6 @@ rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/livel
 rem Wallpaper / Rainmeter - https://www.rainmeter.net
 rem Wallpaper / Wallpaper Engine - https://store.steampowered.com/app/431960
 rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-5-for-windows-11
-rem Windows Tweaks / Winaero Tweaker - https://winaero.com/winaero-tweaker
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -328,6 +301,7 @@ rd "%ProgramData%\Microsoft\Search" /s /q
 rd "%ProgramData%\Microsoft\SmsRouter" /s /q
 rd "%ProgramData%\Microsoft\Windows Defender\Definition Updates" /s /q
 rd "%SystemDrive%\AMD" /s /q
+rd "%SystemDrive%\inetpub" /s /q
 rd "%SystemDrive%\OneDriveTemp" /s /q
 rd "%SystemDrive%\PerfLogs" /s /q
 rd "%SystemDrive%\Recovery" /s /q
@@ -941,7 +915,8 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "S
 rem =================================== Windows Policies ===================================
 
 
-rem rem https://admx.help/?Category=Windows_11_2022
+rem Microsoft 365 URLs and IP address ranges / Privacy and Telemetry 
+rem https://learn.microsoft.com/en-us/microsoft-365/enterprise/urls-and-ip-address-ranges?view=o365-worldwide
 rem https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services
 rem https://learn.microsoft.com/en-us/windows/client-management/new-in-windows-mdm-enrollment-management#whatsnew11
 rem https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
@@ -1178,21 +1153,20 @@ reg add "HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters" /v "SMB
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
 
+rem https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-beta-channel
 rem https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel
 rem https://learn.microsoft.com/en-us/DeployEdge/microsoft-edge-policies
-rem https://www.microsoft.com/en-us/download/details.aspx?id=55319
-rem rem https://admx.help/?Category=EdgeChromium
 rem edge://policy
 
 rem reg delete "HKCU\Software\Policies\Microsoft\Edge" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Edge" /f
 
 rem ________________________________________________________________________________________
-rem 1 - Allow users to access the games menu
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowGamesMenu" /t REG_DWORD /d "0" /f
-
 rem 1 - Allow the audio sandbox to run
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Allow pages to use the built-in AI APIs
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInAIAPIsEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Compose is enabled for writing on the web
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ComposeInlineEnabled" /t REG_DWORD /d "0" /f
@@ -1217,6 +1191,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeAutofillMlEnabled" /t RE
 
 rem 1 - Drop lets users send messages or files to themselves
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeEDropEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Control access to AI-enhanced search in History
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeHistoryAISearchEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Microsoft Edge will attempt to connect to the Microsoft Edge management service to download and apply policy assigned to the Azure AD account of the user
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeManagementEnabled" /t REG_DWORD /d "0" /f
@@ -1618,7 +1595,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecom
 rem Use secure DNS (DoH)
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClientEnabled" /t REG_DWORD /d "1" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsMode" /t REG_SZ /d "secure" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://security.cloudflare-dns.com/dns-query?" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://freedns.controld.com/p1?" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -2133,6 +2110,10 @@ sc config Wcmsvc start= disabled
 rem Windows Font Cache Service
 sc config FontCache start= disabled
 
+rem Windows Health and Optimized Experiences
+sc config whesvc start= disabled
+
+
 rem Windows Image Acquisition (WIA)
 sc config StiSvc start= disabled
 
@@ -2393,7 +2374,7 @@ rem To get adapter's index number use
 rem wmic nicconfig get caption,index,TcpipNetbiosOptions
 
 rem Setup DNS Servers on DHCP Enabled Network (Cloudflare Malware)
-rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
+rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("1.1.1.2","1.0.0.2")
 
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
@@ -3437,14 +3418,12 @@ reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManage
 rem =================================== Windows Support ====================================
 
 
-rem Apps - FixWin - http://www.thewindowsclub.com/fixwin-for-windows-10
-rem Windows Cleanup - https://drive.google.com/file/d/1AQLr94IQPBpZYEyKNi_CsI5WAOC4BCKp/view
+rem Apps - FixWin - https://www.thewindowsclub.com/fixwin-windows-pc-repair-software
 rem Windows Drivers - https://www.catalog.update.microsoft.com
 rem Windows Forums - https://www.elevenforum.com/whats-new
 rem Windows Repair Install - https://www.elevenforum.com/t/repair-install-windows-11-with-an-in-place-upgrade.418
 rem Windows Update Reset - https://github.com/ManuelGil/Reset-Windows-Update-Tool/releases
 rem Windows Repair Toolbox - https://windows-repair-toolbox.com
-rem Windows Update Troubleshooter - https://support.microsoft.com/en-us/windows/windows-update-troubleshooter-for-windows-10-19bc41ca-ad72-ae67-af3c-89ce169755dd
  
 rem Boot into Recovery Mode 
 rem Shutdown /f /r /o /t 0
@@ -3457,6 +3436,7 @@ rem %WinDir%\explorer.exe ms-settings:apps-volume
 
 rem Create shortcut to Store Apps
 rem shell:AppsFolder
+rem Right click app in the Task Manager and select Open File Location 
 
 rem DISM Commands - https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/deployment-image-servicing-and-management--dism--command-line-options?view=windows-11
 rem DISM /Cleanup-Wim
@@ -3551,6 +3531,8 @@ rem mklink /d "%WINDIR%\SoftwareDistribution\Download" "X:\Download"
 
 rem ==================================== Windows Waypoint ==================================
 
+start "" "D:\OneDrive\Downloads\CD.bat"
+start "" "D:\OneDrive\Downloads\Microsoft Defender Disable.bat"
 
 timeout 5
 
@@ -3700,9 +3682,6 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\WebrtcVideoStats" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Applications" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\WebStorage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Workspaces" /s /q
-
-start "" "D:\OneDrive\Downloads\CD.bat"
-start "" "D:\OneDrive\Downloads\Microsoft Defender Disable.bat"
 
 timeout 5
 
