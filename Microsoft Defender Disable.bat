@@ -17,8 +17,6 @@ rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
 rem Run "MD Disable.bat" TWICE - RESTART!
 rem Run - msconfig - General - Normal Startup
 
-pause
-
 rem https://www.elevenforum.com/t/turn-on-or-off-tamper-protection-for-microsoft-defender-antivirus-in-windows-11.3973
 rem reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 
@@ -76,7 +74,7 @@ reg delete "HKCR\Drive\shellex\ContextMenuHandlers\EPP" /f
 
 rem Disable services (it will stop WdFilter.sys as well, better not to disable the driver by itself)
 rem reg add "HKLM\System\CurrentControlSet\Services\WdBoot" /v "Start" /t REG_DWORD /d "4" /f
-rem MDCoreSvc has become more persistant and runs when disabled, but it does not interfiere
+rem MDCoreSvc has become more persistent and runs when disabled, but it does not interfere
 reg add "HKLM\System\CurrentControlSet\Services\MDCoreSvc" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WdFilter" /v "Start" /t REG_DWORD /d "4" /f
 reg add "HKLM\System\CurrentControlSet\Services\WdNisDrv" /v "Start" /t REG_DWORD /d "4" /f
@@ -112,8 +110,8 @@ rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN NOT BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 27868.1000
-rem Microsoft Defender Platform Version 4.18.25060.1 (4-Jun-2025)
-rem Before - hhttps://ibb.co/xtxfxd81 / After - https://ibb.co/xSfq5FZp
+rem Last Tested on Windows 11 Home 27891.1000
+rem Microsoft Defender Platform Version 4.18.25060.6 (6-Jul-2025)
+rem Before - https://ibb.co/xtxfxd81 / After - https://ibb.co/JjG0V6gm
 
 pause
