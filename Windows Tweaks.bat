@@ -17,7 +17,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/06/05/windows-11-27871-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2025/07/04/windows-11-27891-iso-esd-deutsch-english
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
 rem https://torrentfreak.com/court-expands-google-and-cloudflare-dns-blocking-to-combat-piracy-241125/
@@ -96,7 +96,7 @@ rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
 rem DNS List - https://adguard-dns.io/kb/general/dns-providers
 rem NextDNS Test - https://ping.nextdns.io / https://test.nextdns.io
 
-rem Windows ISO - to create a local account use this email - no@thankyou.com
+rem Windows ISO
 rem https://os.click
 rem https://genuine-iso-verifier.weebly.com
 rem https://massgrave.dev/genuine-installation-media.html
@@ -785,6 +785,9 @@ rem ================================ Windows Optimizations =====================
 rem https://prod.support.services.microsoft.com/en-us/windows/options-to-optimize-gaming-performance-in-windows-11-a255f612-2949-4373-a566-ff6f3f474613
 rem https://learn.microsoft.com/en-us/shows/seth-juarez/memory-compression-in-windows-10-rtm
 
+rem https://learn.microsoft.com/en-us/powershell/module/mmagent/disable-mmagent?view=windowsserver2025-ps
+rem Get-MMAgent
+
 rem Determines whether user processes end automatically when the user either logs off or shuts down / 1 - Processes end automatically
 reg add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f
 
@@ -833,6 +836,9 @@ rem Disable Automatic Maintenance / Scheduled System Maintenance
 reg add "HKLM\Software\Microsoft\Windows\ScheduledDiagnostics" /v "EnabledExecution" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" /v "MaintenanceDisabled" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\ScheduledDiagnostics" /v "EnabledExecution" /t REG_DWORD /d "0" /f
+
+rem Multimedia Class Scheduler” service (MMCSS)
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile" /v "SystemResponsiveness" /t REG_DWORD /d "0" /f
 
 rem 0 - Enables 8dot3 name creation for all volumes on the system / 1 - Disables 8dot3 name creation for all volumes on the system / 2 - Sets 8dot3 name creation on a per volume basis / 3 - Disables 8dot3 name creation for all volumes except the system volume
 rem fsutil 8dot3name scan c:\
@@ -1595,7 +1601,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SpotlightExperiencesAndRecom
 rem Use secure DNS (DoH)
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInDnsClientEnabled" /t REG_DWORD /d "1" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsMode" /t REG_SZ /d "secure" /f
-rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://freedns.controld.com/p1?" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://freedns.controld.com/p2?" /f
 
 
 rem =================================== Windows Policies ===================================
@@ -2374,7 +2380,7 @@ rem To get adapter's index number use
 rem wmic nicconfig get caption,index,TcpipNetbiosOptions
 
 rem Setup DNS Servers on DHCP Enabled Network (Cloudflare Malware)
-rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("1.1.1.2","1.0.0.2")
+rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("76.76.2.2")
 
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
 rem http://www.subnet-calculator.com/subnet.php?net_class=A
