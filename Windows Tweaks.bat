@@ -17,7 +17,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/07/04/windows-11-27891-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2025/07/18/windows-11-27902-iso-esd-deutsch-english
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
 rem https://torrentfreak.com/court-expands-google-and-cloudflare-dns-blocking-to-combat-piracy-241125/
@@ -116,10 +116,9 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Avoid junk like Avira, Bitdefender, Kaspersky, Tencent)
-rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://ibb.co/2Mk623n
-rem Microsoft Defender (US) - https://www.defenderui.com - https://ibb.co/zr8hL1n
-rem Panda  (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://ibb.co/dPJw4zp
+rem AntiVirus software (Avoid 360, Avira, Bitdefender, Tencent)
+rem Microsoft Defender (US) - https://www.defenderui.com - https://ibb.co/23Xs6Cjb
+rem Panda  (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://ibb.co/RpnWpXHJ
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
 rem AppCheck (KR) - https://www.checkmal.com/product/appcheck
@@ -316,24 +315,9 @@ del "%WinDir%\System32\FNTCACHE.DAT" /s /f /q
 rem Remove default Windows Powershell (to restore run "sfc /scannow") - Removing PS will prevent a complete uninstall of store/UWP apps
 rem Restrict PS and install the latest version instead - pwsh
 rem winget install Microsoft.PowerShell
-rem https://thehackernews.com/2023/09/cybercriminals-using-powershell-to.html?m=1
-rem https://www.bleepingcomputer.com/news/security/as-microsoft-blocks-office-macros-hackers-find-new-attack-vectors
-rem https://www.bleepingcomputer.com/news/security/nsa-shares-tips-on-securing-windows-devices-with-powershell
-rem taskkill /im PowerShell.exe /f
-rem taskkill /im PowerShell_ISE.exe /f
-rem taskkill /im pwsh.exe /f
-rem takeown /s %computername% /u %username% /f "%ProgramFiles%\WindowsPowerShell" /r /d y
-rem icacls "%ProgramFiles%\WindowsPowerShell" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%ProgramFiles%\WindowsPowerShell" /s /q
-rem takeown /s %computername% /u %username% /f "%ProgramFiles(x86)%\WindowsPowerShell" /r /d y
-rem icacls "%ProgramFiles(x86)%\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%ProgramFiles(x86)%\WindowsPowerShell" /s /q
-rem takeown /s %computername% /u %username% /f "%WinDir%\System32\WindowsPowerShell" /r /d y
-rem icacls "%WinDir%\System32\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%WinDir%\System32\WindowsPowerShell" /s /q
-rem takeown /s %computername% /u %username% /f "%WinDir%\SysWOW64\WindowsPowerShell" /r /d y
-rem icacls "%WinDir%\SysWOW64\WindowsPowerShell" /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%WinDir%\SysWOW64\WindowsPowerShell" /s /q
+rem Determine PowerShell version
+rem $PSVersionTable
+rem Get-Host
 
 rem Remove Startup Folders
 takeown /s %computername% /u %username% /f "%ProgramData%\Microsoft\Windows\Start Menu\Programs\Startup"
@@ -2379,7 +2363,7 @@ rem http://www.computerhope.com/wmic.htm
 rem To get adapter's index number use
 rem wmic nicconfig get caption,index,TcpipNetbiosOptions
 
-rem Setup DNS Servers on DHCP Enabled Network (Cloudflare Malware)
+rem Setup DNS Servers on DHCP Enabled Network
 rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("76.76.2.2")
 
 rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
@@ -3697,4 +3681,4 @@ rem My security: NextDNS Free with Cache Boost ON acting as AV, using separate p
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem https://ibb.co/Q7K1MM8D - Windows 11 Home (27842.1000) Quiet Edition - 69 processes / 677 threads / 27650 handles / 2,3GB RAM (+900MB used by ramdisk)
+rem Windows 11 Home (27902.1000) Quiet Edition - 68 processes / 692 threads / 28316 handles / 2,4GB RAM (+500MB used by ramdisk) - https://ibb.co/NdWqr60y
