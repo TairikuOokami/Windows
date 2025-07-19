@@ -7,9 +7,9 @@ rem Windows Security Platform Updates automatically - https://support.microsoft.
 rem Search a version number to update Defender manually, like: https://www.catalog.update.microsoft.com/Search.aspx?q=4.18.23110.3
 rem Enable Defender - update - restart - disable Defender - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Enable.bat
 
-rem Disable Tamper and Real Protection in Defender - RESTART!
+rem Disable Tamper and Real Time Protection in Defender - RESTART!
 rem start windowsdefender:
-rem Disable Real Protection in Defender - Run "Microsoft Defender Disable.bat" - TWICE - RESTART!
+rem Disable Real Time Protection in Defender - Run "Microsoft Defender Disable.bat" - TWICE - RESTART!
 rem Run "Microsoft Defender Disable.bat" again - TWICE - RESTART!
 
 rem Alternatively run in Safe Mode
@@ -83,7 +83,7 @@ reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWO
 
 rem ======================================= OPTIONAL =======================================
 
-rem OWeb Threat Defense Service (Phishing protection)
+rem Web Threat Defense Service (Phishing protection)
 rem sc config webthreatdefsvc start= disabled
 
 rem Web Threat Defense User Service (Phishing protection)
@@ -110,8 +110,8 @@ rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN NOT BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 27891.1000
-rem Microsoft Defender Platform Version 4.18.25060.6 (6-Jul-2025)
-rem Before - https://ibb.co/xtxfxd81 / After - https://ibb.co/JjG0V6gm
+rem Last Tested on Windows 11 Home 27902.1000
+rem Microsoft Defender Platform Version 4.18.25070.4 (19-Jul-2025)
+rem Before - https://ibb.co/xtxfxd81 / After - https://ibb.co/RGNVCXqw
 
 pause
