@@ -116,9 +116,10 @@ rem https://www.elevenforum.com/t/list-of-windows-11-shell-commands-for-shell-fo
 rem =============================== Software recommendations ===============================
 
 
-rem AntiVirus software (Avoid 360, Avira, Bitdefender, Tencent)
+rem AntiVirus software (Avoid junk like Avast/AVG, Avira, Bitdefender, Tencent)
+rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://ibb.co/Rp7CRvTh
 rem Microsoft Defender (US) - https://www.defenderui.com - https://ibb.co/23Xs6Cjb
-rem Panda  (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://ibb.co/RpnWpXHJ
+rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://ibb.co/RpnWpXHJ
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
 rem AppCheck (KR) - https://www.checkmal.com/product/appcheck
@@ -1491,7 +1492,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearBrowsingDataOnExit" /t 
 rem 1 - Clear cached images and files when Microsoft Edge closes
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearCachedImagesAndFilesOnExit" /t REG_DWORD /d "1" /f
 
-rem edge://settings/content/cookies/siteData
+rem edge://settings/privacy/cookies/AllCookies
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "1" /t REG_SZ /d "[*.]account.samsung.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_SZ /d "[*.]alza.sk" /f
@@ -1529,6 +1530,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "33" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "34" /t REG_SZ /d "[*.]wilderssecurity.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "35" /t REG_SZ /d "[*.]goodreads.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "36" /t REG_SZ /d "[*.]ce-tescoassets.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "37" /t REG_SZ /d "[*.]allegro.sk" /f
 
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
