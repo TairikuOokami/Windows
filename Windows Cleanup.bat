@@ -1,7 +1,7 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-perfmon.exe /rel
-pause
+rem perfmon.exe /rel
+rem pause
 
 rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
 rem HiBit Uninstaller - http://hibitsoft.ir
