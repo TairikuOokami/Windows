@@ -17,7 +17,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/07/18/windows-11-27902-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2025/07/31/windows-11-27913-iso-esd-deutsch-english
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
 rem https://torrentfreak.com/court-expands-google-and-cloudflare-dns-blocking-to-combat-piracy-241125/
@@ -474,6 +474,14 @@ reg add "HKCU\Software\XnView\Start" /v "OnlyOneInstance" /t "REG_DWORD" /d "1" 
 reg add "HKCU\Software\XnView\Start" /v "PathSave" /t "REG_SZ" /d "Z:\Desktop" /f
 reg add "HKCU\Software\XnView\Start" /v "SavePosition" /t "REG_DWORD" /d "0" /f
 reg add "HKCU\Software\XnView\Start" /v "ShowSaveDlg" /t "REG_DWORD" /d "0" /f
+
+
+rem =========================== Windows Defender Security Centre ===========================
+rem --------------------------------- Account Protection -----------------------------------
+rem .............................. Administrator Protection ................................
+
+rem 2 - Enable Administrator Protection for Admin Approval Mode / 1 - Disable
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "TypeOfAdminApprovalMode" /t "REG_DWORD" /d "1" /f
 
 
 rem =========================== Windows Defender Security Centre ===========================
@@ -3563,6 +3571,8 @@ rem Trim Some Edges - edge://settings/content/cookies/siteData
 rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate\Download" /s /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\BrowsingTopicsSiteData" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\BrowsingTopicsState" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DashTrackerDatabase" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DashTrackerDatabase-journal" /s /f /q
@@ -3620,6 +3630,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Continuous Migration" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnGraphiteCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnWebGPUCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\discount_infos_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\discounts_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DNR Extension Rules" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Download Service" /s /q
@@ -3650,12 +3661,12 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_model_metadata_store" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\parcel_tracking_db" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PersistentOriginTrials" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PriceComparison" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Password_Diagnostics" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Pdf" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PDF Restore Data" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PersistentOriginTrials" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Platform Notifications" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\PriceComparison" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Safe Browsing Network" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Segmentation Platform" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\SemanticEncoder.db" /s /q
