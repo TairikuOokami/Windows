@@ -42,7 +42,10 @@ C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  "Get-AppxPackage -All
 
 pause
 
+winget uninstall "Microsoft Edge Game Assist"
+
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Copilot" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage -AllUsers"
 
 pause
 
@@ -107,5 +110,3 @@ pause
 reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
 
 start "" "D:\OneDrive\Downloads\OFF.bat"
-
-shutdown /s /f /t 0
