@@ -1546,8 +1546,8 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD
 rem Enhance the security state in Microsoft Edge / 0 - Standard mode / 1 - Balanced mode / 2 - Strict mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityMode" /t REG_DWORD /d "2" /f
 
-rem 0 - Disabled / 1 - Enable automatic HTTPS upgrades
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HttpsUpgradesEnabled" /t REG_DWORD /d "1" /f
+rem Automatically switch to more secure connections with Automatic HTTPS / allowed / disallowed / force_enabled / force_balanced_enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HttpsOnlyMode" /t REG_SZ /d "force_enabled" /f
 
 rem Search on new tabs uses search box or address bar / redirect - address bar / bing - search box
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageSearchBox" /t REG_SZ /d "redirect" /f
@@ -2113,9 +2113,11 @@ sc config FontCache start= disabled
 rem Windows Health and Optimized Experiences
 sc config whesvc start= disabled
 
-
 rem Windows Image Acquisition (WIA)
 sc config StiSvc start= disabled
+
+rem Windows MIDI Service
+sc config midisrv start= disabled
 
 rem Windows Remote Management (WS-Management)
 sc config WinRM start= disabled
@@ -3630,9 +3632,9 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Continuous Migration" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\databases" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnGraphiteCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DawnWebGPUCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DNR Extension Rules" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\discount_infos_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\discounts_db" /s /q
-rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DNR Extension Rules" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Download Service" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DualEngine" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
