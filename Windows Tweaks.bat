@@ -18,6 +18,7 @@ rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
 rem https://www.deskmodder.de/blog/2025/07/31/windows-11-27913-iso-esd-deutsch-english
+rem https://www.bleepingcomputer.com/news/security/major-password-managers-can-leak-logins-in-clickjacking-attacks
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
 rem https://torrentfreak.com/court-expands-google-and-cloudflare-dns-blocking-to-combat-piracy-241125/
@@ -247,7 +248,7 @@ rem VPN / Proton VPN - https://protonvpn.com
 rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/lively-wallpaper/9NTM2QC6QWS7?hl=en-us&gl=us
 rem Wallpaper / Rainmeter - https://www.rainmeter.net
 rem Wallpaper / Wallpaper Engine - https://store.steampowered.com/app/431960
-rem Windows Tweaks / Ultimate Windows Tweaker - https://www.thewindowsclub.com/ultimate-windows-tweaker-5-for-windows-11
+rem Windows Tweaks on GitHub - https://github.com/MarcoRavich/Opendows/blob/main/Tweakers.md#-
 
 
 rem ============= Remove various files, folders, startup entries and policies ==============
@@ -1164,6 +1165,9 @@ rem ____________________________________________________________________________
 rem 1 - Allow the audio sandbox to run
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_DWORD /d "1" /f
 
+rem 1 - Blocks external extensions from being installed
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BlockExternalExtensions" /t REG_DWORD /d "1" /f
+
 rem 1 - Allow pages to use the built-in AI APIs
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInAIAPIsEnabled" /t REG_DWORD /d "0" /f
 
@@ -1206,6 +1210,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnableMediaRouter" /t REG_DW
 rem The Experimentation and Configuration Service is used to deploy Experimentation and Configuration payloads to the client / 0 - RestrictedMode / 1 - ConfigurationsOnlyMode / 2 - FullMode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExperimentationAndConfigurationServiceControl" /t REG_DWORD /d "0" /f
 
+rem 1 - Extensions Enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExtensionsEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Allows Microsoft Edge to prompt the user to switch to the appropriate profile when Microsoft Edge detects that a link is a personal or work link
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "GuidedSwitchEnabled" /t REG_DWORD /d "0" /f
 
@@ -1247,9 +1254,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QuicAllowed" /t REG_DWORD /d
 
 rem 1 - Enable Read Aloud feature in Microsoft Edge
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ReadAloudEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Configure Related Matches in Find on Page, the results are processed in a cloud service
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RelatedMatchesCloudServiceEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Allow remote debugging
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RemoteDebuggingAllowed" /t REG_DWORD /d "0" /f
@@ -2671,83 +2675,55 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\HideDesktopIcon
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
-rem ...................................... Account info ....................................
-
-rem Allow/Deny - Account info access
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Allow" /f
-
-rem Allow/Deny - Let apps access your account info / Microsoft Content / Email and accounts
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.AccountsControl_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.MicrosoftEdge_8wekyb3d8bbwe" /v "Value" /t REG_SZ /d "Allow" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy" /v "Value" /t REG_SZ /d "Allow" /f
-
-rem ________________________________________________________________________________________
-rem Allow/Deny - Allow access to account info on this device
-rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userAccountInformation" /v "Value" /t REG_SZ /d "Deny" /f
+rem https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-Privacy
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
-rem ................................... Activity history ...................................
+rem ...................................... Account info ....................................
 
-rem 1 - Store my activity history on this device (not really working on 24H2)
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "PublishUserActivities" /t REG_DWORD /d "0" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows\System" /v "UploadUserActivities" /t REG_DWORD /d "0" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessAccountInfo" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem .................................... App diagnostic ....................................
 
-rem Allow/Deny - App diagnostic access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps access diagnostic info about your other apps
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appDiagnostics" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsGetDiagnosticInfo" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Calendar .......................................
 
-rem Allow/Deny - Calendar access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps access your calendar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\appointments" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCalendar" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ..................................... Call history .....................................
 
-rem Allow/Deny - Call history access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps access your call history
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCallHistory" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCallHistory" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ........................................ Camera ........................................
 
-rem Allow/Deny - Camera access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let Apps access your camera
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\webcam" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessCamera" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Contacts .......................................
 
-rem Allow/Deny - Contacts access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps access your contacts
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\contacts" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessContacts" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2798,11 +2774,8 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ......................................... Email ........................................
 
-rem Allow/Deny - Email access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps access your email
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\email" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessEmail" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2843,33 +2816,24 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ....................................... Location .......................................
 
-rem Allow/Deny - Location services
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps access your location
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessLocation" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ...................................... Messaging .......................................
 
-rem Allow/Deny - Messaging access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps read or send messages
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\chat" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessMessaging" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ...................................... Microphone ......................................
 
-rem Allow/Deny - Microphone access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps access your microphone
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\microphone" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessMicrophone" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2920,11 +2884,8 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ..................................... Phone calls ......................................
 
-rem Allow/Deny - Phone calls access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps make phone calls
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\phoneCall" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessPhone" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -2950,39 +2911,24 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ........................................ Radios ........................................
 
-rem Allow/Deny - Radio control access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps control device radios
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\radios" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessRadios" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem .................................. Screenshot borders ..................................
 
-rem Allow/Deny - Screenshot borders access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureWithoutBorder" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps turn off the screenshot border
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureWithoutBorder" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let desktop apps turn off the screenshot border
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureWithoutBorder" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessGraphicsCaptureWithoutBorder" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ................................. Screenshots and apps .................................
 
-rem Allow/Deny - Screenshot access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let apps take screenshots of various windows or displays
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic" /v "Value" /t REG_SZ /d "Deny" /f
-
-rem Allow/Deny - Let desktop apps take screenshots of various windows or displays
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\graphicsCaptureProgrammatic\NonPackaged" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessGraphicsCaptureProgrammatic" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -3006,11 +2952,16 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ......................................... Tasks ........................................
 
-rem Allow/Deny - Task access
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessTasks" /t REG_DWORD /d "2" /f
 
-rem Allow/Deny - Let apps access your tasks
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userDataTasks" /v "Value" /t REG_SZ /d "Deny" /f
+
+rem =================================== Windows Settings ===================================
+rem ---------------------------------- Privacy & security ----------------------------------
+rem ............................... Text and Image Generation ..............................
+
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsAccessSystemAIModels" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -3028,11 +2979,8 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ................................... Voice activation ...................................
 
-rem 1 - Let apps access voice activation services
-reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v "AgentActivationEnabled" /t REG_DWORD /d "0" /f
-
-rem 1 - Let apps use voice activation when device is locked
-reg add "HKCU\Software\Microsoft\Speech_OneCore\Settings\VoiceActivation\UserPreferenceForAllApps" /v "AgentActivationOnLockScreenEnabled" /t REG_DWORD /d "0" /f
+rem 1 - Force Allow / 2 - Force Deny
+reg add "HKLM\Software\Policies\Microsoft\Windows\AppPrivacy" /v "LetAppsActivateWithVoice" /t REG_DWORD /d "2" /f
 
 
 rem =================================== Windows Settings ===================================
@@ -3581,7 +3529,7 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\DashTrackerDatabase-journal
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\default_cloud_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DIPS-journal" /s /f /q
-rem del "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Cookies" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Cookies" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityComp" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityComp-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\ExtensionActivityEdge" /s /f /q
@@ -3655,8 +3603,8 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentWorkspacesV2" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsTopSites" /s /q
-rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Extension Settings" /s /q
-rem rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Extension Settings" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Local Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Managed Extension Settings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
