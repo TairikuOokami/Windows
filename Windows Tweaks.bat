@@ -7,6 +7,7 @@ rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
+rem Settings - Accounts - Sign-in Options (does not work for some reason, unless you upgrade) 
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem DNS/TCP/UDP are blocked - netsh advfirewall firewall delete rule name=all
@@ -3638,4 +3639,4 @@ rem My security: NextDNS Free with Cache Boost ON acting as AV, using separate p
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem Windows 11 Home (27902.1000) Quiet Edition - 68 processes / 692 threads / 28316 handles / 2,4GB RAM (+500MB used by ramdisk) - https://ibb.co/NdWqr60y
+rem Windows 11 Home (27943.1) - 70 processes / 692 threads / 30090 handles / 3.0GB RAM (+500MB used by ramdisk) - https://ibb.co/sdk4mDjX - Something causes CPU spikes 3-5%
