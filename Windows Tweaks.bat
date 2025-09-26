@@ -815,6 +815,9 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "AlwaysUnlo
 rem How long in milliseconds you want to have for a startup delay time for desktop apps that run at startup to load
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize" /v "StartupDelayInMSec" /t REG_DWORD /d "0" /f
 
+rem 1 - Enable Delay of Running Startup Apps
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Serialize" /v "WaitForIdleState" /t REG_DWORD /d "0" /f
+
 rem n - Disable Background disk defragmentation / y - enable
 reg add "HKLM\Software\Microsoft\Dfrg\BootOptimizeFunction" /v "Enable" /t REG_SZ /d "n" /f
 
@@ -940,7 +943,7 @@ reg add "HKLM\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config" /v "E
 rem 1808 - Disable the warning The Publisher could not be verified
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "DefaultFileTypeRisk" /t REG_DWORD /d "1808" /f
 
-rem Disable Security warning to unblock the downloaded file
+rem Disable Security warning to unblock the downloaded file (MoTW - Mark of the Web)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Attachments" /v "SaveZoneInformation" /t REG_DWORD /d "1" /f
 
 rem 1 - Disable Low Disk Space Alerts
@@ -1500,7 +1503,7 @@ rem 1 - Clear cached images and files when Microsoft Edge closes
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearCachedImagesAndFilesOnExit" /t REG_DWORD /d "1" /f
 
 rem edge://settings/privacy/cookies/AllCookies
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "1" /t REG_SZ /d "[*.]account.samsung.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_SZ /d "[*.]alza.sk" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "[*.]netflix.com" /f
@@ -2115,8 +2118,17 @@ sc config whesvc start= disabled
 rem Windows Image Acquisition (WIA)
 sc config StiSvc start= disabled
 
+rem Windows Management Instrumentation
+sc config Winmgmt start= disabled
+
 rem Windows MIDI Service
 sc config midisrv start= disabled
+
+rem Windows Push Notifications System Service
+sc config WpnService start= disabled
+
+rem Windows Push Notifications User Service
+sc config WpnUserService start= disabled
 
 rem Windows Remote Management (WS-Management)
 sc config WinRM start= disabled
@@ -2170,7 +2182,7 @@ reg add "HKCU\Control Panel\Accessibility\Keyboard Response" /v "Flags" /t REG_S
 rem Sticky keys / 26 - Disable All / 511 - Default
 reg add "HKCU\Control Panel\Accessibility\StickyKeys" /v "Flags" /t REG_SZ /d "26" /f
 
-rem Toggle keys / 58 - Disable All / 63 - Default
+rem Toggle keys / 58 - Disable All / 59 - Default
 reg add "HKCU\Control Panel\Accessibility\ToggleKeys" /v "Flags" /t REG_SZ /d "58" /f
 
 rem ________________________________________________________________________________________
@@ -3639,4 +3651,4 @@ rem My security: NextDNS Free with Cache Boost ON acting as AV, using separate p
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem Windows 11 Home (27943.1) - 70 processes / 692 threads / 30090 handles / 3.0GB RAM (+500MB used by ramdisk) - https://ibb.co/sdk4mDjX - Something causes CPU spikes 3-5%
+rem Windows 11 Home (27954.1) - 67 processes (+TaskManager/+XnView) / 755 threads / 31467 handles / 2.7GB RAM (+500MB RamDisk) - https://ibb.co/sdk4mDjX - Something causes CPU spikes 3-5%
