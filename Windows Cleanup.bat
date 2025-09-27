@@ -193,7 +193,6 @@ xcopy "Z:\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
 xcopy "Z:\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
 
 rem Backup Custom Settings
-xcopy "%LocalAppData%\Mailbird\Mailbird.config" "D:\OneDrive\Setup\Users\Tairi\AppData\Local\Mailbird\Mailbird.config" /y
 xcopy "%AppData%\MPC-BE\mpc-be64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\MPC-BE\mpc-be64.ini" /y
 xcopy "%AppData%\Rizonesoft\Notepad3\Notepad3.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Rizonesoft\Notepad3\Notepad3.ini" /y
 xcopy "%AppData%\SystemInformer\settings.xml" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
