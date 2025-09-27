@@ -153,7 +153,7 @@ wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
 
 rem Setup Network (NetBIOS might be required for aDSL/LAN)
 rem Disable IPv6/LMHOSTS lookup/NetBIOS and Set DNS Servers
-wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("9.9.9.9","149.112.112.112")
+wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("76.76.2.2")
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
@@ -198,9 +198,9 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.GamingApp" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.GetHelp" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.HEVCVideoExtension" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftSolitaireCollection" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftStickyNotes" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.PowerAutomateDesktop" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.ScreenSketch" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.StartExperiencesApp" | Remove-AppxPackage -AllUsers"
@@ -241,8 +241,6 @@ rem DISM /Online /Get-Packages /Format:Table
 rem DISM /Online /Get-ProvisionedAppxPackages | select-string Packagename
 Dism /Online /Disable-Feature /FeatureName:MediaPlayback /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Microsoft-Windows-Subsystem-Linux /Quiet /NoRestart
-Dism /Online /Disable-Feature /FeatureName:MicrosoftWindowsPowerShellV2 /Quiet /NoRestart
-Dism /Online /Disable-Feature /FeatureName:MicrosoftWindowsPowerShellV2Root /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:MSRDC-Infrastructure /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:NetFx4-AdvSrvs /Quiet /NoRestart
 Dism /Online /Disable-Feature /FeatureName:Printing-Foundation-Features /Quiet /NoRestart
@@ -374,9 +372,6 @@ winget install 9P9D81GLH89Q --accept-package-agreements --accept-source-agreemen
 
 rem Audials Radio
 winget install XPDM0S9P0J5LT4 --accept-package-agreements --accept-source-agreements
-
-rem MailBird
-winget install XP9KHKVP3JKR39 --accept-package-agreements --accept-source-agreements
 
 rem Wise Disk Cleaner
 winget install XP9CW3GPQQS852 --accept-package-agreements --accept-source-agreements
