@@ -67,7 +67,6 @@ pause
 
 rem https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Command-Line-Flags-in-Brave-
 rem https://github.com/dreammjow/ChromiumHardening/blob/main/flags/chrome-command-line.md
-rem https://peter.sh/experiments/chromium-command-line-switches
 rem https://get.webgl.org / https://www.cloudflare.com/ssl/encrypted-sni / https://pq.cloudflareresearch.com
 rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,IsolatePrerenders,IsolateSandboxedIframes,RendererAppContainer,WinSboxDisableExtensionPoint" --disable-webgl --no-pings
 rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe --disable-breakpad --disable-crash-reporter
@@ -75,7 +74,12 @@ rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.e
 rem Disabled
 rem edge://flags/#allow-all-sites-to-initiate-mirroring
 rem edge://flags/#edge-compose
+rem edge://flags/#edge-copilot-mode
+rem edge://flags/#edge-copilot-mode-profile-toggle
 rem edge://flags/#edge-copilot-vision
+rem edge://flags/#edge-ntp-composer-allow-copilot-search
+rem edge://flags/#edge-ntp-composer-feed-integration
+rem edge://flags/#edge-omnibox-commercial-copilot-chat
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-scheme
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem edge://flags/#edge-optin-experimentation
@@ -84,7 +88,6 @@ rem edge://flags/#edge-visual-rejuv-mica
 rem edge://flags/#enable-force-dark
 rem edge://flags/#enable-quic
 rem edge://flags/#enable-touch-drag-drop
-rem edge://flags/#enable-webrtc-hide-local-ips-with-mdns
 rem edge://flags/#enable-windows-gaming-input-data-fetcher
 rem edge://flags/#media-router-cast-allow-all-ips
 
@@ -92,9 +95,7 @@ rem Enabled
 rem edge://flags/#bind-cookies-to-port
 rem edge://flags/#bind-cookies-to-scheme
 rem edge://flags/#disallow-doc-written-script-loads
-rem edge://flags/#edge-digsig-enabled-pdf
 rem edge://flags/#enable-tls13-early-data
-rem edge://flags/#enable-tls13-kyber
 rem edge://flags/#origin-keyed-processes-by-default
 rem edge://flags/#strict-origin-isolation
 
