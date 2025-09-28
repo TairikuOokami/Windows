@@ -18,7 +18,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/08/30/windows-11-27934-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2025/09/26/windows-11-27954-iso-esd-deutsch-english
 rem https://www.bleepingcomputer.com/news/security/major-password-managers-can-leak-logins-in-clickjacking-attacks
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
@@ -876,6 +876,9 @@ rem reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "S
 
 rem 1 - https://github.com/AlchemyTweaks/Verified-Tweaks/tree/main/Kernel/SplitLargeCaches
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Kernel" /v "SplitLargeCaches" /t REG_DWORD /d "1" /f
+
+rem 1 - Disable Page Combining
+reg add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePageCombining" /t REG_DWORD /d "1" /f
 
 rem 0 - Drivers and the kernel can be paged to disk as needed / 1 - Drivers and the kernel must remain in physical memory
 reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Memory Management" /v "DisablePagingExecutive" /t REG_DWORD /d "1" /f
@@ -1953,6 +1956,9 @@ sc config AMDSAFD start= disabled
 rem AMD User Experience Program Data Uploader
 sc config "AUEPLauncher" start= disabled
 
+rem App Readiness
+sc config "AppReadiness" start= disabled
+
 rem AVCTP service
 sc config BthAvctpSvc start= disabled
 
@@ -1964,6 +1970,9 @@ sc config bthserv start= disabled
 
 rem Clipboard User Service
 sc config cbdhsvc start= disabled
+
+rem COM+ Event System
+sc config EventSystem start= disabled
 
 rem Connected User Experiences and Telemetry
 sc config DiagTrack start= disabled
@@ -1999,7 +2008,7 @@ rem Encrypting File System (EFS)
 sc config EFS start= disabled
 
 rem FileSyncHelper (required to open Personal Vault in OneDrive)
-sc config FileSyncHelper start= demand
+sc config FileSyncHelper start= disabled
 
 rem Function Discovery Provider Host
 sc config fdPHost start= disabled
@@ -2055,6 +2064,9 @@ sc config PcaSvc start= disabled
 rem Print Spooler
 sc config Spooler start= disabled
 
+rem Print Device Configuration Service
+sc config PrintDeviceConfigurationService start= disabled
+
 rem Radio Management Service
 sc config RmSvc start= disabled
 
@@ -2088,6 +2100,9 @@ sc config SysMain start= disabled
 rem Sync Host
 sc config OneSyncSvc start= disabled
 
+rem System Event Notification Service
+sc config SENS start= disabled
+
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
 
@@ -2106,8 +2121,14 @@ sc config webthreatdefusersvc start= disabled
 rem Windows Biometric Service
 sc config WbioSrvc start= disabled
 
+rem Windows Camera Frame Server
+sc config FrameServer start= disabled
+
 rem Windows Connection Manager
 sc config Wcmsvc start= disabled
+
+rem Windows Event Log
+sc config EventLog start= disabled
 
 rem Windows Font Cache Service
 sc config FontCache start= disabled
@@ -3647,8 +3668,8 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem My security: NextDNS Free with Cache Boost ON acting as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB) and Windows
+rem My security: NextDNS Free with Cache Boost OFF acting as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB) and Windows
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem Windows 11 Home (27954.1) - 67 processes (+TaskManager/+XnView) / 755 threads / 31467 handles / 2.7GB RAM (+500MB RamDisk) - https://ibb.co/sdk4mDjX - Something causes CPU spikes 3-5%
+rem Windows 11 Home (27954.1) - 7 mins to let the dust to settle - 58 processes (+TaskManager/+XnView) / 632 threads / 25679 handles / 2.3GB RAM (+500MB RamDisk) - https://ibb.co/Q3gBtJk9
