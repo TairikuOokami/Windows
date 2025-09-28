@@ -128,14 +128,23 @@ pnputil /disable-device "PCI\VEN_1022&DEV_15C7&SUBSYS_15C71022&REV_00\4&98C338A&
 rem AMD Radeon 760M Graphics
 pnputil /disable-device "PCI\VEN_1002&DEV_15BF&SUBSYS_35BF1849&REV_05\4&98C338A&0&0041"
 
+rem AMD SMBUS
+pnputil /disable-device "PCI\VEN_1022&DEV_790B&SUBSYS_790B1849&REV_71\3&11583659&0&A0"
+
 rem AMD Streaming Audio Device
 pnputil /disable-device "ROOT\AMDSAFD&FUN_01&REV_01\0000"
+
+rem Composite Bus Enumerator
+pnputil /disable-device "ROOT\COMPOSITEBUS\0000"
 
 rem Microsoft GS Wavetable Synth
 pnputil /disable-device "SWD\MMDEVAPI\MICROSOFTGSWAVETABLESYNTH"
 
 rem Microsoft Hyper-V Virtualization Infrastructure Driver
 pnputil /disable-device "ROOT\VID\0000"
+
+rem Microsoft Kernel Debug Network Adapter
+pnputil /disable-device "ROOT\KDNIC\0000"
 
 rem NDIS Virtual Network Adapter Enumerator
 pnputil /disable-device "ROOT\NDISVIRTUALBUS\0000"
@@ -151,6 +160,9 @@ pnputil /disable-device "PCI\VEN_1022&DEV_43F6&SUBSYS_10621B21&REV_01\6&6318A00&
 
 rem System speaker
 pnputil /disable-device "ACPI\PNP0800\4&D447ADA&0"
+
+rem UMBus Root Bus Enumerator
+pnputil /disable-device "ROOT\UMBUS\0000"
 
 rem Update Drivers!
 rem Enable - Disk Drives - XPG Policies
