@@ -97,6 +97,48 @@ control
 
 pause
 
+rem AMD Controller Emulation
+pnputil /disable-device "ROOT\AMDXE\0000"
+
+rem AMD Crash Defender
+pnputil /disable-device "ROOT\AMDLOG\0000"
+
+rem AMD High Definition Audio Device
+pnputil /disable-device "HDAUDIO\FUNC_01&VEN_1002&DEV_AA01&SUBSYS_00AA0100&REV_1008\5&1CD0132C&0&0001"
+
+rem AMD High Definition Audio Device
+pnputil /disable-device "HDAUDIO\FUNC_01&VEN_1002&DEV_AA01&SUBSYS_00AA0100&REV_1008\7&ADEDD0B&0&0001"
+
+rem AMD PSP 11.0 Device
+pnputil /disable-device "PCI\VEN_1022&DEV_15C7&SUBSYS_15C71022&REV_00\4&98C338A&0&0241"
+
+rem AMD Radeon 760M Graphics
+pnputil /disable-device "PCI\VEN_1002&DEV_15BF&SUBSYS_35BF1849&REV_05\4&98C338A&0&0041"
+
+rem AMD Streaming Audio Device
+pnputil /disable-device "ROOT\AMDSAFD&FUN_01&REV_01\0000"
+
+rem Microsoft GS Wavetable Synth
+pnputil /disable-device "SWD\MMDEVAPI\MICROSOFTGSWAVETABLESYNTH"
+
+rem Microsoft Hyper-V Virtualization Infrastructure Driver
+pnputil /disable-device "ROOT\VID\0000"
+
+rem NDIS Virtual Network Adapter Enumerator
+pnputil /disable-device "ROOT\NDISVIRTUALBUS\0000"
+
+rem NPU Compute Accelerator Device
+pnputil /disable-device "PCI\VEN_1022&DEV_1502&SUBSYS_15021022&REV_00\4&92D7D1B&0&0142"
+
+rem Remote Desktop Device Redirector Bus
+pnputil /disable-device "ROOT\RDPBUS\0000"
+
+rem Standard SATA AHCI Controller
+pnputil /disable-device "PCI\VEN_1022&DEV_43F6&SUBSYS_10621B21&REV_01\6&6318A00&0&00680011"
+
+rem System speaker
+pnputil /disable-device "ACPI\PNP0800\4&D447ADA&0"
+
 devmgmt.msc
 
 pause
