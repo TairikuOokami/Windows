@@ -73,7 +73,7 @@ rem Privacy Google FLoC - https://amifloced.org / https://brave.com/why-brave-di
 rem Privacy Guides - https://privacyguides.org
 rem Privacy Webpage Scan - https://themarkup.org/blacklight
 rem Privacy Webpage Scan - https://webbkoll.5july.net
-rem SSL/TLS Test - https://www.ssllabs.com/ssltest
+rem SSL/TLS Webpage Test - https://www.ssllabs.com/ssltest
 
 rem AV Comparison
 rem https://avlab.pl/en/recent-results
@@ -1742,6 +1742,9 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "Fil
 
 rem Allow UIAccess applications to prompt for elevation without using the secure desktop / 0 (Default) - Disabled / 1 - Enabled
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "1" /f
+
+rem Administrator Protection for Admin Approval Mode / 1 - Disable / 2 - Enable
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "TypeOfAdminApprovalMode" /t REG_DWORD /d "1" /f
 
 rem Enforce cryptographic signatures on any interactive application that requests elevation of privilege / 0 (Default) - Disabled / 1 - Enabled
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "1" /f
