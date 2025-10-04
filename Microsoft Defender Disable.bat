@@ -1,7 +1,8 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem NOTE: It is highly recommended to install MS Defender Platform Updates sometimes (monthly) because they affect Windows protection as well, like System Guard!
+rem NOTE: It is highly recommended to install MS Defender Platform Updates sometimes (monthly) because they affect Windows protection as well, like LSA and 
+System Guard!
 rem MS Defender Platform/Signatures Updates - https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
 rem Windows Security Platform Updates automatically - https://support.microsoft.com/en-us/topic/windows-security-update-a6ac7d2e-b1bf-44c0-a028-41720a242da3
 rem Search a version number to update Defender manually, like: https://www.catalog.update.microsoft.com/Search.aspx?q=4.18.23110.3
@@ -110,8 +111,8 @@ rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN NOT BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 27934.1
-rem Microsoft Defender Platform Version 4.18.25080.5 (30-Aug-2025)
-rem Before - https://ibb.co/xtxfxd81 / After - https://ibb.co/4RK0zhj1
+rem Last Tested on Windows 11 Home 27954.1
+rem Microsoft Defender Platform Version 4.18.25090.3009 (04-Oct-2025)
+rem Before - https://ibb.co/8DGm0Zxd / After - https://ibb.co/7JFRN6jc
 
 pause
