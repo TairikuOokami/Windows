@@ -1,3 +1,6 @@
+rem Replace Windows PowerShell's shortcut in right click Start menu with CMD
+xcopy "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Windows PowerShell" "%AppData%\Microsoft\Windows\Start Menu\Programs\Windows PowerShell" /s /i /y
+
 rem Access CMD with SYSTEM rights at logon (Win+U)
 takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
 icacls "%WINDIR%\System32\utilman.exe" /grant:r %username%:F
@@ -47,8 +50,6 @@ winget uninstall "Microsoft Edge Game Assist"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Copilot" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.MicrosoftOfficeHub" | Remove-AppxPackage -AllUsers"
 
-pause
-
 rem Single-click to open an item (point to select)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShellState" /t REG_BINARY /d "2400000017a8000000000000000000000000000001000000130000000000000073000000" /f
 
@@ -92,8 +93,6 @@ rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer
 rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 
 start "" /wait "C:\Program Files (x86)\Creative\Sound Blaster Command\Creative.SBCommand.exe"
-
-control
 
 pause
 
@@ -150,10 +149,6 @@ pnputil /disable-device "ACPI\PNP0800\4&D447ADA&0"
 
 rem UMBus Root Bus Enumerator
 pnputil /disable-device "ROOT\UMBUS\0000"
-
-devmgmt.msc
-
-pause
 
 rem reg add "HKCR\CLSID\{F02C1A0D-BE21-4350-88B0-7367FC96EF3C}\ShellFolder" /v "Attributes" /t REG_DWORD /d "2962489444" /f
 
