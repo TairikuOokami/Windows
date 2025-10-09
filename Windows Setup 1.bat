@@ -172,8 +172,7 @@ wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 rem Enable DoT
 netsh dns set global doh=no
 netsh dns add global dot=yes
-netsh dns add encryption server=9.9.9.9 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
-netsh dns add encryption server=149.112.112.112 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
+netsh dns add encryption server=76.76.2.2 dothost=p2.freedns.controld.com:853 autoupgrade=yes udpfallback=no
 
 rem Enable NextDNS DoT - 45.90.28.99/45.90.30.99
 start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
@@ -260,8 +259,8 @@ start "" /wait "D:\OneDrive\Setup\install.bat"
 
 pause
 
-start "" /wait "%ProgramFiles%\ImDisk\RamDiskUI.exe"
-start "" /wait "%ProgramFiles%\ImDisk\config.exe"
+start "" /wait "%ProgramFiles%\AIM Toolkit\RamDiskUI.exe"
+start "" /wait "%ProgramFiles%\AIM Toolkit\config.exe"
 
 pause
 
