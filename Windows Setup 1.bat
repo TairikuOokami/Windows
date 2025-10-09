@@ -226,7 +226,8 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 pause
 
 winget uninstall "Outlook for Windows"
-winget uninstall Microsoft.Teams
+winget uninstall "Microsoft Edge Game Assist"
+winget uninstall "Microsoft.Teams"
 
 rem Uninstall Remote Desktop Connection and check for new bloatware
 start ms-settings:installed-apps
