@@ -18,7 +18,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/09/26/windows-11-27954-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2025/10/07/windows-11-27959-im-canary-kanal-erschienen-gleich-mit-isos/
 rem https://www.bleepingcomputer.com/news/security/major-password-managers-can-leak-logins-in-clickjacking-attacks
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
@@ -229,7 +229,7 @@ rem Radio / Audials Play - https://apps.microsoft.com/store/detail/audials-play-
 rem RAM Fix / Intelligent standby list cleaner (+Timer Resolution) - https://www.wagnardsoft.com/content/intelligent-standby-list-cleaner-v1000-released
 rem RAM Free (Memory Leak) / Mem Reduct - https://www.henrypp.org/product/memreduct
 rem RAM Free (Memory Leak) / Wise Memory Optimizer - https://www.wisecleaner.com/wise-memory-optimizer.html
-rem RAM Disk / ImDisk Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/imdisk-toolkit
+rem RAM Disk / AIM Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/aim-toolkit
 rem RAM Test / Memtest (run one process per each 2GB) - https://hcidesign.com/memtest
 rem Remote Support / TeamViewer - https://www.teamviewer.com/en/download/windows
 rem Remove Locked File/Folder / ThisIsMyFile - https://www.softwareok.com/?seite=Freeware/ThisIsMyFile
@@ -565,14 +565,19 @@ rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-
 netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-852,854-1024,1025-3073,3075-5227,5229-27014,27051-65535
 netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-122,124-442,444-1024
 
-netsh advfirewall firewall add rule name="Brave TCP" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
-netsh advfirewall firewall add rule name="Brave UDP" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
-netsh advfirewall firewall add rule name="Edge TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-netsh advfirewall firewall add rule name="Edge UDP" dir=out action=block protocol=UDP program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-netsh advfirewall firewall add rule name="LibreWolf TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\LibreWolf\librewolf.exe"
-netsh advfirewall firewall add rule name="LibreWolf UDP" dir=out action=block protocol=UDP program="%ProgramFiles%\LibreWolf\librewolf.exe"
-netsh advfirewall firewall add rule name="OneDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
-netsh advfirewall firewall add rule name="IceDrive TCP" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Temp\IcedrivePortable\Icedrive.exe"
+netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-76.76.2.1,76.76.2.3-255.255.255.255
+
+netsh advfirewall firewall add rule name="Brave TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Edge TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="Edge UDP Block" dir=out action=block protocol=UDP program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
+netsh advfirewall firewall add rule name="IceDrive TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Temp\IcedrivePortable\Icedrive.exe"
+netsh advfirewall firewall add rule name="LibreWolf TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\LibreWolf\librewolf.exe"
+netsh advfirewall firewall add rule name="LibreWolf UDP Block" dir=out action=block protocol=UDP program="%ProgramFiles%\LibreWolf\librewolf.exe"
+netsh advfirewall firewall add rule name="OneDrive TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
+
+netsh advfirewall firewall add rule name="SmartScreen Block" dir=out action=block program="%WinDir%\System32\smartscreen.exe"
+netsh advfirewall firewall add rule name="Start Block" dir=out action=block program="%WINDIR%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe"
 
 rem Windows Firewall Allow Rules
 rem netsh advfirewall firewall add rule name="COD MW3 TCP" dir=out action=allow protocol=TCP remoteport=3074,27014-27050 program="D:\steam\steamapps\common\call of duty modern warfare 3\iw5sp.exe"
@@ -1974,9 +1979,6 @@ sc config bthserv start= disabled
 rem Clipboard User Service
 sc config cbdhsvc start= disabled
 
-rem COM+ Event System
-sc config EventSystem start= disabled
-
 rem Connected User Experiences and Telemetry
 sc config DiagTrack start= disabled
 
@@ -1991,6 +1993,9 @@ sc config DusmSvc start= disabled
 
 rem DevQuery Background Discovery Broker
 sc config DevQueryBroker start= disabled
+
+rem DevIO server service
+sc config deviosvc start= disabled
 
 rem Device Management Wireless Application Protocol (WAP) Push message Routing Service
 sc config dmwappushservice start= disabled
@@ -2103,9 +2108,6 @@ sc config SysMain start= disabled
 rem Sync Host
 sc config OneSyncSvc start= disabled
 
-rem System Event Notification Service
-sc config SENS start= disabled
-
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
 
@@ -2121,6 +2123,9 @@ sc config webthreatdefsvc start= disabled
 rem Web Threat Defense User Service (Phishing protection)
 sc config webthreatdefusersvc start= disabled
 
+rem Wi-Fi Direct Services Connection Manager Service
+sc config WFDSConMgrSvc start= disabled
+
 rem Windows Biometric Service
 sc config WbioSrvc start= disabled
 
@@ -2130,9 +2135,6 @@ sc config FrameServer start= disabled
 rem Windows Connection Manager
 sc config Wcmsvc start= disabled
 
-rem Windows Event Log
-sc config EventLog start= disabled
-
 rem Windows Font Cache Service
 sc config FontCache start= disabled
 
@@ -2141,9 +2143,6 @@ sc config whesvc start= disabled
 
 rem Windows Image Acquisition (WIA)
 sc config StiSvc start= disabled
-
-rem Windows Management Instrumentation
-sc config Winmgmt start= disabled
 
 rem Windows MIDI Service
 sc config midisrv start= disabled
@@ -2881,6 +2880,9 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\
 rem =================================== Windows Settings ===================================
 rem ---------------------------------- Privacy & security ----------------------------------
 rem ..................................... Notifications ....................................
+
+rem Position of On-screen Indicators / 1 - Bottom / 2 - Top left / 3 - Top center
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\SystemSettings\ConfirmatorPosition" /v "Value" /t REG_DWORD /d "3" /f
 
 rem Allow/Deny - Notifications access
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\userNotificationListener" /v "Value" /t REG_SZ /d "Allow" /f
