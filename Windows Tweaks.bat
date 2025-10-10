@@ -1,6 +1,11 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
+rem Edge Beta 142 might fail to run, in order to block the update, you can block the updater in the firewall, till MS fixes it, if it is something on their side
+rem netsh advfirewall firewall add rule name="Edge Update Block" dir=out action=block program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"
+rem https://www.elevenforum.com/t/edge-canary-142-3589-fails-to-start.40401
+
+
 rem Create a system backup to reverse any changes or suffer the consequences
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
@@ -1979,6 +1984,9 @@ sc config bthserv start= disabled
 rem Clipboard User Service
 sc config cbdhsvc start= disabled
 
+rem COM+ Event System
+sc config EventSystem start= disabled
+
 rem Connected User Experiences and Telemetry
 sc config DiagTrack start= disabled
 
@@ -2108,6 +2116,9 @@ sc config SysMain start= disabled
 rem Sync Host
 sc config OneSyncSvc start= disabled
 
+rem System Event Notification Service
+sc config SENS start= disabled
+
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
 
@@ -2134,6 +2145,9 @@ sc config FrameServer start= disabled
 
 rem Windows Connection Manager
 sc config Wcmsvc start= disabled
+
+rem Windows Event Log
+sc config EventLog start= disabled
 
 rem Windows Font Cache Service
 sc config FontCache start= disabled
