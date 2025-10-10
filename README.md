@@ -6,4 +6,4 @@ USE AT OWN RISK AS IS without support or warranty of any kind !
 
 It is a collection of tweaks for my use published for copy/paste.
 
-https://buymeacoffee.com/tairikuokami
+Get me a coffee OR not https://buymeacoffee.com/tairikuokami
