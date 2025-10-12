@@ -1,11 +1,6 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
-rem Edge Beta 142 might fail to run, in order to block the update, you can block the updater in the firewall, till MS fixes it, if it is something on their side
-rem netsh advfirewall firewall add rule name="Edge Update Block" dir=out action=block program="%ProgramFiles(x86)%\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe"
-rem https://www.elevenforum.com/t/edge-canary-142-3589-fails-to-start.40401
-
-
 rem Create a system backup to reverse any changes or suffer the consequences
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
@@ -1281,8 +1276,11 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchForImageEnabled" /t RE
 rem 1 - Allow screen capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG_DWORD /d "0" /f
 
-rem 1 - Allow notifications to set Microsoft Edge as default PDF reader
+rem 1 - Enable tab preview on hover
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowPDFDefaultRecommendationsEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow notifications to set Microsoft Edge as default PDF reader
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowTabPreviewEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - The policy can be used to prevent users from opting out of the default behavior of isolating all sites
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SitePerProcess" /t REG_DWORD /d "1" /f
@@ -1573,8 +1571,8 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ResolveNavigationErrorsUseWe
 rem 1 - Scareware blocker
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScarewareBlockerProtectionEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Show me search and site suggestions using my typed characters
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
+rem 1 - Show me search and site suggestions using my typed characters - broken since 142
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchSuggestEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Suggest group names when creating a new tab group
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "TabServicesEnabled" /t REG_DWORD /d "0" /f
@@ -1703,9 +1701,6 @@ rem ____________________________________________________________________________
 rem 1 - If ECH is enabled, Microsoft Edge might or might not use ECH depending on server support, the availability of the HTTPS DNS record
 rem Enable: DOH + the paramater: --enable-features="EncryptedClientHello" - https://www.cloudflare.com/ssl/encrypted-sni
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EncryptedClientHelloEnabled" /t REG_DWORD /d "1" /f
-
-rem 1 - Enable Gamer Mode
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "GamerModeEnabled" /t REG_DWORD /d "0" /f
 
 rem NetworkPrediction / 0 - Always / 1 - WifiOnly / 2 - Never
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkPredictionOptions" /t REG_DWORD /d "2" /f
