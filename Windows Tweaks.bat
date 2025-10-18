@@ -421,6 +421,7 @@ bcdedit /set usephysicaldestination no
 bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "MailClient" /t REG_SZ /d "C:\Program Files\WindowsApps\eMClient.20054CA46072C_10.1.4600.0_neutral__rq410mg92b554\MailClient\MailClient.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
@@ -562,7 +563,7 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 
 rem Windows Firewall Block Rules (TCP43-IPInfo/UDP123-TimeSync/TCPUDP443-QUIC/TCP587-SMTP/TCP993-IMAP)
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-852,854-1024,1025-3073,3075-5227,5229-27014,27051-65535
+netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-586,588-852,854-992,994-1024,1025-3073,3075-5227,5229-27014,27051-65535
 netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-122,124-442,444-1024
 
 netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-76.76.2.1,76.76.2.3-255.255.255.255
@@ -1276,10 +1277,10 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SearchForImageEnabled" /t RE
 rem 1 - Allow screen capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ScreenCaptureAllowed" /t REG_DWORD /d "0" /f
 
-rem 1 - Enable tab preview on hover
+rem 1 - Allow notifications to set Microsoft Edge as default PDF reader
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowPDFDefaultRecommendationsEnabled" /t REG_DWORD /d "0" /f
 
-rem 1 - Allow notifications to set Microsoft Edge as default PDF reader
+rem 1 - Enable tab preview on hover
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowTabPreviewEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - The policy can be used to prevent users from opting out of the default behavior of isolating all sites
@@ -1980,7 +1981,7 @@ rem Clipboard User Service
 sc config cbdhsvc start= disabled
 
 rem COM+ Event System
-sc config EventSystem start= disabled
+rem sc config EventSystem start= disabled
 
 rem Connected User Experiences and Telemetry
 sc config DiagTrack start= disabled
@@ -2001,7 +2002,7 @@ rem DevIO server service
 sc config deviosvc start= disabled
 
 rem Device Management Wireless Application Protocol (WAP) Push message Routing Service
-sc config dmwappushservice start= disabled
+rem sc config dmwappushservice start= disabled
 
 rem DHCP Client
 sc config Dhcp start= disabled
@@ -2112,7 +2113,7 @@ rem Sync Host
 sc config OneSyncSvc start= disabled
 
 rem System Event Notification Service
-sc config SENS start= disabled
+rem sc config SENS start= disabled
 
 rem TCP/IP NetBIOS Helper
 sc config lmhosts start= disabled
@@ -2157,10 +2158,10 @@ rem Windows MIDI Service
 sc config midisrv start= disabled
 
 rem Windows Push Notifications System Service
-sc config WpnService start= disabled
+rem sc config WpnService start= disabled
 
 rem Windows Push Notifications User Service
-sc config WpnUserService start= disabled
+rem sc config WpnUserService start= disabled
 
 rem Windows Remote Management (WS-Management)
 sc config WinRM start= disabled
