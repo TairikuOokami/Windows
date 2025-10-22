@@ -1810,11 +1810,14 @@ schtasks /Change /TN "Microsoft\Windows\EnterpriseMgmt\MDMMaintenenceTask" /Disa
 schtasks /Change /TN "Microsoft\Windows\Feedback\Siuf\DmClient" /Disable
 schtasks /Change /TN "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" /Disable
 schtasks /Change /TN "Microsoft\Windows\FileHistory\File History (maintenance mode)" /Disable
+schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\GovernedFeatureUsageProcessing" /Disable
+schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\ReconcileConfigs" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\ReconcileFeatures" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushing" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataReceiver" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\OneSettings\RefreshCache" /Disable
+schtasks /Change /TN "Microsoft\Windows\Hotpatche\Monitoring" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\InputSettingsRestoreDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\LocalUserSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\MouseSyncDataAvailable" /Disable
@@ -1843,6 +1846,7 @@ schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable
 schtasks /Change /TN "Microsoft\Windows\Network Connectivity Status Indicator\NcsiIdentifyUserProxies" /Disable
 schtasks /Change /TN "Microsoft\Windows\NetworkExperimentation" /Disable
 schtasks /Change /TN "Microsoft\Windows\PerformanceTrace\RequestTrace" /Disable
+schtasks /Change /TN "Microsoft\Windows\PerformanceTrace\WhesvcToast" /Disable
 schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
 schtasks /Change /TN "Microsoft\Windows\Printing\EduPrintProv" /Disable
@@ -1906,6 +1910,7 @@ rem Background Intelligent Transfer Service / required by Windows Updates / depe
 rem Base Filtering Engine / required by Windows Defender Firewall
 rem BitLocker Drive Encryption Service / required to be able to access encryption settings and to disable Bitlocker and device encryption
 rem CNG Key Isolation / required to login to Windows Insider / Switch to Local Account / Set up PIN / Basically everything Credentials related
+rem COM+ services are needed by Hasleo Backup
 rem Connected Devices Platform / required to open Settings - Windows Backup and to sync Edge with android
 rem Credential Manager / required to store credentials (check User Accounts - Credential Manager) / required by apps like Windows Mail to store passwords / An administrator has blocked you from running this app
 rem Cryptographic Services / required to update certificates for browsers, digital signatures (catroot2)
@@ -1937,6 +1942,9 @@ rem Windows Driver Foundation - User-mode Driver Framework / required by some dr
 rem Windows Image Acquisition (WIA) / required by scanners
 rem Windows Management Instrumentation / required by wmic commands / disabled to prevent some fileless malware
 rem Windows Push Notifications User Service / required by Logitech Setpoint to avoid Runtime Error and upon disabling, Windows and network is sluggish
+
+rem Aggregated Data Platform Service
+sc config ADPSvc start= disabled
 
 rem AMD Crash Defender Driver
 sc config amdfendr start= disabled
@@ -2054,6 +2062,9 @@ sc config PolicyAgent start= disabled
 
 rem Microsoft (R) Diagnostics Hub Standard Collector Service
 sc config diagnosticshub.standardcollector.service start= disabled
+
+rem Microsoft Usage and Quality Insights
+sc config wuqisvc start= disabled
 
 rem Network Connections
 sc config Netman start= disabled
@@ -3142,6 +3153,14 @@ reg add "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "fDen
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "TSAppCompat" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "TSEnabled" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services" /v "TSUserEnabled" /t REG_DWORD /d "0" /f
+
+
+rem =================================== Windows Settings ===================================
+rem --------------------------------------- System -----------------------------------------
+rem ................................ Advanced system settings ..............................
+
+rem 0 - Disabled / 1 - Enable Sudo command and run apps "In a new window" / 2 - Enable Sudo command and run apps "With input disabled"
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Sudo" /v "Enabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
