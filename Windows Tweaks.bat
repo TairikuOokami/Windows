@@ -11,14 +11,16 @@ rem Settings - Accounts - Sign-in Options (does not work for some reason, unless
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem DNS/TCP/UDP are blocked - netsh advfirewall firewall delete rule name=all
-rem DoH disabled/DoT enabled - To Disable DoT run - netsh dns add global dot=no
+rem DoH disabled/DoT enabled - To Disable DoT run:
+rem netsh dns add global dot=no
+rem netsh dns add global doh=yes ddr=yes
 
 rem To be able to install Insider updates, you need to enable:
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/10/07/windows-11-27959-im-canary-kanal-erschienen-gleich-mit-isos/
+rem https://www.deskmodder.de/blog/2025/10/24/windows-11-27975-iso-esd-deutsch-english-ohne-wasserzeichen-und-zeitbegrenzung
 rem https://www.bleepingcomputer.com/news/security/major-password-managers-can-leak-logins-in-clickjacking-attacks
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
@@ -421,7 +423,6 @@ bcdedit /set usephysicaldestination no
 bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "MailClient" /t REG_SZ /d "C:\Program Files\WindowsApps\eMClient.20054CA46072C_10.1.4600.0_neutral__rq410mg92b554\MailClient\MailClient.exe" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
@@ -3706,4 +3707,5 @@ rem My security: NextDNS Free with Cache Boost OFF acting as AV, using separate 
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem Windows 11 Home (27954.1) - 7 mins to let the dust to settle - 58 processes (+TaskManager/+XnView) / 632 threads / 25679 handles / 2.3GB RAM (+500MB RamDisk) - https://ibb.co/Q3gBtJk9
+rem Windows Task Manager uses up to 10% CPU, so it is completely unsable now, using System Informer Cannary instead - https://www.systeminformer.com/canary
+rem Windows 11 Home (27975.1) - 64 processes (+SystemInformer/+XnView) / 659 threads / 26521 handles / 2.3GB RAM (+400MB RamDisk) - https://ibb.co/M5cfVk8d
