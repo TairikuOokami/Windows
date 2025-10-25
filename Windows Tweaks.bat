@@ -20,7 +20,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/10/24/windows-11-27975-iso-esd-deutsch-english-ohne-wasserzeichen-und-zeitbegrenzung
+rem https://www.deskmodder.de/blog/2025/10/07/windows-11-27959-im-canary-kanal-erschienen-gleich-mit-isos/
 rem https://www.bleepingcomputer.com/news/security/major-password-managers-can-leak-logins-in-clickjacking-attacks
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
@@ -3707,5 +3707,5 @@ rem My security: NextDNS Free with Cache Boost OFF acting as AV, using separate 
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
 
-rem Windows Task Manager uses up to 10% CPU, so it is completely unsable now, using System Informer Cannary instead - https://www.systeminformer.com/canary
-rem Windows 11 Home (27975.1) - 64 processes (+SystemInformer/+XnView) / 659 threads / 26521 handles / 2.3GB RAM (+400MB RamDisk) - https://ibb.co/M5cfVk8d
+rem Windows Task Manager uses up to 10% CPU, so it is completely unusable now, using System Informer Cannary instead - https://www.systeminformer.com/canary
+rem Windows 11 Home (27975.1) - 64 processes (+SystemInformer/+XnView) / 659 threads / 26521 handles / 2.35GB RAM (+350MB RamDisk) - https://ibb.co/M5cfVk8d
