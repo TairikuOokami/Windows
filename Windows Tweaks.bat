@@ -20,7 +20,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/10/07/windows-11-27959-im-canary-kanal-erschienen-gleich-mit-isos/
+rem https://www.deskmodder.de/blog/2025/11/08/windows-11-26h1-28000-iso-esd-deutsch-english
 rem https://www.bleepingcomputer.com/news/security/major-password-managers-can-leak-logins-in-clickjacking-attacks
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
@@ -933,7 +933,7 @@ rem https://learn.microsoft.com/en-us/windows/client-management/new-in-windows-m
 rem https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-configuration-service-provider
 rem https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines
 
-rem Account Lockout Threshold / 0 - Disabled
+rem Account Lockout Threshold for local accounts only / 0 - Disabled
 net accounts /lockoutthreshold:25
 
 rem Account Lockout Duration / 0 - Locks out the account for good, till Administrator unlocks it
@@ -1522,7 +1522,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "[*.]netflix.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "4" /t REG_SZ /d "[*.]deviantart.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "5" /t REG_SZ /d "[*.]discord.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]duckduckgo.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]search.brave.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "7" /t REG_SZ /d "[*.]elevenforum.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "8" /t REG_SZ /d "[*.]tesco.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "9" /t REG_SZ /d "[*.]fio.sk" /f
@@ -1593,7 +1593,8 @@ rem 1 - Allow users to bypass Enhanced Security Mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityModeAllowUserBypass" /t REG_DWORD /d "0" /f
 
 rem Force the default Search engine and Prevent adding custom search engines
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"DuckDuckGo\",\"keyword\":\"duckduckgo.com\",\"search_url\":\"https://duckduckgo.com/?q={searchTerms}\",\"suggest_url\":\"https://www.duckduckgo.com/qbox?query={searchTerms}\",\"image_search_url\":\"https://www.duckduckgo.com/images/detail/search?iss=sbiupload\"}]" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"DuckDuckGo\",\"keyword\":\"duckduckgo.com\",\"search_url\":\"https://duckduckgo.com/?q={searchTerms}\",\"suggest_url\":\"https://www.duckduckgo.com/qbox?query={searchTerms}\",\"image_search_url\":\"https://www.duckduckgo.com/images/detail/search?iss=sbiupload\"}]" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"Brave\",\"keyword\":\"search.brave.com\",\"search_url\":\"https://search.brave.com/search?q={searchTerms}\",\"suggest_url\":\"https://api.search.brave.com/res/v1/suggest/{searchTerms}\",\"image_search_url\":\"https://api.search.brave.com/res/v1/images/search\"}]" /f
 
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
@@ -3708,4 +3709,4 @@ rem Browsers can connect only to their domains, the rest of the net is blocked a
 
 
 rem Windows Task Manager uses up to 10% CPU, so it is completely unusable now, using System Informer Cannary instead - https://www.systeminformer.com/canary
-rem Windows 11 Home (27975.1) - 64 processes (+SystemInformer/+XnView) / 659 threads / 26521 handles / 2.35GB RAM (+350MB RamDisk) - https://ibb.co/M5cfVk8d
+rem Windows 11 Home (28000.1) - 74 processes (+SystemInformer/+XnView) / 714 threads / 32525 handles / 2.5GB RAM (+400MB RamDisk) - https://ibb.co/gbpbB76y
