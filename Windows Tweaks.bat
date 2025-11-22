@@ -658,6 +658,9 @@ rem ....................................... General ............................
 rem 2 - Open File Explorer to Quick access / 1 - Open File Explorer to This PC / 3 - Open File Explorer to Downloads
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "LaunchTo" /t REG_DWORD /d "3" /f
 
+rem 0 - Disable / 1 - Enable Preloading File Explorer
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShouldPrelaunchFileExplorer" /t REG_DWORD /d "0" /f
+
 rem Single-click to open an item (point to select)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShellState" /t REG_BINARY /d "2400000017a8000000000000000000000000000001000000130000000000000073000000" /f
 
@@ -783,7 +786,6 @@ rem ================================ Windows Optimizations =====================
 
 rem https://prod.support.services.microsoft.com/en-us/windows/options-to-optimize-gaming-performance-in-windows-11-a255f612-2949-4373-a566-ff6f3f474613
 rem https://learn.microsoft.com/en-us/shows/seth-juarez/memory-compression-in-windows-10-rtm
-
 rem https://learn.microsoft.com/en-us/powershell/module/mmagent/disable-mmagent?view=windowsserver2025-ps
 rem Get-MMAgent
 
@@ -1941,6 +1943,7 @@ rem Windows Biometric Service / required by biometric devices like a fingerprint
 rem Windows Connection Manager / required by WiFi and Data Usage and Windows Update (starts even when disabled)
 rem Windows Defender Firewall (Base Filtering Engine/Network Location Awareness) / required by Windows Update and Store Apps (0x80073d0a)
 rem Windows Driver Foundation - User-mode Driver Framework / required by some drivers like USB devices
+rem Windows Event Log required to instal AMD drivers
 rem Windows Image Acquisition (WIA) / required by scanners
 rem Windows Management Instrumentation / required by wmic commands / disabled to prevent some fileless malware
 rem Windows Push Notifications User Service / required by Logitech Setpoint to avoid Runtime Error and upon disabling, Windows and network is sluggish
@@ -2154,9 +2157,6 @@ sc config FrameServer start= disabled
 
 rem Windows Connection Manager
 sc config Wcmsvc start= disabled
-
-rem Windows Event Log
-sc config EventLog start= disabled
 
 rem Windows Font Cache Service
 sc config FontCache start= disabled
