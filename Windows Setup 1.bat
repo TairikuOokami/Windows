@@ -29,7 +29,7 @@ powercfg -h off
 
 rem Disable Windows Recovery Partition
 rem reagentc /info
-rem reagentc /disable
+reagentc /disable
 
 rem Disable Reserved Storage (7GB)
 rem fsutil storagereserve query C:
@@ -153,7 +153,7 @@ wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
 
 rem Setup Network (NetBIOS might be required for aDSL/LAN)
 rem Disable IPv6/LMHOSTS lookup/NetBIOS and Set DNS Servers
-wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("76.76.2.2")
+wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("94.140.14.14","94.140.15.15")
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
@@ -171,8 +171,12 @@ wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
 rem Enable DoT
 netsh dns set global doh=no
-netsh dns add global dot=yes
-netsh dns add encryption server=76.76.2.2 dothost=p2.freedns.controld.com:853 autoupgrade=yes udpfallback=no
+netsh dns add global dot=yes ddr=no
+netsh dns set global dot=yes ddr=no
+netsh dns add encryption server=94.140.14.14 dohtemplate=https://dns.adguard-dns.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=94.140.15.15 dohtemplate=https://dns.adguard-dns.com/dns-query autoupgrade=yes udpfallback=no
+netsh dns add encryption server=94.140.14.14 dothost=dns.adguard-dns.com:853 autoupgrade=yes udpfallback=no
+netsh dns add encryption server=94.140.15.15 dothost=dns.adguard-dns.com:853 autoupgrade=yes udpfallback=no
 
 rem Enable NextDNS DoT - 45.90.28.99/45.90.30.99
 start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
@@ -188,6 +192,7 @@ slmgr /cpky
 
 rem pause
 
+rem https://raw.githubusercontent.com/microsoft/windows-dev-box-setup-scripts/refs/heads/master/scripts/RemoveDefaultApps.ps1
 rem C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle  | Where-Object {$_.NonRemovable -eq $False} | Select-Object Name, PackageFullName"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Clipchamp.Clipchamp" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingNews" | Remove-AppxPackage -AllUsers"
@@ -209,7 +214,6 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.Photos" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsAlarms" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsCamera" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsNotepad" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsTerminal" | Remove-AppxPackage -AllUsers"
@@ -225,9 +229,9 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 
 pause
 
-winget uninstall "Outlook for Windows"
 winget uninstall "Microsoft Edge Game Assist"
 winget uninstall "Microsoft.Teams"
+winget uninstall "Outlook for Windows"
 
 rem Uninstall Remote Desktop Connection and check for new bloatware
 start ms-settings:installed-apps
