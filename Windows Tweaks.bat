@@ -1,4 +1,4 @@
-fddrrem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
+rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes or suffer the consequences
