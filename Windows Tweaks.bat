@@ -1,4 +1,4 @@
-rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
+fddrrem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem Create a system backup to reverse any changes or suffer the consequences
@@ -13,7 +13,11 @@ rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem DNS/TCP/UDP are blocked - netsh advfirewall firewall delete rule name=all
 rem DoH disabled/DoT enabled - To Disable DoT run:
 rem netsh dns set global dot=no
+rem netsh dns add global doh=yes ddr=yes
 rem netsh dns set global doh=yes ddr=yes
+rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
+rem netsh dns add encryption server=94.140.14.14 dohtemplate=https://dns.adguard-dns.com/dns-query autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=94.140.15.15 dohtemplate=https://dns.adguard-dns.com/dns-query autoupgrade=yes udpfallback=no
 
 rem To be able to install Insider updates, you need to enable:
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
@@ -568,7 +572,7 @@ rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-
 netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-586,588-852,854-992,994-1024,1025-3073,3075-5227,5229-27014,27051-65535
 netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-122,124-442,444-1024
 
-netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-76.76.2.1,76.76.2.3-255.255.255.255
+netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-94.140.14.13,94.140.14.15-94.140.15.14,94.140.15.16-255.255.255.255
 
 netsh advfirewall firewall add rule name="Brave TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
@@ -2512,20 +2516,19 @@ rem netsh dns show global
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "0" /f
 
 rem Setup DNS over HTTPS (DoH) Add Custom Servers
+rem netsh dns set global dot=no
 rem netsh dns add global doh=yes ddr=yes
-rem HKLM\System\CurrentControlSet\Services\Dnscache\Parameters\DohWellKnownServers
-rem netsh dns add encryption server=9.9.9.9 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=149.112.112.112 dohtemplate=https://dns.quad9.net/dns-query autoupgrade=yes udpfallback=no
+rem netsh dns set global doh=yes ddr=yes
+rem reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableAutoDoh" /t REG_DWORD /d "2" /f
+rem netsh dns add encryption server=94.140.14.14 dohtemplate=https://dns.adguard-dns.com/dns-query autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=94.140.15.15 dohtemplate=https://dns.adguard-dns.com/dns-query autoupgrade=yes udpfallback=no
 
 rem Setup DNS over TLS (DoT)
-netsh dns set global doh=no
-netsh dns add global dot=yes
-
-rem netsh dns add encryption server=9.9.9.9 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=149.112.112.112 dothost=dns.quad9.net:853 autoupgrade=yes udpfallback=no
-
-rem netsh dns add encryption server=45.90.28.99 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes udpfallback=no
-rem netsh dns add encryption server=45.90.30.99 dothost=:John--Router-8b7ea1.dns.nextdns.io autoupgrade=yes udpfallback=no
+netsh dns set global doh=no ddr=no
+netsh dns add global dot=yes ddr=no
+netsh dns set global dot=yes ddr=no
+rem netsh dns add encryption server=94.140.14.14 dothost=dns.adguard-dns.com:853 autoupgrade=yes udpfallback=no
+rem netsh dns add encryption server=94.140.15.15 dothost=dns.adguard-dns.com:853 autoupgrade=yes udpfallback=no
 
 rem Restrict NTLM: Incoming NTLM traffic - Deny All
 reg add "HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0" /v "RestrictReceivingNTLMTraffic" /t REG_DWORD /d "2" /f
