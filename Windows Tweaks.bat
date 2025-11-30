@@ -12,8 +12,8 @@ rem Settings - Accounts - Sign-in Options (does not work for some reason, unless
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem DNS/TCP/UDP are blocked - netsh advfirewall firewall delete rule name=all
 rem DoH disabled/DoT enabled - To Disable DoT run:
-rem netsh dns add global dot=no
-rem netsh dns add global doh=yes ddr=yes
+rem netsh dns set global dot=no
+rem netsh dns set global doh=yes ddr=yes
 
 rem To be able to install Insider updates, you need to enable:
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollection" /v "AllowTelemetry" /t REG_DWORD /d "3" /f
@@ -98,6 +98,7 @@ rem DNS Encryption (setup DNS server as 127.0.0.1) - https://www.yogadns.com / h
 rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
 rem DNS List - https://adguard-dns.io/kb/general/dns-providers
+rem DNS Rebind Test - https://controld.com/tools/dns-rebind-test
 rem NextDNS Test - https://ping.nextdns.io / https://test.nextdns.io
 
 rem Windows ISO
@@ -1517,6 +1518,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearBrowsingDataOnExit" /t 
 rem 1 - Clear cached images and files when Microsoft Edge closes
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ClearCachedImagesAndFilesOnExit" /t REG_DWORD /d "1" /f
 
+rem 1 - AllowCookies / 2 - BlockCookies / 4 - SessionOnly except ones listed in SaveCookiesOnExit
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultCookiesSetting" /t REG_DWORD /d "4" /f
+
 rem edge://settings/privacy/cookies/AllCookies
 rem reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "0" /t REG_SZ /d "[*.]ntp.msn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "1" /t REG_SZ /d "[*.]account.samsung.com" /f
@@ -1537,7 +1541,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "15" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "16" /t REG_SZ /d "[*.]isthereanydeal.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "17" /t REG_SZ /d "[*.]itesco.sk" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "18" /t REG_SZ /d "[*.]malwaretips.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "19" /t REG_SZ /d "[*.]" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "19" /t REG_SZ /d "[*.]www.elevenforum.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "20" /t REG_SZ /d "[*.]myanimelist.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "21" /t REG_SZ /d "[*.]nextdns.io" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG_SZ /d "[*.]mbank.sk" /f
@@ -3487,9 +3491,11 @@ rem wmic startup get caption,command > c:\StartupApps.txt
 
 rem Malware Live - Real AV Testing
 rem rem https://app.any.run/submissions
+rem https://check.labs.greynoise.io
 rem https://urlhaus.abuse.ch/browse
 rem https://www.hybrid-analysis.com/submissions/sandbox/files
 rem https://www.phishtank.com
+
 
 rem Malware Tests - AV Check
 rem rem https://demo.wd.microsoft.com/?ocid=cx-wddocs-testground
@@ -3584,8 +3590,11 @@ start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.ex
 rem Trim Some Edges - edge://settings/privacy/cookies/AllCookies
 rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate\Download" /s /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\AccountBookmarks" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\BookmarkMergedSurfaceOrdering" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\BrowsingTopicsSiteData" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\BrowsingTopicsSiteData-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\BrowsingTopicsState" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Custom Dictionary.txt" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\DashTrackerDatabase" /s /f /q
@@ -3626,12 +3635,14 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\Top Sites-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\uu_host_config" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Visited Links" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Vpn Tokens" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Vpn Tokens-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\WebAssistDatabase" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\WebAssistDatabase-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Web Data-journal" /s /f /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Asset Store" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AssistanceHome" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AutofillAiModelCache" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\AutofillStrikeDatabase" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\blob_storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\BudgetDatabase" /s /q
@@ -3652,16 +3663,21 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\DualEngine" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeCoupons" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeEDrop" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeHubAppUsage" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeJourneys" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePassageEmbeddings" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePushStorageWithConnectTokenAndKey" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgePushStorageWithWinRt" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeTravel" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeUserUsage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EdgeWallet" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\EntityExtraction" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extensions" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Rules" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension Scripts" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Extension State" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feature Engagement Tracker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\GPUCache" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Feedback Reports" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\File System" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\IndexedDB" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\JumpListIconsRecentClosed" /s /q
@@ -3674,6 +3690,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaFoundationCdmStore" /s 
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Nurturing" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_hint_cache_store" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\optimization_guide_model_metadata_store" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\OptimizationGuideAssetStore.db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\parcel_tracking_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Password_Diagnostics" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Pdf" /s /q
@@ -3687,6 +3704,7 @@ rd "%LocalAppData%\Microsoft\Edge\User Data\Default\SemanticEncoder.db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Service Worker" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Session Storage" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Sessions" /s /q
+rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Settings Search" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Shared Dictionary" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\shared_proto_db" /s /q
 rd "%LocalAppData%\Microsoft\Edge\User Data\Default\Site Characteristics Database" /s /q
