@@ -11,6 +11,7 @@ rem Settings - Accounts - Sign-in Options (does not work for some reason, unless
 
 rem Critical processes removed - SearchHost.exe/StartMenuExperienceHost.exe
 rem DNS/TCP/UDP are blocked - netsh advfirewall firewall delete rule name=all
+
 rem DoH disabled/DoT enabled - To Disable DoT run:
 rem netsh dns set global dot=no
 rem netsh dns add global doh=yes ddr=yes
@@ -115,6 +116,7 @@ rem dism /Get-WimInfo /WimFile:F:\sources\install.wim
 rem dism /Get-WimInfo /WimFile:F:\sources\install.wim /index:1
 rem dism /Get-WimInfo /WimFile:F:\sources\install.esd /index:1
 
+rem https://www.elevenforum.com/t/newly-added-tutorials.18
 rem https://www.elevenforum.com/t/create-shortcuts-to-open-pages-in-settings-in-windows-11.522
 rem https://www.elevenforum.com/t/keyboard-shortcuts-in-windows-11.2253
 rem https://www.elevenforum.com/t/list-of-uri-commands-to-open-microsoft-store-apps-in-windows-11.2683
@@ -3170,6 +3172,14 @@ rem ................................ Advanced system settings ..................
 
 rem 0 - Disabled / 1 - Enable Sudo command and run apps "In a new window" / 2 - Enable Sudo command and run apps "With input disabled"
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Sudo" /v "Enabled" /t REG_DWORD /d "0" /f
+
+
+rem =================================== Windows Settings ===================================
+rem --------------------------------------- System -----------------------------------------
+rem ................................... AI Components ......................................
+
+rem 0 - Disabled / 1 - Enable Experimental agentic features
+reg add "HKLM\System\CurrentControlSet\Services\IsoEnvBroker" /v "Enabled" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Settings ===================================
