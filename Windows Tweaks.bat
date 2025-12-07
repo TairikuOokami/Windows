@@ -1706,6 +1706,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyModeEnabled" /t RE
 rem 1 - Use hardware acceleration when available
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Enable RAM (memory) resource controls
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "RAMResourceControlsEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Save resources with sleeping tabs
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SleepingTabsEnabled" /t REG_DWORD /d "0" /f
 
