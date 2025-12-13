@@ -1637,7 +1637,7 @@ rem 1 - Save and fill payment info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "0" /f
 
 rem Browser sign-in settings / 0 - Disable / 1 - Enable / 2 - Force users to sign-in to use the browser (all profiles)
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserSignin" /t REG_DWORD /d "2" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserSignin" /t REG_DWORD /d "1" /f
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
@@ -2045,8 +2045,6 @@ sc config dLauncherLoopback start= demand
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
 
-rem FileSyncHelper (required to open Personal Vault in OneDrive)
-sc config FileSyncHelper start= disabled
 
 rem Function Discovery Provider Host
 sc config fdPHost start= disabled
@@ -3741,6 +3739,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free with Cache Boost OFF acting as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB) and Windows
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
-
-rem Windows Task Manager uses up to 10% CPU, so it is completely unusable now, using System Informer Cannary instead - https://www.systeminformer.com/canary
-rem Windows 11 Home (28000.1) - 74 processes (+SystemInformer/+XnView) / 714 threads / 32525 handles / 2.5GB RAM (+400MB RamDisk) - https://ibb.co/gbpbB76y
+rem Windows 11 Home (26200.7462) - it settles down after 7min - 65 processes (+SystemInformer/+XnView) / 676 threads / 26960 handles / 2.3GB RAM (+500MB RamDisk) - https://ibb.co/B2MgkNJN
