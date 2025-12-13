@@ -29,7 +29,8 @@ powercfg -h off
 
 rem Disable Windows Recovery Partition
 rem reagentc /info
-reagentc /disable
+rem reagentc /disable
+rem reagentc /enable
 
 rem Disable Reserved Storage (7GB)
 rem fsutil storagereserve query C:
@@ -214,6 +215,7 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.Photos" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsAlarms" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsCamera" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsNotepad" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsTerminal" | Remove-AppxPackage -AllUsers"
@@ -317,9 +319,9 @@ rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell 
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
 takeown /s %computername% /u %username% /f "%USERPROFILE%\Desktop" /r /d y
 icacls "%USERPROFILE%\Desktop" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rem rd "%USERPROFILE%\Desktop" /s /q
-rem md "Z:\Desktop"
-rem mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
+rd "%USERPROFILE%\Desktop" /s /q
+md "Z:\Desktop"
+mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
 
 rem Move Documents
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\OneDrive\Documents" /f
@@ -392,7 +394,7 @@ start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
 
 pause
 
-rem Install paid HEVC and Netflix
+rem Install paid Bitwarden, eM Client, HEVC and Netflix
 
 start ms-windows-store:
 
