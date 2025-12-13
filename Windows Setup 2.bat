@@ -1,5 +1,5 @@
 rem Delete Windows Recovery Partition / Extend Windows Partition
-rem start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-free-portable\x64\dm.exe"
+start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Macrorit\mde-free-portable\x64\dm.exe"
 
 rem pause
 
@@ -69,7 +69,6 @@ rem https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Comman
 rem https://github.com/dreammjow/ChromiumHardening/blob/main/flags/chrome-command-line.md
 rem https://get.webgl.org / https://www.cloudflare.com/ssl/encrypted-sni / https://pq.cloudflareresearch.com
 rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,IsolatePrerenders,IsolateSandboxedIframes,RendererAppContainer,WinSboxDisableExtensionPoint" --disable-webgl --no-pings
-rem C:\Users\Tairi\AppData\Local\BraveSoftware\Brave-Browser\Application\brave.exe --disable-breakpad --disable-crash-reporter
 
 rem Disabled
 rem edge://flags/#allow-all-sites-to-initiate-mirroring
@@ -77,6 +76,8 @@ rem edge://flags/#edge-compose
 rem edge://flags/#edge-copilot-mode
 rem edge://flags/#edge-copilot-mode-profile-toggle
 rem edge://flags/#edge-copilot-vision
+rem edge://flags/#edge-history-ai-search-ui
+rem edge://flags/#edge-llm-on-device-model-performance-param
 rem edge://flags/#edge-ntp-composer-allow-copilot-search
 rem edge://flags/#edge-ntp-composer-feed-integration
 rem edge://flags/#edge-omnibox-commercial-copilot-chat
@@ -95,7 +96,9 @@ rem Enabled
 rem edge://flags/#bind-cookies-to-port
 rem edge://flags/#bind-cookies-to-scheme
 rem edge://flags/#disallow-doc-written-script-loads
+rem edge://flags/#enable-standard-device-bound-session-credentials
 rem edge://flags/#enable-tls13-early-data
+rem edge://flags/#local-network-access-check
 rem edge://flags/#origin-keyed-processes-by-default
 rem edge://flags/#strict-origin-isolation
 
