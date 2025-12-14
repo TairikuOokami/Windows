@@ -314,14 +314,14 @@ rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer
 rem reg add "HKLM\Software\Wow6432Node\Microsoft\Windows\CurrentVersion\explorer\Shell Icons" /v "4" /t REG_SZ /d "D:\OneDrive\Pictures\MLP Icons\Folders\fluttericon.ico" /f
 
 rem Move Desktop
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "%USERPROFILE%\Desktop" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{754AC886-DF64-4CBA-86B5-F7FBF4FBCEF5}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
-rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Desktop" /t REG_SZ /d "%USERPROFILE%\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "{754AC886-DF64-4CBA-86B5-F7FBF4FBCEF5}" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
 takeown /s %computername% /u %username% /f "%USERPROFILE%\Desktop" /r /d y
 icacls "%USERPROFILE%\Desktop" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
 rd "%USERPROFILE%\Desktop" /s /q
-md "Z:\Desktop"
-mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
+md "%USERPROFILE%\Desktop"
+rem rem mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
 
 rem Move Documents
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\OneDrive\Documents" /f
@@ -394,7 +394,8 @@ start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
 
 pause
 
-rem Install paid Bitwarden, eM Client, HEVC and Netflix
+rem Install paid Bitwarden, eM Client, HEVC, Netflix, Ruf
+us
 
 start ms-windows-store:
 
