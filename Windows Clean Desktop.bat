@@ -15,15 +15,13 @@ taskkill /im tor.exe /f
 
 timeout 1
 
-del "C:\Users\Tairi\OneDrive\Desktop\*" /s /f /q
 del "%SystemDrive%\Users\Public\Desktop\*" /s /f /q
+del "C:\Users\Tairi\OneDrive\Desktop\*" /s /f /q
 del "%USERPROFILE%\Desktop\*" /s /f /q
 rd "C:\Users\Tairi\OneDrive\Desktop" /s /q
 rd "%USERPROFILE%\Desktop" /s /q
-rd "Z:\Desktop" /s /q
-md "Z:\Desktop"
 md "C:\Users\Tairi\OneDrive\Desktop"
-mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
+md "%USERPROFILE%\Desktop"
 
 del "Z:\Temp\*" /s /f /q
 rd "Z:\Temp" /s /q
@@ -46,3 +44,4 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsMode" /t REG_SZ 
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DnsOverHttpsTemplates" /t REG_SZ /d "https://dns.adguard-dns.com/dns-query?" /f
 
 ipconfig /flushdns
+
