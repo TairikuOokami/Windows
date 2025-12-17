@@ -468,10 +468,10 @@ reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Ste
 rem XnView
 reg add "HKCU\Software\XnView" /v "UseRegistry" /t "REG_DWORD" /d "1" /f
 reg add "HKCU\Software\XnView\Browser" /v "ShowToolTips" /t "REG_DWORD" /d "0" /f
-reg add "HKCU\Software\XnView\Browser" /v "StartupDirectory" /t "REG_SZ" /d "Z:\Temp" /f
+reg add "HKCU\Software\XnView\Browser" /v "StartupDirectory" /t "REG_SZ" /d "%USERPROFILE%\Desktop" /f
 reg add "HKCU\Software\XnView\Browser" /v "StartupIn" /t "REG_DWORD" /d "2" /f
 reg add "HKCU\Software\XnView\Capture" /v "Delay" /t "REG_DWORD" /d "2" /f
-reg add "HKCU\Software\XnView\Capture" /v "Directory" /t "REG_SZ" /d "Z:\Temp" /f
+reg add "HKCU\Software\XnView\Capture" /v "Directory" /t "REG_SZ" /d "%USERPROFILE%\Desktop" /f
 reg add "HKCU\Software\XnView\Capture" /v "HotKey" /t "REG_DWORD" /d "9" /f
 reg add "HKCU\Software\XnView\Capture" /v "IncludeCursor" /t "REG_DWORD" /d "0" /f
 reg add "HKCU\Software\XnView\Capture" /v "Method" /t "REG_DWORD" /d "0" /f
@@ -479,7 +479,7 @@ reg add "HKCU\Software\XnView\Capture" /v "Multiple" /t "REG_DWORD" /d "1" /f
 reg add "HKCU\Software\XnView\Capture" /v "SaveIntoFile" /t "REG_DWORD" /d "1" /f
 reg add "HKCU\Software\XnView\Start" /v "MaximizeXnviewAtStartup" /t "REG_DWORD" /d "1" /f
 reg add "HKCU\Software\XnView\Start" /v "OnlyOneInstance" /t "REG_DWORD" /d "1" /f
-reg add "HKCU\Software\XnView\Start" /v "PathSave" /t "REG_SZ" /d "Z:\Desktop" /f
+reg add "HKCU\Software\XnView\Start" /v "PathSave" /t "REG_SZ" /d "%USERPROFILE%\Desktop" /f
 reg add "HKCU\Software\XnView\Start" /v "SavePosition" /t "REG_DWORD" /d "0" /f
 reg add "HKCU\Software\XnView\Start" /v "ShowSaveDlg" /t "REG_DWORD" /d "0" /f
 
@@ -931,6 +931,9 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f
 
+rem Enable Native NVMe
+reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "1176759950" /t REG_DWORD /d "1" /f
+
 
 rem =================================== Windows Policies ===================================
 
@@ -1306,7 +1309,7 @@ rem 1 - URL reporting in Edge diagnostic data enabled
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UrlDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Edge User Data Profile Location
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UserDataDir" /t REG_SZ /d "Z:\Edge\User Data" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "UserDataDir" /t REG_SZ /d "Z:\Edge\User Data" /f
 
 rem 1 - Allow video capture
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_DWORD /d "0" /f
@@ -1427,7 +1430,7 @@ rem ------------------------------------ Microsoft Edge ------------------------
 rem ...................................... Downloads .......................................
 
 rem Set download directory
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadDirectory" /t REG_SZ /d "Z:\Temp" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DownloadDirectory" /t REG_SZ /d "%USERPROFILE%\Desktop" /f
 
 rem 1 - Ask me what to do with each download (Ignored when download directory is set)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PromptForDownloadLocation" /t REG_DWORD /d "1" /f
@@ -1960,6 +1963,9 @@ rem Windows Event Log required to instal AMD drivers
 rem Windows Image Acquisition (WIA) / required by scanners
 rem Windows Management Instrumentation / required by wmic commands / disabled to prevent some fileless malware
 rem Windows Push Notifications User Service / required by Logitech Setpoint to avoid Runtime Error and upon disabling, Windows and network is sluggish
+
+rem Agent Activation Runtime
+sc config AarSvc start= disabled
 
 rem Aggregated Data Platform Service
 sc config ADPSvc start= disabled
