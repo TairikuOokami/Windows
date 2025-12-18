@@ -74,17 +74,17 @@ icacls E: /grant "Users":(OI)(CI)RX /t /l /q /c
 
 pause
 
+takeown /s %computername% /u %username% /f D:\HoYoPlay /r /d y
+icacls D:\HoYoPlay /inheritance:r
+icacls D:\HoYoPlay /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\HoYoPlay /grant "System":(OI)(CI)RX /t /l /q /c
+icacls D:\HoYoPlay /grant "Users":(OI)(CI)RX /t /l /q /c
+
 takeown /s %computername% /u %username% /f D:\OneDrive /r /d y
 icacls D:\OneDrive /inheritance:r
 icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\OneDrive /grant "System":(OI)(CI)RX /t /l /q /c
 icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
-
-takeown /s %computername% /u %username% /f D:\RamDisk /r /d y
-icacls D:\RamDisk /inheritance:r
-icacls D:\RamDisk /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\RamDisk /grant:r "System":(OI)(CI)F /t /l /q /c
-icacls D:\RamDisk /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\Steam /r /d y
 icacls D:\Steam /inheritance:r
@@ -262,15 +262,6 @@ Dism /Online /Disable-Feature /FeatureName:WorkFolders-Client /Quiet /NoRestart
 
 pause
 
-start "" /wait "D:\OneDrive\Setup\install.bat"
-
-pause
-
-start "" /wait "%ProgramFiles%\AIM Toolkit\RamDiskUI.exe"
-start "" /wait "%ProgramFiles%\AIM Toolkit\config.exe"
-
-pause
-
 rem Single-click to open an item (point to select)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "ShellState" /t REG_BINARY /d "2400000017a8000000000000000000000000000001000000130000000000000073000000" /f
 
@@ -319,9 +310,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Fold
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders" /v "Desktop" /t REG_EXPAND_SZ /d "%USERPROFILE%\Desktop" /f
 takeown /s %computername% /u %username% /f "%USERPROFILE%\Desktop" /r /d y
 icacls "%USERPROFILE%\Desktop" /inheritance:r /grant:r %username%:(OI)(CI)F /t /l /q /c
-rd "%USERPROFILE%\Desktop" /s /q
-md "%USERPROFILE%\Desktop"
-rem rem mklink /d "%USERPROFILE%\Desktop" "Z:\Desktop"
 
 rem Move Documents
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders" /v "Personal" /t REG_SZ /d "D:\OneDrive\Documents" /f
