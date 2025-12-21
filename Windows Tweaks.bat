@@ -25,7 +25,8 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/11/08/windows-11-26h1-28000-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2025/12/16/windows-11-28020-iso-esd-deutsch-english
+rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
 rem https://www.bleepingcomputer.com/news/security/major-password-managers-can-leak-logins-in-clickjacking-attacks
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
@@ -100,7 +101,7 @@ rem https://www.makeuseof.com/tag/antivirus-tracking-youd-surprised-sends/
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
 rem DNS Check / https://dnscheck.tools / https://www.dnsperf.com
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://www.yogadns.com / https://github.com/DNSCrypt/dnscrypt-proxy
-rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php
+rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php / https://browserleaks.com/tls
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
 rem DNS List - https://adguard-dns.io/kb/general/dns-providers
 rem DNS Rebind Test - https://controld.com/tools/dns-rebind-test
@@ -585,6 +586,7 @@ netsh advfirewall firewall add rule name="LibreWolf TCP Block" dir=out action=bl
 netsh advfirewall firewall add rule name="LibreWolf UDP Block" dir=out action=block protocol=UDP program="%ProgramFiles%\LibreWolf\librewolf.exe"
 netsh advfirewall firewall add rule name="OneDrive TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
 
+netsh advfirewall firewall add rule name="Search Block" dir=out action=block program="%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe"
 netsh advfirewall firewall add rule name="SmartScreen Block" dir=out action=block program="%WinDir%\System32\smartscreen.exe"
 netsh advfirewall firewall add rule name="Start Block" dir=out action=block program="%WINDIR%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe"
 
@@ -871,9 +873,15 @@ rem System Guard / 0 - Default / 1 - On / 2 - Off
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "ConfigureSystemGuardLaunch" /t REG_DWORD /d "2" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "Locked" /t REG_DWORD /d "0" /f
 
-rem 1 - Enable virtualization-based security / run msinfo32 to check
+rem Virtualization-based security / run msinfo32 to check
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "CachedDrtmAuthIndex" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HypervisorEnforcedCodeIntegrity" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HyperVVirtualizationBasedSecurityOptout" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "Locked" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "RequireMicrosoftSignedBootChain" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Locked" /t REG_DWORD /d "0" /f
 
 rem Platform Security Level / 1 - Turns on VBS with Secure Boot / 3 - Turns on VBS with Secure Boot and DMA
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "RequirePlatformSecurityFeatures" /t REG_DWORD /d "0" /f
@@ -931,8 +939,11 @@ reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\DiagLog" /v "Start
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\Diagtrack-Listener" /v "Start" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\WMI\Autologger\WiFiSession" /v "Start" /t REG_DWORD /d "0" /f
 
-rem Enable Native NVMe
-reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "1176759950" /t REG_DWORD /d "1" /f
+rem Enable Native NVMe / https://www.deskmodder.de/blog/2025/12/18/windows-11-auch-mit-nativer-nvme-unterstuetzung
+rem https://www.elevenforum.com/t/announcing-native-nvme-in-windows-server-2025.43018/page-2#post-687585
+reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "156965516" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "735209102" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "1853569164" /t REG_DWORD /d "1" /f
 
 
 rem =================================== Windows Policies ===================================
