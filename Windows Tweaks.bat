@@ -1262,6 +1262,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationR
 rem 1 - Enable IPv6 reachability check override
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "IPv6ReachabilityOverrideEnabled" /t REG_DWORD /d "0" /f
 
+rem Control whether Microsoft 365 Copilot Chat shows in the Microsoft Edge for Business toolbar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Microsoft365CopilotChatIconEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
 
@@ -3756,4 +3759,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free with Cache Boost OFF acting as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB) and Windows
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
 
-rem Windows 11 Home (26200.7462) - it settles down after 7min - 65 processes (+SystemInformer/+XnView) / 676 threads / 26960 handles / 2.3GB RAM (+500MB RamDisk) - https://ibb.co/B2MgkNJN
+rem Windows 11 Home (28020.1362) - it settles down after 7min - 62 processes (+SystemInformer/+XnView) / 618 threads / 26962 handles / 2.1GB RAM - https://ibb.co/qhp42BZ
