@@ -120,7 +120,7 @@ rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
 rem Last Tested on Windows 11 Home 28020.1362
-rem Microsoft Defender Platform Version 4.18.26010.1 (21-Dec-2025)
-rem Before - https://ibb.co/5hYdyCSz / After - https://ibb.co/cSVvcd8c
+rem Microsoft Defender Platform Version 4.18.26010.2 (10-Jan-2026
+rem Before - https://ibb.co/CpBqXbfS / After - https://ibb.co/MD1DgF5s
 
 pause
