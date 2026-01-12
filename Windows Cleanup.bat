@@ -40,6 +40,11 @@ winmgmt /salvagerepository
 net stop wuauserv /y
 schtasks /End /TN "\Microsoft\Windows\Wininet\CacheTask"
 
+rem Reset digital certificates used by Windows, browsers, apps
+rem ren C:\Windows\SoftwareDistribution SoftwareDistribution.old
+rem ren C:\Windows\System32\catroot2 Catroot2.old
+
+
 takeown /f "%WINDIR%\winsxs\pending.xml" /a
 icacls "%WINDIR%\winsxs\pending.xml" /grant:r Administrators:F /c
 del "%WINDIR%\winsxs\pending.xml" /s /f /q
@@ -179,24 +184,28 @@ start "" /wait "%ProgramFiles(x86)%\Wise\Wise Registry Cleaner\WiseRegCleaner.ex
 
 rem Backup Browsers (Flags/Settings)
 taskkill /im brave.exe /f
+taskkill /im chrome.exe /f
 taskkill /im firefox.exe /f
 taskkill /im librewolf.exe /f
 taskkill /im msedge.exe /f
 taskkill /im tor.exe /f
 
 rd "D:\OneDrive\Soft\Brave" /s /q
+rd "D:\OneDrive\Soft\Chromium" /s /q
 rd "D:\OneDrive\Soft\Edge" /s /q
 rd "D:\OneDrive\Soft\Librewolf" /s /q
 
-xcopy "Z:\Brave" "D:\OneDrive\Soft\Brave" /s /i /y
-xcopy "Z:\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
-xcopy "Z:\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
+xcopy "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" "D:\OneDrive\Soft\Brave" /s /i /y
+xcopy "%LocalAppData%\Chromium\User Data" "D:\OneDrive\Soft\Chromium" /s /i /y
+xcopy "%LocalAppData%\Microsoft\Edge" "D:\OneDrive\Soft\Edge" /s /i /y
+xcopy "%AppData%\Librewolf" "D:\OneDrive\Soft\Librewolf" /s /i /y
 
 rem Backup Custom Settings
 xcopy "%AppData%\MPC-BE\mpc-be64.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\MPC-BE\mpc-be64.ini" /y
 xcopy "%AppData%\Rizonesoft\Notepad3\Notepad3.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Rizonesoft\Notepad3\Notepad3.ini" /y
 xcopy "%AppData%\SystemInformer\settings.xml" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\SystemInformer\settings.xml" /y
 xcopy "%AppData%\Wise Disk Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Disk Cleaner\Config.ini" /y
+xcopy "%AppData%\Wise Disk Cleaner\exclusions.dat" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Disk Cleaner\exclusions.dat" /y
 xcopy "%AppData%\Wise Registry Cleaner\Config.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\Wise Registry Cleaner\Config.ini" /y
 xcopy "%AppData%\XnView\xnview.ini" "D:\OneDrive\Setup\Users\Tairi\AppData\Roaming\XnView\xnview.ini" /y
 
