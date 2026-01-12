@@ -110,7 +110,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "PreInstalledAppsEverEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SilentInstalledAppsEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContentEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-310093Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338388Enabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338389Enabled" /t REG_DWORD /d "0" /f
@@ -346,6 +345,7 @@ winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --acce
 
 winget install Brave.Brave --accept-package-agreements --accept-source-agreements
 winget install CreativeTechnology.SoundBlasterCommand --accept-package-agreements --accept-source-agreements
+winget install eloston.ungoogled-chromium --accept-package-agreements --accept-source-agreements
 winget install Kingston.SSDManager --accept-package-agreements --accept-source-agreements
 winget install LibreWolf.LibreWolf --accept-package-agreements --accept-source-agreements
 winget install Logitech.UnifyingSoftware --accept-package-agreements --accept-source-agreements
