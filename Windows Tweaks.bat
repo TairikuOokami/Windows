@@ -105,6 +105,7 @@ rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypt
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
 rem DNS List - https://adguard-dns.io/kb/general/dns-providers
 rem DNS Rebind Test - https://controld.com/tools/dns-rebind-test
+rem DNS Speed Test - https://dnsspeedtest.online
 rem NextDNS Test - https://ping.nextdns.io / https://test.nextdns.io
 
 rem Windows ISO
@@ -190,12 +191,14 @@ rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bandwidth Monitor / TrafficMonitor - https://github.com/zhongyang219/TrafficMonitor/blob/master/README_en-us.md
 rem Bootable USB / Rufus - https://apps.microsoft.com/store/detail/rufus/9PC3H3V7Q9CH?hl=en-us&gl=US
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
-rem Browser / Brave - https://brave.com - Great for Google/Youtube only
-rem Browser / LibreWolf - https://librewolf.net - Great for privacy, like for Facebook
+rem Browser / Brave - https://brave.com - Great for Google/Youtube
+rem Browser / LibreWolf - https://librewolf.net - Great for privacy, like Facebook
 rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy/security!
-rem Cloud Backup / IceDrive - https://icedrive.net/plans
-rem Cloud Backup / IDrive - https://www.idrive.com/pricing
-rem Cloud Backup / PolarBackup - https://www.polarbackup.com/#pricing
+rem Cloud Backup / GoogleDrive (15GB Free) - https://drive.google.com
+rem Cloud Backup / IceDrive (10GB Free) - https://icedrive.net/plans
+rem Cloud Backup / IDrive (10GB Free) - https://www.idrive.com/pricing
+rem Cloud Backup / Mega (20GB Free) - https://mega.io/storage
+rem Cloud Backup / OneDrive (15GB Free with referrals) - https://onedrive.live.com/?v=managestorage
 rem Compact/Compress Files / Compact GUI - https://github.com/ImminentFate/CompactGUI
 rem Computer Management / NirLauncher - https://launcher.nirsoft.net
 rem CPU Info / CPU-Z - https://www.cpuid.com/softwares/cpu-z.html
@@ -228,32 +231,28 @@ rem Password Manager (Offline) / KeePass Professional Edition - https://keepass.
 rem Password Manager (Online) / Bitwarden - https://bitwarden.com
 rem PDF Editor / FreePDF - https://www.getfreepdf.com
 rem PDF Viewer / Sumatra PDF - https://www.sumatrapdfreader.org/free-pdf-reader.html
-rem Performance / LatencyMon - https://www.resplendence.com/latencymon
-rem Performance / HoneCtrl - https://github.com/auraside/HoneCtrl/releases
 rem Performance / Process Lasso - https://bitsum.com
-rem Performance / WhySoSlow - https://www.resplendence.com/whysoslow
 rem Performance / Windows System Timer Tool - https://vvvv.org/contribution/windows-system-timer-tool
 rem Permissions / Reset permissions/Take Ownership - http://lallouslab.net/2013/08/26/resetting-ntfs-files-permission-in-windows-graphical-utility/
 rem Process Monitor / Process Monitor - https://docs.microsoft.com/en-us/sysinternals/downloads/procmon
 rem Radio / Audials Play - https://apps.microsoft.com/store/detail/audials-play-radio-music-tv-podcasts/9PGFN1FJM5TL?hl=en-us&gl=us
 rem RAM Fix / Intelligent standby list cleaner (+Timer Resolution) - https://www.wagnardsoft.com/content/intelligent-standby-list-cleaner-v1000-released
-rem RAM Free (Memory Leak) / Mem Reduct - https://www.henrypp.org/product/memreduct
+rem RAM Free (Memory Leak) / Memory Cleaner - https://github.com/TheUserWW/MemoryCleaner
 rem RAM Free (Memory Leak) / Wise Memory Optimizer - https://www.wisecleaner.com/wise-memory-optimizer.html
 rem RAM Disk / AIM Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/aim-toolkit
-rem RAM Test / Memtest (run one process per each 2GB) - https://hcidesign.com/memtest
 rem Remote Support / TeamViewer - https://www.teamviewer.com/en/download/windows
 rem Remove Locked File/Folder / ThisIsMyFile - https://www.softwareok.com/?seite=Freeware/ThisIsMyFile
 rem Search / UltraSearch - https://www.jam-software.com/ultrasearch_free
 rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem Streaming / XSplit - https://www.xsplit.com
 rem System Imaging / Hasleo Backup Suite - https://www.easyuefi.com/backup-software/backup-suite-free.html
-rem System Restore / Reboot Restore Rx - https://horizondatasys.com/reboot-restore-rx-freeware
 rem Task Manager / System Informer - https://www.systeminformer.com/canary
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
-rem Taskbar Translucent / TranslucentTB - https://www.microsoft.com/en-us/p/translucenttb/9pf4kz2vn4w9?activetab=pivot:overviewtab
+rem Taskbar Translucent / TranslucentTB - https://apps.microsoft.com/detail/9pf4kz2vn4w9?hl=en-US&gl=US
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
 rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
+rem VPN / WARP - https://one.one.one.one
 rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/lively-wallpaper/9NTM2QC6QWS7?hl=en-us&gl=us
 rem Wallpaper / Rainmeter - https://www.rainmeter.net
 rem Wallpaper / Wallpaper Engine - https://store.steampowered.com/app/431960
@@ -1551,7 +1550,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "2" /t REG_
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "3" /t REG_SZ /d "[*.]netflix.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "4" /t REG_SZ /d "[*.]deviantart.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "5" /t REG_SZ /d "[*.]discord.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]search.brave.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "6" /t REG_SZ /d "[*.]duckduckgo.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "7" /t REG_SZ /d "[*.]elevenforum.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "8" /t REG_SZ /d "[*.]tesco.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "9" /t REG_SZ /d "[*.]fio.sk" /f
@@ -1622,8 +1621,8 @@ rem 1 - Allow users to bypass Enhanced Security Mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EnhanceSecurityModeAllowUserBypass" /t REG_DWORD /d "0" /f
 
 rem Force the default Search engine and Prevent adding custom search engines
-rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"DuckDuckGo\",\"keyword\":\"duckduckgo.com\",\"search_url\":\"https://duckduckgo.com/?q={searchTerms}\",\"suggest_url\":\"https://www.duckduckgo.com/qbox?query={searchTerms}\",\"image_search_url\":\"https://www.duckduckgo.com/images/detail/search?iss=sbiupload\"}]" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"Brave\",\"keyword\":\"search.brave.com\",\"search_url\":\"https://search.brave.com/search?q={searchTerms}\",\"suggest_url\":\"https://api.search.brave.com/res/v1/suggest/{searchTerms}\",\"image_search_url\":\"https://api.search.brave.com/res/v1/images/search\"}]" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"DuckDuckGo\",\"keyword\":\"duckduckgo.com\",\"search_url\":\"https://duckduckgo.com/?q={searchTerms}\",\"suggest_url\":\"https://www.duckduckgo.com/qbox?query={searchTerms}\",\"image_search_url\":\"https://www.duckduckgo.com/images/detail/search?iss=sbiupload\"}]" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ManagedSearchEngines" /t REG_SZ /d "[{\"allow_search_engine_discovery\":false},{\"is_default\":true,\"name\":\"Brave\",\"keyword\":\"search.brave.com\",\"search_url\":\"https://search.brave.com/search?q={searchTerms}\",\"suggest_url\":\"https://api.search.brave.com/res/v1/suggest/{searchTerms}\",\"image_search_url\":\"https://api.search.brave.com/res/v1/images/search\"}]" /f
 
 rem Allow personalization of ads, Microsoft Edge, search, news and other Microsoft services by sending browsing history, favorites and collections, usage and other browsing data to Microsoft
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PersonalizationReportingEnabled" /t REG_DWORD /d "0" /f
@@ -2691,11 +2690,13 @@ reg add "HKCU\Software\Microsoft\PolicyManager\default\NewsAndInterests\AllowNew
 reg add "HKLM\Software\Policies\Microsoft\Dsh" /v "AllowNewsAndInterests" /t REG_DWORD /d "0" /f
 
 rem 1 - Disable Copilot
+reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "RemoveMicrosoftCopilotApp" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f
 reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot" /v "CopilotDisabledReason" /t REG_SZ /d "FeatureIsDisabled" /f
 reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot" /v "IsCopilotAvailable" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\Shell\Copilot\BingChat" /v "IsUserEligible" /t REG_DWORD /d "0" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsAI" /v "DisableAIDataAnalysis" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "RemoveMicrosoftCopilotApp" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows\WindowsCopilot" /v "TurnOffWindowsCopilot" /t REG_DWORD /d "1" /f
 
 rem 1 - Show flashing on taskbar apps
@@ -3536,7 +3537,10 @@ rem rem https://demo.wd.microsoft.com/?ocid=cx-wddocs-testground
 rem https://www.amtso.org/feature-settings-check-potentially-unwanted-applications
 rem https://www.wicar.org/test-malware.html
 
-rem Malware URL Check
+rem Warning! Real Malware!
+rem https://db.aa419.org
+rem https://phishtank.org
+rem https://urlhaus.abuse.ch
 rem https://urlscan.io
 rem https://www.malware-traffic-analysis.net
 rem https://www.virustotal.com/gui/home/url
@@ -3757,6 +3761,6 @@ timeout 5
 shutdown /s /f /t 0
 
 rem My security: NextDNS Free with Cache Boost OFF acting as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB) and Windows
-rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/Ld4S1Dp / https://ibb.co/S4TFqPg8 / https://ibb.co/DPPp29mc
+rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/fdkZMyn6 / https://ibb.co/tMpjsY28
 
 rem Windows 11 Home (28020.1362) - it settles down after 7min - 62 processes (+SystemInformer/+XnView) / 618 threads / 26962 handles / 2.1GB RAM - https://ibb.co/qhp42BZ
