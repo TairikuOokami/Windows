@@ -27,23 +27,30 @@ start ms-settings:optionalfeatures
 pause
 
 rem rd "Z:\Brave" /s /q
-rem taskkill /im brave.exe /f
-rem takeown /s %computername% /u %username% /f "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /r /d y
-rem xcopy "D:\OneDrive\Soft\Brave" "Z:\Brave" /s /i /y
+taskkill /im brave.exe /f
+takeown /s %computername% /u %username% /f "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /r /d y
+xcopy "D:\OneDrive\Soft\Brave" "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /s /i /y
+rem rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /s /q
+rem mklink /d "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" "Z:\Brave"
+
+rem rd "Z:\Brave" /s /q
+taskkill /im brave.exe /f
+takeown /s %computername% /u %username% /f "%LocalAppData%\Chromium\User Data" /r /d y
+xcopy "D:\OneDrive\Soft\Chromium" "%LocalAppData%\Chromium\User Data" /s /i /y
 rem rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /s /q
 rem mklink /d "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" "Z:\Brave"
 
 rem rd "Z:\Edge" /s /q
-rem taskkill /im msedge.exe /f
-rem takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
-rem xcopy "D:\OneDrive\Soft\Edge" "Z:\Edge" /s /i /y
+taskkill /im msedge.exe /f
+takeown /s %computername% /u %username% /f "%LocalAppData%\Microsoft\Edge" /r /d y
+xcopy "D:\OneDrive\Soft\Edge" "%LocalAppData%\Microsoft\Edge" /s /i /y
 rem rd "%LocalAppData%\Microsoft\Edge" /s /q
 rem mklink /d "%LocalAppData%\Microsoft\Edge" "Z:\Edge"
 
 rem rd "Z:\librewolf" /s /q
-rem taskkill /im librewolf.exe /f
-rem takeown /s %computername% /u %username% /f "%AppData%\Librewolf" /r /d y
-rem xcopy "D:\OneDrive\Soft\Librewolf" "Z:\Librewolf" /s /i /y
+taskkill /im librewolf.exe /f
+takeown /s %computername% /u %username% /f "%AppData%\Librewolf" /r /d y
+xcopy "D:\OneDrive\Soft\Librewolf" "%AppData%\Librewolf" /s /i /y
 rem rd "%AppData%\Librewolf" /s /q
 rem mklink /d "%AppData%\Librewolf" "Z:\Librewolf"
 
