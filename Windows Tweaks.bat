@@ -569,15 +569,18 @@ rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\F
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedInterfaces" /f
 rem reg delete "HKLM\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\RestrictedServices" /f
 
-rem Windows Firewall Block Rules (TCP43-IPInfo/UDP123-TimeSync/TCPUDP443-QUIC/TCP587-SMTP/TCP993-IMAP)
+rem Windows Firewall Block Rules (TCP43-IPInfo/UDP123-TimeSync/TCPUDP443-QUIC/TCP587-SMTP/TCP993-IMAP/TCP1231-1234-NordVPN)
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
-netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-586,588-852,854-992,994-1024,1025-3073,3075-5227,5229-27014,27051-65535
-netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-122,124-442,444-1024
+netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-586,588-852,854-992,994-1024,1025-1230,1235-3073,3075-5227,5229-27014,27051-65535
+netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-52,54-122,124-442,444-1024
 
 netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-94.140.14.13,94.140.14.15-94.140.15.14,94.140.15.16-255.255.255.255
+netsh advfirewall firewall add rule name="DNS UDP Block" dir=out action=block protocol=UDP remoteport=53 remoteip=0.0.0.0-103.86.96.99,103.86.96.101-103.86.99.99,103.86.99.101-255.255.255.255
 
 netsh advfirewall firewall add rule name="Brave TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Chromium TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Chromium\Application\chrome.exe"
+netsh advfirewall firewall add rule name="Chromium UDP Block" dir=out action=block protocol=UDP program="%LocalAppData%\Chromium\Application\chrome.exe"
 netsh advfirewall firewall add rule name="Edge TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="Edge UDP Block" dir=out action=block protocol=UDP program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Temp\IcedrivePortable\Icedrive.exe"
@@ -588,31 +591,6 @@ netsh advfirewall firewall add rule name="OneDrive TCP Block" dir=out action=blo
 netsh advfirewall firewall add rule name="Search Block" dir=out action=block program="%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe"
 netsh advfirewall firewall add rule name="SmartScreen Block" dir=out action=block program="%WinDir%\System32\smartscreen.exe"
 netsh advfirewall firewall add rule name="Start Block" dir=out action=block program="%WINDIR%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe"
-
-rem Windows Firewall Allow Rules
-rem netsh advfirewall firewall add rule name="COD MW3 TCP" dir=out action=allow protocol=TCP remoteport=3074,27014-27050 program="D:\steam\steamapps\common\call of duty modern warfare 3\iw5sp.exe"
-rem netsh advfirewall firewall add rule name="COD MW3 UDP" dir=out action=allow protocol=UDP remoteport=3074,27000-27060 program="D:\steam\steamapps\common\call of duty modern warfare 3\iw5sp.exe"
-rem netsh advfirewall firewall add rule name="Consent TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\consent.exe"
-rem netsh advfirewall firewall add rule name="Creative.sbcommand TCP" dir=out action=allow protocol=TCP remoteport=80 program="%ProgramFiles(x86)%\creative\sound blaster command\creative.sbcommand.exe"
-rem netsh advfirewall firewall add rule name="Edge TCP Router" dir=out action=allow protocol=TCP remoteip=192.168.9.1 remoteport=80 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-rem netsh advfirewall firewall add rule name="Genshin Impact TCP" dir=out action=allow protocol=TCP remoteport=80 program="D:\hoyoplay\games\genshin impact game\genshinimpact.exe"
-rem netsh advfirewall firewall add rule name="Genshin Impact UDP" dir=out action=allow protocol=UDP remoteport=22101-22102 program="D:\hoyoplay\games\genshin impact game\genshinimpact.exe"
-rem netsh advfirewall firewall add rule name="Hasleo TCP" dir=out action=allow protocol=TCP remoteport=80 program="%ProgramFiles%\hasleo\hasleo backup suite\bin\backupmainui.exe"
-rem netsh advfirewall firewall add rule name="IPNetInfo TCP" dir=out action=allow protocol=TCP remoteport=43 program="D:\onedrive\soft\windows repair toolbox\downloads\nirlauncher\nirsoft\ipnetinfo.exe"
-rem netsh advfirewall firewall add rule name="Lsass TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\lsass.exe"
-rem netsh advfirewall firewall add rule name="RadeonSoftware TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\program files\amd\cnext\cnext\radeonsoftware.exe"
-rem netsh advfirewall firewall add rule name="RuntimeBroker TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\runtimebroker.exe"
-rem netsh advfirewall firewall add rule name="Steam TCP" dir=out action=allow protocol=TCP remoteport=27019 program="D:\steam\steam.exe"
-rem netsh advfirewall firewall add rule name="Steam UDP" dir=out action=allow protocol=UDP remoteport=1025-65535 program="D:\steam\steam.exe"
-rem netsh advfirewall firewall add rule name="Svchost TCP" dir=out action=allow protocol=TCP remoteport=80 program="C:\windows\system32\svchost.exe"
-rem netsh advfirewall firewall add rule name="Svchost TCP DoT" dir=out action=allow protocol=TCP remoteip=9.9.9.9,45.90.28.99,45.90.30.99,149.112.112.112 remoteport=853 program="C:\windows\system32\svchost.exe"
-rem netsh advfirewall firewall add rule name="Svchost UDP CDP Sync" dir=out action=allow protocol=UDP remoteport=5050 remoteip=239.255.255.250 program="C:\windows\system32\svchost.exe"
-rem netsh advfirewall firewall add rule name="UpdateTime UDP" dir=out action=allow protocol=UDP remoteport=123 program="D:\OneDrive\Soft\Windows Repair Toolbox\downloads\custom tools\added custom tools\updatetime_x64.exe"
-rem netsh advfirewall firewall add rule name="WRT TCP" dir=out action=allow protocol=TCP remoteport=80 program="D:\OneDrive\Soft\Windows Repair Toolbox\Windows_Repair_Toolbox.exe"
-rem netsh advfirewall firewall add rule name="Xsplit.core TCP" dir=out action=allow protocol=TCP remoteport=80,1935 program="%ProgramFiles%\xsplit\broadcaster\xsplit.core.exe"
-rem netsh advfirewall firewall add rule name="Xsplit.core UDP" dir=out action=allow protocol=UDP remoteport=123,5353 program="%ProgramFiles%\xsplit\broadcaster\xsplit.core.exe"
-rem netsh advfirewall firewall add rule name="Xsplit.xbcbp TCP" dir=out action=allow protocol=TCP remoteport=80 program="%ProgramFiles%\xsplit\broadcaster\cef3_5060\xsplit.xbcbp.exe"
-rem netsh advfirewall firewall add rule name="Xsplit.xbcbp UDP" dir=out action=allow protocol=UDP remoteport=123 program="%ProgramFiles%\xsplit\broadcaster\cef3_5060\xsplit.xbcbp.exe"
 
 
 rem ================================ Windows Error Reporting ===============================
@@ -1568,13 +1546,13 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "20" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "21" /t REG_SZ /d "[*.]nextdns.io" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG_SZ /d "[*.]mbank.sk" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "[*.]modland.net" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "24" /t REG_SZ /d "[*.]" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "24" /t REG_SZ /d "[*.]nordaccount.com /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "25" /t REG_SZ /d "[*.]primevtc.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "26" /t REG_SZ /d "[*.]roextended.ro" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "27" /t REG_SZ /d "[*.]softpedia.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "28" /t REG_SZ /d "[*.]steamcommunity.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "29" /t REG_SZ /d "[*.]steampowered.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "30" /t REG_SZ /d "[*.]hianimez.to" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "30" /t REG_SZ /d "[*.]nordvpn.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "31" /t REG_SZ /d "[*.]truckersmp.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "32" /t REG_SZ /d "[*.]twitch.tv" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "33" /t REG_SZ /d "[*.]vk.com" /f
@@ -3595,6 +3573,7 @@ start "" "D:\OneDrive\Downloads\Microsoft Defender Disable.bat"
 timeout 5
 
 taskkill /im brave.exe /f
+taskkill /im chrome.exe /f
 taskkill /im dllhost.exe /f
 taskkill /im firefox.exe /f
 taskkill /im librewolf.exe /f
@@ -3760,7 +3739,7 @@ timeout 5
 
 shutdown /s /f /t 0
 
-rem My security: NextDNS Free with Cache Boost OFF acting as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB) and Windows
-rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/fdkZMyn6 / https://ibb.co/tMpjsY28
+rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
+rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
 rem Windows 11 Home (28020.1362) - it settles down after 7min - 62 processes (+SystemInformer/+XnView) / 618 threads / 26962 handles / 2.1GB RAM - https://ibb.co/qhp42BZ
