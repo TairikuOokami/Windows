@@ -76,6 +76,9 @@ nbtstat -R
 nbtstat -RR
 netsh advfirewall reset
 
+netsh dns set global doh=no
+netsh dns set global dot=no
+
 netcfg -d
 netsh winsock reset
 netsh int 6to4 reset all
