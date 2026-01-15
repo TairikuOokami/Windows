@@ -33,12 +33,12 @@ xcopy "D:\OneDrive\Soft\Brave" "%LocalAppData%\BraveSoftware\Brave-Browser\User 
 rem rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /s /q
 rem mklink /d "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" "Z:\Brave"
 
-rem rd "Z:\Brave" /s /q
-taskkill /im brave.exe /f
+rem rd "Z:\Chromium" /s /q
+taskkill /im chrome.exe /f
 takeown /s %computername% /u %username% /f "%LocalAppData%\Chromium\User Data" /r /d y
 xcopy "D:\OneDrive\Soft\Chromium" "%LocalAppData%\Chromium\User Data" /s /i /y
-rem rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /s /q
-rem mklink /d "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" "Z:\Brave"
+rem rd "%LocalAppData%\Chromium\User Data" /s /q
+rem mklink /d "%LocalAppData%\Chromium\User Data" "Z:\Chromium"
 
 rem rd "Z:\Edge" /s /q
 taskkill /im msedge.exe /f
@@ -83,7 +83,6 @@ rem edge://flags/#edge-compose
 rem edge://flags/#edge-copilot-mode
 rem edge://flags/#edge-copilot-mode-profile-toggle
 rem edge://flags/#edge-copilot-vision
-rem edge://flags/#edge-history-ai-search-ui
 rem edge://flags/#edge-llm-on-device-model-performance-param
 rem edge://flags/#edge-ntp-composer-allow-copilot-search
 rem edge://flags/#edge-ntp-composer-feed-integration
@@ -95,13 +94,12 @@ rem edge://flags/#edge-rounded-containers
 rem edge://flags/#edge-visual-rejuv-mica
 rem edge://flags/#enable-force-dark
 rem edge://flags/#enable-quic
-rem edge://flags/#enable-touch-drag-drop
 rem edge://flags/#enable-windows-gaming-input-data-fetcher
 rem edge://flags/#media-router-cast-allow-all-ips
+rem edge://flags/#prefetch-new-tab-page-trigger
+rem edge://flags/#ui-disable-partial-swap
 
 rem Enabled
-rem edge://flags/#bind-cookies-to-port
-rem edge://flags/#bind-cookies-to-scheme
 rem edge://flags/#disallow-doc-written-script-loads
 rem edge://flags/#enable-standard-device-bound-session-credentials
 rem edge://flags/#enable-tls13-early-data
