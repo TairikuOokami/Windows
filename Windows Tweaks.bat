@@ -960,7 +960,10 @@ rem 1 - Disable Low Disk Space Alerts
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoLowDiskSpaceChecks" /t REG_DWORD /d "1" /f
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "NoLowDiskSpaceChecks" /t REG_DWORD /d "1" /f
 
-rem 1 - Don't run specified exe
+rem Block specified exe system wide (like run by CMD) via IFEO
+rem reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\mshta.exe" /v "Debugger" /t REG_SZ /d "C:\Windows\System32\calc.exe" /f
+
+rem Block specified exe run via explorer.exe
 rem https://lolbas-project.github.io
 rem https://blog.talosintelligence.com/2019/11/hunting-for-lolbins.html
 rem https://learn.microsoft.com/en-us/windows/security/application-security/application-control/app-control-for-business/design/applications-that-can-bypass-appcontrol
@@ -1560,6 +1563,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "34" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "35" /t REG_SZ /d "[*.]goodreads.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "36" /t REG_SZ /d "[*.]ce-tescoassets.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "37" /t REG_SZ /d "[*.]allegro.sk" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "38" /t REG_SZ /d "[*.]wolt.com" /f
 
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
@@ -3508,7 +3512,6 @@ rem https://check.labs.greynoise.io
 rem https://urlhaus.abuse.ch/browse
 rem https://www.hybrid-analysis.com/submissions/sandbox/files
 rem https://www.phishtank.com
-
 
 rem Malware Tests - AV Check
 rem rem https://demo.wd.microsoft.com/?ocid=cx-wddocs-testground
