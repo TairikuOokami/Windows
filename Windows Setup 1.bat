@@ -8,13 +8,13 @@ reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputab
 start windowsdefender:
 rem Update Windows, Defender, Restart
 rem Disable Tamper and Real Protection in Defender
-rem Run "MD Disable.bat" TWICE - RESTART!
+rem Run "MD Disable.bat" TRICE - RESTART!
+rem Run "MD Disable.bat" again TRICE - RESTART!
 
 pause
 
-rem Change D/E after removing pagefile
-rem Remove the user from D:\
-rem Take Ownership of D/E
+rem Remove the user snd take Ownership of D/E
+
 explorer
 
 pause
@@ -63,22 +63,16 @@ pause
 takeown /s %computername% /u %username% /f D: /r /d y
 icacls D: /inheritance:r
 icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D: /grant "System":(OI)(CI)RX /t /l /q /c
+icacls D: /grant "System":(OI)(CI)F /t /l /q /c
 icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f E: /r /d y
 icacls E: /inheritance:r
 icacls E: /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls E: /grant "System":(OI)(CI)F /t /l /q /c
+icacls E: /grant "System":(OI)(CI)RX /t /l /q /c
 icacls E: /grant "Users":(OI)(CI)RX /t /l /q /c
 
 pause
-
-takeown /s %computername% /u %username% /f D:\HoYoPlay /r /d y
-icacls D:\HoYoPlay /inheritance:r
-icacls D:\HoYoPlay /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\HoYoPlay /grant "System":(OI)(CI)RX /t /l /q /c
-icacls D:\HoYoPlay /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f D:\OneDrive /r /d y
 icacls D:\OneDrive /inheritance:r
@@ -86,11 +80,17 @@ icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\OneDrive /grant "System":(OI)(CI)RX /t /l /q /c
 icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
 
-takeown /s %computername% /u %username% /f D:\Steam /r /d y
-icacls D:\Steam /inheritance:r
-icacls D:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
-icacls D:\Steam /grant "Users":(OI)(CI)RX /t /l /q /c
+takeown /s %computername% /u %username% /f E:\HoYoPlay /r /d y
+icacls E:\HoYoPlay /inheritance:r
+icacls E:\HoYoPlay /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls E:\HoYoPlay /grant "System":(OI)(CI)RX /t /l /q /c
+icacls E:\HoYoPlay /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f E:\Steam /r /d y
+icacls E:\Steam /inheritance:r
+icacls E:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls E:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls E:\Steam /grant "Users":(OI)(CI)RX /t /l /q /c
 
 pause
 
@@ -198,7 +198,6 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingNews" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingSearch" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.BingWeather" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Copilot" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.GamingApp" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.GetHelp" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.HEVCVideoExtension" | Remove-AppxPackage -AllUsers"
@@ -217,7 +216,6 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsNotepad" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsSoundRecorder" | Remove-AppxPackage -AllUsers"
-start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsTerminal" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.YourPhone" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.ZuneMusic" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Xbox.TCUI" | Remove-AppxPackage -AllUsers"
@@ -361,12 +359,6 @@ winget install XSplit.Broadcaster --accept-package-agreements --accept-source-ag
 
 pause
 
-rem 2fast – Two Factor Authenticator\
-winget install 9P9D81GLH89Q --accept-package-agreements --accept-source-agreements
-
-rem Audials Radio
-winget install XPDM0S9P0J5LT4 --accept-package-agreements --accept-source-agreements
-
 rem Wise Disk Cleaner
 winget install XP9CW3GPQQS852 --accept-package-agreements --accept-source-agreements
 
@@ -382,8 +374,7 @@ start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
 
 pause
 
-rem Install paid Bitwarden, eM Client, HEVC, Netflix, Ruf
-us
+rem Install Audials, Bitwarden, eM Client, HEVC, Netflix, Rufus
 
 start ms-windows-store:
 
