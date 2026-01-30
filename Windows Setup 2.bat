@@ -110,8 +110,8 @@ rem edge://flags/#strict-origin-isolation
 pause
 
 reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "C:\Program Files\TruckersMP Launcher" /f
-reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "D:\Steam\steamapps\common\Euro Truck Simulator 2" /f
-start "" /wait "D:\Steam\steam.exe"
+reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "E:\Steam\steamapps\common\Euro Truck Simulator 2" /f
+start "" /wait "E:\Steam\steam.exe"
 start "" /wait "D:\OneDrive\Setup\TruckersMP-Setup.exe"
 
 rem Steam Interface - Disable Everything
