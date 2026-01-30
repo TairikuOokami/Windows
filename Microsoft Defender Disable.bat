@@ -119,8 +119,8 @@ rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN NOT BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 28020.1362
-rem Microsoft Defender Platform Version 4.18.26010.2 (10-Jan-2026
-rem Before - https://ibb.co/CpBqXbfS / After - https://ibb.co/MD1DgF5s
+rem Last Tested on Windows 11 Home 26300.7674
+rem Microsoft Defender Platform Version 4.18.25110.6 (30-Jan-2026)
+rem Before - https://ibb.co/CpBqXbfS / After - https://ibb.co/tpZP8hZ3
 
 pause
