@@ -254,6 +254,7 @@ rem Taskbar Translucent / TranslucentTB - https://apps.microsoft.com/detail/9pf4
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
 rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
+rem VPN / VPNLY - https://vpnly.com
 rem VPN / WARP - https://one.one.one.one
 rem Wallpaper / Lively Wallpaper - https://apps.microsoft.com/store/detail/lively-wallpaper/9NTM2QC6QWS7?hl=en-us&gl=us
 rem Wallpaper / Rainmeter - https://www.rainmeter.net
@@ -1338,6 +1339,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowPDFDefaultRecommendation
 rem 1 - Enable tab preview on hover
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShowTabPreviewEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Enable Silent Printing
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SilentPrintingEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - The policy can be used to prevent users from opting out of the default behavior of isolating all sites
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "SitePerProcess" /t REG_DWORD /d "1" /f
 
@@ -1440,6 +1444,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultFileSystemWriteGuardS
 
 rem Location / 1 - AllowGeolocation / 2 - BlockGeolocation / 3 - AskGeolocation
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultGeolocationSetting" /t REG_DWORD /d "2" /f
+
+rem Default idle detection setting / 1 - AllowIdleDetection / 2 - BlockIdleDetection / 3 - AskIdleDetection
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultIdleDetectionSetting" /t REG_DWORD /d "2" /f
 
 rem Insecure Content / 2 - BlockInsecureContent / 3 - AllowExceptionsInsecureContent
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultInsecureContentSetting" /t REG_DWORD /d "2" /f
@@ -1715,6 +1722,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordGeneratorEnabled" /t
 
 rem 1 - Offer to save passwords
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordManagerEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable saving passkeys to the password manager
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordManagerPasskeysEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Show alerts when passwords are found in an online leak
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PasswordMonitorAllowed" /t REG_DWORD /d "0" /f
