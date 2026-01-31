@@ -28,7 +28,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2025/12/16/windows-11-28020-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/01/28/windows-11-26h2-26300-iso-esd-deutsch-english/
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
 rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
@@ -433,7 +433,7 @@ bcdedit /set useplatformtick yes
 bcdedit /set vsmlaunchtype off
 
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "OneDrive" /t REG_SZ /d "C:\Program Files\Microsoft OneDrive\OneDrive.exe /background" /f
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "D:\Steam\steam.exe -silent"
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "Steam" /t REG_SZ /d "E:\Steam\steam.exe -silent"
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "System Informer" /t REG_SZ /d "C:\Program Files\SystemInformer\SystemInformer.exe -hide" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Shell" /t REG_SZ /d "explorer.exe" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Winlogon" /v "Userinit" /t REG_SZ /d "C:\Windows\System32\userinit.exe," /f
@@ -1944,7 +1944,6 @@ schtasks /Change /TN "Microsoft\Windows\Time Synchronization\SynchronizeTime" /D
 schtasks /Change /TN "Microsoft\Windows\Time Zone\SynchronizeTimeZone" /Disable
 schtasks /Change /TN "Microsoft\Windows\TPM\Tpm-HASCertRetr" /Disable
 schtasks /Change /TN "Microsoft\Windows\TPM\Tpm-Maintenance" /Disable
-schtasks /Change /TN "Microsoft\Windows\UPnP\UPnPHostConfig" /Disable
 schtasks /Change /TN "Microsoft\Windows\UPnP\UPnPHostConfig" /Disable
 schtasks /Change /TN "Microsoft\Windows\User Profile Service\HiveUploadTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\WCM\WiFiTask" /Disable
@@ -3792,4 +3791,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
-rem Windows 11 Home (28020.1362) - it settles down after 7min - 62 processes (+SystemInformer/+XnView) / 618 threads / 26962 handles / 2.1GB RAM - https://ibb.co/qhp42BZ
+rem Windows 11 Home (26300.7674) - it settles down after a few mins - 62 processes (+SystemInformer/+XnView) / 682 threads / 26529 handles / 2.1GB RAM - https://ibb.co/fYVCRvkR
