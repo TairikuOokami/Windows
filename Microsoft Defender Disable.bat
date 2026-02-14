@@ -4,8 +4,8 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 rem NOTE: It is highly recommended to install MS Defender Platform Updates sometimes (monthly) because they affect Windows protection as well, like LSA and System Guard!
 rem MS Defender Platform/Signatures Updates - https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
 rem Windows Security Platform Updates automatically - https://support.microsoft.com/en-us/topic/windows-security-update-a6ac7d2e-b1bf-44c0-a028-41720a242da3
-rem Search a version number to update Defender manually, like: https://www.catalog.update.microsoft.com/Search.aspx?q=4.18.23110.3
 rem Enable Defender - update - restart - disable Defender - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Enable.bat
+rem https://forums.mydigitallife.net/threads/microsoft-defender-anti-malware-platform-update-kit-for-windows-11-updated-february-10th-2026.83758
 
 rem Disable Tamper and Real Time Protection in Defender - RESTART!
 rem start windowsdefender:
@@ -20,18 +20,8 @@ rem Run - msconfig - General - Normal Startup
 rem https://www.elevenforum.com/t/turn-on-or-off-tamper-protection-for-microsoft-defender-antivirus-in-windows-11.3973
 rem reg add "HKLM\Software\Microsoft\Windows Defender\Features" /v "TamperProtection" /t REG_DWORD /d "0" /f
 
-rem Disable System Guard Runtime Monitor Broker (when disabled, it might cause BSOD Critical Process Died)
-rem reg add "HKLM\System\CurrentControlSet\Services\SgrmBroker" /v "Start" /t REG_DWORD /d "4" /f
-
 rem Disable Windows Defender Security Center
 rem reg add "HKLM\System\CurrentControlSet\Services\SecurityHealthService" /v "Start" /t REG_DWORD /d "4" /f
-
-rem 1 - Antivirus Disabled Notification
-reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
-reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications " /t REG_DWORD /d "1" /f
-
-rem 0 - Security and Maitenance Notification
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Disable Real-time protection
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
@@ -72,10 +62,6 @@ schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Cleanu
 schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Scheduled Scan" /Disable
 schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Verification" /Disable
 
-rem Disable systray icon
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
-reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
-
 rem Remove context menu
 reg delete "HKCR\*\shellex\ContextMenuHandlers\EPP" /f
 reg delete "HKCR\Directory\shellex\ContextMenuHandlers\EPP" /f
@@ -91,6 +77,17 @@ reg add "HKLM\System\CurrentControlSet\Services\WdNisSvc" /v "Start" /t REG_DWOR
 reg add "HKLM\System\CurrentControlSet\Services\WinDefend" /v "Start" /t REG_DWORD /d "4" /f
 
 rem ======================================= OPTIONAL =======================================
+
+rem Disable Windows Security Health systray icon used by MS Defender, it can be opened via Start - Run - windowsdefender:
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Explorer\StartupApproved\Run" /v "SecurityHealth" /f
+reg delete "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v "SecurityHealth" /f
+
+rem 1 - Disable Antivirus Disabled Notification (If 3rd party AV is not installed or it is disabled)
+reg add "HKLM\Software\Microsoft\Windows Defender Security Center\Notifications" /v "DisableNotifications" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Windows Defender Security Center\Notifications" /v "DisableEnhancedNotifications " /t REG_DWORD /d "1" /f
+
+rem 0 - Disable Security and Maitenance Notification
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings\Windows.SystemToast.SecurityAndMaintenance" /v "Enabled" /t REG_DWORD /d "0" /f
 
 rem Web Threat Defense Service (Phishing protection)
 rem sc config webthreatdefsvc start= disabled
@@ -120,7 +117,7 @@ rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
 rem Last Tested on Windows 11 Home 26300.7674
-rem Microsoft Defender Platform Version 4.18.25110.6 (30-Jan-2026)
-rem Before - https://ibb.co/CpBqXbfS / After - https://ibb.co/tpZP8hZ3
+rem Microsoft Defender Platform Version 4.18.26020.4 (14-Feb-2026)
+rem Before - https://ibb.co/MkRRsnB3 / After - https://ibb.co/4g5z3M19
 
 pause
