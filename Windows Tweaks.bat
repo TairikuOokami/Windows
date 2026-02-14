@@ -1,6 +1,9 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
+timeout 10
+
+
 rem Create a system backup to reverse any changes or suffer the consequences
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 
@@ -181,9 +184,8 @@ rem RKill (BleepingComputer) - https://www.bleepingcomputer.com/download/rkill/
 rem Security cleanup software (online/updatable on-demand scanners)
 rem ESET Online Scanner (SK) - https://www.eset.com/us/home/online-scanner
 rem F-Secure Online Scanner (US) - https://www.f-secure.com/en/home/free-tools/online-scanner
-rem Norton Power Eraser (US) - https://support.norton.com/sp/static/external/tools/npe.html
 rem Panda Cloud Cleaner (ES) - https://www.pandasecurity.com/en/homeusers/cloud-cleaner
-rem Sophos Scan & Clean alas HitmanPro (UK) - https://www.sophos.com/en-us/free-tools/virus-removal-tool
+rem Sophos HitmanPro (UK) - https://www.hitmanpro.com/en-us/downloads
 rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/products/housecall.html
 
 rem Software
@@ -341,6 +343,7 @@ del "%AppData%\Microsoft\Windows\Start Menu\Programs\Startup\*" /s /f /q
 
 rem Remove random reg keys (Startup/Privacy/Policies/Malware related)
 rem reg delete "HKCU\Software\Classes\ms-settings\shell\open" /f
+reg delete "HKCR\lnkfile" /v "NeverShowExt" /f
 reg delete "HKCU\Software\Microsoft\Command Processor" /v "AutoRun" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\RunMRU" /f
@@ -1364,6 +1367,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "VideoCaptureAllowed" /t REG_
 rem 1 - Wallet Donation Enabled
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WalletDonationEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Enable User Web App Install From Browser
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WebAppInstallByUserEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - DNS-based WPAD optimization (Web Proxy Auto-Discovery)
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "WPADQuickCheckEnabled" /t REG_DWORD /d "0" /f
 
@@ -1701,9 +1707,8 @@ rem 1 - Forces data synchronization in Microsoft Edge. This policy also prevents
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ForceSync" /t REG_DWORD /d "1" /f
 
 rem If you enable this policy all the specified data types will be included for synchronization
-reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "1" /t REG_SZ /d "extensions" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "2" /t REG_SZ /d "favorites" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "3" /t REG_SZ /d "settings" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "1" /t REG_SZ /d "favorites" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\ForceSyncTypes" /v "2" /t REG_SZ /d "settings" /f
 
 rem If you enable this policy all the specified data types will be excluded from synchronization
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "1" /t REG_SZ /d "addressesAndMore" /f
@@ -1711,9 +1716,10 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "2" /t 
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "3" /t REG_SZ /d "collections" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "4" /t REG_SZ /d "edgeWallet" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "5" /t REG_SZ /d "edgeFeatureUsage" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "6" /t REG_SZ /d "history" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "7" /t REG_SZ /d "openTabs" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "8" /t REG_SZ /d "passwords" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "6" /t REG_SZ /d "extensions" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "7" /t REG_SZ /d "history" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "8" /t REG_SZ /d "openTabs" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SyncTypesListDisabled" /v "9" /t REG_SZ /d "passwords" /f
 
 rem 1 - Disable Share Microsoft Edge Browsing Data with other Windows Features
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "LocalBrowserDataShareEnabled" /t REG_DWORD /d "0" /f
