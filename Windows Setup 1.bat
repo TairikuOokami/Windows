@@ -2,6 +2,14 @@ rem Unlink OneDrive!
 
 pause
 
+rem Set Default Profile in Terminal to CMD !!!!!
+rem Default Terminal Application / {00000000-0000-0000-0000-000000000000} - Let Windows decide / {B23D10C0-E52E-411E-9D5B-C09FDF709C7D} - Windows Console Host
+rem "DelegationConsole"="{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}"/"DelegationTerminal"="{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}" - Windows Terminal
+reg add "HKCU\Console\%%Startup" /v "DelegationConsole" /t REG_SZ /d "{B23D10C0-E52E-411E-9D5B-C09FDF709C7D}" /f
+reg add "HKCU\Console\%%Startup" /v "DelegationTerminal" /t REG_SZ /d "{B23D10C0-E52E-411E-9D5B-C09FDF709C7D}" /f
+
+pause
+
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9
 reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
@@ -46,7 +54,7 @@ reg add "HKLM\System\CurrentControlSet\Services\Tcpip\Parameters" /v "NV Hostnam
 
 rem DISM /Online /Get-Capabilities
 rem https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/features-on-demand-non-language-fod?view=windows-11
-DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
+rem DISM /Online /Add-Capability /CapabilityName:WMIC~~~~
 Dism /Online /NoRestart /Remove-Capability /CapabilityName:OpenSSH.Client~~~~0.0.1.0
 
 start "" "D:\OneDrive\Setup"
@@ -59,48 +67,6 @@ rem Disable Indexing C:
 explorer
 
 pause
-
-takeown /s %computername% /u %username% /f D: /r /d y
-icacls D: /inheritance:r
-icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D: /grant "System":(OI)(CI)F /t /l /q /c
-icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
-
-takeown /s %computername% /u %username% /f E: /r /d y
-icacls E: /inheritance:r
-icacls E: /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls E: /grant "System":(OI)(CI)RX /t /l /q /c
-icacls E: /grant "Users":(OI)(CI)RX /t /l /q /c
-
-pause
-
-takeown /s %computername% /u %username% /f D:\OneDrive /r /d y
-icacls D:\OneDrive /inheritance:r
-icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls D:\OneDrive /grant "System":(OI)(CI)RX /t /l /q /c
-icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
-
-takeown /s %computername% /u %username% /f E:\HoYoPlay /r /d y
-icacls E:\HoYoPlay /inheritance:r
-icacls E:\HoYoPlay /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls E:\HoYoPlay /grant "System":(OI)(CI)RX /t /l /q /c
-icacls E:\HoYoPlay /grant "Users":(OI)(CI)RX /t /l /q /c
-
-takeown /s %computername% /u %username% /f E:\Steam /r /d y
-icacls E:\Steam /inheritance:r
-icacls E:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls E:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
-icacls E:\Steam /grant "Users":(OI)(CI)RX /t /l /q /c
-
-pause
-
-rem Access CMD with SYSTEM rights at logon (Win+U)
-takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
-icacls "%WINDIR%\System32\utilman.exe" /grant:r %username%:F
-copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\utilman.exe
-takeown /s %computername% /u %username% /f "%WINDIR%\System32\sethc.exe"
-icacls "%WINDIR%\System32\sethc.exe" /grant:r %username%:F
-copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\sethc.exe
 
 rem Disable Auto-install subscribed/suggested apps (games like Candy Crush Soda Saga/Minecraft)
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "ContentDeliveryAllowed" /t REG_DWORD /d "0" /f
@@ -147,13 +113,18 @@ rem compact /u /i /q /f /s:D:\OneDrive\Pictures\
 
 rem Disable pagefile
 rem fsutil behavior set EncryptPagingFile 1
-wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
-wmic pagefileset where name="%SystemDrive%\\pagefile.sys" set InitialSize=0,MaximumSize=0
-wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
+rem wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
+rem wmic pagefileset where name="%SystemDrive%\\pagefile.sys" set InitialSize=0,MaximumSize=0
+rem wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
 
+control
+
+pause
+
+rem https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-interface
 rem Setup Network (NetBIOS might be required for aDSL/LAN)
 rem Disable IPv6/LMHOSTS lookup/NetBIOS and Set DNS Servers
-wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("94.140.14.14","94.140.15.15")
+rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("94.140.14.14","94.140.15.15")
 netsh int ipv6 isatap set state disabled
 netsh int teredo set state disabled
 netsh interface ipv6 6to4 set state state=disabled undoonstop=disabled
@@ -162,12 +133,13 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "ISATAP
 reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "Teredo_State" /t REG_SZ /d "Disabled" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "EnableICSIPv6" /t REG_DWORD /d "255" /f
-wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
-wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
+rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
+rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
+rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
-wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
-wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
+rem wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
+rem wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
+reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableNetbios" /t REG_DWORD /d "0" /f
 
 rem Enable DoT
 netsh dns set global doh=no
