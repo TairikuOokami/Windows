@@ -134,7 +134,7 @@ rem AMD PSP 11.0 Device
 pnputil /disable-device "PCI\VEN_1022&DEV_15C7&SUBSYS_15C71022&REV_00\4&98C338A&0&0241"
 
 rem AMD Radeon 760M Graphics
-pnputil /disable-device "PCI\VEN_1002&DEV_15BF&SUBSYS_35BF1849&REV_05\4&98C338A&0&0041"
+rem pnputil /disable-device "PCI\VEN_1002&DEV_15BF&SUBSYS_35BF1849&REV_05\4&98C338A&0&0041"
 
 rem AMD SMBUS
 pnputil /disable-device "PCI\VEN_1022&DEV_790B&SUBSYS_790B1849&REV_71\3&11583659&0&A0"
@@ -180,6 +180,40 @@ devmgmt.msc
 pause
 
 start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TCPOptimizer.exe"
+
+pause
+
+takeown /s %computername% /u %username% /f D: /r /d y
+icacls D: /inheritance:r
+icacls D: /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D: /grant "System":(OI)(CI)F /t /l /q /c
+icacls D: /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f E: /r /d y
+icacls E: /inheritance:r
+icacls E: /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls E: /grant "System":(OI)(CI)RX /t /l /q /c
+icacls E: /grant "Users":(OI)(CI)RX /t /l /q /c
+
+pause
+
+takeown /s %computername% /u %username% /f D:\OneDrive /r /d y
+icacls D:\OneDrive /inheritance:r
+icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls D:\OneDrive /grant "System":(OI)(CI)RX /t /l /q /c
+icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f E:\HoYoPlay /r /d y
+icacls E:\HoYoPlay /inheritance:r
+icacls E:\HoYoPlay /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls E:\HoYoPlay /grant "System":(OI)(CI)RX /t /l /q /c
+icacls E:\HoYoPlay /grant "Users":(OI)(CI)RX /t /l /q /c
+
+takeown /s %computername% /u %username% /f E:\Steam /r /d y
+icacls E:\Steam /inheritance:r
+icacls E:\Steam /grant:r %username%:(OI)(CI)F /t /l /q /c
+icacls E:\Steam /grant:r "System":(OI)(CI)F /t /l /q /c
+icacls E:\Steam /grant "Users":(OI)(CI)RX /t /l /q /c
 
 rem Restart Now !
 
