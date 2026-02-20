@@ -1,8 +1,6 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-
-timeout 10
-
+pause
 
 rem Create a system backup to reverse any changes or suffer the consequences
 rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
@@ -31,7 +29,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/01/28/windows-11-26h2-26300-iso-esd-deutsch-english/
+rem https://www.deskmodder.de/blog/2026/02/19/windows-11-29531-iso-esd-deutsch-english
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
 rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
@@ -781,6 +779,11 @@ rem https://prod.support.services.microsoft.com/en-us/windows/options-to-optimiz
 rem https://learn.microsoft.com/en-us/shows/seth-juarez/memory-compression-in-windows-10-rtm
 rem https://learn.microsoft.com/en-us/powershell/module/mmagent/disable-mmagent?view=windowsserver2025-ps
 rem Get-MMAgent
+
+rem Default Terminal Application / {00000000-0000-0000-0000-000000000000} - Let Windows decide / {B23D10C0-E52E-411E-9D5B-C09FDF709C7D} - Windows Console Host
+rem "DelegationConsole"="{2EACA947-7F5F-4CFA-BA87-8F7FBEEFBE69}"/"DelegationTerminal"="{E12CFF52-A866-4C77-9A90-F570A7AA2C6B}" - Windows Terminal
+reg add "HKCU\Console\%%Startup" /v "DelegationConsole" /t REG_SZ /d "{B23D10C0-E52E-411E-9D5B-C09FDF709C7D}" /f
+reg add "HKCU\Console\%%Startup" /v "DelegationTerminal" /t REG_SZ /d "{B23D10C0-E52E-411E-9D5B-C09FDF709C7D}" /f
 
 rem Determines whether user processes end automatically when the user either logs off or shuts down / 1 - Processes end automatically
 reg add "HKCU\Control Panel\Desktop" /v "AutoEndTasks" /t REG_SZ /d "1" /f
@@ -2499,29 +2502,13 @@ rem =================================== Windows Settings =======================
 rem ---------------------------------- Network & internet ----------------------------------
 rem ............................... Advanced network settings ..............................
 
+rem https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/netsh-interface
+
 rem Show public/external IP
 rem nslookup myip.opendns.com. resolver1.opendns.com
 
-rem Windows wmic command line command
-rem http://www.computerhope.com/wmic.htm
-rem To get adapter's index number use
-rem wmic nicconfig get caption,index,TcpipNetbiosOptions
-
-rem Setup DNS Servers on DHCP Enabled Network
-rem wmic nicconfig where DHCPEnabled=TRUE call SetDNSServerSearchOrder ("76.76.2.2")
-
-rem Setup IP, Gateway and DNS Servers based on the MAC address (To Enable DHCP: wmic nicconfig where macaddress="28:E3:47:18:70:3D" call enabledhcp)
-rem http://www.subnet-calculator.com/subnet.php?net_class=A
-wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
-wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
-
 rem 0 - Disable LMHOSTS Lookup on all adapters / 1 - Enable
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
-
-rem 2 - Disable NetBIOS over TCP/IP on all adapters / 1 - Enable / 0 - Default
-wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
-wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
 
 rem NetBIOS / 0 - Disabled / 1 - Allowed / 2 - Disabled on public networks / 3 - Learning mode
 reg add "HKLM\System\CurrentControlSet\Services\Dnscache\Parameters" /v "EnableNetbios" /t REG_DWORD /d "0" /f
@@ -2758,9 +2745,6 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTas
 
 
 rem ________________________________________________________________________________________
-rem 1 - Always show all icons and notifications on the taskbar
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer" /v "EnableAutoTray" /t REG_DWORD /d "0" /f
-
 rem Disable Cortana
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "BingSearchEnabled" /t REG_DWORD /d "0" /f
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Windows Search" /v "CortanaConsent" /t REG_DWORD /d "0" /f
@@ -3185,9 +3169,6 @@ reg add "HKLM\System\CurrentControlSet\Control\PriorityControl" /v "Win32Priorit
 
 rem Performance - Settings - Advanced - Virtual memory
 rem Disable pagefile
-wmic computersystem where name="%computername%" set AutomaticManagedPagefile=False
-wmic pagefileset where name="%SystemDrive%\\pagefile.sys" set InitialSize=0,MaximumSize=0
-wmic pagefileset where name="%SystemDrive%\\pagefile.sys" delete
 
 rem Performance - Visual effects / Keep: Show thumbnails instead of icons/Show windows contents/Smooth edges
 rem reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\VisualEffects" /v "VisualFXSetting" /t REG_DWORD /d "3" /f
@@ -3567,7 +3548,6 @@ rem SAVE - Unload Hive (when you finish editing)
 rem List processes/services
 rem tasklist>c:\list.txt
 rem tasklist/svc>c:\processlist.txt
-rem wmic startup get caption,command > c:\StartupApps.txt
 
 rem Malware Live - Real AV Testing
 rem rem https://app.any.run/submissions
@@ -3808,4 +3788,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
-rem Windows 11 Home (26300.7674) - it settles down after a few mins - 62 processes (+SystemInformer/+XnView) / 682 threads / 26529 handles / 2.1GB RAM - https://ibb.co/fYVCRvkR
+rem Windows 11 Home (29531.1000) - it settles down after a few mins - 64 processes / 673 threads / 26941 handles / 2.6GB RAM - https://ibb.co/HTQPrXqC
