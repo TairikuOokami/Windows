@@ -1076,7 +1076,7 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\Disall
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\DisallowRun" /v "10" /t REG_SZ /d "wmic.exe" /f
 
 rem 1 - Enable secure mode for processing batch files that ensures they do not change during execution
-reg add "HKLM\Software\Microsoft\Command Processor" /v "LockBatchFilesWhenInUse " /t REG_SZ /d "1" /f
+reg add "HKLM\Software\Microsoft\Command Processor" /v "LockBatchFilesWhenInUse " /t REG_DWORD /d "1" /f
 
 rem N - Disable Distributed Component Object Model (DCOM) support in Windows / Y - Enable
 reg add "HKLM\Software\Microsoft\Ole" /v "EnableDCOM" /t REG_SZ /d "N" /f
