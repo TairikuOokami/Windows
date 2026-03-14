@@ -29,8 +29,8 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem New SCS that destroyed ETS2 game after decades of playing, they just want MONEY https://ibb.co/gZFfQzsw 
-rem https://www.deskmodder.de/blog/2026/02/19/windows-11-29531-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/03/14/windows-11-29550-im-canary-kanal-erschienen-gleich-mit-isos
+rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
 rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
