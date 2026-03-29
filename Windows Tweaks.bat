@@ -29,7 +29,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/03/14/windows-11-29550-im-canary-kanal-erschienen-gleich-mit-isos
+rem https://www.deskmodder.de/blog/2026/03/21/windows-11-29553-iso-esd-deutsch-english
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
@@ -456,6 +456,9 @@ rem Gihosoft TubeGet
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DefaultOutputFolder" /t REG_SZ /d "Z:/Temp" /f
 reg add "HKCU\Software\Gihosoft\TubeGet" /v "DownloadTempFolder" /t REG_SZ /d "Z:/TEMP/Gihosoft/temp" /f
 
+rem LibreWolf's spam
+rd "%AppData%\Librewolf\Profiles\n632hgaj.default-default\extensions" /s /q
+
 rem Notepad
 reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosDX" /t REG_DWORD /d "1934" /f
 reg add "HKCU\Software\Microsoft\Notepad" /v "iWindowPosDY" /t REG_DWORD /d "651" /f
@@ -575,7 +578,7 @@ netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protoc
 netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-52,54-122,124-442,444-1024
 
 netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-94.140.14.13,94.140.14.15-94.140.15.14,94.140.15.16-255.255.255.255
-netsh advfirewall firewall add rule name="DNS UDP Block" dir=out action=block protocol=UDP remoteport=53 remoteip=0.0.0.0-103.86.96.99,103.86.96.101-103.86.99.99,103.86.99.101-255.255.255.255
+netsh advfirewall firewall add rule name="DNS UDP Block" dir=out action=block protocol=UDP remoteport=53
 
 netsh advfirewall firewall add rule name="Brave TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
@@ -999,6 +1002,7 @@ reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\extexport.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\findstr.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\finger.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\fodhelper.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\fsi.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\fsiAnyCpu.exeaddinprocess.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ftp.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
@@ -1038,6 +1042,7 @@ reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\runscripthelper.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\query.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\scriptrunner.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sdclt.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\sftp.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\ssh.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
 reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\SyncAppvPublishingServer.exe" /v "Debugger" /t REG_SZ /d "Blocked" /f
@@ -1697,9 +1702,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t R
 
 rem 1 - Save and fill payment info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "0" /f
-
-rem Browser sign-in settings / 0 - Disable / 1 - Enable / 2 - Force users to sign-in to use the browser (all profiles)
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserSignin" /t REG_DWORD /d "1" /f
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
