@@ -29,7 +29,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/03/21/windows-11-29553-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/03/31/windows-11-29558-iso-esd-deutsch-english/
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
@@ -929,6 +929,7 @@ rem https://www.elevenforum.com/t/announcing-native-nvme-in-windows-server-2025.
 reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "156965516" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "735209102" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "1853569164" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "3244671118" /t REG_DWORD /d 1 /f
 
 
 rem =================================== Windows Policies ===================================
@@ -3788,4 +3789,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
-rem Windows 11 Home (29531.1000) - it settles down after a few mins - 64 processes / 673 threads / 26941 handles / 2.6GB RAM - https://ibb.co/HTQPrXqC
+rem Windows 11 Home (29558.1000) - it settles down after a few mins - 69 processes / 656 threads / 30326 handles / 2.3GB RAM - https://ibb.co/C3NtGV6g
