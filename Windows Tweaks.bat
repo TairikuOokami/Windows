@@ -29,7 +29,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/03/31/windows-11-29558-iso-esd-deutsch-english/
+rem https://www.deskmodder.de/blog/2026/04/04/windows-11-29560-iso-esd-deutsch-english
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
@@ -1703,6 +1703,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillAddressEnabled" /t R
 
 rem 1 - Save and fill payment info
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AutofillCreditCardEnabled" /t REG_DWORD /d "0" /f
+
+rem Browser sign-in settings / 0 - Disable / 1 - Enable / 2 - Force users to sign-in to use the browser (all profiles)
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BrowserSignin" /t REG_DWORD /d "1" /f
 
 rem 1 - Let users compare the prices of a product they are looking at, get coupons or rebates from the website they're on
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeShoppingAssistantEnabled" /t REG_DWORD /d "0" /f
