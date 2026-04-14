@@ -1,10 +1,10 @@
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
-rem https://www.defenderui.com
-rem https://www.microsoft.com/en-us/wdsi/defenderupdates
-rem https://learn.microsoft.com/en-us/powershell/module/defender/set-mppreference?view=windowsserver2022-ps
-rem https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
-rem https://support.microsoft.com/en-us/topic/windows-security-update-a6ac7d2e-b1bf-44c0-a028-41720a242da3
+rem https://www.cyberlock.global/DefenderUI.aspx
+rem Windows Defender Set-MpPreference - https://learn.microsoft.com/en-us/powershell/module/defender/set-mppreference
+rem Windows Defender Signature Update - https://www.microsoft.com/en-us/wdsi/defenderupdates
+rem Windows Defender Platform Update - https://definitionupdates.microsoft.com/packages?package=platform&arch=x64
+rem Windows Security App Update - https://support.microsoft.com/en-us/topic/windows-security-update-a6ac7d2e-b1bf-44c0-a028-41720a242da3
 
 reg delete "HKLM\Software\Policies\Microsoft\Windows Defender" /f
 reg add "HKLM\Software\Policies\Microsoft\Windows Defender" /v "AllowFastServiceStartup" /t REG_DWORD /d "1" /f
