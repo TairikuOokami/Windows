@@ -29,7 +29,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/04/04/windows-11-29560-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/04/11/windows-11-29565-iso-esd-deutsch-english
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
@@ -98,15 +98,11 @@ rem https://www.lifewire.com/best-free-antivirus-software-4151895
 rem AVs/SSL Filtering - https://adguard.com/en/blog/everything-about-https-filtering.html - https://badssl.com
 rem AV is as vulnerable as any other software, but since it uses SYSTEM rights, it is more dangerous - https://www.darkreading.com/threat-intelligence/windows-doubleagent-attack-turns-av-tools-into-malware
 rem Disable webfiltering, AV replacing legitimate certificates - https://www.eff.org/deeplinks/2015/02/dear-software-vendors-please-stop-trying-intercept-your-customers-encrypted
-rem MD NeverEnding Story https://www.bleepingcomputer.com/news/security/12-year-old-windows-defender-bug-gives-hackers-admin-rights/
-rem https://www.bleepingcomputer.com/news/security/smartservice-and-s5mark-acts-like-an-adware-bodyguard-by-blocking-antivirus-software/
-rem https://blog.emsisoft.com/2015/01/17/has-the-antivirus-industry-gone-mad
-rem https://www.makeuseof.com/tag/antivirus-tracking-youd-surprised-sends/
 
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
 rem DNS Check / https://dnscheck.tools / https://www.dnsperf.com
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://www.yogadns.com / https://github.com/DNSCrypt/dnscrypt-proxy
-rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://defo.ie/ech-check.php / https://browserleaks.com/tls
+rem DNS ECH - Good-bye ESNI, hello ECH! - https://www.cloudflare.com/ssl/encrypted-sni / https://browserleaks.com/tls
 rem DNS Fix / DNS-Lock - https://www.sordum.org/9432/dns-lock-v1-5/
 rem DNS List - https://adguard-dns.io/kb/general/dns-providers
 rem DNS Rebind Test - https://controld.com/tools/dns-rebind-test
@@ -136,7 +132,7 @@ rem =============================== Software recommendations ===================
 
 rem AntiVirus software (Avoid junk like Avast/AVG, Avira, Bitdefender, Tencent)
 rem 360 Total Security (CN) - https://www.360totalsecurity.com - https://ibb.co/Rp7CRvTh
-rem Microsoft Defender (US) - https://www.defenderui.com - https://ibb.co/23Xs6Cjb
+rem Microsoft Defender (US) - https://www.cyberlock.global/DefenderUI.aspx - https://ibb.co/23Xs6Cjb
 rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - https://ibb.co/RpnWpXHJ
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
@@ -146,15 +142,12 @@ rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
 
 rem Browser Extensions useful against (99% malware comes via an email or a browser)
-rem CDN (Chrome/Firefox/Opera) - https://decentraleyes.org
-rem Cookie Warnings (Chrome/Edge/Firefox) - https://www.cookie-dialog-monster.com
 rem Cookie Warnings (Chrome/Edge/Firefox) - https://www.i-dont-care-about-cookies.eu
 rem Filter Lists - https://filterlists.com
 rem Malware (Chrome/Edge) - https://github.com/Foulest/Osprey
 rem Malware (Chrome/Firefox) - https://www.bitdefender.com/solutions/trafficlight.html
 rem Malware (Chrome/Edge/Firefox) - https://microsoftedge.microsoft.com/addons/detail/emsisoft-browser-security/jlpdpddffjddlfdbllimedpemaodbjgn
 rem Phishing (Chrome/Edge/Firefox/Opera) - https://www.netcraft.com/apps/browser
-rem Phishing (Chrome/Edge/Firefox/Opera) - SafeToOpen - https://safetoopen.com
 
 rem Cleanup software
 rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
@@ -178,7 +171,6 @@ rem Dr.Web CureIt (RU) - https://free.drweb.com/download+cureit+free
 rem Emsisoft Emergency Kit (NZ) - https://www.emsisoft.com/en/home/emergency-kit
 rem Kaspersky Virus Removal Tool (RU) - https://www.kaspersky.com/downloads/free-virus-removal-tool
 rem Microsoft Safety Scanner (US) - https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download
-rem RKill (BleepingComputer) - https://www.bleepingcomputer.com/download/rkill/
 
 rem Security cleanup software (online/updatable on-demand scanners)
 rem ESET Online Scanner (SK) - https://www.eset.com/us/home/online-scanner
@@ -190,13 +182,12 @@ rem Trend Micro HouseCall (US) - https://www.trendmicro.com/en_us/forHome/produc
 rem Software
 rem 2FA / 2fast - two factor authenticator supporting TOTP - https://apps.microsoft.com/store/detail/2fast-%E2%80%93-two-factor-authenticator-supporting-totp/9P9D81GLH89Q
 rem Application Updates / App Installer (winget) - https://www.microsoft.com/en-us/p/app-installer/9nblggh4nns1#activetab=pivot:overviewtab
-rem Application Updates / App Installer GUI (winget) - https://www.marticliment.com/wingetui - https://winget.run
+rem Application Updates / App Installer GUI (winget) - https://devolutions.net/unigetui - https://winget.run
 rem Bandwidth Meter / NetTraffic - https://www.venea.net/web/nettraffic
 rem Bandwidth Monitor / TrafficMonitor - https://github.com/zhongyang219/TrafficMonitor/blob/master/README_en-us.md
 rem Bootable USB / Rufus - https://apps.microsoft.com/store/detail/rufus/9PC3H3V7Q9CH?hl=en-us&gl=US
 rem Bootloader / EasyUEFI - https://www.softpedia.com/get/System/Boot-Manager-Disk/EasyUEFI.shtml
 rem Browser / Brave - https://brave.com - Great for Google/Youtube
-rem Browser / LibreWolf - https://librewolf.net - Great for privacy, like Facebook
 rem Browser / TOR - https://www.torproject.org - Set Settings to Safest to disable all javascripts for max privacy/security!
 rem Cloud Backup / GoogleDrive (15GB Free) - https://drive.google.com
 rem Cloud Backup / IceDrive (10GB Free) - https://icedrive.net/plans
