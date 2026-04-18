@@ -2,10 +2,11 @@ rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 
 rem NOTE: It is highly recommended to install MS Defender Platform Updates sometimes (monthly) because they affect Windows protection as well, like LSA and System Guard!
-rem MS Defender Platform/Signatures Updates - https://learn.microsoft.com/en-us/defender-endpoint/microsoft-defender-antivirus-updates?view=o365-worldwide
-rem Windows Security Platform Updates automatically - https://support.microsoft.com/en-us/topic/windows-security-update-a6ac7d2e-b1bf-44c0-a028-41720a242da3
-rem Enable Defender - update - restart - disable Defender - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Enable.bat
-rem https://forums.mydigitallife.net/threads/microsoft-defender-anti-malware-platform-update-kit-for-windows-11-updated-february-10th-2026.83758
+rem Windows Defender Platform Update - https://definitionupdates.microsoft.com/packages?package=platform&arch=x64
+rem Windows Defender Set-MpPreference - https://learn.microsoft.com/en-us/powershell/module/defender/set-mppreference
+rem Windows Defender Signature Update - https://www.microsoft.com/en-us/wdsi/defenderupdates
+rem Windows Security App Update - https://catalog.update.microsoft.com/Search.aspx?q=kb5007651
+rem Enable Defender - update - restart - Disable Defender - https://github.com/TairikuOokami/Windows/blob/main/Microsoft%20Defender%20Enable.bat
 
 rem Disable Tamper and Real Time Protection in Defender - RESTART!
 rem start windowsdefender:
@@ -116,8 +117,8 @@ rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN NOT BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 29558.1000
-rem Microsoft Defender Platform Version 4.18.26030.3008 (31-Mar-2026)
-rem Before - https://ibb.co/Lh9qnNQj / After - https://ibb.co/5gzr3DfX
+rem Last Tested on Windows 11 Home 29570.1000
+rem Microsoft Defender Platform Version 4.18.26030.3011 (18-Apr-2026)
+rem Before - https://ibb.co/kV9vsbpf / After - https://ibb.co/fz1fBVBd
 
 pause
