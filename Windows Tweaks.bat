@@ -30,6 +30,7 @@ rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
 rem https://www.deskmodder.de/blog/2026/05/02/windows-11-29580-iso-esd-deutsch-english/
+rem https://distrosea.com
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
@@ -921,6 +922,7 @@ reg add "HKLM\System\CurrentControlSet\Control\SafeBoot\Minimal\nvmedisk" /ve /t
 reg add "HKLM\System\CurrentControlSet\Control\SafeBoot\Network\nvmedisk" /ve /t REG_SZ /d "Service" /f
 reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "156965516" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "735209102" /t REG_DWORD /d "1" /f
+reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "1409234060" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "1853569164" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Policies\Microsoft\FeatureManagement\Overrides" /v "3244671118" /t REG_DWORD /d 1 /f
 
@@ -950,8 +952,8 @@ rem net user tairi /active:yes
 
 rem ________________________________________________________________________________________
 rem https://www.bleepingcomputer.com/news/security/microsoft-code-sign-check-bypassed-to-drop-zloader-malware
-reg add "HKLM\Software\Microsoft\Cryptography\Wintrust\Config" /v "EnableCertPaddingCheck" /t REG_SZ /d "1" /f
-reg add "HKLM\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config" /v "EnableCertPaddingCheck" /t REG_SZ /d "1" /f
+reg add "HKLM\Software\Microsoft\Cryptography\Wintrust\Config" /v "EnableCertPaddingCheck" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Wow6432Node\Microsoft\Cryptography\Wintrust\Config" /v "EnableCertPaddingCheck" /t REG_DWORD /d "1" /f
 
 rem 1808 - Disable the warning The Publisher could not be verified
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Policies\Associations" /v "DefaultFileTypeRisk" /t REG_DWORD /d "1808" /f
@@ -1292,9 +1294,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationR
 rem 1 - Enable IPv6 reachability check override
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "IPv6ReachabilityOverrideEnabled" /t REG_DWORD /d "0" /f
 
-rem Control whether Microsoft 365 Copilot Chat shows in the Microsoft Edge for Business toolbar
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Microsoft365CopilotChatIconEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
 
@@ -1477,6 +1476,21 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultWebHidGuardSetting" /
 
 rem =================================== Windows Policies ===================================
 rem ------------------------------------ Microsoft Edge ------------------------------------
+rem .................................... Copilot and AI ....................................
+
+rem 1 - Enable Browse with Copilot
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowBrowsingWithCopilot" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable the Copilot new tab page
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CopilotNewTabPageEnabled" /t REG_DWORD /d "1" /f
+
+rem ________________________________________________________________________________________
+rem Control whether Microsoft 365 Copilot Chat shows in the Microsoft Edge for Business toolbar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Microsoft365CopilotChatIconEnabled" /t REG_DWORD /d "0" /f
+
+
+rem =================================== Windows Policies ===================================
+rem ------------------------------------ Microsoft Edge ------------------------------------
 rem ...................................... Downloads .......................................
 
 rem Set download directory
@@ -1604,7 +1618,7 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "19" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "20" /t REG_SZ /d "[*.]myanimelist.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "21" /t REG_SZ /d "[*.]nextdns.io" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG_SZ /d "[*.]mbank.sk" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "[*.]tipli.sk" /f
+rem reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "[*.]" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "24" /t REG_SZ /d "[*.]" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "25" /t REG_SZ /d "[*.]" /f
 rem reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "26" /t REG_SZ /d "[*.]" /f
