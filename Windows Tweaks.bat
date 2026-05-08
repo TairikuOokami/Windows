@@ -1482,11 +1482,14 @@ rem 1 - Enable Browse with Copilot
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AllowBrowsingWithCopilot" /t REG_DWORD /d "0" /f
 
 rem 1 - Enable the Copilot new tab page
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CopilotNewTabPageEnabled" /t REG_DWORD /d "1" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CopilotNewTabPageEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 rem Control whether Microsoft 365 Copilot Chat shows in the Microsoft Edge for Business toolbar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Microsoft365CopilotChatIconEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Allow sharing tenant-approved browsing history with Microsoft 365 Copilot Search
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ShareBrowsingHistoryWithCopilotSearchAllowed" /t REG_DWORD /d "0" /f
 
 
 rem =================================== Windows Policies ===================================
