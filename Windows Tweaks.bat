@@ -1485,6 +1485,12 @@ rem 1 - Enable the Copilot new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CopilotNewTabPageEnabled" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
+rem 1 - Enables DALL-E themes generation
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AIGenThemesEnabled" /t REG_DWORD /d "1" /f
+
+rem 1 - Disabled / 0 - The model is downloaded automatically and used for inference
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "GenAILocalFoundationalModelSettings" /t REG_DWORD /d "1" /f
+
 rem Control whether Microsoft 365 Copilot Chat shows in the Microsoft Edge for Business toolbar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "Microsoft365CopilotChatIconEnabled" /t REG_DWORD /d "0" /f
 
@@ -1775,8 +1781,14 @@ rem ................................ System and performance ....................
 rem 1 - Continue running background apps when Microsoft Edge is closed
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BackgroundModeEnabled" /t REG_DWORD /d "0" /f
 
+rem Energy Saver / 0 - AlwaysActive / 1 - NeverActive / 2 - ActiveWhenUnplugged / 3 - ActiveWhenUnpluggedBatteryLow / 4 - BalancedSavings / 5 - MaximumSavings
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyMode" /t REG_DWORD /d "1" /f
+
 rem Efficiency Mode / 1 - Enables efficiency mode
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyModeEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable efficiency mode when the device is connected to a power source
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EfficiencyModeOnPowerEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Use hardware acceleration when available
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "HardwareAccelerationModeEnabled" /t REG_DWORD /d "0" /f
@@ -3663,6 +3675,8 @@ rem Trim Some Edges - edge://settings/privacy/cookies/AllCookies
 rd "%ProgramFiles(x86)%\Microsoft\EdgeUpdate\Download" /s /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\*history*." /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\AccountBookmarks" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Affiliation Database" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Affiliation Database-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\arbitration_service_config.json" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\BookmarkMergedSurfaceOrdering" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\BrowsingTopicsSiteData" /s /f /q
@@ -3683,10 +3697,13 @@ del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\HubApps Icons-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\InterestGroups" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOCK" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\LOG.old" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data-journal" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data For Account" /s /f /q
+del "%LocalAppData%\Microsoft\Edge\User Data\Default\Login Data For Account-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaDeviceSalts" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\MediaDeviceSalts-journal" /s /f /q
 del "%LocalAppData%\Microsoft\Edge\User Data\Default\Network Action Predictor" /s /f /q
