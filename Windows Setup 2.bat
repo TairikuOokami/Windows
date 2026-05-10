@@ -21,7 +21,7 @@ regedit
 
 pause
 
-rem Uninstall all but VBScript required by AMD Chipset Software
+rem Display all available features and unistall all
 start ms-settings:optionalfeatures
 
 pause
@@ -32,13 +32,6 @@ takeown /s %computername% /u %username% /f "%LocalAppData%\BraveSoftware\Brave-B
 xcopy "D:\OneDrive\Soft\Brave" "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /s /i /y
 rem rd "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" /s /q
 rem mklink /d "%LocalAppData%\BraveSoftware\Brave-Browser\User Data" "Z:\Brave"
-
-rem rd "Z:\Chromium" /s /q
-taskkill /im chrome.exe /f
-takeown /s %computername% /u %username% /f "%LocalAppData%\Chromium\User Data" /r /d y
-xcopy "D:\OneDrive\Soft\Chromium" "%LocalAppData%\Chromium\User Data" /s /i /y
-rem rd "%LocalAppData%\Chromium\User Data" /s /q
-rem mklink /d "%LocalAppData%\Chromium\User Data" "Z:\Chromium"
 
 rem rd "Z:\Edge" /s /q
 taskkill /im msedge.exe /f
@@ -82,22 +75,25 @@ rem edge://flags/#allow-all-sites-to-initiate-mirroring
 rem edge://flags/#edge-compose
 rem edge://flags/#edge-copilot-mode
 rem edge://flags/#edge-copilot-mode-profile-toggle
-rem edge://flags/#edge-copilot-vision
+rem edge://flags/#edge-copilot-tips
 rem edge://flags/#edge-llm-on-device-model-performance-param
-rem edge://flags/#edge-ntp-composer-allow-copilot-search
 rem edge://flags/#edge-ntp-composer-feed-integration
 rem edge://flags/#edge-omnibox-commercial-copilot-chat
+rem edge://flags/#edge-omnibox-consumer-copilot-chat
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-scheme
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem edge://flags/#edge-optin-experimentation
+rem edge://flags/#edge-page-screenshot
+rem edge://flags/#edge-prerender-new-tab-page-trigger
 rem edge://flags/#edge-rounded-containers
+rem edge://flags/#edge-vision-in-cmc
 rem edge://flags/#edge-visual-rejuv-mica
 rem edge://flags/#enable-force-dark
 rem edge://flags/#enable-quic
-rem edge://flags/#enable-windows-gaming-input-data-fetcher
 rem edge://flags/#media-router-cast-allow-all-ips
 rem edge://flags/#prefetch-new-tab-page-trigger
 rem edge://flags/#ui-disable-partial-swap
+rem edge://flags/#web-app-installation-api
 
 rem Enabled
 rem edge://flags/#disallow-doc-written-script-loads
