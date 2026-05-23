@@ -29,7 +29,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/05/09/windows-11-29585-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/05/23/windows-11-29595-iso-esd-deutsch-english
 rem https://distrosea.com
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
@@ -1616,8 +1616,6 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "8" /t REG_
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "9" /t REG_SZ /d "[*.]forums.mydigitallife.net" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "10" /t REG_SZ /d "[*.]github.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "11" /t REG_SZ /d "[*.]heureka.sk" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "12" /t REG_SZ /d "[*.]hoyolab.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "13" /t REG_SZ /d "[*.]hoyoverse.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "14" /t REG_SZ /d "[*.]imdb.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "15" /t REG_SZ /d "[*.]isthereanydeal.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "16" /t REG_SZ /d "[*.]itesco.sk" /f
