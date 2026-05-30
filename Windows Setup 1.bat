@@ -183,6 +183,7 @@ start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-Ap
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WidgetsPlatformRuntime" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.DevHome" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.Photos" | Remove-AppxPackage -AllUsers"
+start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.Windows.Ai.Copilot.Provider" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsAlarms" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsCamera" | Remove-AppxPackage -AllUsers"
 start "" /wait C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "Get-AppxPackage -AllUsers -PackageTypeFilter Bundle -Name "Microsoft.WindowsFeedbackHub" | Remove-AppxPackage -AllUsers"
@@ -319,10 +320,11 @@ winget install eloston.ungoogled-chromium --accept-package-agreements --accept-s
 winget install Kingston.SSDManager --accept-package-agreements --accept-source-agreements
 winget install LibreWolf.LibreWolf --accept-package-agreements --accept-source-agreements
 winget install Logitech.UnifyingSoftware --accept-package-agreements --accept-source-agreements
-winget install Rizonesoft.Notepad3 --accept-package-agreements --accept-source-agreements
 winget install M2Team.NanaZip --accept-package-agreements --accept-source-agreements
 winget install Microsoft.OneDrive --accept-package-agreements --accept-source-agreements
 winget install MPC-BE.MPC-BE --accept-package-agreements --accept-source-agreements
+winget install Proton.ProtonPass --accept-package-agreements --accept-source-agreements
+winget install Rizonesoft.Notepad3 --accept-package-agreements --accept-source-agreements
 winget install SumatraPDF.SumatraPDF --accept-package-agreements --accept-source-agreements
 winget install TheDocumentFoundation.LibreOffice --accept-package-agreements --accept-source-agreements
 winget install WinsiderSS.SystemInformer.Canary --accept-package-agreements --accept-source-agreements
@@ -346,7 +348,7 @@ start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
 
 pause
 
-rem Install Audials, Bitwarden, eM Client, HEVC, Netflix, Rufus
+rem Install Audials, eM Client, HEVC, Netflix, Rufus
 
 start ms-windows-store:
 
