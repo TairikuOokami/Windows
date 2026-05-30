@@ -29,10 +29,10 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/05/23/windows-11-29595-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/05/30/windows-11-29599-iso-esd-deutsch-english
+rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
-rem https://github.com/garlin-cant-code/SecureBoot-CA-2023-Updates/releases
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
 rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
 rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
@@ -3149,6 +3149,10 @@ rem System Protection - Disable System restore and Set the minimal size
 reg add "HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore" /v "DisableSR" /t REG_DWORD /d "1" /f
 schtasks /Change /TN "Microsoft\Windows\SystemRestore\SR" /Disable
 vssadmin Resize ShadowStorage /For=C: /On=C: /Maxsize=320MB
+
+rem 0 - Disable Point-in-time Restore
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Setup\Recovery\PITR\Settings" /v "Active_UX" /t REG_DWORD /d "0" /f
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Setup\Recovery\PITR\Settings" /v "MaxGlobalSize_UX" /t REG_DWORD /d "0" /f
 
 rem ________________________________________________________________________________________
 rem System Protection - Enable System restore and Set the size
