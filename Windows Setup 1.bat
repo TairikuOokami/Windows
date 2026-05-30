@@ -1,5 +1,6 @@
 rem Unlink OneDrive!
 
+
 pause
 
 rem Set Default Profile in Terminal to CMD !!!!!
@@ -316,7 +317,6 @@ winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --acce
 
 winget install Brave.Brave --accept-package-agreements --accept-source-agreements
 winget install CreativeTechnology.SoundBlasterCommand --accept-package-agreements --accept-source-agreements
-winget install eloston.ungoogled-chromium --accept-package-agreements --accept-source-agreements
 winget install Kingston.SSDManager --accept-package-agreements --accept-source-agreements
 winget install LibreWolf.LibreWolf --accept-package-agreements --accept-source-agreements
 winget install Logitech.UnifyingSoftware --accept-package-agreements --accept-source-agreements
@@ -341,7 +341,7 @@ winget install XPDLS1XBTXVPP4 --accept-package-agreements --accept-source-agreem
 
 pause
 
-‪start "" /wait "D:\OneDrive\Setup\GIHO_TubeGet_Pro.exe"
+start "" /wait "D:\OneDrive\Setup\GIHO_TubeGet_Pro.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
 start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
