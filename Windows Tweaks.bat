@@ -1488,6 +1488,9 @@ rem ____________________________________________________________________________
 rem 1 - Enables DALL-E themes generation
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AIGenThemesEnabled" /t REG_DWORD /d "1" /f
 
+rem 1 - Enable Copilot address bar suggestions
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CopilotAddressBarSuggestionsEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Disabled / 0 - The model is downloaded automatically and used for inference
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "GenAILocalFoundationalModelSettings" /t REG_DWORD /d "1" /f
 
@@ -3803,4 +3806,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
-rem Windows 11 Home (29558.1000) - it settles down after a few mins - 69 processes / 656 threads / 30326 handles / 2.3GB RAM - https://ibb.co/C3NtGV6g
+rem Windows 11 Home (29599.1000) - it settles down after a few mins - 68 processes / 719 threads / 28360 handles / 2.2GB RAM - https://ibb.co/GvFJqRgh
