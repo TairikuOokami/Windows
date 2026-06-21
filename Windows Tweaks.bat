@@ -29,7 +29,7 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/05/30/windows-11-29599-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/06/20/windows-11-29613-iso-esd-deutsch-english
 rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
@@ -1450,6 +1450,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultIdleDetectionSetting"
 
 rem Insecure Content / 2 - BlockInsecureContent / 3 - AllowExceptionsInsecureContent
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultInsecureContentSetting" /t REG_DWORD /d "2" /f
+
+rem Default Local Fonts permission setting / 2 - BlockLocalFonts / 3 - AskLocalFonts
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultLocalFontsSetting" /t REG_DWORD /d "2" /f
 
 rem Notifications / 1 - AllowNotifications / 2 - BlockNotifications / 3 - AskNotifications
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DefaultNotificationsSetting" /t REG_DWORD /d "2" /f
@@ -3645,7 +3648,7 @@ taskkill /im steam.exe /f
 taskkill /im tor.exe /f
 
 rem https://learn.microsoft.com/en-us/windows/package-manager/winget/upgrade
-winget upgrade --all -h --include-unknown --accept-package-agreements --accept-source-agreements
+winget upgrade --all -h -u --accept-package-agreements --accept-source-agreements
 timeout 5
 
 rem https://kalilinuxtutorials.com/webview2-cookie-stealer
