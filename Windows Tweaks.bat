@@ -32,6 +32,9 @@ rem bcdedit /set {bootmgr} flightsigning on
 rem https://www.deskmodder.de/blog/2026/06/20/windows-11-29613-iso-esd-deutsch-english
 rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
+
+rem PhotoDNA by MS (any cloud service or social media) - https://youtu.be/kBkHLYaEkCI
+rem Windows GDID / HKCU\Software\Microsoft\IdentityCRL - https://youtu.be/AkvetmzCh_M
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
 rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
@@ -291,6 +294,7 @@ rd "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom 
 rd "%AppData%\AMD" /s /q
 rd "%AppData%\ArtifexMundi\SparkPromo" /s /q
 rd "%LocalAppData%\Microsoft\Internet Explorer" /s /q
+rd "%LocalAppData%\Microsoft\OneDrive\logs" /s /q
 rd "%LocalAppData%\Microsoft\Windows\AppCache" /s /q
 rd "%LocalAppData%\Microsoft\Windows\History" /s /q
 rd "%LocalAppData%\Microsoft\Windows\IECompatCache" /s /q
@@ -308,6 +312,7 @@ rd "%ProgramData%\Microsoft\Search" /s /q
 rd "%ProgramData%\Microsoft\SmsRouter" /s /q
 rd "%ProgramData%\Microsoft\Windows Defender\Definition Updates" /s /q
 rd "%SystemDrive%\AMD" /s /q
+rd "%SystemDrive%\Device" /s /q
 rd "%SystemDrive%\inetpub" /s /q
 rd "%SystemDrive%\OneDriveTemp" /s /q
 rd "%SystemDrive%\PerfLogs" /s /q
@@ -1228,6 +1233,9 @@ rem reg delete "HKCU\Software\Policies\Microsoft\Edge" /f
 rem reg delete "HKLM\Software\Policies\Microsoft\Edge" /f
 
 rem ________________________________________________________________________________________
+rem 1 - Enable clipboard suggestions in the address bar
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarClipboardSuggestEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Allow the audio sandbox to run
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_DWORD /d "1" /f
 
@@ -1267,6 +1275,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeHistoryAISearchEnabled" 
 rem 1 - Microsoft Edge will attempt to connect to the Microsoft Edge management service to download and apply policy assigned to the Azure AD account of the user
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeManagementEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Enable service-based extraction for Reading Mode in Microsoft Edge
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeReadingModeServiceBasedExtractionEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - If you enable this policy, users will be able to access the Microsoft Edge Workspaces feature
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "EdgeWorkspacesEnabled" /t REG_DWORD /d "0" /f
 
@@ -1294,6 +1305,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "InternetExplorerIntegrationR
 rem 1 - Enable IPv6 reachability check override
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "IPv6ReachabilityOverrideEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Launch Microsoft Edge on Windows startup
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "LaunchEdgeOnWindowsStartupEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Shows content promoting the Microsoft Edge Insider channels on the About Microsoft Edge settings page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "MicrosoftEdgeInsiderPromotionEnabled" /t REG_DWORD /d "0" /f
 
@@ -1308,6 +1322,9 @@ rem reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NetworkServiceSandboxEna
 
 rem 1 - Hide the default top sites from the new tab page
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "NewTabPageHideDefaultTopSites" /t REG_DWORD /d "1" /f
+
+rem 1 - Enable Process Isolation
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ProcessIsolationEnabled" /t REG_DWORD /d "1" /f
 
 rem 1 - Enable QR Code Generator
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "QRCodeGeneratorEnabled" /t REG_DWORD /d "0" /f
@@ -3639,10 +3656,11 @@ taskkill /im chrome.exe /f
 taskkill /im dllhost.exe /f
 taskkill /im firefox.exe /f
 taskkill /im librewolf.exe /f
-taskkill /im mailbird.exe /f
+taskkill /im mailclient.exe /f
 taskkill /im msedge.exe /f
 taskkill /im msedgewebview2.exe /f
 taskkill /im onedrive.exe /f
+taskkill /im protonpass.exe /f
 taskkill /im rundll32.exe /f
 taskkill /im steam.exe /f
 taskkill /im tor.exe /f
