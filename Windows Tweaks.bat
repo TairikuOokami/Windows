@@ -8,7 +8,7 @@ rem https://www.easyuefi.com/backup-software/tutorial/add-remove-boot-menu.html
 rem "ValidateAdminCodeSignatures" will prevent exe without a digital signature to run as admin: "A referral was returned from the server"
 rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 rem Radio Management Service (RmSvc) is required to be able to see and to connect to WiFi networks
-rem Settings - Accounts - Sign-in Options (does not work for some reason, unless you upgrade) 
+rem Settings - Accounts - Sign-in Options - it takes some time to open (1+min)
 
 rem Critical processes removed - SearchHost.exe/Smartscreen.exe/StartMenuExperienceHost.exe
 rem Several processes blocked via IEFO (Image File Execution Options)
@@ -29,12 +29,13 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/06/20/windows-11-29613-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/08/18/windows-11-29648-iso-esd-deutsch-english/
 rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
 
 rem PhotoDNA by MS (any cloud service or social media) - https://youtu.be/kBkHLYaEkCI
 rem Windows GDID / HKCU\Software\Microsoft\IdentityCRL - https://youtu.be/AkvetmzCh_M
+rem STTW - AI Can See Without Cameras. https://youtu.be/olaQ3-m271M?si=z_HMlsM-rxXHlNXo
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
 rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
@@ -198,7 +199,7 @@ rem Cloud Backup / GoogleDrive (15GB Free) - https://drive.google.com
 rem Cloud Backup / IceDrive (10GB Free) - https://icedrive.net/plans
 rem Cloud Backup / IDrive (10GB Free) - https://www.idrive.com/pricing
 rem Cloud Backup / Mega (20GB Free) - https://mega.io/storage
-rem Cloud Backup / OneDrive (15GB Free with referrals) - https://onedrive.live.com/?v=managestorage
+rem Cloud Backup / OneDrive - https://onedrive.live.com/?v=managestorage
 rem Compact/Compress Files / Compact GUI - https://github.com/ImminentFate/CompactGUI
 rem Computer Management / NirLauncher - https://launcher.nirsoft.net
 rem CPU Info / CPU-Z - https://www.cpuid.com/softwares/cpu-z.html
@@ -277,6 +278,12 @@ ipconfig /flushdns
 rem Remove default user
 net user defaultuser1 /delete
 net user defaultuser100000 /delete
+
+rem Remove OneDrive Sync service causing unlimited writes, not needed for sync
+takeown /s %computername% /u %username% /f "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe"
+icacls "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /grant:r %username%:F
+taskkill /im OneDrive.Sync.Service.exe /f
+del "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /s /f /q
 
 rem Remove random files/folders
 rem del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
@@ -1651,7 +1658,8 @@ reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "22" /t REG
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "23" /t REG_SZ /d "[*.]steampowered.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "24" /t REG_SZ /d "[*.]tesco.com" /f
 reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "25" /t REG_SZ /d "[*.]vk.com" /f
-reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "26" /t REG_SZ /d "[*.]wilderssecurity.com" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "26" /t REG_SZ /d "[*.]vk.ru" /f
+reg add "HKLM\Software\Policies\Microsoft\Edge\SaveCookiesOnExit" /v "27" /t REG_SZ /d "[*.]wilderssecurity.com" /f
 
 rem Diagnostic Data / 0 - Off / 1 - RequiredData / 2 - OptionalData
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "DiagnosticData" /t REG_DWORD /d "0" /f
@@ -2078,7 +2086,7 @@ rem AMD Link Controller Emulation
 sc config AMDXE start= disabled
 
 rem AMD Provisioning Packages Service
-sc config AmdPpkgSvc start= disabled
+rem sc config AmdPpkgSvc start= disabled
 
 rem AMD PSP Driver
 sc config amdpsp start= disabled
@@ -2142,7 +2150,6 @@ sc config dLauncherLoopback start= demand
 
 rem Encrypting File System (EFS)
 sc config EFS start= disabled
-
 
 rem Function Discovery Provider Host
 sc config fdPHost start= disabled
@@ -2230,9 +2237,6 @@ sc config SSDPSRV start= disabled
 
 rem Superfetch
 sc config SysMain start= disabled
-
-rem Sync Host
-sc config OneSyncSvc start= disabled
 
 rem System Event Notification Service
 rem sc config SENS start= disabled
@@ -3827,4 +3831,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
-rem Windows 11 Home (29599.1000) - it settles down after a few mins - 68 processes / 719 threads / 28360 handles / 2.2GB RAM - https://ibb.co/GvFJqRgh
+rem Windows 11 Home (29599.1000) - it settles down after a few mins - 71 processes / 713 threads / 30086 handles / 2.3GB RAM - https://ibb.co/8LSB7GM0
