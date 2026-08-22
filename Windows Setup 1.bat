@@ -317,6 +317,7 @@ winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --acce
 
 winget install Brave.Brave --accept-package-agreements --accept-source-agreements
 winget install CreativeTechnology.SoundBlasterCommand --accept-package-agreements --accept-source-agreements
+winget install eMClient.eMClient --accept-package-agreements --accept-source-agreements
 winget install Kingston.SSDManager --accept-package-agreements --accept-source-agreements
 winget install LibreWolf.LibreWolf --accept-package-agreements --accept-source-agreements
 winget install Logitech.UnifyingSoftware --accept-package-agreements --accept-source-agreements
@@ -329,7 +330,6 @@ winget install SumatraPDF.SumatraPDF --accept-package-agreements --accept-source
 winget install TheDocumentFoundation.LibreOffice --accept-package-agreements --accept-source-agreements
 winget install WinsiderSS.SystemInformer.Canary --accept-package-agreements --accept-source-agreements
 winget install XnSoft.XnView.Classic --accept-package-agreements --accept-source-agreements
-winget install XSplit.Broadcaster --accept-package-agreements --accept-source-agreements
 
 pause
 
