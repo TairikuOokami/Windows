@@ -61,7 +61,7 @@ start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 
 pause
 
-start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\NanaZip.lnk"
+start "" /wait "D:\OneDrive\Downloads\NanaZip.lnk"
 
 pause
 
@@ -105,11 +105,6 @@ rem edge://flags/#strict-origin-isolation
 
 pause
 
-reg add "HKLM\Software\TruckersMP" /v "InstallDir" /t REG_SZ /d "C:\Program Files\TruckersMP Launcher" /f
-reg add "HKLM\Software\TruckersMP" /v "InstallLocationETS2" /t REG_SZ /d "E:\Steam\steamapps\common\Euro Truck Simulator 2" /f
-start "" /wait "E:\Steam\steam.exe"
-start "" /wait "D:\OneDrive\Setup\TruckersMP-Setup.exe"
-
 rem Steam Interface - Disable Everything
 
 pause
@@ -130,7 +125,7 @@ rem AMD PSP 11.0 Device
 pnputil /disable-device "PCI\VEN_1022&DEV_15C7&SUBSYS_15C71022&REV_00\4&98C338A&0&0241"
 
 rem AMD Radeon 760M Graphics
-rem pnputil /disable-device "PCI\VEN_1002&DEV_15BF&SUBSYS_35BF1849&REV_05\4&98C338A&0&0041"
+pnputil /disable-device "PCI\VEN_1002&DEV_15BF&SUBSYS_35BF1849&REV_05\4&98C338A&0&0041"
 
 rem AMD SMBUS
 pnputil /disable-device "PCI\VEN_1022&DEV_790B&SUBSYS_790B1849&REV_71\3&11583659&0&A0"
@@ -175,7 +170,7 @@ devmgmt.msc
 
 pause
 
-start "" /wait "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\TCPOptimizer.exe"
+start "" /wait "D:\OneDrive\Soft\PortableApps\TCPOptimizer\TCPOptimizer.exe"
 
 pause
 
@@ -198,12 +193,6 @@ icacls D:\OneDrive /inheritance:r
 icacls D:\OneDrive /grant:r %username%:(OI)(CI)F /t /l /q /c
 icacls D:\OneDrive /grant "System":(OI)(CI)RX /t /l /q /c
 icacls D:\OneDrive /grant "Users":(OI)(CI)RX /t /l /q /c
-
-takeown /s %computername% /u %username% /f E:\HoYoPlay /r /d y
-icacls E:\HoYoPlay /inheritance:r
-icacls E:\HoYoPlay /grant:r %username%:(OI)(CI)F /t /l /q /c
-icacls E:\HoYoPlay /grant "System":(OI)(CI)RX /t /l /q /c
-icacls E:\HoYoPlay /grant "Users":(OI)(CI)RX /t /l /q /c
 
 takeown /s %computername% /u %username% /f E:\Steam /r /d y
 icacls E:\Steam /inheritance:r
