@@ -8,7 +8,6 @@ rem HiBit Uninstaller - http://hibitsoft.ir
 rem Wise Disk Cleaner - http://www.wisecleaner.com/wise-disk-cleaner.html
 rem Wise Registry Cleaner - http://www.wisecleaner.com/wise-registry-cleaner.html
 rem Windows Drivers - https://www.catalog.update.microsoft.com/Home.aspx
-rem Windows Repair Toolbox - https://windows-repair-toolbox.com
 
 rem Disable Reserved Storage (7GB)
 Dism /Online /Set-ReservedStorageState /State:Disabled /Quiet /NoRestart
