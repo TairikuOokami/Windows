@@ -4,7 +4,7 @@ rem Temporarily allow "ValidateAdminCodeSignatures" to allow exe without a digit
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "ValidateAdminCodeSignatures" /t REG_DWORD /d "0" /f
 
 rem Update Time manually to deal with the broken Windows Time Sync
-start "" "D:\OneDrive\Soft\Windows Repair Toolbox\Downloads\Custom Tools\Added Custom Tools\UpdateTime_x64.exe"
+start "" "D:\OneDrive\Soft\PortableApps\UpdateTime\UpdateTime_x64.exe"
 
 pause
 
