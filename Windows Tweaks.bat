@@ -143,7 +143,6 @@ rem Panda (ES) - https://www.pandasecurity.com/en/homeusers/free-antivirus - htt
 
 rem AntiVirus software - additional protection (can be run alongside of realtime AV)
 rem AppCheck (KR) - https://www.checkmal.com/product/appcheck
-rem CatchPulse Lite (SG) - https://www.secureage.com/products/home-malware-protection
 rem Hard Configurator - https://github.com/AndyFul/Hard_Configurator
 rem KeyScrambler (US) - https://www.qfxsoftware.com
 
@@ -156,7 +155,7 @@ rem Malware (Chrome/Edge/Firefox) - https://microsoftedge.microsoft.com/addons/d
 rem Phishing (Chrome/Edge/Firefox/Opera) - https://www.netcraft.com/apps/browser
 
 rem Cleanup software
-rem Driver Store Explorer - https://github.com/lostindark/DriverStoreExplorer/releases
+rem Driver Store Explorer (RAPR) - https://github.com/lostindark/DriverStoreExplorer/releases
 rem HiBit Uninstaller - https://hibitsoft.ir
 rem Wise Disk Cleaner - https://www.wisecleaner.com/wise-disk-cleaner.html
 rem Wise Registry Cleaner - https://www.wisecleaner.com/wise-registry-cleaner.html
@@ -168,13 +167,12 @@ rem Windows Firewall Control (US) - https://www.binisoft.org/wfc.php
 
 rem Sandbox software
 rem 360 Total Security Essential (CN) - https://www.360totalsecurity.com/en/features/360-total-security-essential
-rem Comodo Antivirus (US) - https://antivirus.comodo.com/free-antivirus.php
 rem Sandboxie - https://github.com/sandboxie-plus/Sandboxie
 
 rem Security cleanup software (portable on-demand scanners, some still leave traces/drivers)
 rem Antivirus Rescue Disks - https://www.techradar.com/in/best/best-antivirus-rescue-disk
 rem Dr.Web CureIt (RU) - https://free.drweb.com/download+cureit+free
-rem Emsisoft Emergency Kit (NZ) - https://www.emsisoft.com/en/home/emergency-kit
+rem Emsisoft Emergency Kit (NZ) - https://www.emsisoft.com/en/emergency-kit
 rem Kaspersky Virus Removal Tool (RU) - https://www.kaspersky.com/downloads/free-virus-removal-tool
 rem Microsoft Safety Scanner (US) - https://learn.microsoft.com/en-us/defender-endpoint/safety-scanner-download
 
@@ -199,7 +197,6 @@ rem Cloud Backup / GoogleDrive (15GB Free) - https://drive.google.com
 rem Cloud Backup / IceDrive (10GB Free) - https://icedrive.net/plans
 rem Cloud Backup / IDrive (10GB Free) - https://www.idrive.com/pricing
 rem Cloud Backup / Mega (20GB Free) - https://mega.io/storage
-rem Cloud Backup / OneDrive - https://onedrive.live.com/?v=managestorage
 rem Compact/Compress Files / Compact GUI - https://github.com/ImminentFate/CompactGUI
 rem Computer Management / NirLauncher - https://launcher.nirsoft.net
 rem CPU Info / CPU-Z - https://www.cpuid.com/softwares/cpu-z.html
@@ -229,7 +226,7 @@ rem Office Suite / LibreOffice - https://www.libreoffice.org
 rem Partition Manager / Macrorit Partition Expert - https://macrorit.com/partition-magic-manager/free-edition.html
 rem Password Generator / Strong Password Generator - https://apps.microsoft.com/store/detail/strong-password-generator/9NNKGKL4V8HV?hl=en-us&gl=us
 rem Password Manager (Offline) / KeePass Professional Edition - https://keepass.info/download.html
-rem Password Manager (Online) / Bitwarden - https://bitwarden.com
+rem Password Manager (Online) / Proton Pass - https://proton.me/pass
 rem PDF Editor / FreePDF - https://www.getfreepdf.com
 rem PDF Viewer / Sumatra PDF - https://www.sumatrapdfreader.org/free-pdf-reader.html
 rem Performance / Process Lasso - https://bitsum.com
@@ -243,15 +240,13 @@ rem RAM Free (Memory Leak) / Wise Memory Optimizer - https://www.wisecleaner.com
 rem RAM Disk / AIM Toolkit (Unlimited/Unsigned) - https://sourceforge.net/projects/aim-toolkit
 rem Remote Support / TeamViewer - https://www.teamviewer.com/en/download/windows
 rem Remove Locked File/Folder / ThisIsMyFile - https://www.softwareok.com/?seite=Freeware/ThisIsMyFile
-rem Search / UltraSearch - https://www.jam-software.com/ultrasearch_free
-rem Startup Manager / Autoruns - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
-rem Streaming / XSplit - https://www.xsplit.com
+rem Search / WizFile - https://antibody-software.com/wizfile
+rem Startup Manager / Autoruns (Uncheck - Options - Hide Windows entries) - https://docs.microsoft.com/en-us/sysinternals/downloads/autoruns
 rem System Imaging / Hasleo Backup Suite - https://www.easyuefi.com/backup-software/backup-suite-free.html
 rem Task Manager / System Informer - https://www.systeminformer.com/canary
 rem Taskbar Overall / ExplorerPatcher - https://github.com/valinet/ExplorerPatcher
 rem Taskbar Translucent / TranslucentTB - https://apps.microsoft.com/detail/9pf4kz2vn4w9?hl=en-US&gl=US
 rem Uninstaller / HiBit Uninstaller - https://hibitsoft.ir - https://www.techsupportalert.com/best-free-program-un-installer.htm
-rem VM Android / BlueStacks - https://www.bluestacks.com
 rem VPN / Proton VPN - https://protonvpn.com
 rem VPN / VPNLY - https://vpnly.com
 rem VPN / WARP - https://one.one.one.one
@@ -867,7 +862,7 @@ rem Virtualization-based security / run msinfo32 to check
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "CachedDrtmAuthIndex" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "EnableVirtualizationBasedSecurity" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HypervisorEnforcedCodeIntegrity" /t REG_DWORD /d "0" /f
-reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HyperVVirtualizationBasedSecurityOptout" /t REG_DWORD /d "0" /f
+reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "HyperVVirtualizationBasedSecurityOptout" /t REG_DWORD /d "1" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "Locked" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard" /v "RequireMicrosoftSignedBootChain" /t REG_DWORD /d "0" /f
 reg add "HKLM\System\CurrentControlSet\Control\DeviceGuard\Scenarios\HypervisorEnforcedCodeIntegrity" /v "Enabled" /t REG_DWORD /d "0" /f
@@ -3539,7 +3534,6 @@ rem Windows Drivers - https://www.catalog.update.microsoft.com
 rem Windows Forums - https://www.elevenforum.com/whats-new
 rem Windows Repair Install - https://www.elevenforum.com/t/repair-install-windows-11-with-an-in-place-upgrade.418
 rem Windows Update Reset - https://github.com/ManuelGil/Reset-Windows-Update-Tool/releases
-rem Windows Repair Toolbox - https://windows-repair-toolbox.com
  
 rem Boot into Recovery Mode 
 rem Shutdown /f /r /o /t 0
@@ -3831,4 +3825,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
-rem Windows 11 Home (29599.1000) - it settles down after a few mins - 71 processes / 713 threads / 30086 handles / 2.3GB RAM - https://ibb.co/8LSB7GM0
+rem Windows 11 Home (29648.1000) - it settles down after a few mins - 71 processes / 713 threads / 30086 handles / 2.3GB RAM - https://ibb.co/8LSB7GM0
