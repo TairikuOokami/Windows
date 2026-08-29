@@ -33,6 +33,7 @@ rem https://www.deskmodder.de/blog/2026/08/18/windows-11-29648-iso-esd-deutsch-e
 rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
 
+rem Ex-Google Maps PM Open Sources God’s Eye View - https://youtu.be/GRJaKcXZS94
 rem PhotoDNA by MS (any cloud service or social media) - https://youtu.be/kBkHLYaEkCI
 rem Windows GDID / HKCU\Software\Microsoft\IdentityCRL - https://youtu.be/AkvetmzCh_M
 rem STTW - AI Can See Without Cameras. https://youtu.be/olaQ3-m271M?si=z_HMlsM-rxXHlNXo
@@ -274,11 +275,11 @@ rem Remove default user
 net user defaultuser1 /delete
 net user defaultuser100000 /delete
 
-rem Remove OneDrive Sync service causing unlimited writes, not needed for sync
-takeown /s %computername% /u %username% /f "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe"
-icacls "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /grant:r %username%:F
-taskkill /im OneDrive.Sync.Service.exe /f
-del "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /s /f /q
+rem Remove OneDrive Sync service causing unlimited writes, not needed for sync (version 26.134.0713.0007 solved it)
+rem takeown /s %computername% /u %username% /f "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe"
+rem icacls "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /grant:r %username%:F
+rem taskkill /im OneDrive.Sync.Service.exe /f
+rem del "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /s /f /q
 
 rem Remove random files/folders
 rem del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
@@ -582,15 +583,14 @@ netsh advfirewall firewall add rule name="DNS UDP Block" dir=out action=block pr
 
 netsh advfirewall firewall add rule name="Brave TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
-netsh advfirewall firewall add rule name="Chromium TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Chromium\Application\chrome.exe"
-netsh advfirewall firewall add rule name="Chromium UDP Block" dir=out action=block protocol=UDP program="%LocalAppData%\Chromium\Application\chrome.exe"
 netsh advfirewall firewall add rule name="Edge TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="Edge UDP Block" dir=out action=block protocol=UDP program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Temp\IcedrivePortable\Icedrive.exe"
 netsh advfirewall firewall add rule name="LibreWolf TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\LibreWolf\librewolf.exe"
 netsh advfirewall firewall add rule name="LibreWolf UDP Block" dir=out action=block protocol=UDP program="%ProgramFiles%\LibreWolf\librewolf.exe"
 netsh advfirewall firewall add rule name="OneDrive TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles%\Microsoft OneDrive\OneDrive.exe"
-
+netsh advfirewall firewall add rule name="Steam TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="E:\Steam\bin\cef\cef.win64\steamwebhelper.exe"
+netsh advfirewall firewall add rule name="Steam UDP Block" dir=out action=block protocol=UDP program="E:\Steam\bin\cef\cef.win64\steamwebhelper.exe"
 netsh advfirewall firewall add rule name="Search Block" dir=out action=block program="%WINDIR%\SystemApps\MicrosoftWindows.Client.CBS_cw5n1h2txyewy\SearchHost.exe"
 netsh advfirewall firewall add rule name="SmartScreen Block" dir=out action=block program="%WinDir%\System32\smartscreen.exe"
 netsh advfirewall firewall add rule name="Start Block" dir=out action=block program="%WINDIR%\SystemApps\Microsoft.Windows.StartMenuExperienceHost_cw5n1h2txyewy\StartMenuExperienceHost.exe"
