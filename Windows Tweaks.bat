@@ -1,3 +1,4 @@
+wddi
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 pause
@@ -29,9 +30,11 @@ rem reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\DataCollect
 rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
-rem https://www.deskmodder.de/blog/2026/09/12/windows-11-29667-iso-esd-deutsch-english
+rem https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewiso
+rem https://www.deskmodder.de/blog/2026/10/24/windows-11-29695-iso-esd-deutsch-english/
 rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
+rem https://fast.com
 
 rem Ex-Google Maps PM Open Sources God’s Eye View - https://youtu.be/GRJaKcXZS94
 rem PhotoDNA by MS (any cloud service or social media) - https://youtu.be/kBkHLYaEkCI
@@ -322,7 +325,7 @@ rd "%SystemDrive%\PerfLogs" /s /q
 rd "%SystemDrive%\Recovery" /s /q
 rd "%WinDir%\System32\GroupPolicy" /s /q
 rd "%WinDir%\System32\GroupPolicyUsers" /s /q
-gpupdate /force
+rem gpupdate /force
 
 rem Remove/Rebuild Font Cache
 del "%WinDir%\ServiceProfiles\LocalService\AppData\Local\FontCache\*FontCache*"/s /f /q
@@ -489,14 +492,6 @@ reg add "HKCU\Software\XnView\Start" /v "ShowSaveDlg" /t "REG_DWORD" /d "0" /f
 
 
 rem =========================== Windows Defender Security Centre ===========================
-rem --------------------------------- Account Protection -----------------------------------
-rem .............................. Administrator Protection ................................
-
-rem 2 - Enable Administrator Protection for Admin Approval Mode / 1 - Disable
-reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "TypeOfAdminApprovalMode" /t "REG_DWORD" /d "1" /f
-
-
-rem =========================== Windows Defender Security Centre ===========================
 rem -------------------------------- App & browser control ---------------------------------
 
 rem Off - Disable Windows SmartScreen / On - Enable Windows SmartScreen 
@@ -581,8 +576,12 @@ netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protoc
 netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-94.140.14.13,94.140.14.15-94.140.15.14,94.140.15.16-255.255.255.255
 netsh advfirewall firewall add rule name="DNS UDP Block" dir=out action=block protocol=UDP remoteport=53
 
+C:\Users\Tairi\AppData\Local\Chromium\Application\chrome.exe
+
 netsh advfirewall firewall add rule name="Brave TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Chromium TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Chromium\Application\chrome.exe"
+netsh advfirewall firewall add rule name="Chromium UDP Block" dir=out action=block protocol=UDP program="%LocalAppData%\Chromium\Application\chrome.exe"
 netsh advfirewall firewall add rule name="Edge TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="Edge UDP Block" dir=out action=block protocol=UDP program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
 netsh advfirewall firewall add rule name="IceDrive TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Temp\IcedrivePortable\Icedrive.exe"
@@ -1864,7 +1863,7 @@ reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "Fil
 rem Allow UIAccess applications to prompt for elevation without using the secure desktop / 0 (Default) - Disabled / 1 - Enabled
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "PromptOnSecureDesktop" /t REG_DWORD /d "1" /f
 
-rem Administrator Protection for Admin Approval Mode / 1 - Disable / 2 - Enable
+rem 2 - Enable Administrator Protection for Admin Approval Mode (It lowers the security, just like a passkey, it does not asks for 2FA) / 1 - Disable
 reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v "TypeOfAdminApprovalMode" /t REG_DWORD /d "1" /f
 
 rem Enforce cryptographic signatures on any interactive application that requests elevation of privilege / 0 (Default) - Disabled / 1 - Enabled
@@ -2704,7 +2703,7 @@ rem Specifies whether the screen saver is password-protected / 0 - No / 1 - Yes
 reg add "HKCU\Control Panel\Desktop" /v "ScreenSaverIsSecure" /t REG_SZ /d "1" /f
 
 rem Specifies in seconds how long the System remains idle before the screen saver starts
-reg add "HKCU\Control Panel\Desktop" /v "ScreenSaveTimeOut" /t REG_SZ /d "250" /f
+reg add "HKCU\Control Panel\Desktop" /v "ScreenSaveTimeOut" /t REG_SZ /d "600" /f
 
 rem Screensaver - Mystify.scr
 reg add "HKCU\Control Panel\Desktop" /v "SCRNSAVE.EXE" /t REG_SZ /d "Mystify.scr" /f
