@@ -1,4 +1,3 @@
-wddi
 rem USE AT OWN RISK AS IS WITHOUT WARRANTY OF ANY KIND !!!!!
 
 pause
