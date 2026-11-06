@@ -277,12 +277,6 @@ rem Remove default user
 net user defaultuser1 /delete
 net user defaultuser100000 /delete
 
-rem Remove OneDrive Sync service causing unlimited writes, not needed for sync (version 26.134.0713.0007 solved it)
-rem takeown /s %computername% /u %username% /f "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe"
-rem icacls "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /grant:r %username%:F
-rem taskkill /im OneDrive.Sync.Service.exe /f
-rem del "%ProgramFiles%\Microsoft OneDrive\26.129.0706.0004\OneDrive.Sync.Service.exe" /s /f /q
-
 rem Remove random files/folders
 rem del "%AppData%\Microsoft\Windows\Recent\*" /s /f /q
 del "%SystemDrive%\AMFTrace.log" /s /f /q
@@ -571,14 +565,9 @@ rem Windows Firewall Block Rules (TCP43-IPInfo/UDP123-TimeSync/TCPUDP443-QUIC/TC
 rem https://www.bleepingcomputer.com/news/security/new-windows-pingback-malware-uses-icmp-for-covert-communication
 netsh advfirewall firewall add rule name="TCP Block" dir=out action=block protocol=TCP remoteport=1-42,44-79,81-442,444-586,588-852,854-992,994-1024,1025-3073,3075-5227,5229-27014,27051-65535
 netsh advfirewall firewall add rule name="UDP Block" dir=out action=block protocol=UDP remoteport=1-52,54-122,124-442,444-1024
-
 netsh advfirewall firewall add rule name="TCP DoT Block" dir=out action=block protocol=TCP remoteport=853 remoteip=0.0.0.0-45.90.28.98,45.90.28.100-45.90.30.98,45.90.30.100-94.140.14.13,94.140.14.15-94.140.15.14,94.140.15.16-255.255.255.255
-netsh advfirewall firewall add rule name="DNS UDP Block" dir=out action=block protocol=UDP remoteport=53
-
-C:\Users\Tairi\AppData\Local\Chromium\Application\chrome.exe
-
 netsh advfirewall firewall add rule name="Brave TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-5227,5229-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
-netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP remoteport=1-442,444-65535 program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
+netsh advfirewall firewall add rule name="Brave UDP Block" dir=out action=block protocol=UDP program="%LocalAppData%\BraveSoftware\Brave-Browser\Application\brave.exe"
 netsh advfirewall firewall add rule name="Chromium TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%LocalAppData%\Chromium\Application\chrome.exe"
 netsh advfirewall firewall add rule name="Chromium UDP Block" dir=out action=block protocol=UDP program="%LocalAppData%\Chromium\Application\chrome.exe"
 netsh advfirewall firewall add rule name="Edge TCP Block" dir=out action=block protocol=TCP remoteport=1-442,444-65535 program="%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
