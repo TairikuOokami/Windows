@@ -30,7 +30,7 @@ rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
 rem https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewiso
-rem https://www.deskmodder.de/blog/2026/10/24/windows-11-29695-iso-esd-deutsch-english/
+rem https://www.deskmodder.de/blog/2026/11/07/windows-11-29704-iso-esd-deutsch-english
 rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
 rem https://fast.com
@@ -3812,4 +3812,4 @@ shutdown /s /f /t 0
 rem My security: NextDNS Free as AV, using separate profiles for browsers (Edge for internet, Brave for Youtube, LibreWolf for FB and Chromium with AdguardDNS for Streaming)
 rem Browsers can connect only to their domains, the rest of the net is blocked as well as 95% TLDs https://ibb.co/hJ8nFCBw / https://ibb.co/XfwzCzrk / https://ibb.co/tMpjsY28
 
-rem Windows 11 Home (29648.1000) - it settles down after a few mins - 71 processes / 713 threads / 30086 handles / 2.3GB RAM - https://ibb.co/8LSB7GM0
+rem Windows 11 Home (29704.1000) - it settles down after a few mins - 70 processes / 695 threads / 30090 handles / 2.3GB RAM - https://ibb.co/67Qnq30S
