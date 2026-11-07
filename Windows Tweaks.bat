@@ -107,6 +107,7 @@ rem AVs/SSL Filtering - https://adguard.com/en/blog/everything-about-https-filte
 rem AV is as vulnerable as any other software, but since it uses SYSTEM rights, it is more dangerous - https://www.darkreading.com/threat-intelligence/windows-doubleagent-attack-turns-av-tools-into-malware
 rem Disable webfiltering, AV replacing legitimate certificates - https://www.eff.org/deeplinks/2015/02/dear-software-vendors-please-stop-trying-intercept-your-customers-encrypted
 
+rem DNS https://netapi.com/research/tld-abuse/?sort=popularity
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
 rem DNS Check / https://dnscheck.tools / https://www.dnsperf.com
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://www.yogadns.com / https://github.com/DNSCrypt/dnscrypt-proxy
@@ -1225,6 +1226,9 @@ rem ____________________________________________________________________________
 rem 1 - Enable clipboard suggestions in the address bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AddressBarClipboardSuggestEnabled" /t REG_DWORD /d "0" /f
 
+rem 1 - Agent Profile Enabled
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AgentProfileEnabled" /t REG_DWORD /d "0" /f
+
 rem 1 - Allow the audio sandbox to run
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "AudioSandboxEnabled" /t REG_DWORD /d "1" /f
 
@@ -1233,6 +1237,9 @@ reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BlockExternalExtensions" /t 
 
 rem 1 - Allow pages to use the built-in AI APIs
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "BuiltInAIAPIsEnabled" /t REG_DWORD /d "0" /f
+
+rem 1 - Enable Commercial Journeys (Get things done) in Microsoft Edge
+reg add "HKLM\Software\Policies\Microsoft\Edge" /v "CommercialJourneysGetThingsDoneEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Compose is enabled for writing on the web
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ComposeInlineEnabled" /t REG_DWORD /d "0" /f
@@ -1385,14 +1392,8 @@ rem ..................................... Appearances ..........................
 rem 0 - Show share button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ConfigureShare" /t REG_DWORD /d "1" /f
 
-rem 1 - Extensions Performance Detector enabled
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "ExtensionsPerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
-
 rem 1 - Show favorites bar
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "FavoritesBarEnabled" /t REG_DWORD /d "1" /f
-
-rem 1 - The performance detector detects tab performance issues and recommends actions to fix the performance issues
-reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PerformanceDetectorEnabled" /t REG_DWORD /d "0" /f
 
 rem 1 - Pin browser essentials toolbar button
 reg add "HKLM\Software\Policies\Microsoft\Edge" /v "PinBrowserEssentialsToolbarButton" /t REG_DWORD /d "0" /f
