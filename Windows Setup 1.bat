@@ -1,5 +1,13 @@
 rem Unlink OneDrive!
 
+rem Disable Bitlocker, EFS and Decrypt C:
+rem manage-bde -status
+reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d "1" /f
+fsutil behavior set disableencryption 1
+manage-bde -off C:
+manage-bde -off D:
+manage-bde -off E:
+cipher /d /s:C:\
 
 pause
 
@@ -17,12 +25,10 @@ reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputab
 start windowsdefender:
 rem Update Windows, Defender, Restart
 rem Disable Tamper and Real Protection in Defender
-rem Run "MD Disable.bat" TRICE - RESTART!
-rem Run "MD Disable.bat" again TRICE - RESTART!
 
 pause
 
-rem Remove the user snd take Ownership of D/E
+rem Remove the user
 
 explorer
 
@@ -92,15 +98,6 @@ reg add "HKLM\Software\Policies\Microsoft\MRT" /v "DontOfferThroughWUAU" /t REG_
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\Subscriptions" /f
 reg delete "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager\SuggestedApps" /f
 
-rem Disable Bitlocker, EFS and Decrypt C:
-rem manage-bde -status
-reg add "HKLM\System\CurrentControlSet\Control\BitLocker" /v "PreventDeviceEncryption" /t REG_DWORD /d "1" /f
-fsutil behavior set disableencryption 1
-manage-bde -off C:
-manage-bde -off D:
-manage-bde -off E:
-cipher /d /s:C:\
-
 rem Windows File Compression
 rem compact /compactos:query
 fsutil behavior set disablecompression 1
@@ -134,9 +131,6 @@ reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "ISATAP
 reg add "HKLM\Software\Policies\Microsoft\Windows\TCPIP\v6Transition" /v "Teredo_State" /t REG_SZ /d "Disabled" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "DisabledComponents" /t REG_DWORD /d "255" /f
 reg add "HKLM\System\CurrentControlSet\Services\Tcpip6\Parameters" /v "EnableICSIPv6" /t REG_DWORD /d "255" /f
-rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
-rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
-rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
 reg add "HKLM\System\CurrentControlSet\Services\NetBT\Parameters" /v "EnableLMHOSTS" /t REG_DWORD /d "0" /f
 rem wmic nicconfig where TcpipNetbiosOptions=0 call SetTcpipNetbios 2
 rem wmic nicconfig where TcpipNetbiosOptions=1 call SetTcpipNetbios 2
@@ -154,6 +148,9 @@ netsh dns add encryption server=94.140.15.15 dothost=dns.adguard-dns.com:853 aut
 rem Enable NextDNS DoT - 45.90.28.99/45.90.30.99
 start "" /wait "D:\OneDrive\Downloads\UnValidate.bat"
 start ms-settings:network-ethernet
+rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call EnableStatic ("192.168.9.2"), ("255.255.255.0")
+rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetDNSServerSearchOrder ("45.90.28.99","45.90.30.99")
+rem wmic nicconfig where macaddress="9C-6B-00-37-4B-DB" call SetGateways ("192.168.9.1")
 
 pause
 
@@ -206,7 +203,7 @@ winget uninstall "Microsoft Edge Game Assist"
 winget uninstall "Microsoft.Teams"
 winget uninstall "Outlook for Windows"
 
-rem Uninstall Remote Desktop Connection and check for new bloatware
+rem Uninstall Copilot/Remote Desktop Connection and check for new bloatware
 start ms-settings:installed-apps
 
 pause
@@ -317,6 +314,7 @@ winget import -i D:\OneDrive\Setup\winget.txt --accept-package-agreements --acce
 
 winget install Brave.Brave --accept-package-agreements --accept-source-agreements
 winget install CreativeTechnology.SoundBlasterCommand --accept-package-agreements --accept-source-agreements
+winget install eloston.ungoogled-chromium --accept-package-agreements --accept-source-agreements
 winget install eMClient.eMClient --accept-package-agreements --accept-source-agreements
 winget install Kingston.SSDManager --accept-package-agreements --accept-source-agreements
 winget install LibreWolf.LibreWolf --accept-package-agreements --accept-source-agreements
@@ -341,16 +339,13 @@ winget install XPDLS1XBTXVPP4 --accept-package-agreements --accept-source-agreem
 
 pause
 
-start "" /wait "D:\OneDrive\Setup\GIHO_TubeGet_Pro.exe"
 start "" /wait "D:\OneDrive\Setup\instalatoraplikacii.exe"
-start "" /wait "D:\OneDrive\Setup\tracksim-installer.exe"
 start "" /wait "D:\OneDrive\Setup\AESeriesDriverInstaller_W10.exe"
 
 pause
 
-rem Install Audials, eM Client, HEVC, Netflix, Rufus
-
-start ms-windows-store:
+rem Install HEVC
+start "" /wait "https://apps.microsoft.com/detail/9nmzlz57r3t7?hl=en-US&gl=SK"
 
 pause
 
