@@ -57,10 +57,6 @@ rd "C:\Setup" /s /q
 
 pause
 
-start "" /wait "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe"
-
-pause
-
 start "" /wait "D:\OneDrive\Downloads\NanaZip.lnk"
 
 pause
