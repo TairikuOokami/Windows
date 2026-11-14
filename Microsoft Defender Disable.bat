@@ -10,8 +10,10 @@ rem Enable Defender - update - restart - Disable Defender - https://github.com/T
 
 rem Disable Tamper and Real Time Protection in Defender - RESTART!
 rem start windowsdefender:
-rem Disable Real Time Protection in Defender - Run "Microsoft Defender Disable.bat" - TRICE - RESTART!
-rem Run "Microsoft Defender Disable.bat" again - TRICE - RESTART!
+rem Disable Real Time Protection in Defender again - Run "Microsoft Defender Disable.bat" - TWICE - All Denied! - RESTART!
+rem Run "Microsoft Defender Disable.bat" again after restart - TWICE (till you get the message) - RESTART! REPEAT!
+rem You should get the message for services: The operation completed successfully - https://ibb.co/8Ln0ysNm
+rem Dismiss messages in Windows Center or Windows will think, that a script (malware) disabled AV!
 
 rem Alternatively run in Safe Mode
 rem Run - msconfig - Boot - Safe Boot - Minimal - Restart
@@ -117,8 +119,8 @@ rem del "%WinDir%\System32\smartscreen.exe" /s /f /q
 rem Disable Stupid Smart App Control blocking legitimate apps like VisualC++ and DX9 / ONCE DISABLED, IT CAN NOT BE ENABLED!
 rem reg add "HKLM\System\CurrentControlSet\Control\CI\Policy" /v "VerifiedAndReputablePolicyState" /t REG_DWORD /d "0" /f
 
-rem Last Tested on Windows 11 Home 29680.1000
-rem Microsoft Defender Platform Version 4.18.26100.2 (03-Oct-2026)
-rem Before - https://ibb.co/FqJnSj2S / After - https://ibb.co/zW9d8kZb
+rem Last Tested on Windows 11 Home 29708.1003
+rem Microsoft Defender Platform Version 4.18.26110.3 (14-Nov-2026)
+rem Before - https://ibb.co/8gD0kxg2 / After - https://ibb.co/yBqBC3y9
 
 pause
