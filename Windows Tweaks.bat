@@ -35,17 +35,16 @@ rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
 rem https://fast.com
 
-rem Ex-Google Maps PM Open Sources God’s Eye View - https://youtu.be/GRJaKcXZS94
+rem Ex-Google Maps PM Open Sources God’s Eye View - https://www.youtube.com/@bilawalsidhu/videos
+rem Windows GDID / https://github.com/SmtimesIWndr/gdid-reversal / https://youtu.be/AkvetmzCh_M
 rem PhotoDNA by MS (any cloud service or social media) - https://youtu.be/kBkHLYaEkCI
-rem Windows GDID / HKCU\Software\Microsoft\IdentityCRL - https://youtu.be/AkvetmzCh_M
-rem STTW - AI Can See Without Cameras. https://youtu.be/olaQ3-m271M?si=z_HMlsM-rxXHlNXo
+rem STTW - AI Can See Without Cameras. https://youtu.be/olaQ3-m271M
+rem https://cyberinsider.com/quad9-to-leave-france
+rem https://expertinsights.com/identity-and-access-management/mfa-bypass-attacks-how-do-they-work-and-how-can-you-avoid-them
 rem https://www.businessinsider.com/programmatic-ads-overtake-email-top-malware-vector-the-media-trust-2026-3
 rem https://www.forbes.com/sites/thomasbrewster/2026/01/22/microsoft-gave-fbi-keys-to-unlock-bitlocker-encrypted-data
 rem https://techcommunity.microsoft.com/blog/windowsservernewsandbestpractices/announcing-native-nvme-in-windows-server-2025-ushering-in-a-new-era-of-storage-p/4477353
-rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem https://techpp.com/2025/03/25/what-is-powered-off-finding
-rem https://torrentfreak.com/court-expands-google-and-cloudflare-dns-blocking-to-combat-piracy-241125/
-rem https://www.upguard.com/blog/how-hackers-can-bypass-mfa - https://youtu.be/V-lSqR_rj78
 rem https://techcrunch.com/2024/05/08/encrypted-services-apple-proton-and-wire-helped-spanish-police-identify-activist
 
 
@@ -107,7 +106,9 @@ rem AVs/SSL Filtering - https://adguard.com/en/blog/everything-about-https-filte
 rem AV is as vulnerable as any other software, but since it uses SYSTEM rights, it is more dangerous - https://www.darkreading.com/threat-intelligence/windows-doubleagent-attack-turns-av-tools-into-malware
 rem Disable webfiltering, AV replacing legitimate certificates - https://www.eff.org/deeplinks/2015/02/dear-software-vendors-please-stop-trying-intercept-your-customers-encrypted
 
+rem Bufferbloat - https://bufferspeed.com
 rem DNS https://netapi.com/research/tld-abuse/?sort=popularity
+rem https://techblog.nexxwave.eu/public-dns-malware-filters-to-be-tested-in-2025
 rem DNS Benchmark / Namebench - https://code.google.com/archive/p/namebench/downloads
 rem DNS Check / https://dnscheck.tools / https://www.dnsperf.com
 rem DNS Encryption (setup DNS server as 127.0.0.1) - https://www.yogadns.com / https://github.com/DNSCrypt/dnscrypt-proxy
@@ -3610,6 +3611,7 @@ rem net user NewGuy * /add
 rem net localgroup Administrators NewGuy /add
 
 rem Access CMD with SYSTEM rights at logon (Win+U)
+rem whoami - https://ibb.co/kV8F9DNt
 takeown /s %computername% /u %username% /f "%WINDIR%\System32\utilman.exe"
 icacls "%WINDIR%\System32\utilman.exe" /grant:r %username%:F
 copy /y %WINDIR%\System32\cmd.exe %WINDIR%\System32\utilman.exe
