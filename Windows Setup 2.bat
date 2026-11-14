@@ -64,18 +64,13 @@ pause
 rem https://support.brave.com/hc/en-us/articles/360044860011-How-Do-I-Use-Command-Line-Flags-in-Brave-
 rem https://github.com/dreammjow/ChromiumHardening/blob/main/flags/chrome-command-line.md
 rem https://get.webgl.org / https://www.cloudflare.com/ssl/encrypted-sni / https://pq.cloudflareresearch.com
-rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,IsolatePrerenders,IsolateSandboxedIframes,RendererAppContainer,WinSboxDisableExtensionPoint" --disable-webgl --no-pings
+rem "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" --enable-features="EnableCsrssLockdown,EncryptedClientHello,IsolatePrerenders,IsolateSandboxedIframes,-api-for-phi-miniRendererAppContainer,WinSboxDisableExtensionPoint" --disable-webgl --no-pings
 
 rem Disabled
 rem edge://flags/#allow-all-sites-to-initiate-mirroring
 rem edge://flags/#edge-ai-search
 rem edge://flags/#edge-copilot-mode
-rem edge://flags/#edge-llm-on-device-model-debug-logs
 rem edge://flags/#edge-llm-on-device-model-performance-param
-rem edge://flags/#edge-llm-prompt-api-for-phi-mini
-rem edge://flags/#edge-llm-rewriter-api-for-phi-mini
-rem edge://flags/#edge-llm-summarization-api-for-phi-mini
-rem edge://flags/#edge-llm-writer-api-for-phi-mini
 rem edge://flags/#edge-omnibox-commercial-copilot-chat
 rem edge://flags/#edge-omnibox-consumer-copilot-chat
 rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-scheme
@@ -83,7 +78,6 @@ rem edge://flags/#edge-omnibox-ui-hide-steady-state-url-trivial-subdomains
 rem edge://flags/#edge-optin-experimentation
 rem edge://flags/#edge-prerender-new-tab-page-trigger
 rem edge://flags/#edge-visual-rejuv-mica
-rem edge://flags/#edge-wchromium-config
 rem edge://flags/#enable-force-dark
 rem edge://flags/#enable-quic
 rem edge://flags/#media-router-cast-allow-all-ips
@@ -98,6 +92,9 @@ rem edge://flags/#enable-tls13-early-data
 rem edge://flags/#local-network-access-check
 rem edge://flags/#origin-keyed-processes-by-default
 rem edge://flags/#strict-origin-isolation
+rem edge://flags/#universal-opt-out
+rem edge://flags/#universal-opt-out-settings
+
 
 pause
 
