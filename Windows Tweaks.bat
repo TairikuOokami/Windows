@@ -30,7 +30,7 @@ rem bcdedit /set flightsigning on
 rem bcdedit /set {bootmgr} flightsigning on
 
 rem https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewiso
-rem https://www.deskmodder.de/blog/2026/11/07/windows-11-29704-iso-esd-deutsch-english
+rem https://www.deskmodder.de/blog/2026/11/14/windows-11-29708-iso-esd-deutsch-english/
 rem https://www.drivereasy.com/knowledge
 rem https://distrosea.com
 rem https://fast.com
