@@ -1899,6 +1899,7 @@ schtasks /Change /TN "Microsoft\Windows\Application Experience\SdbinstMergeDbTas
 schtasks /Change /TN "Microsoft\Windows\Application Experience\StartupAppTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\AppxDeploymentClient\UCPD velocity" /Disable
 schtasks /Change /TN "Microsoft\Windows\Autochk\Proxy" /Disable
+schtasks /Change /TN "Microsoft\Windows\ConsentUX\UnifiedConsent\UnifiedConsentSyncTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" /Disable
 schtasks /Change /TN "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" /Disable
 schtasks /Change /TN "Microsoft\Windows\Defrag\ScheduledDefrag" /Disable
@@ -1906,6 +1907,7 @@ schtasks /Change /TN "Microsoft\Windows\Device Information\Device" /Disable
 schtasks /Change /TN "Microsoft\Windows\Device Information\Device User" /Disable
 schtasks /Change /TN "Microsoft\Windows\Diagnosis\RecommendedTroubleshootingScanner" /Disable
 schtasks /Change /TN "Microsoft\Windows\Diagnosis\Scheduled" /Disable
+schtasks /Change /TN "Microsoft\Windows\Diagnosis\UnexpectedCodepath" /Disable
 schtasks /Change /TN "Microsoft\Windows\DiskCleanup\SilentCleanup" /Disable
 schtasks /Change /TN "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" /Disable
 schtasks /Change /TN "Microsoft\Windows\DiskFootprint\Diagnostics" /Disable
@@ -1922,7 +1924,7 @@ schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataFlushin
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataReceiver" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\FeatureConfig\UsageDataReporting" /Disable
 schtasks /Change /TN "Microsoft\Windows\Flighting\OneSettings\RefreshCache" /Disable
-schtasks /Change /TN "Microsoft\Windows\Hotpatche\Monitoring" /Disable
+schtasks /Change /TN "Microsoft\Windows\Hotpatch\Monitoring" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\InputSettingsRestoreDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\LocalUserSyncDataAvailable" /Disable
 schtasks /Change /TN "Microsoft\Windows\Input\MouseSyncDataAvailable" /Disable
@@ -1950,7 +1952,7 @@ schtasks /Change /TN "Microsoft\Windows\NlaSvc\WiFiTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\NetTrace\GatherNetworkInfo" /Disable
 schtasks /Change /TN "Microsoft\Windows\Network Connectivity Status Indicator\NcsiIdentifyUserProxies" /Disable
 schtasks /Change /TN "Microsoft\Windows\NetworkExperimentation" /Disable
-schtasks /Change /TN "Microsoft\Windows\PerformanceTrace\RequestTrace" /Disable
+schtasks /Change /TN "Microsoft\Windows\PerformanceTrace\ShowFeedbackToast" /Disable
 schtasks /Change /TN "Microsoft\Windows\PerformanceTrace\WhesvcToast" /Disable
 schtasks /Change /TN "Microsoft\Windows\PI\Sqm-Tasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Power Efficiency Diagnostics\AnalyzeSystem" /Disable
@@ -1965,6 +1967,7 @@ schtasks /Change /TN "Microsoft\Windows\RetailDemo\CleanupOfflineContent" /Disab
 schtasks /Change /TN "Microsoft\Windows\Servicing\StartComponentCleanup" /Disable
 schtasks /Change /TN "Microsoft\Windows\SettingSync\NetworkStateChangeTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Setup\SetupCleanupTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\Setup\SetupRecoveryDataTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Setup\SnapshotCleanupTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyMonitor" /Disable
 schtasks /Change /TN "Microsoft\Windows\Shell\FamilySafetyRefreshTask" /Disable
@@ -1972,6 +1975,7 @@ schtasks /Change /TN "Microsoft\Windows\Shell\ThemesSyncedImageDownload" /Disabl
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceAgentTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\SpacePort\SpaceManagerTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Speech\SpeechModelDownloadTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\StateRepository\MaintenanceTasks" /Disable
 schtasks /Change /TN "Microsoft\Windows\Storage Tiers Management\Storage Tiers Management Initialization" /Disable
 schtasks /Change /TN "Microsoft\Windows\Sustainability\PowerGridForecastTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\Sustainability\SustainabilityTelemetry" /Disable
@@ -1986,8 +1990,11 @@ schtasks /Change /TN "Microsoft\Windows\TPM\Tpm-HASCertRetr" /Disable
 schtasks /Change /TN "Microsoft\Windows\TPM\Tpm-Maintenance" /Disable
 schtasks /Change /TN "Microsoft\Windows\UPnP\UPnPHostConfig" /Disable
 schtasks /Change /TN "Microsoft\Windows\User Profile Service\HiveUploadTask" /Disable
+schtasks /Change /TN "Microsoft\Windows\User Profile Service\HiveUploadTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\WCM\WiFiTask" /Disable
 schtasks /Change /TN "Microsoft\Windows\WDI\ResolutionHost" /Disable
+schtasks /Change /TN "Microsoft\Windows\WindowsAI\ClickToDo\ModelCachingIdle" /Disable
+schtasks /Change /TN "Microsoft\Windows\WindowsAI\Recall\InitialConfiguration" /Disable
 schtasks /Change /TN "Microsoft\Windows\Windows Filtering Platform\BfeOnServiceStartTypeChange" /Disable
 schtasks /Change /TN "Microsoft\Windows\WindowsUpdate\Scheduled Start" /Disable
 schtasks /Change /TN "Microsoft\Windows\WlanSvc\CDSSync" /Disable
